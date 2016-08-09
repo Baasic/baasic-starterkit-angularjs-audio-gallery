@@ -1,0 +1,14 @@
+welcome, {{user.displayName}}
+
+
+
+ng-repeat="album in albums"
+
+a ui-sref="/album/{{album.name}}"
+    img ng-src="{{album.cover}}"
+    img src="default.svg" ng-if='album.cover.length == 0'
+/a
+
+<baasic-profile artist-id="artistId"></baasic-profile>
+
+<a ui-sref="master.main.profile({artistId: artistId})">autor link</a>

@@ -1,0 +1,13 @@
+/*------------------------------------*\
+    # modules.container
+\*------------------------------------*/
+
+ .container {
+ 	margin: 0 auto;
+    max-width: 1280px;
+    overflow-x: hidden;
+
+    &--profile__detail {
+        margin-top:  -9rem;
+    }
+ }

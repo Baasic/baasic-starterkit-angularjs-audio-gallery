@@ -1,0 +1,11 @@
+<div class="album__list">
+    <div ng-repeat="album in albums" class="album__list__item">
+        <a href="#" title="sa ovime upucati album json u player">
+            <img class="profile__album__cover" ng-src="{{album.cover}}" />
+            <h3 class="profile__album__name">{{album.name}}</h3>
+        </a>
+    </div>
+    <div ng-if="!albums.length">
+        <p>No albums found for this artist</p>
+    </div>
+</div>

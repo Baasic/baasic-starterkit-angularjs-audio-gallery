@@ -1,0 +1,39 @@
+/*------------------------------------*\
+    # vars.colors
+\*------------------------------------*/
+
+/**
+ * Generic colors
+ * Color naming taken from: http://www.color-blindness.com/color-name-hue/
+ */
+
+$free-speech-red: #C90000;
+$teal: #009688;
+
+/**
+ * Brand colors
+ */
+$brandname-blue: #de7503;
+
+/**
+ * Global text color
+ */
+$color-text:        #333;
+
+/**
+ * Theme colors
+ */
+$color-primary:     $free-speech-red;
+$color-secondary: 	$teal;
+
+/**
+ * Background-colors
+ */
+$bg-header:         $brandname-blue;
+
+/**
+ * Utility colors
+ */
+$color-warning:     #F44336;
+$color-success:     #4CAF50;
+$color-note:        #FFEB3B;

@@ -1,0 +1,42 @@
+﻿<header class="header">
+    <div class="container">
+        <a ui-sref="master.main.index">
+            <img src="img/logo.svg" class="logo--header">
+        </a>
+        <form name="searchForm" ng-submit="search();">
+            <label for="searchEntry">
+                <input type="text" name="searchEntry" />
+            </label>
+            <button type="submit">
+                <span class="icon icon-search">search</span>
+            </button>
+        </form>
+        <div ng-if="$root.user.isAuthenticated" class="nav">
+            <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--med btn--secondary">Profile</a>
+            <baasic-logout on-logout="setEmptyUser()">
+                <button ng-click="logout()" class="btn btn--med btn--primary">Sign out</button>
+            </baasic-logout>
+        </div>
+        <div ng-if="!$root.user.isAuthenticated">
+            <a ui-sref="login" class="btn btn--med btn--primary">sign in</a>
+            <a ui-sref="register" class="btn btn--med btn--secondary">sign up</a>
+        </div>
+        <div ng-if="isEdit" class="edit edit--cover">
+            <span class="icon icon-camera"> Change Cover</span>
+        </div>
+        <div class="avatar">
+            <img ng-src="{{profile.avatar}}" />
+
+            <div ng-if="isEdit" class="edit">
+                <span class="icon icon-camera"> Change Image</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main ui-view>
+
+</main>
+<footer class="player">
+	Player
+</footer>

@@ -1,0 +1,63 @@
+<div class="main" ng-if="profile.id == $root.user.id">
+
+    <form novalidate name="editProfile" ng-submit="saveProfile(profile)">
+        <div>
+            <p>{{profile.displayName}}</p>
+        </div>
+
+        <div >
+            <label>Artist Name
+                <input name="displayName" ng-model="profile.displayName" type="text" required>
+            </label>
+
+            <label>About {{profile.displayName}}
+                <textarea name="about" id="about" cols="30" rows="10" ng-model="profile.aboutArtist" required>
+                </textarea>
+            </label>
+
+            <label>Country
+                <input name="country" ng-model="profile.country" type="text" required>
+            </label>
+            <label>LastFM
+                <input name="lastfm" ng-model="profile.social.lastfm" type="text">
+            </label>
+            <label>MySpace
+                <input name="myspace" ng-model="profile.social.myspace" type="text">
+            </label>
+            <label>Bandcamp
+                <input name="bandcamp" ng-model="profile.social.bandcamp" type="text">
+            </label>
+            <label>Soundcloud
+                <input name="soundcloud" ng-model="profile.social.soundcloud" type="text">
+            </label>
+            <label>Twitter
+                <input name="twitter" ng-model="profile.social.twitter" type="text">
+            </label>
+            <label>Facebook
+                <input name="facebook" ng-model="profile.social.facebook" type="text">
+            </label>
+            <label>Website
+                <input name="web" ng-model="profile.social.web" type="text">
+            </label>
+
+
+
+
+            <div ng-show="editProfile.$submitted || editProfile.displayName.$dirty">
+                <span ng-show="editProfile.displayName.$error.required">
+                    Artist name field is required.
+                </span>
+            </div>
+
+        </div>
+
+
+        <div>
+            <button type="submit" class="btn btn--quinary btn--med push">Save</button>
+            <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit()">Cancel</button>
+        </div>
+
+    </form>
+</div>
+
+

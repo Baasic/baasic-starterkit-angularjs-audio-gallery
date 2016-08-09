@@ -1,0 +1,30 @@
+<div class="profile__header" ng-style="{'background-image': 'url(' + profile.cover + ')'}" style="background-position:center;height:30rem; margin: 0 -8px;">
+</div>
+<div class="container container--profile__detail">
+    <div class="profile__avatar__wrapper">
+        <img ng-src="{{profile.avatar}}" class="profile__avatar">
+        <h1 class="profile__title profile__title--main">{{profile.displayName}}
+            <a class="btn btn--primary btn--sml" ui-sref="master.main.profile-edit({artistId : $root.user.id})" ng-if="profile.id == $root.user.id">EDIT PROFILE</a>
+        </h1>
+
+    </div>
+
+    <h1 class="profile__title">{{profile.displayName}} Albums</h1>
+    <album-list artist-id="profile.id"></album-list>
+
+    <div class="profile__about__wrapper">
+        <h1 class="profile__title">About {{profile.displayName}}</h1>
+        <p class="profile__about__text">{{profile.aboutArtist}}</p>
+    </div>
+
+    <div class="profile__links">
+        <h1 class="profile__title">{{profile.displayName}} on the web</h1>
+        <div ng-repeat="(key, value) in profile.social" class="social__links">
+            <a ng-href="{{value}}" title="Visit {{profile.displayName}} on {{key}}!">
+                <img ng-src="img/{{key}}.svg" width="32" class="profile__links__social" />
+            </a>
+        </div>
+    </div>
+</div>
+
+{{profile}}

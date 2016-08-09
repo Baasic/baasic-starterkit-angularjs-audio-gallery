@@ -1,0 +1,39 @@
+﻿<header>
+    <button ng-click="searchOpen=!searchOpen" title="Search" class="btn btn--icon icon--search spc--right--lrg" type="button">Search</button>
+    <div ng-if="$root.user.isAuthenticated">
+        <div>Welcome, {{ $root.user.displayName }}</div>
+        <baasic-logout on-logout="setEmptyUser()">
+            <button type="button" ng-click="logout()">Logout</button>
+        </baasic-logout>
+        <a ui-sref="master.new-photo">Upload photo</a>
+    </div>
+    <div ng-if="!$root.user.isAuthenticated">To upload files please <a ui-sref="login">login.</a></div>
+</header>
+
+<h1>Media Gallery</h1>
+
+<main ui-view>
+
+</main>
+
+<div class="modal" ng-class="{'nShow': searchOpen}">
+    <div class="modal--dialog">
+        <div class="modal--content">
+            <button ng-click="searchOpen=!searchOpen" class="btn btn--close spc--bottom--xlrg" type="button"></button>
+            <div class="search">
+                <form ng-controller="SearchCtrl" novalidate ng-submit="searchNature()">
+                    <button ng-click="$parent.searchOpen = false" type="submit" class="btn btn--icon btn--search btn--lrg icon--search ">Search</button>
+                    <input class="input--search" placeholder="Nature..." type="search" ng-model="searchFor" />
+                </form>
+                <form ng-controller="SearchCtrl" novalidate ng-submit="searchPeople()">
+                    <button ng-click="$parent.searchOpen = false" type="submit" class="btn btn--icon btn--search btn--lrg icon--search ">Search</button>
+                    <input class="input--search" placeholder="People..." type="search" ng-model="searchFor" />
+                </form>
+                <form ng-controller="SearchCtrl" novalidate ng-submit="searchCitiesAndVillages()">
+                    <button ng-click="$parent.searchOpen = false" type="submit" class="btn btn--icon btn--search btn--lrg icon--search ">Search</button>
+                    <input class="input--search" placeholder="Cities and Villages..." type="search" ng-model="searchFor" />
+                </form>                                
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,3 +32,4 @@ Code
 
 
 deploy-all-themes-dist.cmd
+typings/angularjs/angular.d.ts

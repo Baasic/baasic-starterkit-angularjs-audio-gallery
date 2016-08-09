@@ -1,0 +1,35 @@
+<div>
+    <div>
+        <ng-form novalidate name="album">
+            <div >
+                <p>{{album.name}}</p>
+
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <label>Album Name
+                                <input name="albumName" ng-model="album.name" type="text" required>
+                                <div ng-show="albumForm.$submitted || albumForm.albumName.$dirty">
+                                    <span ng-show="albumForm.albumName.$error.required"> Album name field is required. </span>
+                                </div>
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="text" name="cover" id="albumCover" ng-model="album.cover" class="input input--text" required />
+                               Album Cover
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form--wrapper">
+                        <button ng-disabled="albumForm.$invalid" type="submit" class="btn btn--quinary btn--med push" ng-click="saveAlbum(album);">Save</button>
+                        <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </ng-form>
+    </div>
+</div>
