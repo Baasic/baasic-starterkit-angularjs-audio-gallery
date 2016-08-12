@@ -8,6 +8,7 @@
     overflow-x: hidden;
 
     &--profile__detail {
-        margin-top:  -9rem;
+        margin-top: -90px;
+        padding: 0 1rem;
     }
  }

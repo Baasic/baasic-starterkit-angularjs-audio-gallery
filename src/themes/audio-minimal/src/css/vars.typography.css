@@ -3,11 +3,10 @@
 \*------------------------------------*/
 
 /**
- * google font
+ * google fonts
  */
 @import url(https://fonts.googleapis.com/css?family=Fjalla+One);
-$ff-sans: 'Fjalla One', sans-serif;
-
+@import url(https://fonts.googleapis.com/css?family=Cantarell);
 
 /**
  * Project base line height (unitless in order to work with typomatic)
@@ -38,5 +37,5 @@ $type-xxxlarge: 40;
 /**
  * Font stacks
  */
- $ff-sans: Helvetica, Arial, sans-serif;
- $ff-serif: Georgia, Times, serif;
+ $ff-sans: 'Fjalla One', Helvetica, Arial, sans-serif;
+ $ff-serif:'Cantarell' ,Georgia, Times, serif;

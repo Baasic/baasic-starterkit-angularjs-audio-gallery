@@ -8,6 +8,7 @@ angular.module('media-gallery')
                 scope: { artistId: '=artistId' },
                 controller: ['$scope', '$q', 'baasicUserProfileService',
                     function baasicFindProfile($scope, $q, profileService) {
+                        $scope.$root.loader.suspend();
                         $scope.artistId = '';
 
                         $scope.$watch('artistId', function() {
@@ -22,6 +23,7 @@ angular.module('media-gallery')
                                         console.log(error); // jshint ignore: line
                                     })
                                     .finally(function () {
+                                        $scope.$root.loader.resume();
                                     });
                             }
                         });

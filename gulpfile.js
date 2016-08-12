@@ -191,7 +191,15 @@ gulp.task('templates-dist', function () {
  * Vendors
  */
 gulp.task('vendors', function () {
-    var files = bowerFiles();
+    var files = bowerFiles({
+        'overrides': {
+            'components-font-awesome': {
+                'main': [
+                    '**/*.js'
+                ]
+            }
+        }
+    });
     var vendorJs = fileTypeFilter(files, 'js');
     var vendorCss = fileTypeFilter(files, 'css');
     var q = new queue({ objectMode: true });
@@ -247,11 +255,22 @@ gulp.task('clean-tmp', function (done) {
     done();
 });
 
+/**
+ * Copy font awesome
+ */
+ gulp.task('font-awesome-dist', function() {
+    return gulp.src('bower_components/components-font-awesome/fonts/**/*')
+        .pipe(gulp.dest('./dist/fonts/'));
+ });
+  gulp.task('font-awesome-tmp', function() {
+    return gulp.src('bower_components/components-font-awesome/fonts/**/*')
+        .pipe(gulp.dest('.tmp/fonts/'));
+ });
 
 /**
  * Dist
  */
-gulp.task('dist', ['clean-dist', 'vendors', 'assets', 'styles-dist', 'scripts-dist'], function () {
+gulp.task('dist', ['clean-dist', 'vendors', 'assets', 'styles-dist', 'scripts-dist', 'font-awesome-dist'], function () {
     return gulp.src('./src/app/index.html')
         .pipe(g.inject(gulp.src('./dist/vendors.min.{js,css}'), { addRootSlash: false, ignorePath: 'dist', starttag: '<!-- inject:vendor:{{ext}} -->' }))
         .pipe(replace('<base href="/" />', '<base href="' + baseUrl + '" />'))
@@ -264,7 +283,7 @@ gulp.task('dist', ['clean-dist', 'vendors', 'assets', 'styles-dist', 'scripts-di
 /**
  * Watch
  */
-gulp.task('serve', ['watch'], g.serve({
+gulp.task('serve', ['font-awesome-tmp','watch'], g.serve({
     port: 3000,
     root: ['./.tmp', './.tmp/src/app', './src/app', './bower_components', './src', './src/themes/' + theme],
     middleware: function (req, res, next) {

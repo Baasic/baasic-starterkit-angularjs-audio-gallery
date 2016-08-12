@@ -6,15 +6,19 @@
        return {
         restrict: 'AE',
         templateUrl:'templates/album/template-album-list.html',
-        scope: {},
+        scope: { profileName: "="},
         controller: ['$scope', '$state', '$stateParams', '$q', 'baasicDynamicResourceService',
             function($scope, $state, $stateParams, $q, albumService) {
-                $scope.albums = [];
                 $scope.$root.loader.suspend();
+                $scope.profileName = $scope.profileName;
+                $scope.albums = [];
+
                 albumService.find('albums',{
                     page: 1,
                     rpp: 10,
-                    search: $stateParams.artistId
+                    search: $stateParams.artistId,
+                    orderBy: 'releaseYear',
+                    orderDirection : 'asc'
                 })
                 .success(function(data) {
                     $scope.albums = data.item;

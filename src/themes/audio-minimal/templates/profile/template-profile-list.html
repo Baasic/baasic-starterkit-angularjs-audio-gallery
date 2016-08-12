@@ -1,16 +1,10 @@
 <div class="container profile__list">
-    <section class="profile__list__item" ng-repeat="profile in profiles.item" ng-if="profiles.item.length">
-        <a ui-sref="master.main.profile({artistId : profile.id})">
+    <section class="profile__list__item col-sml-6 col-med-4 col-lrg-3 col-xlrg-2" ng-repeat="profile in profiles.item" ng-if="profiles.item.length">
+        <a ui-sref="master.main.profile({artistId : profile.id})" class="profile__artist__link profile__artist__link--name">
             <div class="profile__content">
-                <div class="profile__avatar">
-                    <img src="assets/img/avatar.jpg" ng-src="{{profile.avatar}}" alt="{{profile.displayName}}">
-                </div>
-                <div class="profile__data">
-                    <div class="profile__firstname">{{profile.firstName}}</div>
-                    <div class="profile__lastname">{{profile.lastName}}</div>
-                    <!-- div class="profile__country" ng-if="profile.country.length">{{profile.country}}</div>
-                    <div class="profile__description" ng-if="profile.aboutMySelf.length">{{profile.aboutArtist}}</div>
-                    <div class="profile__since">Member since: {{profile.dateCreated | date: 'mediumDate' }}</div-->
+                <div class="profile__list__avatar">
+                    <img src="img/avatar.svg" ng-src="{{profile.avatar}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                    <p class="profile__artist__name">{{profile.displayName}}</p>
                 </div>
             </div>
         </a>
@@ -28,6 +22,8 @@
         <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage + 1})" class="btn --light --med" ng-show="profiles.pagerData.hasNext">Next</a>
     </pager>
 </div>
+
+<span class="fa fa-music"></span>
 
 
 

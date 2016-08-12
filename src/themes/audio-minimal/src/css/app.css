@@ -52,8 +52,9 @@
 @import modules.btn.css;
 @import modules.container.css;
 @import modules.logo.css;
-/* @import modules.anchor.css; */
-/* @import modules.input.css; */
+@import modules.form.css;
+@import modules.input.css;
+@import modules.loader.css;
 
 /**
 * Import: components
@@ -62,7 +63,6 @@
 @import components.header.css;
 /* @import components.footer.css; */
 @import components.profile.css;
-
 /**
 * Import: views
 * Description: specific website/app views (example: 404 view, login view)
@@ -85,7 +85,7 @@
 * Note: when importing code from a 3rd party it should be stripped off
 * any vendor prefixes since autoprefixer will use project specific vendor prefixes
 */
-@import plugins.fontface.css;
+@import plugins.fontawesome.css;
 /* @import plugins.select2.css; */
 /* @import plugins.remodal.css; */
 

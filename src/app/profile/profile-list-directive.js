@@ -13,11 +13,10 @@ angular.module('media-gallery')
                             $scope.$root.loader.suspend();
 
                             baasicUserProfileService.find({
-                            embed: 'work,educations,skills,educations.organization,skills.skill,work.company,membership',
-                            page: $state.params.page || 1,
-                            rpp: 10,
-                            search: $state.params.search
-                        })
+                                page: $state.params.page || 1,
+                                rpp: 10,
+                                search: $state.params.search
+                            })
                             .success(function profileList(profiles) {
                                 $scope.profiles = profiles;
 

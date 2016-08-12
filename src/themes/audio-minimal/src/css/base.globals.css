@@ -8,10 +8,11 @@
  */
 html {
     @mixin typomatic-init;
+    overflow-y: scroll;
 }
 
 body {
-    font-family: $ff-sans;
+    font-family: $ff-serif;
     background: white;
     overflow-x: hidden;
     color: $color-text;

@@ -34,6 +34,7 @@ angular.module('media-gallery')
                         };
 
                         $scope.submitLogin = function submitLogin() {
+                            $scope.$root.loader.suspend();
                             if ($scope.login.$valid) {
                                 $scope.logging = true;
                                 loginService.login({
@@ -74,9 +75,13 @@ angular.module('media-gallery')
                                         default:
                                             $scope.loginError = data.message;
                                             break;
-                                    }
+                                        }
+                                    })
+                                .finally(function() {
+                                    $scope.$root.loader.resume();
                                 });
-                            }
+                                }
+
                         };
                     }
                 ],

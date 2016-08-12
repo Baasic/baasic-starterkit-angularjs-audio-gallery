@@ -45,6 +45,7 @@ angular.module('media-gallery')
 
 
                         $scope.saveAlbum = function saveAlbum(album) {
+                            $scope.$root.loader.suspend();
                             var promise;
                             if (!album.id) {
                                 promise = albumService.create(album);
@@ -63,7 +64,7 @@ angular.module('media-gallery')
                                     $scope.error = error.message;
                                 })
                                 .finally(function () {
-
+                                    $scope.$root.loader.resume();
                                 });
 
                             };

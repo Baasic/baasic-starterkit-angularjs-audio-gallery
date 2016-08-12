@@ -9,18 +9,19 @@ angular.module('media-gallery')
                 controller: ['$scope', '$state', '$q', 'baasicUserProfileService',
                     function baasicProfileDetail($scope, $state, $q, baasicUserProfileService) {
                         function loadProfile() {
-                        baasicUserProfileService.get($state.params.artistId, {
-
-                        })
-                            .success(function (data) {
-                                $scope.profile = data;
+                            $scope.$root.loader.suspend();
+                            baasicUserProfileService.get($state.params.artistId, {
                             })
-                            .error(function (error) {
-                                console.log (error); // jshint ignore: line
-                            })
-                            .finally(function (response){
-                                console.log (response); // jshint ignore: line
-                            });
+                                .success(function (data) {
+                                    $scope.profile = data;
+                                })
+                                .error(function (error) {
+                                    console.log (error); // jshint ignore: line
+                                })
+                                .finally(function (response){
+                                    console.log (response); // jshint ignore: line
+                                    $scope.$root.loader.resume();
+                                });
 
                         }
 

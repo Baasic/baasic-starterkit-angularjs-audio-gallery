@@ -5,4 +5,10 @@
 .header {
     width: 100%;
     background: $bg-header;
+
+    &__buttons {
+        display: inline-block;
+        float: right;
+        margin-top: 1.5rem;
+    }
 }

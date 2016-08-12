@@ -21,7 +21,9 @@ angular.module('media-gallery')
 						if(vm.resetData.newPassword !== vm.resetData.confirmPassword) {
 							vm.message = 'Password and Confirm Password must match';
 							return;
-						}
+						} else {
+                            $scope.$root.loader.suspend();
+                        }
 
 						passwordRecoveryService.reset(vm.resetData)
 							.success(function() {
