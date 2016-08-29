@@ -24,14 +24,18 @@ angular.module('media-gallery')
                     function ($scope, $state, $q, albumService) {
 
                         if (!$scope.$root.user.isAuthenticated) {
-                            $state.go('login');
+                            $state.go('master.login');
                         }
 
                         $scope.backToDetails = function backToDetails() {
                             $state.go('master.main.profile', {artistId : $scope.$root.user.id});
                         };
 
-                        albumService.get($state.params.albumId)
+                        $scope.albumId = $state.params.albumId;
+
+                        albumService.get('albums',{
+                            id: $scope.albumId
+                        })
                             .success(function (album) {
                                 $scope.album = album;
                             })

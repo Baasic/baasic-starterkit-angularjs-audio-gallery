@@ -19,7 +19,7 @@ angular.module('media-gallery')
 							vm.message = '';
 
 							vm.user = {};
-							vm.user.activationUrl = $state.href('account-activation', {}, {absolute: true}) + '?activationToken={activationToken}';
+							vm.user.activationUrl = $state.href('master.account-activation', {}, {absolute: true}) + '?activationToken={activationToken}';
 							vm.user.creationDate = new Date();
 							vm.user.challengeIdentifier = '';
 							vm.user.challengeResponse = '';

@@ -24,7 +24,7 @@ angular.module('media-gallery')
                 function ($scope, $state, $q, profileService) {
 
                     if (!$scope.$root.user.isAuthenticated) {
-                        $state.go('login');
+                        $state.go('master.login');
                     }
 
                     $scope.backToDetails = function backToDetails() {

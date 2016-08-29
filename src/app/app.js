@@ -27,7 +27,7 @@ angular.module('media-gallery', [
 
             $urlRouterProvider.otherwise(function ($injector) {
                 var $state = $injector.get('$state');
-                $state.go('404');
+                $state.go('master.404');
             });
 
             $urlRouterProvider.rule(function ($injector, $location) {
@@ -50,25 +50,25 @@ angular.module('media-gallery', [
                     templateUrl: 'templates/main.html',
                     controller: 'MainCtrl'
                 })
-                .state('login', {
-                    url: '/login',
+                .state('master.login', {
+                    url: 'login',
                     templateUrl: 'templates/membership/login.html',
                     controller: 'LoginCtrl'
                 })
-                .state('register', {
-                    url: '/register',
+                .state('master.register', {
+                    url: 'register',
                     templateUrl: 'templates/membership/register.html'
                 })
-                .state('password-change', {
-                    url: '/password-change?passwordRecoveryToken',
+                .state('master.password-change', {
+                    url: 'password-change?passwordRecoveryToken',
                     templateUrl: 'templates/membership/password-change.html'
                 })
-                .state('password-recovery', {
-                    url: '/password-recovery',
+                .state('master.password-recovery', {
+                    url: 'password-recovery',
                     templateUrl: 'templates/membership/password-recovery.html'
                 })
-                .state('account-activation', {
-                    url: '/account-activation?activationToken',
+                .state('master.account-activation', {
+                    url: 'account-activation?activationToken',
                     templateUrl: 'templates/membership/account-activation.html',
                     controller: 'AccountActivationCtrl'
                 })
@@ -81,20 +81,16 @@ angular.module('media-gallery', [
                     templateUrl: 'templates/profile/profile-edit.html'
                 })
                 .state('master.main.profile-add', {
-                    url: 'artist/add/{artistId}',
-                    templateUrl: 'templates/profile/profile-add.html'
+                    url: 'artist/add/{userId}',
+                    templateUrl: 'templates/profile/profile-edit.html'
                 })
                 .state('master.main.index', {
                     url: '?{page}',
                     templateUrl: 'templates/profile/profile-list.html'
                 })
-                .state('master.main.add-album', {
-                    url: 'new-album/{artistId}',
-                    templateUrl: 'templates/album/album-add-form.html'
-                })
                 .state('master.main.edit-album', {
                     url: 'edit-album/{albumId}',
-                    templateUrl: 'templates/album/album-edit-form.html'
+                    templateUrl: 'templates/album/album-edit.html'
                 })
                 .state('master.main.add-song', {
                     url: 'new-song',
@@ -109,7 +105,7 @@ angular.module('media-gallery', [
                     templateUrl: 'templates/gallery/search-results.html',
                     controller: 'SearchResultsCtrl'
                 })
-                .state('404', {
+                .state('master.404', {
                     templateUrl: 'templates/404.html'
                 });
         }

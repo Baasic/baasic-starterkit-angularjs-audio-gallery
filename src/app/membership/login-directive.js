@@ -34,9 +34,10 @@ angular.module('media-gallery')
                         };
 
                         $scope.submitLogin = function submitLogin() {
-                            $scope.$root.loader.suspend();
+
                             if ($scope.login.$valid) {
                                 $scope.logging = true;
+                                $scope.$root.loader.suspend();
                                 loginService.login({
                                     username: $scope.username,
                                     password: $scope.password,
@@ -60,6 +61,7 @@ angular.module('media-gallery')
                                             $scope.logging = false;
                                             $state.go('master.main.index');
                                         });
+                                    $scope.$root.loader.suspend();
                                 })
                                 .error(function (data, status) {
                                     $scope.logging = false;
@@ -76,6 +78,7 @@ angular.module('media-gallery')
                                             $scope.loginError = data.message;
                                             break;
                                         }
+                                    $scope.$root.loader.resume();
                                     })
                                 .finally(function() {
                                     $scope.$root.loader.resume();

@@ -14,7 +14,7 @@ angular.module('media-gallery')
 						.success(function(){
 							vm.message = 'You have successfully activated your account! You will be redirected to login form in 5 seconds.';
                             setTimeout(function(){
-                                    $state.go('login');
+                                    $state.go('master.login');
                                 }, 5000);
 						})
 						.error(function (data, status) {
