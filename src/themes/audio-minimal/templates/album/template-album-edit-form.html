@@ -1,35 +1,20 @@
-<div>
-    <div>
-        <ng-form novalidate name="album">
-            <div >
-                <p>{{album.name}}</p>
 
-            </div>
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <label>Album Name
-                                <input name="albumName" ng-model="album.name" type="text" required>
-                                <div ng-show="albumForm.$submitted || albumForm.albumName.$dirty">
-                                    <span ng-show="albumForm.albumName.$error.required"> Album name field is required. </span>
-                                </div>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <input type="text" name="cover" id="albumCover" ng-model="album.cover" class="input input--text" required />
-                               Album Cover
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form--wrapper">
-                        <button ng-disabled="albumForm.$invalid" type="submit" class="btn btn--quinary btn--med push" ng-click="saveAlbum(album);">Save</button>
-                        <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-        </ng-form>
+<form novalidate name="album" ng-submit="save()">
+    <input name="artistId" ng-model="album.artistId" type="hidden" required>
+    <input name="albumName" ng-model="album.name" type="text" required>
+    <div ng-show="album.$submitted || album.albumName.$dirty">
+        <p ng-show="album.albumName.$error.required"> Album name is required. </p>
     </div>
-</div>
+
+<album-cover></album-cover>
+
+    <input name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" required>
+    <div ng-show="album.$submitted || album.releaseYear.$dirty">
+        <p ng-show="album.releaseYear.$error.required"> Album name is required. </p>
+        <p ng-show="album.$error.fileType"> Please Enter Four Digit Number Only</p>
+    </div>
+    <div>
+        <button ng-disabled="album.$invalid" type="submit" class="btn btn--quinary btn--med push" ng-click="saveAlbum(album)">Save</button>
+        <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
+    </div>
+</form>

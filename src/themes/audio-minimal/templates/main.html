@@ -18,15 +18,11 @@
             </baasic-logout>
         </div>
         <div ng-if="!$root.user.isAuthenticated" class="header__buttons">
-            <a ui-sref="login" class="btn btn--med btn--primary"><span class="fa fa-sign-in"></span> sign in</a>
-            <a ui-sref="register" class="btn btn--med btn--secondary"><span class="fa fa-plus-circle"></span> sign up</a>
+            <a ui-sref="master.login" class="btn btn--med btn--primary"><span class="fa fa-sign-in"></span> sign in</a>
+            <a ui-sref="master.register" class="btn btn--med btn--secondary"><span class="fa fa-plus-circle"></span> sign up</a>
         </div>
     </div>
 </header>
 
-<main ui-view>
-
+<main ui-view class="main">
 </main>
-<footer class="player">
-	Player
-</footer>

@@ -3,4 +3,5 @@
         <img ng-src="{{album.cover}}" />
         <h3 class="profile__artist__album__name">{{album.name}}</h3>
     </a>
+    <a ui-sref="master.main.edit-album({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>
 </div>

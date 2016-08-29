@@ -1,0 +1,5 @@
+<div>
+    <img ng-src="{{album.cover}}">
+    <input type="file" file-model="file.blob" ng-model="file.fileName" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg">
+    <p ng-show="(album.$submitted || album.$touched) && album.$error.fileType">Allowed extensions are: png, jpeg, jpg </p>
+</div>

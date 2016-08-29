@@ -41,8 +41,6 @@
             </label>
 
 
-
-
             <div ng-show="editProfile.$submitted || editProfile.displayName.$dirty">
                 <span ng-show="editProfile.displayName.$error.required">
                     Artist name field is required.
@@ -58,8 +56,6 @@
         </div>
 
     </form>
-
-
 
     <form novalidate name="addProfile" ng-submit="saveProfile(profile)"  ng-if="!profile.id">
         <div>
@@ -100,8 +96,6 @@
             <label>Website
                 <input name="web" ng-model="profile.social.web" type="text">
             </label>
-
-
 
 
             <div ng-show="addProfile.$submitted || addProfile.displayName.$dirty">

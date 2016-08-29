@@ -67,8 +67,8 @@
 * Import: views
 * Description: specific website/app views (example: 404 view, login view)
 */
-/* @import views.login.css; */
-/* @import views.404.css; */
+@import views.main.css;
+@import views.404.css;
 
 /**
 * Import: utils
@@ -86,7 +86,7 @@
 * any vendor prefixes since autoprefixer will use project specific vendor prefixes
 */
 @import plugins.fontawesome.css;
-/* @import plugins.select2.css; */
+@import plugins.aplayer.css;
 /* @import plugins.remodal.css; */
 
 /**
