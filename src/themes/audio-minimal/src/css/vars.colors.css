@@ -7,13 +7,10 @@
  * Color naming taken from: http://www.color-blindness.com/color-name-hue/
  */
 
-$free-speech-red: #C90000;
-$teal: #009688;
-
-/**
- * Brand colors
- */
-$brandname-blue: #de7503;
+$yellowred: #eeaa7b;
+$viridian: #07889b;
+$moonstone: #66b9bf;
+$tangelo: #e37222;
 
 /**
  * Global text color
@@ -23,13 +20,16 @@ $color-text:        #333;
 /**
  * Theme colors
  */
-$color-primary:     $free-speech-red;
-$color-secondary: 	$teal;
+$color-primary:     $yellowred;
+$color-secondary: 	$moonstone;
+$color-tertiary:    $tangelo;
+$color-quartenary:  $viridian;
+
 
 /**
  * Background-colors
  */
-$bg-header:         $brandname-blue;
+$bg-header:         $tangelo;
 
 /**
  * Utility colors

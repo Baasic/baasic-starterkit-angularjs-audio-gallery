@@ -63,6 +63,7 @@
 @import components.header.css;
 /* @import components.footer.css; */
 @import components.profile.css;
+@import components.album.css;
 /**
 * Import: views
 * Description: specific website/app views (example: 404 view, login view)

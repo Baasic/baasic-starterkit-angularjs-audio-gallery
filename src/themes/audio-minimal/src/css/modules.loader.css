@@ -10,6 +10,7 @@
     width: 100%;
     background: $bg-header;
     z-index: 2;
+    transition: all .3s ease-in-out;
     &__content {
         height: 50px;
         left: calc(50% - 40px);

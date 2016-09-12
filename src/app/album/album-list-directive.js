@@ -6,7 +6,7 @@
        return {
         restrict: 'AE',
         templateUrl:'templates/album/template-album-list.html',
-        scope: { profileName: "="},
+        scope: "=",
         controller: ['$scope', '$state', '$stateParams', '$q', 'baasicDynamicResourceService',
             function($scope, $state, $stateParams, $q, albumService) {
                 $scope.$root.loader.suspend();
@@ -18,7 +18,7 @@
                     rpp: 10,
                     search: $stateParams.artistId,
                     orderBy: 'releaseYear',
-                    orderDirection : 'asc'
+                    orderDirection : 'desc'
                 })
                 .success(function(data) {
                     $scope.albums = data.item;

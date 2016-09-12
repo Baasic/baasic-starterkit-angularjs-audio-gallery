@@ -1,0 +1,44 @@
+/*------------------------------------*\
+# components.album
+\*------------------------------------*/
+
+.album {
+    &__wrapper {
+        padding: 2rem 1rem;
+    }
+    &__name {
+        letter-spacing: 0.5px;
+        font-family: $ff-sans;
+        @mixin type-scale $type-large, 1.5;
+        &--primary {
+            font-weight: 700;
+        }
+        &--secondary {
+            max-width: 250px;
+            width: 100%;
+            margin-top: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    &__link {
+        display: block;
+        color: $color-primary;
+        font-family: $ff-sans;
+        @mixin type-scale $type-medium, 1.25;
+        text-decoration: none;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            color: $color-secondary;
+            opacity: 0.75;
+        }
+        &--first {
+            padding: 0 1.25rem 1.25rem 0;
+        }
+    }
+    &__about {
+        padding: 0 5px;
+    }
+}

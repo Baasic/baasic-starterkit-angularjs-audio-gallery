@@ -4,11 +4,7 @@
 
  .container {
  	margin: 0 auto;
+    padding: 0 1rem;
     max-width: 1280px;
     overflow-x: hidden;
-
-    &--profile__detail {
-        margin-top: -90px;
-        padding: 0 1rem;
-    }
  }

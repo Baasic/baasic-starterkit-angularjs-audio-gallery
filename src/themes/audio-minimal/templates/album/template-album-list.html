@@ -1,7 +1,27 @@
-<div ng-if="albums.length" ng-repeat="album in albums" class="profile__album__item col-sml-6 col-lrg-4">
-    <a href="#" class="profile__artist__link" title="Click to listen album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
-        <img ng-src="{{album.cover}}" />
-        <h3 class="profile__artist__album__name">{{album.name}}</h3>
-    </a>
-    <a ui-sref="master.main.edit-album({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>
+<div class="row col-sml-12">
+    <div ng-if="albums.length" ng-repeat="album in albums">
+        <div ng-if="$first" class="album__wrapper col-sml-12">
+            <a href="#" class="album__link album__link--first col-sml-12 col-lrg-3" title="Click to listen album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
+                <img ng-src="{{album.cover}}" />
+            </a>
+
+            <div class="album__about col-sml-12 col-lrg-8">
+                <h3 class="album__name album__name--primary">{{album.name}} ({{album.releaseYear}})</h3>
+                <p>{{album.aboutAlbum}}</p>
+                <a ng-if="profile.id == $root.user.id" ui-sref="master.main.edit-album({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>
+            </div>
+
+        </div>
+
+        <div ng-if="!$first" class="album__wrapper col-sml-6 col-lrg-3">
+            <a href="#" class="album__link" title="Click to listen album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
+                <img ng-src="{{album.cover}}" />
+                <h3 class="album__name album__name--secondary">{{album.name}}</h3>
+            </a>
+            <a ng-if="profile.id == $root.user.id" ui-sref="master.main.edit-album({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>
+        </div>
+
+
+
+    </div>
 </div>

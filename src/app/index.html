@@ -33,37 +33,120 @@
     <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
   //do work
-
         var option = {
             element: document.getElementById('aplayer'),                       // Optional, player element
             narrow: false,                                                     // Optional, narrow style
-            autoplay: false,                                                    // Optional, autoplay song(s), not supported by mobile browsers
-            showlrc: 0,                                                        // Optional, show lrc, can be 0, 1, 2, see: ###With lrc
+            autoplay: false,
+            preload: 'none',                                                    // Optional, autoplay song(s), not supported by mobile browsers
             mutex: true,                                                       // Optional, pause other players when this player playing
-            theme: '#e6d0b2',                                                  // Optional, theme color, default: #b7daff
-            loop: true,                                                        // Optional, loop play music, default: true
-            preload: 'metadata',                                               // Optional, the way to load music, can be 'none' 'metadata' 'auto', default: 'metadata' in Desktop, 'none' in mobile
+            theme: '#e37222',
             music: [
                 {                                                           // Required, music info, see: ###With playlist
                     title: 'Violent Revolution',                                          // Required, music title
                     author: 'Kreator',                          // Required, music author
                     url: 'http://c.mimp3.me/d/QzM5YzM3kDO/kreator-violent-revolution.mp3',  // Required, music url
                     pic: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Violent_revolution.jpg',  // Optional, music picture
-                    lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'                   // Optional, lrc, see: ###With lrc
                 },
                 {                                                           // Required, music info, see: ###With playlist
                     title: 'OREAD',                                          // Required, music title
                     author: 'The Great Cold',                          // Required, music author
-                    url: 'https://freemusicarchive.org/music/download/66c98d70a8a41e37c5bb7d9582fc349819491174',  // Required, music url
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
                     pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
-                    lrc: '[00:00.00]lrc here\n[00:01.00]aplayer'                   // Optional, lrc, see: ###With lrc
+                },
+                                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                                {                                                           // Required, music info, see: ###With playlist
+                    title: 'Violent Revolution',                                          // Required, music title
+                    author: 'Kreator',                          // Required, music author
+                    url: 'http://c.mimp3.me/d/QzM5YzM3kDO/kreator-violent-revolution.mp3',  // Required, music url
+                    pic: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Violent_revolution.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },{                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                 },
+                                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
+                },
+                {                                                           // Required, music info, see: ###With playlist
+                    title: 'OREAD',                                          // Required, music title
+                    author: 'The Great Cold',                          // Required, music author
+                    url: 'https://freemusicarchive.org/music/download/0b8717ae85289b1cb6f26d49e3b95830b2f3f423',  // Required, music url
+                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
                 }
             ]
         }
         var ap = new APlayer(option);
         ap.init();
 
-});
+        function hidePlaylistOnLoad() {
+            var e = document.getElementsByClassName("aplayer-list");
+            e[0].className += " aplayer-list-hide";
+        }
+        hidePlaylistOnLoad();
+    });
     </script>
 </body>
 </html>

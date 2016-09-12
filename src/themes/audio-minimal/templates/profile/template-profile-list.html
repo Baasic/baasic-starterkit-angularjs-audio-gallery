@@ -2,10 +2,11 @@
     <section class="profile__list__item col-sml-6 col-med-4 col-lrg-3 col-xlrg-2" ng-repeat="profile in profiles.item" ng-if="profiles.item.length">
         <a ui-sref="master.main.profile({artistId : profile.id})" class="profile__artist__link profile__artist__link--name">
             <div class="profile__content">
-                <div class="profile__list__avatar">
-                    <img src="img/avatar.svg" ng-src="{{profile.avatar}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-                    <p class="profile__artist__name">{{profile.displayName}}</p>
+                <div class="profile__list__avatar__wrapper">
+                    <img src="img/avatar.svg" ng-if="profile.avatar.length==0" class="profile__list__avatar">
+                    <img src="img/avatar.svg" ng-if="profile.avatar.length>0" class="profile__list__avatar" ng-src="{{profile.avatar}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
                 </div>
+                <p class="profile__artist__name">{{profile.displayName}}</p>
             </div>
         </a>
     </section>

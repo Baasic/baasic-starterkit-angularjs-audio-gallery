@@ -1,30 +1,26 @@
 <div ng-if="profile">
-    <div class="profile__header" ng-style="profile.cover.length && {'background-image': 'url(' + profile.cover + ')'}">
-    </div>
-    <div class="container container--profile__detail">
-        <div class="profile__avatar__wrapper">
-            <div class="profile__avatar__overlay"></div>
-            <img src="./img/avatar.svg" ng-src="{{profile.avatar}}" class="profile__avatar">
-            <h1 class="profile__title profile__title--main">{{profile.displayName}}</h1>
+    <div class="profile__header" ng-style="profile.cover.length && {'background-image': 'linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url(' + profile.cover + ')'}">
+        <div class="container">
+            <div class="profile__about col-sml-12 col-lrg-8">
+                <img src="./img/avatar.svg" ng-src="{{profile.avatar}}" class="profile__avatar">
+                <h1 class="profile__title profile__title--main">{{profile.displayName}}</h1>
+                <h3 class="profile__title profile__title--subtitle">{{profile.genre}} | {{profile.country}}</h3>
+                <p class="profile__about__text">{{profile.aboutArtist}}</p>
+                <div class="profile__social">
+                    <div ng-repeat="(key, value) in profile.social">
+                        <a ng-href="{{value}}" title="Visit {{profile.displayName}} on {{key}}!">
+                            <img ng-src="img/{{key}}.svg" width="32" class="profile__social__link" />
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div ng-if="$root.user.isAuthenticated" class="profile__edit">
                 <a class="btn btn--primary btn--med" ui-sref="master.main.profile-edit({artistId : $root.user.id})" ng-if="profile.id == $root.user.id">EDIT PROFILE</a>
                 <a class="btn btn--primary btn--med" ui-sref="master.main.profile-add({artistId : $root.user.id})" ng-if="!profile.id.length">ADD PROFILE</a>
             </div>
         </div>
-        <album-list artist-id="profile.id" profile-name="profile.displayName" class="col-sml-12 col-xlrg-9"></album-list>
-
-        <div class="profile__about col-sml-12 col-xlrg-3">
-            <h1 class="profile__title">About {{profile.displayName}}</h1>
-            <p class="profile__about__text">{{profile.aboutArtist}}</p>
-        </div>
-
-        <div class="profile__social col-sml-12 col-xlrg-3">
-            <h1 class="profile__title">{{profile.displayName}} on the web</h1>
-            <div ng-repeat="(key, value) in profile.social">
-                <a ng-href="{{value}}" title="Visit {{profile.displayName}} on {{key}}!">
-                    <img ng-src="img/{{key}}.svg" width="32" class="profile__social__link" />
-                </a>
-            </div>
-        </div>
+    </div>
+    <div class="container">
+        <album-list artist-id="profile.id" profile-name="profile.displayName"></album-list>
     </div>
 </div>

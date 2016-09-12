@@ -39,21 +39,21 @@
         background: $color-primary;
         color: white;
         &:hover {
-            background: color($color-primary blackness(+10%));
+            background: color($color-primary whiteness(+10%));
         }
     }
     &--secondary {
         background: $color-secondary;
         color: white;
         &:hover {
-            background: color($color-secondary blackness(+10%));
+            background: color($color-secondary whiteness(+10%));
         }
     }
     &--ghost {
         background-color: transparent;
         color: $color-primary;
         &:hover {
-            color: color($color-primary blackness(+10%));
+            color: color($color-primary whiteness(+10%));
         }
     }
     &--search {
