@@ -29,7 +29,7 @@ angular.module('media-gallery')
 							.success(function() {
              					vm.message = 'You have successfully changed your password, you will be redirected to login form in 5 seconds';
                                 setTimeout(function(){
-                                    $state.go('master.login');
+                                    $state.go('master.main.login');
                                 }, 5000);
 							})
 							.error(function(data, status){

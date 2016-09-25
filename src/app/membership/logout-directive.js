@@ -10,8 +10,8 @@ angular.module('media-gallery')
                 compile: function (elem, attrs) {
                     fn = $parse(attrs.onLogout);
                 },
-                controller: ['$scope', 'baasicLoginService', 'baasicAuthorizationService',
-                    function baasicLogoutCtrl($scope, loginService, authService) {
+                controller: ['$scope', '$state', 'baasicLoginService', 'baasicAuthorizationService',
+                    function baasicLogoutCtrl($scope, $state, loginService, authService) {
                         function clearUser() {
                             authService.setUser(null);
                             authService.updateAccessToken(null);
@@ -19,6 +19,7 @@ angular.module('media-gallery')
                             if (fn) {
                                 fn($scope);
                             }
+                            $state.go('master.main.index');
                         }
                         var storageKey = 'socialData';
                         var storeSocialLoginData = function(data){

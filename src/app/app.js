@@ -50,27 +50,26 @@ angular.module('media-gallery', [
                     templateUrl: 'templates/main.html',
                     controller: 'MainCtrl'
                 })
-                .state('master.login', {
+                .state('master.main.login', {
                     url: 'login',
                     templateUrl: 'templates/membership/login.html',
                     controller: 'LoginCtrl'
                 })
-                .state('master.register', {
+                .state('master.main.register', {
                     url: 'register',
                     templateUrl: 'templates/membership/register.html'
                 })
-                .state('master.password-change', {
+                .state('master.main.password-change', {
                     url: 'password-change?passwordRecoveryToken',
                     templateUrl: 'templates/membership/password-change.html'
                 })
-                .state('master.password-recovery', {
+                .state('master.main.password-recovery', {
                     url: 'password-recovery',
                     templateUrl: 'templates/membership/password-recovery.html'
                 })
-                .state('master.account-activation', {
+                .state('master.main.account-activation', {
                     url: 'account-activation?activationToken',
                     templateUrl: 'templates/membership/account-activation.html',
-                    controller: 'AccountActivationCtrl'
                 })
                 .state('master.main.profile', {
                     url: 'artist/{artistId}',

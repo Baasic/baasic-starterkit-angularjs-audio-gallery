@@ -60,8 +60,9 @@ angular.module('media-gallery')
                                         .finally(function () {
                                             $scope.logging = false;
                                             $state.go('master.main.index');
+                                            $scope.$root.loader.resume();
                                         });
-                                    $scope.$root.loader.suspend();
+
                                 })
                                 .error(function (data, status) {
                                     $scope.logging = false;

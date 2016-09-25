@@ -17,7 +17,7 @@ angular.module('media-gallery')
 					vm.recoveryData = {};
 					vm.recoveryData.challengeIdentifier = '';
 					vm.recoveryData.challengeResponse = '';
-					vm.recoveryData.recoverUrl = $state.href('master.password-change', {}, { absolute: true }) + '?passwordRecoveryToken={passwordRecoveryToken}';
+					vm.recoveryData.recoverUrl = $state.href('master.main.password-change', {}, { absolute: true }) + '?passwordRecoveryToken={passwordRecoveryToken}';
 
 					vm.recoverPassword = function() {
 						vm.recoveryData.challengeIdentifier = recaptchaService.challenge();
