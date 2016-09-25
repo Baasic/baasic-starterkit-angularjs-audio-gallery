@@ -1,0 +1,9 @@
+/*------------------------------------*\
+    # plugins.recaptcha
+\*------------------------------------*/
+
+.recaptcha {
+    display: block;
+    width: calc(100% - 130px);
+    margin: 1rem auto;
+}
