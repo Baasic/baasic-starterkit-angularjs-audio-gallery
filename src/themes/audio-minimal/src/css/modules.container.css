@@ -7,4 +7,10 @@
     padding: 0 1rem;
     max-width: 1280px;
     overflow-x: hidden;
+
+    &--membership {
+        margin: 3rem auto;
+        max-width: 600px;
+        text-align: center;
+    }
  }

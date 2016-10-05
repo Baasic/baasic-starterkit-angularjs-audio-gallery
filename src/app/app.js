@@ -80,14 +80,18 @@ angular.module('media-gallery', [
                     templateUrl: 'templates/profile/profile-edit.html'
                 })
                 .state('master.main.profile-add', {
-                    url: 'artist/add/{userId}',
-                    templateUrl: 'templates/profile/profile-edit.html'
+                    url: 'artist/add/{artistId}',
+                    templateUrl: 'templates/profile/profile-add.html'
                 })
                 .state('master.main.index', {
                     url: '?{page}',
                     templateUrl: 'templates/profile/profile-list.html'
                 })
-                .state('master.main.edit-album', {
+                .state('master.main.album-add', {
+                    url: 'add-album/{artistId}',
+                    templateUrl: 'templates/album/album-add.html'
+                })
+                .state('master.main.album-edit', {
                     url: 'edit-album/{albumId}',
                     templateUrl: 'templates/album/album-edit.html'
                 })

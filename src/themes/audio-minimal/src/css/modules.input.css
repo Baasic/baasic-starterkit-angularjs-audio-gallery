@@ -6,15 +6,39 @@
     &__search {
         display: inline-block;
         padding: 1rem;
-        margin: 1rem 0 1rem .5rem;
-        min-width: 350px;
-        width: calc(100% - 700px);
+        width: calc(100% - 64px);
         color: white;
         background: none;
         border: 1px solid white;
 
         &:focus {
             outline: 0;
+        }
+    }
+    &__file {
+        visibility: hidden;
+        &__label {
+            position: absolute;
+            max-width: 250px;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            padding: 6px;
+            background-color: rgba(0,0,0,.75);
+        }
+    }
+    &__text {
+        width: 100%;
+
+        background-color: transparent;
+        border: 0;
+        border-bottom: 1px solid;
+        border-color: black;
+
+        &:focus, &:hover {
+            outline: 0;
+
+            border-color: $color-primary;
         }
     }
 }

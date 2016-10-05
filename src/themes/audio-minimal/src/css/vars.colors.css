@@ -12,6 +12,11 @@ $viridian: #07889b;
 $moonstone: #66b9bf;
 $tangelo: #e37222;
 
+$gray1: #2D2D2D;
+$gray2: #353535;
+$gray3: #444444;
+$gray4: #727272;
+
 /**
  * Global text color
  */
@@ -20,10 +25,16 @@ $color-text:        #333;
 /**
  * Theme colors
  */
-$color-primary:     $yellowred;
+/*$color-primary:     $yellowred;
 $color-secondary: 	$moonstone;
 $color-tertiary:    $tangelo;
 $color-quartenary:  $viridian;
+*/
+/* Test colors */
+$color-primary:     $gray1;
+$color-secondary:   $gray2;
+$color-tertiary:    $gray3;
+$color-quartenary:  $gray4;
 
 
 /**

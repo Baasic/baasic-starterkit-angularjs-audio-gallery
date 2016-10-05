@@ -4,7 +4,15 @@
 
 .form {
     &--search {
-        display: inline;
-        margin-left: 6rem;
+        position: relative;
+        display: inline-block;
+
+        width: 100%;
+        margin-top: 1rem;
+
+        @media (--screen-from-lrg) {
+            margin: 1rem 2rem 1rem 2.75rem;
+            width: calc(100% - 550px);
+        }
     }
 }

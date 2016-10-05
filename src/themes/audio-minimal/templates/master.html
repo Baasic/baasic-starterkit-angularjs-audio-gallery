@@ -14,7 +14,8 @@
     </div>
 </div>
 <div ui-view></div>
-<div class="aplayer__wrapper">
+<div class="aplayer__wrapper" ng-class="{'aplayer__wrapper--closed' : !open, '':open}">
+    <a href="#" ng-click="open=!open" class="fa fa-minus-square-o" ng-class="{'fa-plus-square-o aplayer__max':!open, 'fa-minus-square-o':open}"></a>
     <div class="container container--aplayer">
         <div id="aplayer" class="aplayer"></div>
     </div>

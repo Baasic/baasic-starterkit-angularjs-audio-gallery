@@ -6,11 +6,22 @@ $aplayer-height: 66px;
 $lrc-height: 40px;
 $aplayer-height-lrc: $aplayer-height + $lrc-height;
 
+.aplayer__max {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+}
 .aplayer__wrapper {
     position: fixed;
     bottom: 0;
     width: 100%;
+    min-height: 75px;
     background: $color-quartenary;
+    transition: all 300ms ease-in-out;
+    &--closed {
+        min-height: 0;
+        height: 0;
+    }
 }
 
 .aplayer-narrow {
@@ -244,11 +255,11 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
 
                 &.aplayer-time-narrow {
                     .aplayer-icon-loop {
-                        display: none;
+                        display: inline-block!important;
                     }
 
                     .aplayer-icon-menu {
-                        display: none;
+                        display: inline-block!important;
                     }
                 }
             }
@@ -351,7 +362,7 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height;
     .aplayer-list {
         overflow: auto;
         transition: all 0.5s ease;
-        height: 250px;
+        max-height: 250px;
 
         &.aplayer-list-hide {
             height: 0 !important;

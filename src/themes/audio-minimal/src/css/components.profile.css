@@ -15,10 +15,9 @@
     &__avatar {
         display: inline-block;
         float: left;
-        width: 75px;
-        height: 75px;
-        margin-right: 1.5rem;
-        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        margin: 0 1.5rem 2rem 0;
     }
     &__artist {
         &__link {
@@ -51,9 +50,9 @@
         }
     }
     &__about {
-        margin: 2rem 0.5rem;
+        margin: 3rem 0.5rem;
         @media (--screen-from-med) {
-            margin: 2rem 0 2rem 25%;
+            margin: 3rem 0;
         }
         &__text {
             margin-bottom: 2rem;
@@ -62,7 +61,7 @@
 
     }
     &__header {
-        background: url(../img/cover.svg) center no-repeat;
+        background: center no-repeat;
         background-size: cover;
         &__overlay {
             position: absolute;
@@ -74,6 +73,7 @@
         }
     }
     &__social {
+        display: block;
         &__link {
             display: inline-block;
             float:  left;
@@ -83,6 +83,10 @@
             &:hover {
                 opacity: 0.7;
             }
+        }
+        &__edit {
+            display: inline-block;
+            margin: 1rem 1.5rem 1rem 0;
         }
     }
     &__edit {

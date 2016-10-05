@@ -4,7 +4,7 @@
 
 .album {
     &__wrapper {
-        padding: 2rem 1rem;
+        padding: 3rem 1rem 0 0.5rem;
     }
     &__name {
         letter-spacing: 0.5px;
@@ -20,6 +20,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            @mixin type-scale $type-medium, 1.5;
         }
     }
     &__link {

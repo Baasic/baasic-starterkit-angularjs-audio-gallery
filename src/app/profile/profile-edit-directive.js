@@ -24,27 +24,30 @@ angular.module('media-gallery')
                 function ($scope, $state, $q, profileService) {
 
                     if (!$scope.$root.user.isAuthenticated) {
-                        $state.go('master.login');
+                        $state.go('master.main.profile', {artistId: $state.params.artistId});
                     }
 
-                    $scope.backToDetails = function backToDetails() {
-                        $state.go('master.main.profile', {artistId: $scope.$root.user.id});
+                    profileService.get($state.params.artistId)
+                        .success(function (profile) {
+                            $scope.profile = profile;
+                        })
+                        .error(function (error) {
+                            console.log(error); // jshint ignore: line
+                            if(error === '"Resource not found."') {
+                                $state.go('master.main.profile-add', {artistId: $state.params.artistId});
+                            }
+                        })
+                        .finally(function () {
+                           // $scope.backToDetails();
+                       });
+
+                    $scope.reloadRoute = function() {
+                        $state.reload();
                     };
 
-                    profileService.get($state.params.artistId)
-                    .success(function (profile) {
-                        $scope.profile = profile;
-                    })
-                    .error(function (error) {
-                                    console.log(error); // jshint ignore: line
-                                })
-                    .finally(function () {
-                                   // $scope.backToDetails();
-                               });
-
-
-
                     $scope.saveProfile = function saveProfile(profile) {
+                        $scope.$root.loader.suspend();
+
                         $scope.profile = profile;
                         var promise;
                         if (!profile.id) {
@@ -53,23 +56,28 @@ angular.module('media-gallery')
                             promise = profileService.update(profile);
                         }
 
+                        var getNumber = function() {
+                            $scope.profile.random = (Math.ceil(Math.random() * 5));
+                        };
+
+                        getNumber();
+
                         promise
                         .success(function () {
                             if ($scope.onSaveFn) {
                                 $scope.onSaveFn($scope.$parent);
                             }
-                            $scope.backToDetails();
                         })
                         .error(function (error) {
                             $scope.error = error.message;
                         })
                         .finally(function () {
-
+                            $state.go('master.main.profile', {artistId: $state.params.artistId});
+                            $scope.$root.loader.resume();
                         });
                     };
-
                     $scope.cancelEdit = function cancelEdit() {
-                        $scope.backToDetails();
+                        $state.go('master.main.profile', {artistId: $state.params.artistId});
                     };
                 }
             ],

@@ -6,8 +6,8 @@ angular.module('media-gallery')
             return {
                 restrict: 'E',
                 scope: true,
-                controller: ['$scope', '$state', 'baasicFilesService',
-                    function ($scope, $state, baasicFilesService) {
+                controller: ['$scope', '$state', '$rootScope','baasicFilesService',
+                    function ($scope, $state, $rootScope, baasicFilesService) {
                         $scope.file = { fileName: '' };
                         $scope.model = {};
 
@@ -18,7 +18,7 @@ angular.module('media-gallery')
                         $scope.save = function () {
                             if ($scope.newSong.$valid) {
                                 $scope.$root.loader.suspend();
-                                var path = $root.$scope.user.userName + '/' + $scope.model.album + '/' + $scope.file.blob.name;
+                                var path = $rootScope.user.userName + '/' + $scope.model.album + '/' + $scope.file.blob.name;
                                 baasicFilesService.streams.create(path, $scope.file.blob)
                                     .success(function (fileData) {
                                         angular.extend($scope.model, fileData);

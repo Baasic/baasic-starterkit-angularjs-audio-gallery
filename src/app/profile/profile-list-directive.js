@@ -29,6 +29,7 @@ angular.module('media-gallery')
                                 };
 
                                 $scope.hasProfiles = profiles.totalRecords > 0;
+
                             })
                             .error(function (error) {
                                 console.log(error); //jshint ignore: line

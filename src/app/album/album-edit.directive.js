@@ -20,20 +20,21 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'baasicDynamicResourceService',
+                controller: ['$scope', '$state', '$q', 'albumService',
                     function ($scope, $state, $q, albumService) {
 
                         if (!$scope.$root.user.isAuthenticated) {
-                            $state.go('master.login');
+                            $state.go('master.main.login');
                         }
 
                         $scope.backToDetails = function backToDetails() {
                             $state.go('master.main.profile', {artistId : $scope.$root.user.id});
                         };
 
+                        $scope.artistId = $state.params.artistId;
                         $scope.albumId = $state.params.albumId;
 
-                        albumService.get('albums',{
+                        albumService.get('album',{
                             id: $scope.albumId
                         })
                             .success(function (album) {
@@ -41,17 +42,23 @@ angular.module('media-gallery')
                             })
                             .error(function (error) {
                                 console.log(error); // jshint ignore: line
+                                if(error === '"Resource not found."') {
+                                    $state.go('master.main.album-add', {artistId: $state.params.artistId});
+                                }
                             })
                             .finally(function () {
-
+                                if( !$scope.album.id ){
+                                    $scope.album = {};
+                                }
                             });
-
-
 
                         $scope.saveAlbum = function saveAlbum(album) {
                             $scope.$root.loader.suspend();
+                            $scope.album = { };
+                            $scope.album = album;
                             var promise;
                             if (!album.id) {
+                                $scope.album.artistId = $scope.artistId;
                                 promise = albumService.create(album);
                             } else {
                                 promise = albumService.update(album);
@@ -65,7 +72,7 @@ angular.module('media-gallery')
                                 $scope.backToDetails();
                                 })
                                 .error(function (error) {
-                                    $scope.error = error.message;
+                                    $scope.error = error;
                                 })
                                 .finally(function () {
                                     $scope.$root.loader.resume();
@@ -82,3 +89,4 @@ angular.module('media-gallery')
             };
         }
     ]);
+
