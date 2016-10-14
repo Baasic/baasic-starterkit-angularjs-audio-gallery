@@ -1,0 +1,39 @@
+/*------------------------------------*\
+    # modules.label
+\*------------------------------------*/
+
+.label {
+    display: block;
+    font-family: $ff-sans;
+    font-weight: $type-weight-bold;
+    transition: all 300ms ease-in-out;
+    letter-spacing: 1px;
+
+    &--files {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        padding: 6px;
+        background-color: rgba(0,0,0,.75);
+        @mixin type-scale $type-base, 1.25;
+
+        cursor: pointer;
+
+        &:hover {
+            color: $color-primary;
+        }
+
+        &--sml {
+             max-width: 150px;
+             bottom: 2rem;
+        }
+        &--med {
+            max-width: 250px;
+        }
+    }
+
+    &--primary {
+@mixin type-scale $type-medium, 1.25;
+    }
+}

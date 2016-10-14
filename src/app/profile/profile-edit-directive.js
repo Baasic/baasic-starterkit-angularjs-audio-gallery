@@ -41,10 +41,6 @@ angular.module('media-gallery')
                            // $scope.backToDetails();
                        });
 
-                    $scope.reloadRoute = function() {
-                        $state.reload();
-                    };
-
                     $scope.saveProfile = function saveProfile(profile) {
                         $scope.$root.loader.suspend();
 

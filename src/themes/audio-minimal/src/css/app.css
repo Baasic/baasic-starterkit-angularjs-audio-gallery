@@ -55,6 +55,7 @@
 @import modules.form.css;
 @import modules.input.css;
 @import modules.loader.css;
+@import modules.label.css;
 
 /**
 * Import: components

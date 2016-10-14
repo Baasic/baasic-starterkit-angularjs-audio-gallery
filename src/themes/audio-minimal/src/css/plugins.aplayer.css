@@ -6,21 +6,38 @@ $aplayer-height: 66px;
 $lrc-height: 40px;
 $aplayer-height-lrc: $aplayer-height + $lrc-height;
 
-.aplayer__max {
+.aplayer-max {
     position: fixed;
     bottom: 50px;
     left: 50px;
 }
-.aplayer__wrapper {
+.aplayer-wrapper {
     position: fixed;
     bottom: 0;
     width: 100%;
-    min-height: 75px;
     background: $color-quartenary;
     transition: all 300ms ease-in-out;
-    &--closed {
+    &-open {
+        min-height: 75px;
+        height: 75px;
+    }
+    &-closed {
         min-height: 0;
         height: 0;
+    }
+}
+.aplayer-toggle {
+    position: absolute;
+    top: -34px;
+    right: 0px;
+
+    color: white;
+    background-color: black;
+    padding: 5px 15px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: gray;
     }
 }
 

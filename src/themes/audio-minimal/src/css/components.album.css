@@ -4,7 +4,7 @@
 
 .album {
     &__wrapper {
-        padding: 3rem 1rem 0 0.5rem;
+        padding: 2rem 1rem 0 0.5rem;
     }
     &__name {
         letter-spacing: 0.5px;
@@ -40,6 +40,10 @@
         }
     }
     &__about {
-        padding: 0 5px;
+        margin-top: 2rem;
+        @media (--screen-from-sml) {
+            padding: 0 15px;
+            margin-top: 0;
+        }
     }
 }

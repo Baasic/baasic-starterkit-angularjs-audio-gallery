@@ -1,31 +1,38 @@
-// /* global google */
 angular.module('media-gallery')
-    .directive('newSong', [
+    .directive('newPhoto', [
         function () {
             'use strict';
             return {
                 restrict: 'E',
                 scope: true,
-                controller: ['$scope', '$state', '$rootScope','baasicFilesService',
-                    function ($scope, $state, $rootScope, baasicFilesService) {
+                controller: ['$scope', '$state', 'filesService', 'profileService',
+                    function ($scope, $state, filesService, profileService) {
                         $scope.file = { fileName: '' };
                         $scope.model = {};
+                        $scope.artistId = $state.params.artistId;
+
+                        var api = 'api.baasic.com',
+                            version = 'beta',
+                            key = 'audiogallery';
+                        $scope.appPath = 'http://' + api + '/' + version + '/' + key + '/file-streams/';
+
 
                         $scope.cancel = function () {
                             $state.go('master.main.index');
                         };
 
-                        $scope.save = function () {
-                            if ($scope.newSong.$valid) {
+                        $scope.savePhoto = function () {
+                            if ($scope.newPhoto.$valid) {
                                 $scope.$root.loader.suspend();
-                                var path = $rootScope.user.userName + '/' + $scope.model.album + '/' + $scope.file.blob.name;
-                                baasicFilesService.streams.create(path, $scope.file.blob)
+                                var path = $scope.artistId + '/avatar/' + $scope.file.blob.name;
+                                filesService.streamCreate(path, $scope.file.blob)
                                     .success(function (fileData) {
                                         angular.extend($scope.model, fileData);
-                                        baasicFilesService.batch.update([$scope.model])
+                                        $scope.profile.avatar = $scope.appPath + fileData.id;
+
+                                        filesService.batchUpdate([$scope.model])
                                             .success(function () {
                                                 $scope.$root.loader.resume();
-                                                $state.go('master.main.index');
                                             })
                                             .error(function (error) {
                                                 $scope.error = error.message;
@@ -38,10 +45,9 @@ angular.module('media-gallery')
                                     });
                             }
                         };
-
                     }
                 ],
-                templateUrl: 'templates/new-song/template-new-song.html'
+                templateUrl: 'templates/new-photo/template-new-photo.html'
             };
         }
     ]);

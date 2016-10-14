@@ -1,23 +1,16 @@
 <div class="container">
-    <div class="album__wrapper col-sml-12">
-        <form novalidate name="album" ng-submit="save()">
-            <div class="position--rel display--ib">
-                <img ng-src="{{album.cover}}">
-                <label for="albumCover" class="type--wide type--center type--color--negative input__file__label"><i class="fa fa-camera"></i>
-                    <span ng-if="!album.id">Add Cover</span>
-                    <span ng-if="album.id">Change Cover</span>
-                </label>
-                <!--input type="file" id="albumCover" file-model="file.blob" ng-model="file.fileName" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
-                <p ng-show="(album.$submitted || album.$touched) && album.$error.fileType">Allowed extensions are: png, jpeg, jpg </p>
-                 <input name="albumCover" ng-model="album.cover" type="text" required placeholder="album cover" /-->
-                 <input type="text" id="albumCover" ng-model="album.cover">
+    <div class="album__wrapper row col-sml-12">
+        <form novalidate name="album" ng-submit="saveAlbum(album)">
+            <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
             </div>
-            <div class="album__about col-sml-12 col-lrg-8">
-                <h3 class="album__name album__name--primary">
-                    <input name="albumName" ng-model="album.name" type="text" required />
-                    <input name="artistId" ng-model="album.artistId" type="text">
-                    <input name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" required>
-                </h3>
+            <div class="album__about col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
+                    <label for="albumName" class="label label--primary">Album Name</label>
+                    <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input__text" required />
+
+                    <input name="artistId" ng-model="album.artistId" type="hidden" />
+
+                    <label for="albumReleaseYear" class="label label--primary">Release Year</label>
+                    <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input__text" required>
                 <div ng-show="album.$submitted || album.albumName.$dirty">
                     <p ng-show="album.albumName.$error.required"> Album name is required. </p>
                 </div>
@@ -25,14 +18,16 @@
                     <p ng-show="album.releaseYear.$error.required"> Album name is required. </p>
                     <p ng-show="album.$error.fileType"> Please Enter Four Digit Number Only</p>
                 </div>
-                <textarea name="aboutAlbum" rows="5" ng-model="album.aboutAlbum"></textarea>
+                <label for="aboutAlbum" class="label label--primary">About Album</label>
+                <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input__text"></textarea>
                 <div>
-                    <button ng-disabled="album.$invalid" type="submit" class="btn btn--quinary btn--med push" ng-click="saveAlbum(album)">Save</button>
+                    <button ng-disabled="album.$invalid" type="submit" class="btn btn--quinary btn--med push">Save</button>
                     <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
                 </div>
             </div>
         </form>
     </div>
+    <album-song-list></album-song-list>
 </div>
 
 

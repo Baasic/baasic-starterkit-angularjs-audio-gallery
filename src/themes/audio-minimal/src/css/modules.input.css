@@ -16,29 +16,37 @@
         }
     }
     &__file {
-        visibility: hidden;
-        &__label {
-            position: absolute;
-            max-width: 250px;
-            width: 100%;
-            left: 0;
-            bottom: 0;
-            padding: 6px;
-            background-color: rgba(0,0,0,.75);
-        }
+        display: none;
     }
     &__text {
-        width: 100%;
+        width: calc(100% - 10px);
+        margin-bottom: 2rem;
+        padding: .5rem 1rem;
 
         background-color: transparent;
         border: 0;
         border-bottom: 1px solid;
-        border-color: black;
+        border-color: gray;
+
+        @mixin type-scale $type-medium, 1.25;
+        color: gray;
 
         &:focus, &:hover {
             outline: 0;
-
-            border-color: $color-primary;
+            border-color: black;
+            color:  black;
+        }
+        &__separator {
+            display: none;
+            @media (--screen-from-med) {
+                display:  inline-block;
+                float: left;
+            }
+        }
+        &--social {
+            display: inline-block;
+            width: calc(100% - 50px);
+            margin: -7px 0 0 0 ;
         }
     }
 }

@@ -14,8 +14,11 @@
     </div>
 </div>
 <div ui-view></div>
-<div class="aplayer__wrapper" ng-class="{'aplayer__wrapper--closed' : !open, '':open}">
-    <a href="#" ng-click="open=!open" class="fa fa-minus-square-o" ng-class="{'fa-plus-square-o aplayer__max':!open, 'fa-minus-square-o':open}"></a>
+<div class="aplayer-wrapper" ng-class="{'aplayer-wrapper-closed' : !open, '':open}">
+    <a href="#" ng-click="open=!open" class="aplayer-toggle">
+        <span class="fa" ng-class="{'fa-chevron-circle-up':!open, 'fa-chevron-circle-down':open}"></span>
+        <span class="fa fa-music"></span>
+    </a>
     <div class="container container--aplayer">
         <div id="aplayer" class="aplayer"></div>
     </div>

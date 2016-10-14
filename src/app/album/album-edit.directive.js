@@ -20,8 +20,8 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumService',
-                    function ($scope, $state, $q, albumService) {
+                controller: ['$scope', '$state', '$q', 'albumService', 'filesService',
+                    function ($scope, $state, $q, albumService, filesService) {
 
                         if (!$scope.$root.user.isAuthenticated) {
                             $state.go('master.main.login');
@@ -38,12 +38,12 @@ angular.module('media-gallery')
                             id: $scope.albumId
                         })
                             .success(function (album) {
-                                $scope.album = album;
+                                $scope.album = album
                             })
                             .error(function (error) {
                                 console.log(error); // jshint ignore: line
                                 if(error === '"Resource not found."') {
-                                    $state.go('master.main.album-add', {artistId: $state.params.artistId});
+                                    $state.go('master.main.album-add', {artistId: $scope.artistId});
                                 }
                             })
                             .finally(function () {
@@ -69,7 +69,7 @@ angular.module('media-gallery')
                                     if ($scope.onSaveFn) {
                                         $scope.onSaveFn($scope.$parent);
                                     }
-                                $scope.backToDetails();
+                                    $scope.backToDetails();
                                 })
                                 .error(function (error) {
                                     $scope.error = error;
@@ -77,9 +77,7 @@ angular.module('media-gallery')
                                 .finally(function () {
                                     $scope.$root.loader.resume();
                                 });
-
                             };
-
                         $scope.cancelEdit = function () {
                             $scope.backToDetails();
                         };

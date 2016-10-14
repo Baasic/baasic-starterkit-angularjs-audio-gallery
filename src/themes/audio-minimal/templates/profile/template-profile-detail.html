@@ -4,8 +4,7 @@
             <div class="container">
                 <div class="profile__about col-sml-12">
                     <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2">
-                        <img src="./img/avatar.svg" ng-if="profile.avatar.length" ng-src="{{profile.avatar}}" class="profile__avatar">
-                        <img src="./img/avatar.svg" ng-if="!profile.avatar.length" ng-src="./img/avatar-{{profile.random}}.png" class="profile__avatar">
+                        <img ng-src="{{profile.avatar}}" class="profile__avatar">
                     </div>
                     <div class="col-sml-12 col-lrg-8">
                         <h1 class="profile__title profile__title--main">{{profile.displayName}}</h1>
@@ -32,12 +31,8 @@
                             <a ng-if="profile.web.length" ng-href="{{profile.web}}" title="Visit {{profile.displayName}} Official Web Page">
                                 <img ng-src="img/web.svg" width="32" class="profile__social__link" />
                             </a>
-
                         </div>
                     </div>
-
-
-
                 </div>
                 <div ng-if="$root.user.isAuthenticated" class="profile__edit">
                     <a class="btn btn--primary btn--med" ui-sref="master.main.profile-edit({artistId : $root.user.id})" ng-if="profile.id == $root.user.id">EDIT PROFILE</a>
