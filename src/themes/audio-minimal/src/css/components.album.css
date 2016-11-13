@@ -46,4 +46,7 @@
             margin-top: 0;
         }
     }
+    &__cover {
+        max-width: 150px;
+    }
 }

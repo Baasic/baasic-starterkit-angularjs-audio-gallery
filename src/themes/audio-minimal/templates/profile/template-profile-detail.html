@@ -2,9 +2,10 @@
     <div ng-if="profile">
         <div class="profile__header" ng-style="profile.cover.length && {'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(' + profile.cover + ')'}" style="background-image: linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(https://unsplash.it/800/600/?random)">
             <div class="container">
+            <p>{{profile}}</p>
                 <div class="profile__about col-sml-12">
                     <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2">
-                        <img ng-src="{{profile.avatar}}" class="profile__avatar">
+                        <img src="./img/img.png" ng-src="{{profile.avatar.links('stream-token').href}}" class="profile__avatar">
                     </div>
                     <div class="col-sml-12 col-lrg-8">
                         <h1 class="profile__title profile__title--main">{{profile.displayName}}</h1>

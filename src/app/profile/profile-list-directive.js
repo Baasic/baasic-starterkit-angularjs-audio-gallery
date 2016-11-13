@@ -15,7 +15,8 @@ angular.module('media-gallery')
                             baasicUserProfileService.find({
                                 page: $state.params.page || 1,
                                 rpp: 10,
-                                search: $state.params.search
+                                search: $state.params.search,
+                                embed: 'avatar'
                             })
                             .success(function profileList(profiles) {
                                 $scope.profiles = profiles;
@@ -29,7 +30,6 @@ angular.module('media-gallery')
                                 };
 
                                 $scope.hasProfiles = profiles.totalRecords > 0;
-
                             })
                             .error(function (error) {
                                 console.log(error); //jshint ignore: line

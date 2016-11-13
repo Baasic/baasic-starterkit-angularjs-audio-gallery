@@ -20,26 +20,34 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'baasicUserProfileService',
-                function ($scope, $state, $q, profileService) {
+                controller: ['$scope', '$state', '$q', '$window','profileService', 'baasicUserProfileAvatarService',
+                function ($scope, $state, $q, $window, profileService, avatarService) {
 
                     if (!$scope.$root.user.isAuthenticated) {
                         $state.go('master.main.profile', {artistId: $state.params.artistId});
                     }
 
-                    profileService.get($state.params.artistId)
+                    $scope.loadProfiles = function(){
+
+                        profileService.get($state.params.artistId, {
+                            embed: 'avatar'
+                        })
                         .success(function (profile) {
                             $scope.profile = profile;
                         })
                         .error(function (error) {
                             console.log(error); // jshint ignore: line
                             if(error === '"Resource not found."') {
+                                $scope.$root.loader.resume();
                                 $state.go('master.main.profile-add', {artistId: $state.params.artistId});
                             }
                         })
                         .finally(function () {
-                           // $scope.backToDetails();
-                       });
+
+                        });
+                    };
+
+                    $scope.loadProfiles();
 
                     $scope.saveProfile = function saveProfile(profile) {
                         $scope.$root.loader.suspend();
@@ -52,14 +60,30 @@ angular.module('media-gallery')
                             promise = profileService.update(profile);
                         }
 
-                        var getNumber = function() {
-                            $scope.profile.random = (Math.ceil(Math.random() * 5));
-                        };
+                        if(profile.avatar.change) {
+                            var avatarEdit;
+                            if (!profile.avatar.id) {
+                                avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', profile.avatar.blob);
+                            } else {
+                                avatarEdit = avatarService.streams.update($scope.profile.id, profile.avatar.blob);
+                            }
+                        }
 
-                        getNumber();
 
                         promise
                         .success(function () {
+                            if(profile.avatar){
+                                avatarEdit
+                                .success(function(data, stream) {
+
+                                })
+                                .error(function(error) {
+                                    console.log(error);
+                                })
+                                .finally(function (){
+                                    $scope.$root.loader.resume();
+                                });
+                            }
                             if ($scope.onSaveFn) {
                                 $scope.onSaveFn($scope.$parent);
                             }
@@ -68,7 +92,8 @@ angular.module('media-gallery')
                             $scope.error = error.message;
                         })
                         .finally(function () {
-                            $state.go('master.main.profile', {artistId: $state.params.artistId});
+                            $state.go('master.main.profile', {artistId: $state.params.artistId}, {reload:true});
+                            $window.location.reload();
                             $scope.$root.loader.resume();
                         });
                     };

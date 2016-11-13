@@ -10,7 +10,7 @@
         controller: ['$scope', '$state', '$stateParams', '$q', 'baasicDynamicResourceService',
         function($scope, $state, $stateParams, $q, albumService) {
 
-            $scope.loadAlbums = function() {
+            function loadAlbums() {
                 $scope.albums = [];
 
                 albumService.find('albums',{
@@ -35,9 +35,9 @@
                 .finally(function() {
                     $scope.$parent.albums = $scope.albums;
                 });
-            };
+            }
 
-            $scope.loadAlbums();
+            loadAlbums();
 
 
             $scope.backToDetails = function backToDetails() {

@@ -2,7 +2,7 @@
     <div ng-if="albums.length" ng-repeat="album in albums">
         <div ng-if="$first" class="album__wrapper col-sml-12">
             <a href="#" class="album__link album__link--first col-sml-12 col-lrg-3" title="Click to listen album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
-                <img src="./img/img.png" ng-src="{{album.cover}}" />
+                <img src="./img/img.png" ng-src="{{album.cover.links('stream-token').href}}" />
             </a>
 
             <div class="album__about col-sml-12 col-lrg-8">

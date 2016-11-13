@@ -61,7 +61,7 @@
 
     }
     &__header {
-        background: center no-repeat;
+        background: center top no-repeat;
         background-size: cover;
         &__overlay {
             position: absolute;

@@ -32,19 +32,50 @@ angular.module('media-gallery')
 
                                         filesService.batchUpdate([$scope.model])
                                             .success(function () {
-                                                $scope.$root.loader.resume();
                                             })
                                             .error(function (error) {
                                                 $scope.error = error.message;
                                                 $scope.$root.loader.resume();
                                             });
-                                    })
+
+                                            filesService.find({
+                                                search: $scope.artistId + '/avatar/',
+                                                orderBy: 'dateCreated',
+                                                orderDirection : 'desc'
+                                            })
+                                            .success(function(covers){
+                                                $scope.cover = covers.item[0];
+
+                                            })
+                                            .error(function(error){
+                                                console.log(error);
+
+                                            });
+                                        })
                                     .error(function (error) {
                                         $scope.error = error.message;
+                                        $scope.$root.loader.resume();
+                                    })
+                                    .finally(function(response) {
                                         $scope.$root.loader.resume();
                                     });
                             }
                         };
+
+                        $scope.loadPhoto = function() {
+                            filesService.find({
+                                search: $scope.artistId + '/avatar/',
+                                orderBy: 'dateCreated',
+                                orderDirection : 'desc'
+                            })
+                            .success(function(covers){
+                                $scope.cover = covers.item[0];
+                            })
+                            .error(function(error){
+                                console.log(error);
+                            });
+                        }
+                        $scope.loadPhoto();
                     }
                 ],
                 templateUrl: 'templates/new-photo/template-new-photo.html'

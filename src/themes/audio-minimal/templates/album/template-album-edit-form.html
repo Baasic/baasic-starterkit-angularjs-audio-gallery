@@ -2,6 +2,18 @@
     <div class="album__wrapper row col-sml-12">
         <form novalidate name="album" ng-submit="saveAlbum(album)">
             <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
+                <img src="./img/img.png" ng-src="{{album.cover('stream-token').href}}" class="album__cover">
+                <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--sml"><i class="fa fa-camera"></i>
+                    <span ng-if="!album.cover.length">Add Cover</span>
+                    <span ng-if="album.cover.length">Change Cover</span>
+                </label>
+                <input type="file" name ="albumCover" id="albumCover" file-model="album.cover" ng-model="album.cover.name" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
+                <input type="text" ng-model="album.cover" ng-value="{{album.cover('stream-token').href}}">
+                <p ng-show="(album.$submitted || album.$touched) && album.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+                <button type="submit">Change cover</button>
+                <div ng-show="error">
+                    {{ error }}
+                </div>
             </div>
             <div class="album__about col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
                     <label for="albumName" class="label label--primary">Album Name</label>
@@ -27,7 +39,15 @@
             </div>
         </form>
     </div>
-    <album-song-list></album-song-list>
+    <div class="row col-sml-12">
+        <div>
+            <div ng-repeat="song in album.playlist">
+                <input type="text" ng-model="song.fileName" placeholder="Enter song name" class="input__text">
+                <input type="file">
+            </div>
+        </div>
+    </div>
 </div>
+
 
 

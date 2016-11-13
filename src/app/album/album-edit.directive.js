@@ -32,13 +32,18 @@ angular.module('media-gallery')
                         };
 
                         $scope.artistId = $state.params.artistId;
-                        $scope.albumId = $state.params.albumId;
+                        if(!$state.params.albumId){
+                            $scope.albumId = 'nonexistent';
+                        } else {
+                            $scope.albumId = $state.params.albumId;
+                        }
 
-                        albumService.get('album',{
-                            id: $scope.albumId
+                        $scope.$root.loader.suspend();
+                        albumService.get($scope.albumId,{
+
                         })
                             .success(function (album) {
-                                $scope.album = album
+                                $scope.album = album;
                             })
                             .error(function (error) {
                                 console.log(error); // jshint ignore: line
@@ -50,6 +55,22 @@ angular.module('media-gallery')
                                 if( !$scope.album.id ){
                                     $scope.album = {};
                                 }
+                                $scope.$root.loader.resume();
+                            });
+
+
+                            filesService.find ({
+                                search: $state.params.albumId,
+                                orderBy: 'dateCreated',
+                                orderDirection: 'asc'
+                            })
+                                .success(function(songs) {
+                                    $scope.album.playlist = songs.item;
+                            })
+                                .error(function(error) {
+                                console.log(error);
+                            })
+                                .finally(function(){
                             });
 
                         $scope.saveAlbum = function saveAlbum(album) {

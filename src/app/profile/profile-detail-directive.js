@@ -12,6 +12,7 @@ angular.module('media-gallery')
                             $scope.$root.loader.suspend();
                             $scope.albums = [];
                             profileService.get($state.params.artistId, {
+                                embed: 'avatar'
                             })
                                 .success(function (data) {
                                     $scope.profile = data;
@@ -28,7 +29,7 @@ angular.module('media-gallery')
 
                         $scope.deleteProfile = function(profile) {
                             if($scope.albums.length === 0) {
-                                if (confirm('By deleting your profile, all your data and albums will be irrecoverably lost. Are you sure that you want to delete your profile?')) {
+                                if (confirm('By deleting your profile, all your data will be irrecoverably lost. Are you sure that you want to delete your profile?')) {
                                     profileService.remove($scope.profile)
                                         .success(function () {
                                             console.log('Profile deleted!');

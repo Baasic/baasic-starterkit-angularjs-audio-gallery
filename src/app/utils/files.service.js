@@ -40,7 +40,7 @@
 
             this.batchUpdate = function batchUpdate(data) {
                 return filesService.batch.update(data);
-            }
+            };
 
             this.next = function next(dataList) {
                 var nextLink = dataList.links('next');
