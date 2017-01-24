@@ -6,26 +6,42 @@ angular.module('media-gallery')
             return {
                 restrict: 'AE',
                 scope: '=',
-                controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService',
-                    function baasicProfileDetail($scope, $state, $stateParams, $q, profileService) {
+                controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService', 'baasicFilesService',
+                    function baasicProfileDetail($scope, $state, $stateParams, $q, profileService, filesService) {
                         function loadProfile() {
                             $scope.$root.loader.suspend();
                             $scope.albums = [];
                             profileService.get($state.params.artistId, {
                                 embed: 'avatar'
                             })
-                                .success(function (data) {
-                                    $scope.profile = data;
+                                .success(function (profile) {
+                                    $scope.profile = profile;
                                 })
                                 .error(function (error) {
                                     console.log (error); // jshint ignore: line
                                 })
                                 .finally(function (){
+                                    loadProfileCover();
+                                });
+                        }
+                        function loadProfileCover() {
+                            filesService.get($scope.profile.coverPath, {
+                            })
+                                .success(function (cover) {
+                                    if(cover.path) {
+                                        $scope.profileCover = cover;
+                                    }
+                                })
+                                .error(function (error){
+                                    console.log(error);
+                                })
+                                .finally(function(){
                                     $scope.$root.loader.resume();
                                 });
-
                         }
+
                         loadProfile();
+
 
                         $scope.deleteProfile = function(profile) {
                             if($scope.albums.length === 0) {
@@ -42,7 +58,7 @@ angular.module('media-gallery')
                                         });
                                 }
                             } else {
-                                alert('You have to first delete all your albums to be able to delete your profile!');
+                                window.alert('You have to first delete all your albums to be able to delete your profile!');
                             }
 
                         };

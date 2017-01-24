@@ -1,8 +1,8 @@
 <div class="row col-sml-12">
     <div ng-if="albums.length" ng-repeat="album in albums">
         <div ng-if="$first" class="album__wrapper col-sml-12">
-            <a href="#" class="album__link album__link--first col-sml-12 col-lrg-3" title="Click to listen album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
-                <img src="./img/img.png" ng-src="{{album.cover.links('stream-token').href}}" />
+            <a href="#" class="album__link album__link--first col-sml-12 col-lrg-3" title="Click to listen album {{album.name}} by {{profile.displayName}} released in {{album.releaseYear}}">
+                <img src="./assets/img/img.png" ng-src="{{album.cover.links('stream-token').href}}" />
             </a>
 
             <div class="album__about col-sml-12 col-lrg-8">
@@ -16,7 +16,7 @@
 
         <div ng-if="!$first" class="album__wrapper col-sml-6 col-lrg-2">
             <a href="#" class="album__link" title="Click to listen album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
-                <img src="./img/img.png" ng-src="{{album.cover}}" />
+                <img src="./assets/img/img.png" ng-src="{{album.cover}}" />
                 <h3 class="album__name album__name--secondary">{{album.name}}</h3>
             </a>
             <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>

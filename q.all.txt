@@ -1,0 +1,3 @@
+q.all(promise1, promise2)
+
+.then ()

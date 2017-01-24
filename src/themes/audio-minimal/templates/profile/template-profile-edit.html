@@ -1,11 +1,11 @@
 <div class="main">
-    <div>
-        <div class="profile__header" ng-style="profile.cover.length && {'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(' + profile.cover + ')'}">
+    <div ng-if="profile.id == $root.user.id">
+        <div class="profile__header" ng-style="{'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(' + profileCover.links('stream-token').href + ')'}">
             <div class="container">
-                <form novalidate name="editProfile" ng-submit="saveProfile(profile);">
+                <form novalidate name="editProfile" ng-submit="saveProfile(profile);saveCover();">
                     <div class="profile__about col-sml-12">
                         <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 position--rel">
-                        <img src="./img/img.png" class="profile__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                        <img class="profile__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
 
     <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files label--files--sml"><i class="fa fa-camera"></i>
         <span ng-if="!profile.avatar">Add Avatar</span>
@@ -14,7 +14,7 @@
 
     <input type="file" name ="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
 
-    <input type="text" ng-model="profile.avatarsss" ng-value="{{profile.avatar.link('stream-token').href}}">
+    <input type="text" ng-model="profile.avatar.rnd" ng-value="{{profile.avatar.rnd}}">
 
     <p ng-show="(editProfile.$submitted || editProfile.$touched) && editProfile.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
 
@@ -40,41 +40,41 @@
                                 <label class="label label--primary">Enter Social Links</label>
                                 <div class="profile__social__edit">
                                     <label for="bandcamp" title="Enter bandcamp link">
-                                        <img ng-src="img/bandcamp.svg" class="profile__social__link" />
+                                        <img ng-src="./assets/img/bandcamp.svg" class="profile__social__link" />
                                     </label>
                                     <input type="text" id="bandcamp" name="bandcamp" ng-model="profile.bandcamp" placeholder="Bandcamp" class="input__text input__text--social">
                                 </div>
                                 <div class="profile__social__edit">
                                     <label for="myspace" title="Enter myspace link">
-                                        <img ng-src="img/myspace.svg" class="profile__social__link" />
+                                        <img ng-src="./assets/img/myspace.svg" class="profile__social__link" />
                                     </label>
                                     <input type="text" id="myspace" name="myspace" ng-model="profile.myspace" placeholder="Myspace" class="input__text input__text--social">
                                 </div>
                                 <div class="profile__social__edit">
                                     <label for="lastfm" title="Enter lastfm link">
-                                        <img ng-src="img/lastfm.svg" class="profile__social__link" />
+                                        <img ng-src="./assets/img/lastfm.svg" class="profile__social__link" />
                                     </label>
                                     <input type="text" id="lastfm" name="lastfm" ng-model="profile.lastfm" placeholder="Lastfm" class="input__text input__text--social">
                                 </div>
                                 <div class="profile__social__edit">
                                     <label for="soundcloud" title="Enter soundcloud link">
-                                        <img ng-src="img/soundcloud.svg" class="profile__social__link" />
+                                        <img ng-src="./assets/img/soundcloud.svg" class="profile__social__link" />
                                     </label>
                                     <input type="text" id="soundcloud" name="soundcloud" ng-model="profile.soundcloud" placeholder="Soundcloud" class="input__text input__text--social">
                                 </div>
                                 <div class="profile__social__edit">
                                     <label for="web" title="Enter official web link">
-                                        <img ng-src="img/web.svg" class="profile__social__link" />
+                                        <img ng-src="./assets/img/web.svg" class="profile__social__link" />
                                     </label>
                                 <input type="text" id="web" name="web" ng-model="profile.web" placeholder="Official web" class="input__text input__text--social">
                             </div>
                         </div>
-                        <label for="profileCover" class="label label--primary">Enter URL of your profile cover</label>
-                        <input type="text" id="profileCover" name="profileCover" ng-model="profile.cover" class="input__text" />
+                        <profile-cover></profile-cover>
                     </div>
                 </div>
                 <div ng-if="$root.user.isAuthenticated" class="profile__edit">
-                    <button class="btn btn--primary btn--med" type="submit" ng-if="profile.id == $root.user.id">Save</button>
+                    <button class="btn btn--primary btn--med" type="submit">Save</button>
+                    <!--ng-if="profile.id == $root.user.id"-->
                     <button class="btn btn--primary btn--med" type="submit" ng-if="!profile.id.length">Add Profile</button>
                     <a class="btn btn--primary btn--med" ui-sref="master.main.album-add({artistId : $root.user.id})" ng-if="profile.id.length">Add album</a>
                     <a class="btn btn--primary btn--med" ui-sref="master.main.profile({artistId : $root.user.id})">Cancel</a>
@@ -90,5 +90,8 @@
     <div class="container">
         <album-list artist-id="profile.id" profile-name="profile.displayName"></album-list>
     </div>
+</div>
+<div ng-if="profile.id != $root.user.id">
+    It is not nice to try to edit data of other artists.
 </div>
 </div>

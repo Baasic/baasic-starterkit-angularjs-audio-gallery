@@ -1,5 +1,5 @@
 {
     "apiRootUrl": "api.baasic.com",
-    "apiVersion": "beta",
+    "apiVersion": "v1",
     "apiKey": "audiogallery"
 }

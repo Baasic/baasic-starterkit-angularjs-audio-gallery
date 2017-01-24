@@ -1,0 +1,11 @@
+<div>
+    <div>
+        <input id="profileCover" name="profileCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg">
+        <p ng-show="(editProfile.$submitted || editProfile.$touched) && editProfile.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+    </div>
+
+    <div ng-show="error">
+        {{ error }}
+    </div>
+</div>
+

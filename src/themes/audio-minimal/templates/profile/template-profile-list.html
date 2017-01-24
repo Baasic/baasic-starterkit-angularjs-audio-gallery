@@ -3,7 +3,7 @@
         <a ui-sref="master.main.profile({artistId: profile.id})" class="profile__artist__link profile__artist__link--name">
             <div class="profile__content">
                 <div class="profile__list__avatar__wrapper">
-                    <img src="./img/img.png" class="profile__list__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                    <img class="profile__list__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
                 </div>
                 <p class="profile__artist__name">{{profile.displayName}}</p>
             </div>

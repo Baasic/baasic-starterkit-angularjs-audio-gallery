@@ -20,7 +20,7 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumService', 'filesService',
+                controller: ['$scope', '$state', '$q', 'baasicDynamicResourceService', 'baasicFilesService',
                     function ($scope, $state, $q, albumService, filesService) {
 
                         if (!$scope.$root.user.isAuthenticated) {
@@ -33,12 +33,13 @@ angular.module('media-gallery')
 
                         $scope.artistId = $state.params.artistId;
                         if(!$state.params.albumId){
-                            $scope.albumId = 'nonexistent';
+                            $scope.albumId = ' ';
                         } else {
                             $scope.albumId = $state.params.albumId;
                         }
 
                         $scope.$root.loader.suspend();
+
                         albumService.get($scope.albumId,{
 
                         })
@@ -58,31 +59,38 @@ angular.module('media-gallery')
                                 $scope.$root.loader.resume();
                             });
 
-
-                            filesService.find ({
-                                search: $state.params.albumId,
-                                orderBy: 'dateCreated',
-                                orderDirection: 'asc'
-                            })
-                                .success(function(songs) {
-                                    $scope.album.playlist = songs.item;
-                            })
-                                .error(function(error) {
+                        filesService.find ({
+                            search: 'album' + $scope.albumId,
+                            orderBy: 'dateCreated',
+                            orderDirection: 'asc'
+                        })
+                            .success(function(songs) {
+                                $scope.album.playlist = songs.item;
+                        })
+                            .error(function(error) {
                                 console.log(error);
-                            })
-                                .finally(function(){
-                            });
+                        })
+                            .finally(function(){
+                        });
+
 
                         $scope.saveAlbum = function saveAlbum(album) {
                             $scope.$root.loader.suspend();
-                            $scope.album = { };
+                            $scope.album = {};
                             $scope.album = album;
                             var promise;
-                            if (!album.id) {
+                            if (!$scope.album.id) {
                                 $scope.album.artistId = $scope.artistId;
-                                promise = albumService.create(album);
+                                promise = albumService.create($scope.album);
                             } else {
-                                promise = albumService.update(album);
+                                promise = albumService.update($scope.album);
+                            }
+
+                            var albumCoverUpdate;
+                            if (!$scope.album.cover) {
+                                albumCoverUpdate = filesService.streams.create($scope.album.cover, 'cover', $scope.album.cover.blob);
+                            } else {
+                                albumCoverUpdate = filesService.streams.update($scope.album.cover, $scope.album.cover.blob);
                             }
 
                             promise
@@ -90,13 +98,23 @@ angular.module('media-gallery')
                                     if ($scope.onSaveFn) {
                                         $scope.onSaveFn($scope.$parent);
                                     }
-                                    $scope.backToDetails();
+                                    albumCoverUpdate
+                                        .success(function(data) {
+                                            $scope.cover = data;
+                                        })
+                                        .error(function(error) {
+                                            console.log(error);
+                                        })
+                                        .finally(function(){
+                                    });
+
                                 })
                                 .error(function (error) {
                                     $scope.error = error;
                                 })
                                 .finally(function () {
                                     $scope.$root.loader.resume();
+                                    $scope.backToDetails();
                                 });
                             };
                         $scope.cancelEdit = function () {

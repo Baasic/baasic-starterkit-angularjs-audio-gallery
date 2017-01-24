@@ -3,7 +3,7 @@
         <span ng-if="!album.id">Add Cover</span>
         <span ng-if="album.id">Change Cover</span>
     </label>
-    <img src="./img/img.png" ng-src="{{album.cover}}">
+    <img src="./assets/img/img.png" ng-src="{{album.cover}}">
     <input type="file" id="cover" file-model="file.blob" ng-model="file.fileName" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
     <input type="hidden" ng-model="file.description" ng-value="albumCover{{albumId}}">
     <p ng-show="(album.$submitted || album.$touched) && album.$error.fileType">Allowed extensions are: png, jpeg, jpg </p>
