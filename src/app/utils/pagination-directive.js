@@ -1,7 +1,9 @@
-﻿angular.module('media-gallery')
+﻿(function(angular) {
+    'use strict';
+
+angular.module('media-gallery')
     .directive('pager', [
         function pager() {
-            'use strict';
 
             var pagerDataExp,
                 pagerName;
@@ -47,5 +49,6 @@
                 }
             };
         }
-    ]
-    );
+    ]);
+
+}(angular));

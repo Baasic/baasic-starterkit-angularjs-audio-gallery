@@ -1,4 +1,6 @@
-/* global angular */
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery', [
     'ui.router',
     'ngAnimate',
@@ -12,7 +14,7 @@ angular.module('media-gallery', [
 ])
     .config(['$locationProvider', '$urlRouterProvider', '$stateProvider', 'baasicAppProvider', 'baasicAppConfigProvider',
         function config($locationProvider, $urlRouterProvider, $stateProvider, baasicAppProvider, baasicAppConfigProvider) {
-            'use strict';
+
 
             baasicAppProvider.create(baasicAppConfigProvider.config.apiKey, {
                 apiRootUrl: baasicAppConfigProvider.config.apiRootUrl,
@@ -95,17 +97,17 @@ angular.module('media-gallery', [
                     url: 'edit-album/{albumId}',
                     templateUrl: 'templates/album/album-edit.html'
                 })
-                .state('master.main.add-song', {
-                    url: 'new-song',
-                    templateUrl: 'templates/gallery/new-song.html'
+                .state('master.main.song-list', {
+                    url: '{albumId}/song-list',
+                    templateUrl: 'templates/album/album-song-list.html'
                 })
-                .state('master.main.edit-song', {
-                    url: 'edit-song/{slug}',
-                    templateUrl: 'templates/gallery/edit-song.html'
+                .state('master.main.add-song', {
+                    url: '{albumId}/add-songs',
+                    templateUrl: 'templates/album/album-songs-edit.html'
                 })
                 .state('master.main.search', {
                     url: 'search?{search,type}',
-                    templateUrl: 'templates/gallery/search-results.html',
+                    templateUrl: 'templates/album/search-results.html',
                     controller: 'SearchResultsCtrl'
                 })
                 .state('master.404', {
@@ -116,7 +118,6 @@ angular.module('media-gallery', [
     .constant('recaptchaKey', '6LfcryYTAAAAAO0KBx1Cj6yNnSSjbB2MHTchdWac')
     .controller('MainCtrl', ['$scope', '$state', '$rootScope', '$browser',
         function MainCtrl($scope, $state, $rootScope, $browser) {
-            'use strict';
 
             // http://stackoverflow.com/questions/8141718/javascript-need-to-do-a-right-trim
             var rightTrim = function (str, ch) {
@@ -146,7 +147,6 @@ angular.module('media-gallery', [
     ])
     .controller('LoginCtrl', ['$scope', '$state',
         function LoginCtrl($scope, $state) {
-            'use strict';
 
             $scope.goHome = function goHome() {
                 $state.go('master.main.index');
@@ -154,7 +154,7 @@ angular.module('media-gallery', [
         }
     ])
     .controller('SearchCtrl', ['$scope', '$state', function ($scope, $state) {
-        'use strict';
+
         $scope.searchNature = function () {
             $state.go('master.main.photo-search', { search: $scope.searchFor, type: 'nature' });
         };
@@ -170,7 +170,6 @@ angular.module('media-gallery', [
     }])
     .run(['$rootScope', '$window', 'baasicAuthorizationService',
         function moduleRun($rootScope, $window, baasicAuthService) {
-            'use strict';
 
             var token = baasicAuthService.getAccessToken();
             var userDetails;
@@ -195,3 +194,5 @@ angular.module('media-gallery', [
             $rootScope.user = user;
         }
     ]);
+
+}(angular));

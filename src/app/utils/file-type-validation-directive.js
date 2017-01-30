@@ -1,5 +1,7 @@
-angular.module('media-gallery').directive('fileTypes', function () {
+(function(angular) {
     'use strict';
+
+angular.module('media-gallery').directive('fileTypes', function () {
     return {
         require: 'ngModel',
         link: function (scope, element, attr, ngModel) {
@@ -22,3 +24,5 @@ angular.module('media-gallery').directive('fileTypes', function () {
         }
     };
 });
+
+}(angular));

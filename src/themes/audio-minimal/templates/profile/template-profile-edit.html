@@ -5,22 +5,20 @@
                 <form novalidate name="editProfile" ng-submit="saveProfile(profile);saveCover();">
                     <div class="profile__about col-sml-12">
                         <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 position--rel">
-                        <img class="profile__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                            <img class="profile__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
 
-    <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files label--files--sml"><i class="fa fa-camera"></i>
-        <span ng-if="!profile.avatar">Add Avatar</span>
-        <span ng-if="profile.avatar">Change Avatar</span>
-    </label>
+                            <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files label--files--sml"><i class="fa fa-camera"></i>
+                                <span ng-if="!profile.avatar">Add Avatar</span>
+                                <span ng-if="profile.avatar">Change Avatar</span>
+                            </label>
 
-    <input type="file" name ="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
+                            <input type="file" name ="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
+                            <p ng-show="(editProfile.$submitted || editProfile.$touched) && editProfile.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
 
-    <input type="text" ng-model="profile.avatar.rnd" ng-value="{{profile.avatar.rnd}}">
+                            <div ng-show="error">
+                                {{ error }}
+                            </div>
 
-    <p ng-show="(editProfile.$submitted || editProfile.$touched) && editProfile.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
-
-    <div ng-show="error">
-        {{ error }}
-    </div>
                         </div>
                         <div class="col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
                             <label for="displayName" class="label label--primary">Artist / Band Name</label>

@@ -197,6 +197,9 @@ gulp.task('vendors', function () {
                 'main': [
                     '**/*.js'
                 ]
+            },
+            'angular-sanitize': {
+                'main': 'angular-sanitize.js'
             }
         }
     });

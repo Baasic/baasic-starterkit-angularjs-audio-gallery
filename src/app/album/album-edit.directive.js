@@ -1,7 +1,9 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
     .directive('albumEdit', ['$parse',
         function albumList($parse) {
-            'use strict';
 
             return {
                 restrict: 'AE',
@@ -20,103 +22,53 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'baasicDynamicResourceService', 'baasicFilesService',
-                    function ($scope, $state, $q, albumService, filesService) {
+                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', '$sce',
+                    function ($scope, $state, $q, albumsService, filesService, $sce) {
 
                         if (!$scope.$root.user.isAuthenticated) {
                             $state.go('master.main.login');
                         }
 
+                        $scope.getAlbum = function getAlbum() {
+                            albumsService.get($state.params.albumId)
+                                .success(function (album) {
+                                    $scope.album = album;
+                                })
+                                .error(function (error) {
+                                    console.log(error); // jshint ignore:line
+                                });
+                        };
+
+                        $scope.getAlbum();
+
                         $scope.backToDetails = function backToDetails() {
                             $state.go('master.main.profile', {artistId : $scope.$root.user.id});
                         };
 
-                        $scope.artistId = $state.params.artistId;
-                        if(!$state.params.albumId){
-                            $scope.albumId = ' ';
-                        } else {
-                            $scope.albumId = $state.params.albumId;
-                        }
-
-                        $scope.$root.loader.suspend();
-
-                        albumService.get($scope.albumId,{
-
-                        })
-                            .success(function (album) {
-                                $scope.album = album;
-                            })
-                            .error(function (error) {
-                                console.log(error); // jshint ignore: line
-                                if(error === '"Resource not found."') {
-                                    $state.go('master.main.album-add', {artistId: $scope.artistId});
-                                }
-                            })
-                            .finally(function () {
-                                if( !$scope.album.id ){
-                                    $scope.album = {};
-                                }
-                                $scope.$root.loader.resume();
-                            });
-
-                        filesService.find ({
-                            search: 'album' + $scope.albumId,
-                            orderBy: 'dateCreated',
-                            orderDirection: 'asc'
-                        })
-                            .success(function(songs) {
-                                $scope.album.playlist = songs.item;
-                        })
-                            .error(function(error) {
-                                console.log(error);
-                        })
-                            .finally(function(){
-                        });
-
-
                         $scope.saveAlbum = function saveAlbum(album) {
-                            $scope.$root.loader.suspend();
-                            $scope.album = {};
-                            $scope.album = album;
-                            var promise;
-                            if (!$scope.album.id) {
-                                $scope.album.artistId = $scope.artistId;
-                                promise = albumService.create($scope.album);
-                            } else {
-                                promise = albumService.update($scope.album);
-                            }
+                            if(album){
+                                var promise;
+                                if (album.id === undefined) {
+                                    album.artistId = $state.params.artistId;
+                                    promise = albumsService.create(album);
+                                } else {
+                                    promise = albumsService.update(album);
+                                }
 
-                            var albumCoverUpdate;
-                            if (!$scope.album.cover) {
-                                albumCoverUpdate = filesService.streams.create($scope.album.cover, 'cover', $scope.album.cover.blob);
-                            } else {
-                                albumCoverUpdate = filesService.streams.update($scope.album.cover, $scope.album.cover.blob);
-                            }
-
-                            promise
-                                .success(function () {
-                                    if ($scope.onSaveFn) {
-                                        $scope.onSaveFn($scope.$parent);
-                                    }
-                                    albumCoverUpdate
-                                        .success(function(data) {
-                                            $scope.cover = data;
-                                        })
-                                        .error(function(error) {
-                                            console.log(error);
-                                        })
-                                        .finally(function(){
+                                promise
+                                    .success(function () {
+                                        if ($scope.onSaveFn) {
+                                            $scope.onSaveFn($scope.$parent);
+                                        }
+                                    })
+                                    .error(function (error) {
+                                        $scope.error = error;
+                                    })
+                                    .finally(function () {
+                                        $scope.backToDetails();
                                     });
-
-                                })
-                                .error(function (error) {
-                                    $scope.error = error;
-                                })
-                                .finally(function () {
-                                    $scope.$root.loader.resume();
-                                    $scope.backToDetails();
-                                });
-                            };
+                            }
+                        };
                         $scope.cancelEdit = function () {
                             $scope.backToDetails();
                         };
@@ -127,3 +79,4 @@ angular.module('media-gallery')
         }
     ]);
 
+}(angular));

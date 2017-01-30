@@ -2,27 +2,24 @@
     'use strict';
 
 angular.module('media-gallery')
-    .directive('profileCover', [
+    .directive('albumSongs', [
         function () {
-
             return {
                 restrict: 'E',
                 scope: '=',
-                controller: ['$scope', '$state', 'baasicFilesService', 'baasicUserProfileService',
-                    function ($scope, $state, filesService, profileService) {
+                controller: ['$scope', '$state', 'baasicFilesService', 'albumsService',
+                    function ($scope, $state, filesService, albumsService) {
                         $scope.file = { filename: ''};
                         $scope.model = {};
-                        $scope.artistId = $state.params.artistId;
-                        var path = $scope.artistId + '/profileCover.jpg';
-                        function getProfile() {
-                            return profileService.get($scope.artistId, {
+                        $scope.albumId = $state.params.albumId;
+                        var path = $scope.albumId + ' / ' + $scope.file.blob.name;
+
+                        function getAlbum() {
+                            return albumsService.get($scope.albumId, {
                             })
-                                .success(function(profile){
-                                    $scope.profile = profile;
-                                    $scope.profile.coverPathOld = profile.coverPath;
-                                    if ($scope.profile.coverPath) {
-                                        $scope.profile.coverPath = path;
-                                    }
+                                .success(function(album){
+                                    $scope.album = album;
+
                                 });
                         }
 
@@ -56,7 +53,6 @@ angular.module('media-gallery')
                                             $scope.$root.loader.resume();
                                         });
                                     };
-
                                     getProfile();
                                     if($scope.profile.coverPath) {
                                     updateCover(path, file)
@@ -69,9 +65,8 @@ angular.module('media-gallery')
                         };
                     }
                 ],
-                templateUrl: 'templates/profile/template-profile-cover.html'
+                templateUrl: 'templates/album/template-album-songs-add.html'
             };
         }
     ]);
-
 }(angular));

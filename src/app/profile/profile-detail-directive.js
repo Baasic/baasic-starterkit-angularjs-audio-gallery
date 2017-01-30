@@ -1,7 +1,9 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
     .directive('profileDetail', [
         function profileDetail() {
-            'use strict';
 
             return {
                 restrict: 'AE',
@@ -9,7 +11,6 @@ angular.module('media-gallery')
                 controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService', 'baasicFilesService',
                     function baasicProfileDetail($scope, $state, $stateParams, $q, profileService, filesService) {
                         function loadProfile() {
-                            $scope.$root.loader.suspend();
                             $scope.albums = [];
                             profileService.get($state.params.artistId, {
                                 embed: 'avatar'
@@ -33,25 +34,24 @@ angular.module('media-gallery')
                                     }
                                 })
                                 .error(function (error){
-                                    console.log(error);
+                                    $scope.error = error;
                                 })
                                 .finally(function(){
-                                    $scope.$root.loader.resume();
+
                                 });
                         }
 
                         loadProfile();
 
 
-                        $scope.deleteProfile = function(profile) {
+                        $scope.deleteProfile = function() {
                             if($scope.albums.length === 0) {
-                                if (confirm('By deleting your profile, all your data will be irrecoverably lost. Are you sure that you want to delete your profile?')) {
+                                if (window.confirm('By deleting your profile, all your data will be irrecoverably lost. Are you sure that you want to delete your profile?')) {
                                     profileService.remove($scope.profile)
                                         .success(function () {
-                                            console.log('Profile deleted!');
                                         })
                                         .error(function (error) {
-                                            console.log (error); // jshint ignore: line
+                                            $scope.error = error;
                                         })
                                         .finally(function () {
                                             $state.go('master.main.index');
@@ -68,3 +68,5 @@ angular.module('media-gallery')
             };
         }
     ]);
+
+}(angular));

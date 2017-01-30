@@ -1,7 +1,9 @@
-﻿angular.module('media-gallery')
+﻿(function(angular) {
+    'use strict';
+
+angular.module('media-gallery')
     .directive('loader', [
         function loader() {
-            'use strict';
 
             var delay = 300,
                 hideClass = 'ng-hide';
@@ -37,5 +39,6 @@
                 }
             };
         }
-    ]
-    );
+    ]);
+
+}(angular));

@@ -1,5 +1,6 @@
 (function(angular) {
     'use strict';
+
     angular.module('media-gallery')
     .directive('albumList', function(){
 
@@ -7,13 +8,13 @@
         restrict: 'AE',
         templateUrl:'templates/album/template-album-list.html',
         scope: '=',
-        controller: ['$scope', '$state', '$stateParams', '$q', 'baasicDynamicResourceService',
-        function($scope, $state, $stateParams, $q, albumService) {
+        controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService',
+        function($scope, $state, $stateParams, $q, albumsService) {
 
             function loadAlbums() {
                 $scope.albums = [];
 
-                albumService.find('albums',{
+                albumsService.find({
                     page: 1,
                     rpp: 10,
                     search: $stateParams.artistId,
@@ -45,9 +46,9 @@
             };
 
             $scope.deleteAlbum = function(album) {
-                if (confirm('Are you sure you want to delete album ' + $scope.albums[album].name + '?')) {
+                if (window.confirm('Are you sure you want to delete album ' + $scope.albums[album].name + '?')) {
 
-                    albumService.remove($scope.albums[album])
+                    albumsService.remove($scope.albums[album])
                     .success(function () {
                         $scope.albums.splice(album,1);
                         $scope.loadAlbums();

@@ -1,8 +1,9 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
     .directive('baasicAccountActivation', [
         function baasicAccountActivation() {
-            'use strict';
-
 
             return {
                 restrict: 'AE',
@@ -40,3 +41,5 @@ angular.module('media-gallery')
             };
         }
     ]);
+
+}(angular));

@@ -1,7 +1,9 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
 	.directive('baasicPasswordChange', [
 		function baasicPasswordChange() {
-			'use strict';
 
 			return {
 				restrict: 'AE',
@@ -46,3 +48,5 @@ angular.module('media-gallery')
 			};
 		}
 	]);
+
+}(angular));

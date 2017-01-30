@@ -1,7 +1,9 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
     .directive('profileEdit', ['$parse',
         function profileList($parse) {
-            'use strict';
 
             return {
                 restrict: 'AE',
@@ -28,8 +30,7 @@ angular.module('media-gallery')
                     }
 
                     function loadProfile() {
-                        $scope.$root.loader.suspend();
-                        $scope.albums = [];
+                        //$scope.albums = [];
                         profileService.get($state.params.artistId, {
                             embed: 'avatar'
                         })
@@ -41,7 +42,6 @@ angular.module('media-gallery')
                             })
                             .finally(function (){
                                 loadProfileCover();
-                                $scope.$root.loader.resume();
                             });
                     }
 
@@ -56,20 +56,18 @@ angular.module('media-gallery')
 
                             })
                             .error(function (error){
-                                console.log(error);
-                                if($scope.user.id == $state.params.artistId && error === '"Resource not found."') {
+                                $scope.error = error;
+                                if($scope.user.id === $state.params.artistId && error === '"Resource not found."') {
                                     $state.go('master.main.profile-add', {artistId: $state.params.artistId});
                                 }
                             })
                             .finally(function(){
-                                $scope.$root.loader.resume();
                             });
                     }
 
                     loadProfile();
 
                     $scope.saveProfile = function saveProfile(profile) {
-                        $scope.$root.loader.suspend();
 
                         $scope.profile = profile;
                         $scope.profile.avatar.rnd = Math.random(10).toString().substring(7);
@@ -96,12 +94,14 @@ angular.module('media-gallery')
                             if(profile.avatar.change){
                                 avatarEdit
                                     .success(function(data, stream) {
+                                        $scope.avatarData = data;
+                                        $scope.avatarStream = stream;
                                     })
                                     .error(function(error) {
-                                        console.log(error);
+                                        $scope.error = error;
                                     })
                                     .finally(function (){
-                                        $scope.$root.loader.resume();
+
                                     });
                             }
                             if ($scope.onSaveFn) {
@@ -112,7 +112,7 @@ angular.module('media-gallery')
                             $scope.error = error.message;
                         })
                         .finally(function () {
-                            $scope.$root.loader.resume();
+
                             $state.go('master.main.profile', {artistId: $state.params.artistId}, {reload:true});
 
                         });
@@ -127,3 +127,5 @@ angular.module('media-gallery')
         };
     }
 ]);
+
+}(angular));

@@ -1,8 +1,9 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
 	.directive('baasicPasswordRecovery', [
 		function baasicPasswordRecovery() {
-		'use strict';
-
 
 		return {
 			restrict: 'AE',
@@ -45,3 +46,5 @@ angular.module('media-gallery')
 		};
 		}
 	]);
+
+}(angular));

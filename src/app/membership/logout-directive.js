@@ -1,9 +1,10 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
     .directive('baasicLogout', ['$parse',
         function baasicLogout($parse) {
-            'use strict';
             var fn;
-
             return {
                 restrict: 'AE',
                 scope: false,
@@ -53,3 +54,5 @@ angular.module('media-gallery')
             };
         }
     ]);
+
+}(angular));

@@ -1,8 +1,10 @@
-/* global conosle */
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
     .controller('SongSearchResultsCtrl', ['$scope', '$state', 'baasicFilesService',
         function ($scope, $state, baasicFilesService) {
-            'use strict';
+
 
             function parseCollection(collection) {
                 $scope.pagerData = {
@@ -58,3 +60,5 @@ angular.module('media-gallery')
             };
         }
     ]);
+
+}(angular));

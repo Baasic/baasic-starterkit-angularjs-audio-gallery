@@ -1,6 +1,6 @@
 <div class="container">
     <div class="album__wrapper row col-sml-12">
-        <form novalidate name="album" ng-submit="saveAlbum(album)">
+        <ng-form novalidate name="editAlbum">
             <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
                 <img src="./assets/img/img.png" ng-src="{{album.cover('stream-token').href}}" class="album__cover">
                 <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--sml"><i class="fa fa-camera"></i>
@@ -9,7 +9,7 @@
                 </label>
                 <input type="file" name ="albumCover" id="albumCover" file-model="album.cover" ng-model="album.cover" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
                 <input type="text" ng-model="album.cover.name" ng-value="{{album.cover('stream-token').href}}">
-                <p ng-show="(album.$submitted || album.$touched) && album.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+                <p ng-show="(editAlbum.$submitted || editAlbum.$touched) && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
                 <button type="submit">Change cover</button>
                 <div ng-show="error">
                     {{ error }}
@@ -21,27 +21,33 @@
                     <input name="artistId" ng-model="album.artistId" type="hidden" />
                     <label for="albumReleaseYear" class="label label--primary">Release Year</label>
                     <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input__text" required>
-                <div ng-show="album.$submitted || album.albumName.$dirty">
-                    <p ng-show="album.albumName.$error.required"> Album name is required. </p>
+                <div ng-show="editAlbum.$submitted || editAlbum.albumName.$dirty">
+                    <p ng-show="editAlbum.albumName.$error.required"> Album name is required. </p>
                 </div>
-                <div ng-show="album.$submitted || album.releaseYear.$dirty">
-                    <p ng-show="album.releaseYear.$error.required"> Album name is required. </p>
-                    <p ng-show="album.$error.fileType"> Please Enter Four Digit Number Only</p>
+                <div ng-show="editAlbum.$submitted || editAlbum.releaseYear.$dirty">
+                    <p ng-show="editAlbum.releaseYear.$error.required"> Album name is required. </p>
+                    <p ng-show="editAlbum.$error.fileType"> Please Enter Four Digit Number Only</p>
                 </div>
                 <label for="aboutAlbum" class="label label--primary">About Album</label>
                 <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input__text"></textarea>
                 <div>
-                    <button ng-disabled="album.$invalid" type="submit" class="btn btn--quinary btn--med push">Save</button>
+                    <button ng-disabled="editAlbum.$invalid" type="submit" class="btn btn--quinary btn--med push" ng-click="saveAlbum(album)">Save</button>
                     <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
                 </div>
             </div>
-        </form>
+        </ng-form>
     </div>
     <div class="row col-sml-12">
-        <div>
-            <div ng-repeat="song in album.playlist">
-                <input type="text" ng-model="song.fileName" placeholder="Enter song name" class="input__text">
-                <input type="file">
+        <div ng-repeat="song in album.playlist" style="margin: 20px 0; display:inline-block;">
+            <img ng-src="{{song.pic}}" alt="Album Cover Art" style="display: inline-block; height: 100px; width:auto;vertical-align:top;">
+            <div style="display:inline-block; position:relative;">
+                <p style="margin:10px 20px;" class="label label--primary">{{song.author}} - {{song.title}}</p>
+                <audio controls style="margin:10px 20px;">
+                    <source ng-src="{{song.url | trusted}}" type="audio/mpeg"/>
+                </audio>
+                <div style="position: absolute; top:10px; right:0" title="Delete this song from album">
+                    X
+                </div>
             </div>
         </div>
     </div>

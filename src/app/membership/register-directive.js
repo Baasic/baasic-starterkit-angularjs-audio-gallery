@@ -1,7 +1,10 @@
+(function(angular) {
+    'use strict';
+
 angular.module('media-gallery')
 	.directive('baasicRegistration', ['$parse',
 		function baasicRegistration($parse) {
-			'use strict';
+
 			var fn;
 
 			return {
@@ -53,3 +56,5 @@ angular.module('media-gallery')
 			};
 		}
 	]);
+
+}(angular));
