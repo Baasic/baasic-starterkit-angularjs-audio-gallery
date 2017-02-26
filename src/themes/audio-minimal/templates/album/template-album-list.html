@@ -2,21 +2,18 @@
     <div ng-if="albums.length" ng-repeat="album in albums">
         <div ng-if="$first" class="album__wrapper col-sml-12">
             <a href="#" class="album__link album__link--first col-sml-12 col-lrg-3" title="Click to listen album {{album.name}} by {{profile.displayName}} released in {{album.releaseYear}}">
-                <img src="./assets/img/img.png" ng-src="{{album.cover.links('stream-token').href}}" />
+                <img src="./assets/img/img.png" ng-src="https://api.baasic.com/v1/audiogallery/file-streams/{{album.coverId}}?rnd={{album.rnd}}">
             </a>
-
             <div class="album__about col-sml-12 col-lrg-8">
                 <h3 class="album__name album__name--primary">{{album.name}} ({{album.releaseYear}})</h3>
                 <p>{{album.aboutAlbum}}</p>
                 <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>
                 <a ng-if="profile.id == $root.user.id" href="javascript:void();" ng-click="album.id ? deleteAlbum($index) : cancelEdit()" class="btn btn--primary btn--sml">delete album</a>
             </div>
-
         </div>
-
         <div ng-if="!$first" class="album__wrapper col-sml-6 col-lrg-2">
             <a href="#" class="album__link" title="Click to listen album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
-                <img src="./assets/img/img.png" ng-src="{{album.cover}}" />
+                <img src="./assets/img/img.png" ng-src="https://api.baasic.com/v1/audiogallery/file-streams/{{album.coverId}}" />
                 <h3 class="album__name album__name--secondary">{{album.name}}</h3>
             </a>
             <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>

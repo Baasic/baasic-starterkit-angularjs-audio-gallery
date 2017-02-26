@@ -1,15 +1,10 @@
-<form name="addSong" action="">
 <div ng-repeat="song in album.playlist">
-    <label for="song-title-+{{$index}}">Song Title</label>
-    <input id="song-title-+{{$index}}" name="song-title" type="text" ng-model="song.title">
-    <label for="song-file-+{{$index}}"></label>
-    <input id="song-file-+{{$index}}" type="file" ng-model="">
+    <label for="song-title-{{$index}}">Song Title</label>
+    <input id="song-title-{{$index}}" name="song-title" type="text" ng-model="song.title">
+    <label for="song-file-{{$index}}"></label>
+    <input id="song-file-{{$index}}" type="file" file-model="file.blob" ng-model="file.filename">
     <input type="hidden" ng-model="song.url">
     <input type="hidden" ng-model="song.pic">
     <button type="submit">Add</button>
     <button type="button"> x </button>
-    <div ng-show="1 + 1 ? 3">validation error</div>
-    <div ng-show="1 + 1 ? 3">promise errors</div>
-    <div ng-show="1 + 1 ? 3">song succesfuly saved</div>
 </div>
-</form>

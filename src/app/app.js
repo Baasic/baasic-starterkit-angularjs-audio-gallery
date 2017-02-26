@@ -107,7 +107,7 @@ angular.module('media-gallery', [
                 })
                 .state('master.main.search', {
                     url: 'search?{search,type}',
-                    templateUrl: 'templates/album/search-results.html',
+                    templateUrl: 'templates/search/search-results.html',
                     controller: 'SearchResultsCtrl'
                 })
                 .state('master.404', {
@@ -115,7 +115,7 @@ angular.module('media-gallery', [
                 });
         }
     ])
-    .constant('recaptchaKey', '6LfcryYTAAAAAO0KBx1Cj6yNnSSjbB2MHTchdWac')
+    .constant('recaptchaKey', '6Lf9xRYUAAAAAGM2pIRSQpipXoRyLJweTfKB1CXN')
     .controller('MainCtrl', ['$scope', '$state', '$rootScope', '$browser',
         function MainCtrl($scope, $state, $rootScope, $browser) {
 
@@ -153,21 +153,18 @@ angular.module('media-gallery', [
             };
         }
     ])
-    .controller('SearchCtrl', ['$scope', '$state', function ($scope, $state) {
+    .controller('SearchCtrl', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
 
-        $scope.searchNature = function () {
-            $state.go('master.main.photo-search', { search: $scope.searchFor, type: 'nature' });
-        };
+        $scope.searchFor = $stateParams.search || '';
 
-        $scope.searchPeople = function () {
-            $state.go('master.main.photo-search', { search: $scope.searchFor, type: 'people' });
-        };
-
-        $scope.searchCitiesAndVillages = function () {
-            $state.go('master.main.photo-search', { search: $scope.searchFor, type: 'cities-and-villages' });
-        };
-
-    }])
+    $scope.searchSite = function searchProfile() {
+        $state.go('master.main.index', { search: $scope.searchFor, page: 1 });
+    };
+    $scope.resetSearch = function resetSearch() {
+        $scope.searchFor = '';
+        $state.go('master.main.index', { search: $scope.searchFor, page: 1});
+    };
+}])
     .run(['$rootScope', '$window', 'baasicAuthorizationService',
         function moduleRun($rootScope, $window, baasicAuthService) {
 

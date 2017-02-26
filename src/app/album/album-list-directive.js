@@ -8,8 +8,10 @@
         restrict: 'AE',
         templateUrl:'templates/album/template-album-list.html',
         scope: '=',
-        controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService',
-        function($scope, $state, $stateParams, $q, albumsService) {
+        controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService', 'baasicFilesService',
+        function($scope, $state, $stateParams, $q, albumsService, filesService) {
+
+
 
             function loadAlbums() {
                 $scope.albums = [];
@@ -35,11 +37,24 @@
                     })
                 .finally(function() {
                     $scope.$parent.albums = $scope.albums;
+                    $scope.firstAlbum = $scope.albums[0];
+                    loadAlbumCovers();
                 });
             }
 
             loadAlbums();
 
+            function loadAlbumCovers() {
+                filesService.find({
+                    search: $scope.firstAlbum.coverPath
+                })
+                .success(function(data) {
+                    $scope.firstAlbum.coverUrl = data.item[0].links('stream-token').href;
+                })
+                .error(function(error) {
+                    console.log(error);
+                })
+            }
 
             $scope.backToDetails = function backToDetails() {
                 $state.go('master.main.profile', {artistId : $scope.artistId});
@@ -51,7 +66,7 @@
                     albumsService.remove($scope.albums[album])
                     .success(function () {
                         $scope.albums.splice(album,1);
-                        $scope.loadAlbums();
+                        loadAlbums();
                     })
                     .error(function (error) {
                     })

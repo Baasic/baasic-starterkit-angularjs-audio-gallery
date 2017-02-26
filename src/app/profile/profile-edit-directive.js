@@ -24,13 +24,15 @@ angular.module('media-gallery')
                 },
                 controller: ['$scope', '$state', '$q', '$window','baasicUserProfileService', 'baasicUserProfileAvatarService', 'baasicFilesService',
                 function ($scope, $state, $q, $window, profileService, avatarService, filesService) {
+                    $scope.file = { filename: ''};
+                    $scope.model = {};
+                    $scope.artistId = $state.params.artistId;
+                    var path = $scope.artistId + '/profileCover.jpg';
 
                     if (!$scope.$root.user.isAuthenticated) {
                         $state.go('master.main.profile', {artistId: $state.params.artistId});
                     }
-
                     function loadProfile() {
-                        //$scope.albums = [];
                         profileService.get($state.params.artistId, {
                             embed: 'avatar'
                         })
@@ -41,57 +43,53 @@ angular.module('media-gallery')
                                 console.log (error); // jshint ignore: line
                             })
                             .finally(function (){
-                                loadProfileCover();
+                                if ($scope.profile.coverId) {
+                                    loadProfileCover();
+                                }
                             });
                     }
 
                     function loadProfileCover() {
-                        filesService.get($scope.profile.coverPath)
-                            .success(function (cover) {
-                                if(cover.path) {
-                                    $scope.profileCover = cover;
-                                } else {
-                                    $scope.profileCover = '/assets/img/img.png';
-                                }
-
+                        filesService.get($scope.profile.coverId)
+                            .success(function () {
                             })
                             .error(function (error){
                                 $scope.error = error;
-                                if($scope.user.id === $state.params.artistId && error === '"Resource not found."') {
-                                    $state.go('master.main.profile-add', {artistId: $state.params.artistId});
-                                }
                             })
                             .finally(function(){
                             });
                     }
-
                     loadProfile();
 
-                    $scope.saveProfile = function saveProfile(profile) {
+                    $scope.saveProfile = function saveProfile(editProfile) {
+                        $scope.profile = editProfile;
 
-                        $scope.profile = profile;
-                        $scope.profile.avatar.rnd = Math.random(10).toString().substring(7);
+                        if ($scope.profile.avatar) {
+                            $scope.profile.avatar.rnd = Math.random(10).toString().substring(7);
+                        }
 
                         var promise;
-                        if (!profile.id) {
+                        if (!$scope.profile.id) {
                             promise = profileService.create($scope.profile);
                         } else {
                             promise = profileService.update($scope.profile);
                         }
 
-                        if(profile.avatar.change) {
-                            var avatarEdit;
-                            if (!profile.avatar.id) {
-                                avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob);
-                            } else {
-                                avatarEdit = avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob);
-                            }
+                        if($scope.profile.avatar.change) {
+
+                                var avatarEdit;
+                                if (!$scope.profile.avatar.id) {
+                                    avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob);
+                                } else {
+                                    avatarEdit = avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob);
+                                }
+                            
 
                         }
 
                         promise
                         .success(function () {
-                            if(profile.avatar.change){
+                            if($scope.profile.avatar.change){
                                 avatarEdit
                                     .success(function(data, stream) {
                                         $scope.avatarData = data;
@@ -113,10 +111,57 @@ angular.module('media-gallery')
                         })
                         .finally(function () {
 
-                            $state.go('master.main.profile', {artistId: $state.params.artistId}, {reload:true});
-
                         });
                     };
+
+                    $scope.saveCover = function () {
+                        if($scope.file.filename) {
+                            //$scope.$root.loader.suspend();
+                            var coverId = $scope.profile.coverId;
+                            var file = $scope.file.blob;
+                            var addCover = function(path, file) {
+                                return filesService.streams.create(path, file)
+                                    .success(function(fileData) {
+                                        angular.extend($scope.model, fileData);
+                                        $scope.fileData = fileData;
+                                        $scope.profile.coverRnd = Math.random(10).toString().substring(7);
+                                        $scope.profile.coverId = $scope.fileData.id;
+                                    })
+                                    .finally(function(){
+                                    });
+                                },
+                                updateCover = function(coverId, file) {
+                                return filesService.streams.update(coverId, file)
+                                    .success(function() {
+                                        $scope.profile.coverRnd = Math.random(10).toString().substring(7);
+                                    })
+                                    .finally(function(){
+                                    });
+                                },
+                                updateProfile = function() {
+                                    return profileService.update($scope.profile)
+                                    .success (function(data){
+                                        $scope.updatedProfile = data;
+                                        //$scope.$root.loader.resume();
+                                    });
+                                },
+                                backToProfile = function() {
+                                    $state.go('master.main.profile', {artistId: $state.params.artistId}, {reload:true});
+                                };
+
+                                loadProfile();
+                                if($scope.profile.coverId) {
+                                updateCover(coverId, file)
+                                        .then(updateProfile)
+                                        .then(backToProfile);
+                                } else {
+                                addCover(path, file)
+                                    .then(updateProfile)
+                                    .then(backToProfile);
+                                }
+                          }
+                    };
+
                     $scope.cancelEdit = function cancelEdit() {
                         $state.go('master.main.profile', {artistId: $state.params.artistId});
                     };

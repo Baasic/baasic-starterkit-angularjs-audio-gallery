@@ -29,54 +29,6 @@
     <!-- inject:js -->
     <!-- endinject -->
 
-    <script type="text/javascript" src="//www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
-    <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
-  //do work
-        var option = {
-            element: document.getElementById('aplayer'),                       // Optional, player element
-            narrow: false,                                                     // Optional, narrow style
-            autoplay: false,
-            preload: 'none',                                                    // Optional, autoplay song(s), not supported by mobile browsers
-            mutex: true,                                                       // Optional, pause other players when this player playing
-            theme: '#e37222',
-            music: [
-
-                {                                                           // Required, music info, see: ###With playlist
-                    title: 'Violent Revolution',                                          // Required, music title
-                    author: 'Kreator',                          // Required, music author
-                    url: 'http://c.mimp3.me/d/QzM5YzM3kDO/kreator-violent-revolution.mp3',  // Required, music url
-                    pic: 'https://upload.wikimedia.org/wikipedia/en/5/5f/Violent_revolution.jpg',  // Optional, music picture
-                },
-                {                                                           // Required, music info, see: ###With playlist
-                    title: 'Seven Nation Army',                                          // Required, music title
-                    author: 'Chili Dragon Stones',                          // Required, music author
-                    url: 'http://api.baasic.com/beta/audiogallery/file-streams/JPM22ZKR4ak6pAPzW7q2Q1',  // Required, music url
-                    pic: 'http://i.imgur.com/tvQC3YH.jpg',  // Optional, music picture
-                },
-                                {                                                           // Required, music info, see: ###With playlist
-                    title: 'Fearless Flight',                                          // Required, music title
-                    author: 'NullSleep',                          // Required, music author
-                    url: 'http://api.baasic.com/beta/audiogallery/file-streams/y6eyAIav3T6csQcc03Je7D',  // Required, music url
-                    pic: 'http://onetwo.tv/storage/images/covers/250x250/0/0/4/62/rlj4wvrm8740.jpg',  // Optional, music picture
-                },
-                                               {                                                           // Required, music info, see: ###With playlist
-                    title: 'Chemical Wedding',                                          // Required, music title
-                    author: 'Bruce Dickinson',                          // Required, music author
-                    url: 'http://api.baasic.com/beta/audiogallery/file-streams/HH5KBUuVQKAg5API0CaJJ0',  // Required, music url
-                    pic: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/03/The_Chemical_Wedding.jpg/220px-The_Chemical_Wedding.jpg',  // Optional, music picture
-                }
-            ]
-        }
-        var ap = new APlayer(option);
-        ap.init();
-
-        function hidePlaylistOnLoad() {
-            var e = document.getElementsByClassName("aplayer-list");
-            e[0].className += " aplayer-list-hide";
-        }
-        hidePlaylistOnLoad();
-    });
-    </script>
+    <script type="text/javascript" src="//www.google.com/recaptcha/api.js"></script>
 </body>
 </html>

@@ -22,21 +22,20 @@ angular.module('media-gallery')
                                     console.log (error); // jshint ignore: line
                                 })
                                 .finally(function (){
-                                    loadProfileCover();
+                                    if ($scope.profile.coverId) {
+                                        loadProfileCover();
+                                    }
                                 });
                         }
                         function loadProfileCover() {
-                            filesService.get($scope.profile.coverPath, {
+                            filesService.streams.get($scope.profile.coverId, {
                             })
-                                .success(function (cover) {
-                                    if(cover.path) {
-                                        $scope.profileCover = cover;
-                                    }
+                                .success(function() {
                                 })
-                                .error(function (error){
+                                .error(function(error) {
                                     $scope.error = error;
                                 })
-                                .finally(function(){
+                                .finally(function() {
 
                                 });
                         }
@@ -58,7 +57,11 @@ angular.module('media-gallery')
                                         });
                                 }
                             } else {
-                                window.alert('You have to first delete all your albums to be able to delete your profile!');
+                                window.confirm('You have to first delete all your albums to be able to delete your profile! Would you like to delete all your albums?');
+                                //pseudo TODO
+                                /*
+                                pronađi sve albume ovog profila i redom ih obriši
+                                */
                             }
 
                         };

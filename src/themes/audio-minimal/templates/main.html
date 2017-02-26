@@ -1,8 +1,8 @@
 ﻿<header class="header">
     <div class="container">
-        <form name="searchForm" ng-submit="search();" class="form form--search">
+        <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="form form--search">
             <label for="searchEntry">
-                <input type="text" name="searchEntry" class="input__search"/>
+                <input type="text" name="searchEntry" class="input__search" ng-model="searchFor"/>
             </label>
             <button type="submit" class="btn btn--search">
                 <span class="fa fa-search"></span>

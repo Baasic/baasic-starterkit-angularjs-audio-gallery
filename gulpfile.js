@@ -200,6 +200,9 @@ gulp.task('vendors', function () {
             },
             'angular-sanitize': {
                 'main': 'angular-sanitize.js'
+            },
+            'amplitude' : {
+                'main': 'js/amplitude.min.js'
             }
         }
     });

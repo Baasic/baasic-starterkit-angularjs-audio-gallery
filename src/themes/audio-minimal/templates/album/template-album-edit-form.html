@@ -1,20 +1,23 @@
 <div class="container">
     <div class="album__wrapper row col-sml-12">
         <ng-form novalidate name="editAlbum">
+
             <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
-                <img src="./assets/img/img.png" ng-src="{{album.cover('stream-token').href}}" class="album__cover">
-                <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--sml"><i class="fa fa-camera"></i>
-                    <span ng-if="!album.cover.length">Add Cover</span>
-                    <span ng-if="album.cover.length">Change Cover</span>
-                </label>
-                <input type="file" name ="albumCover" id="albumCover" file-model="album.cover" ng-model="album.cover" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input__file">
-                <input type="text" ng-model="album.cover.name" ng-value="{{album.cover('stream-token').href}}">
-                <p ng-show="(editAlbum.$submitted || editAlbum.$touched) && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
-                <button type="submit">Change cover</button>
+                <div>
+                    <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--med"><i class="fa fa-camera"></i>
+                        <span ng-if="!album.id">Add Cover</span>
+                        <span ng-if="album.id">Change Cover</span>
+                    </label>
+                    <img src="./assets/img/img.png" ng-src="https://api.baasic.com/v1/audiogallery/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250">
+                    <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg">
+                    <p ng-show="(editAlbum.$submitted || editAlbum.$touched) && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+                </div>
+
                 <div ng-show="error">
                     {{ error }}
                 </div>
             </div>
+
             <div class="album__about col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
                     <label for="albumName" class="label label--primary">Album Name</label>
                     <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input__text" required />
@@ -31,26 +34,29 @@
                 <label for="aboutAlbum" class="label label--primary">About Album</label>
                 <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input__text"></textarea>
                 <div>
-                    <button ng-disabled="editAlbum.$invalid" type="submit" class="btn btn--quinary btn--med push" ng-click="saveAlbum(album)">Save</button>
+                    <button type="submit" class="btn btn--quinary btn--med push" ng-click="saveAlbum(album);">Save</button>
                     <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
                 </div>
             </div>
         </ng-form>
     </div>
     <div class="row col-sml-12">
-        <div ng-repeat="song in album.playlist" style="margin: 20px 0; display:inline-block;">
-            <img ng-src="{{song.pic}}" alt="Album Cover Art" style="display: inline-block; height: 100px; width:auto;vertical-align:top;">
-            <div style="display:inline-block; position:relative;">
-                <p style="margin:10px 20px;" class="label label--primary">{{song.author}} - {{song.title}}</p>
-                <audio controls style="margin:10px 20px;">
+        <div ng-repeat="song in album.playlist">
+            <div style="position:relative;margin: 20px 0;" class="col-sml-12">
+                <p class="label label--primary col-sml-12 col-med-6 col-lrg-9" style="display: inline-block">
+                    <span title="Delete this song from album" ng-click="deleteSong();" class="fa fa-times"></span>
+                        {{song.author}} - {{song.title}}
+                </p>
+                <audio controls style="display: inline-block" class="col-sml-12 col-med-6 col-lrg-3">
                     <source ng-src="{{song.url | trusted}}" type="audio/mpeg"/>
                 </audio>
-                <div style="position: absolute; top:10px; right:0" title="Delete this song from album">
-                    X
-                </div>
             </div>
         </div>
+        <div ng-if="!album.playlist.length">
+            No songs uploaded for this album
+        </div>
     </div>
+    <album-songs></album-songs>
 </div>
 
 

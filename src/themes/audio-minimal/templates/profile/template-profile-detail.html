@@ -1,6 +1,6 @@
 <div>
     <div ng-if="profile">
-        <div class="profile__header" ng-style="{'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(' + profileCover.links('stream-token').href + ')'}" >
+        <div class="profile__header" ng-style="{'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(https://api.baasic.com/v1/audiogallery/file-streams/{{profile.coverId}}?rnd={{profile.coverRnd}})'}">
             <div class="container">
                 <div class="profile__about col-sml-12">
                     <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2">
