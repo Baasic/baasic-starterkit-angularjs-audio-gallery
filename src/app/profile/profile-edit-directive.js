@@ -4,7 +4,6 @@
 angular.module('media-gallery')
     .directive('profileEdit', ['$parse',
         function profileList($parse) {
-
             return {
                 restrict: 'AE',
                 scope: true,
@@ -27,7 +26,6 @@ angular.module('media-gallery')
                     $scope.file = { filename: ''};
                     $scope.model = {};
                     $scope.artistId = $state.params.artistId;
-                    var path = $scope.artistId + '/profileCover.jpg';
 
                     if (!$scope.$root.user.isAuthenticated) {
                         $state.go('master.main.profile', {artistId: $state.params.artistId});
@@ -36,36 +34,44 @@ angular.module('media-gallery')
                         profileService.get($state.params.artistId, {
                             embed: 'avatar'
                         })
-                            .success(function (profile) {
-                                $scope.profile = profile;
-                            })
-                            .error(function (error) {
-                                console.log (error); // jshint ignore: line
-                            })
-                            .finally(function (){
-                                if ($scope.profile.coverId) {
-                                    loadProfileCover();
-                                }
-                            });
+                        .success(function (profile) {
+                            $scope.profile = profile;
+                        })
+                        .error(function (error) {
+                            console.log (error); // jshint ignore: line
+                        })
+                        .finally(function (){
+                            if ($scope.profile.coverId) {
+                                loadProfileCover();
+                            }
+                        });
                     }
-
                     function loadProfileCover() {
                         filesService.get($scope.profile.coverId)
-                            .success(function () {
-                            })
-                            .error(function (error){
-                                $scope.error = error;
-                            })
-                            .finally(function(){
-                            });
+                        .success(function () {
+                        })
+                        .error(function (error){
+                            $scope.error = error;
+                        })
+                        .finally(function(){
+                        });
                     }
                     loadProfile();
 
-                    $scope.saveProfile = function saveProfile(editProfile) {
+                    $scope.saveProfile = function(editProfile) {
                         $scope.profile = editProfile;
 
-                        if ($scope.profile.avatar) {
-                            $scope.profile.avatar.rnd = Math.random(10).toString().substring(7);
+                        var avatarEdit;
+                        if($scope.profile.avatar){
+                            if (!$scope.profile.avatar.id) {
+                                avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob);
+                            } else {
+                                avatarEdit = avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob);
+                            }
+
+                            if($scope.profile.avatar.change){
+                                $scope.profile.avatar.rnd =  Math.random(10).toString().substring(7);
+                            }
                         }
 
                         var promise;
@@ -73,34 +79,25 @@ angular.module('media-gallery')
                             promise = profileService.create($scope.profile);
                         } else {
                             promise = profileService.update($scope.profile);
-                        }
-
-                        if($scope.profile.avatar.change) {
-
-                                var avatarEdit;
-                                if (!$scope.profile.avatar.id) {
-                                    avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob);
-                                } else {
-                                    avatarEdit = avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob);
-                                }
-                            
 
                         }
 
                         promise
                         .success(function () {
-                            if($scope.profile.avatar.change){
-                                avatarEdit
+                            if($scope.profile.avatar){
+                                if($scope.profile.avatar.change) {
+                                    avatarEdit
                                     .success(function(data, stream) {
                                         $scope.avatarData = data;
                                         $scope.avatarStream = stream;
                                     })
                                     .error(function(error) {
-                                        $scope.error = error;
+                                        console.log(error); //jshint ignore: line
                                     })
                                     .finally(function (){
 
                                     });
+                                }
                             }
                             if ($scope.onSaveFn) {
                                 $scope.onSaveFn($scope.$parent);
@@ -113,10 +110,10 @@ angular.module('media-gallery')
 
                         });
                     };
-
                     $scope.saveCover = function () {
                         if($scope.file.filename) {
                             //$scope.$root.loader.suspend();
+                            var path = $scope.artistId + '/profileCover.jpg';
                             var coverId = $scope.profile.coverId;
                             var file = $scope.file.blob;
                             var addCover = function(path, file) {
@@ -141,8 +138,11 @@ angular.module('media-gallery')
                                 updateProfile = function() {
                                     return profileService.update($scope.profile)
                                     .success (function(data){
-                                        $scope.updatedProfile = data;
-                                        //$scope.$root.loader.resume();
+                                        $scope.updatedProfile = data; //see if neccessary, if not - delete
+                                         //$scope.$root.loader.resume();
+                                    }).error (function(error){
+                                        console.log(error); //jshint ignore: line
+                                    }).finally (function(){
                                     });
                                 },
                                 backToProfile = function() {

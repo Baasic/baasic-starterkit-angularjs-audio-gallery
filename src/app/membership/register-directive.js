@@ -40,6 +40,7 @@ angular.module('media-gallery')
 									registerService.create(vm.user)
 										.success(function() {
 											vm.message = 'You have successfully registered, please check you email in order to finish registration process';
+                                            /*To do: create profile and make it active:false; */
 										})
 										.error(function(data, status) {
 											vm.message = status + ': ' + data.message;
