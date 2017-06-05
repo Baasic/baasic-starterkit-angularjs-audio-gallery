@@ -11,7 +11,18 @@
         controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService', 'baasicFilesService',
         function($scope, $state, $stateParams, $q, albumsService, filesService) {
 
+            function loadAlbumCovers (){
+                return filesService.streams.get($scope.album.coverId)
+                .success(function(cover){
+                    $scope.cover = cover;
+                })
+                .error (function(error){
+                    $scope.error = error; //jshint ignore: line
+                })
+                .finally(function(){
 
+                });
+            }
 
             function loadAlbums() {
                 $scope.albums = [];
@@ -37,24 +48,12 @@
                     })
                 .finally(function() {
                     $scope.$parent.albums = $scope.albums;
-                    $scope.firstAlbum = $scope.albums[0];
                     loadAlbumCovers();
                 });
             }
 
             loadAlbums();
 
-            function loadAlbumCovers() {
-                filesService.find({
-                    search: $scope.firstAlbum.coverPath
-                })
-                .success(function(data) {
-                    $scope.firstAlbum.coverUrl = data.item[0].links('stream-token').href;
-                })
-                .error(function(error) {
-                    console.log(error);
-                })
-            }
 
             $scope.backToDetails = function backToDetails() {
                 $state.go('master.main.profile', {artistId : $scope.artistId});
@@ -69,9 +68,10 @@
                         loadAlbums();
                     })
                     .error(function (error) {
+                        console.log(error); //jshint ignore: line
                     })
                     .finally(function () {
-                        backToDetails();
+                        $scope.backToDetails();
                     });
                 }
             };

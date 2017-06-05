@@ -10,7 +10,9 @@ angular.module('media-gallery', [
     'baasic.files',
     'baasic.userProfile',
     'file-model',
-    'baasic.dynamicResource'
+    'baasic.dynamicResource',
+    'angularSoundManager',
+    'filereader'
 ])
     .config(['$locationProvider', '$urlRouterProvider', '$stateProvider', 'baasicAppProvider', 'baasicAppConfigProvider',
         function config($locationProvider, $urlRouterProvider, $stateProvider, baasicAppProvider, baasicAppConfigProvider) {

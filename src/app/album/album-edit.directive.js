@@ -15,7 +15,6 @@ angular.module('media-gallery')
                             if (attrs.onSave) {
                                 scope.onSaveFn = $parse(attrs.onSave);
                             }
-
                             if (attrs.onCancel) {
                                 scope.onCancelFn = $parse(attrs.onCancel);
                             }
@@ -24,27 +23,33 @@ angular.module('media-gallery')
                 },
                 controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', '$sce','baasicUserProfileService',
                     function ($scope, $state, $q, albumsService, filesService, $sce, profileService) {
-
-                        $scope.file = { filename: ''};
-                        $scope.model = {};
                         $scope.artistId = $state.params.artistId;
                         $scope.albumId = $state.params.albumId;
-                        var path = '/albumCover/' + $scope.albumId + '/albumCover.jpg';
+                        var file;
+                        var path;
 
+
+
+                        //please loginif not logged in
                         if (!$scope.$root.user.isAuthenticated) {
                             $state.go('master.main.login');
                         }
 
+                        //get me selected album
                         function getAlbum() {
-                            albumsService.get($state.params.albumId)
-                                .success(function (album) {
-                                    $scope.album = album;
-                                })
-                                .error(function (error) {
-                                    console.log(error); // jshint ignore:line
-                                })
-                                .finally(function(){
-                                });
+                            if($state.params.albumId) {
+                                albumsService.get($state.params.albumId)
+                                    .success(function (album) {
+                                        $scope.album = album;
+                                    })
+                                    .error(function (error) {
+                                        console.log(error); // jshint ignore:line
+                                    })
+                                    .finally(function(){
+                                    });
+                            } else {
+                                $scope.album = {};
+                            }
                         }
 
                         getAlbum();
@@ -54,27 +59,22 @@ angular.module('media-gallery')
                         };
 
 
-                        $scope.saveAlbum = function(album) {
-                            var path;
-                            var file;
-                            if($scope.file.blob){
-                                file = $scope.file.blob;
-                                path = $scope.file.blob.name;
-                            }
+                        $scope.saveAlbum = function(saveAlbum) {
+                            $scope.album = saveAlbum;
+
                             var saveCover = function() {
                                 var promiseAlbumCover;
-                                if(albumCover.value.length) {
+                                if($scope.file.blob) {
                                     if($scope.album.coverId) {
                                         $scope.file = file;
                                         promiseAlbumCover = filesService.streams.update($scope.album.coverId, $scope.file);
                                     } else {
                                         promiseAlbumCover = filesService.streams.create(path, file);
                                     }
-
                                 }
                                 return promiseAlbumCover
-                                    .success(function(cover){
-                                        $scope.coverId = cover.id;
+                                    .success(function(){
+
                                     })
                                     .error(function (error) {
                                         console.log(error);  // jshint ignore: line
@@ -83,22 +83,24 @@ angular.module('media-gallery')
 
                                     });
 
-                            },
-                            saveAlbum = function() {
+                            };
+                            var editAlbum = function() {
                                 var promiseAlbumData;
-                                $scope.album.rnd = Math.random().toString().substr(2);
-                                    if($scope.album.id === undefined) {
+
+                                if($scope.album.id === undefined) {
                                         $scope.album.artistId = $state.params.artistId;
                                         $scope.album.coverId = $scope.coverId;
+                                        $scope.album.rnd = Math.random().toString().substr(2);
                                         promiseAlbumData = albumsService.create($scope.album);
                                 } else {
                                     if($scope.album.coverId) {
-                                            $scope.coverId = $scope.album.coverId;
+                                            $scope.album.rnd = Math.random().toString().substr(2);
                                     }
                                     promiseAlbumData = albumsService.update($scope.album);
                                 }
                                 return promiseAlbumData
-                                    .success(function(){
+                                    .success(function(album){
+                                        $scope.album = album;
                                         if ($scope.onSaveFn) {
                                             $scope.onSaveFn($scope.$parent);
                                         }
@@ -107,51 +109,68 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function () {
-                                        getAlbum()
+                                        getAlbum();
                                     });
-                            },
-                            getFilesData = function(){
-                                filesService.get($scope.coverId)
-                                    .success(function (data) {
-                                        $scope.filesData = data;
-                                        updateFilesData();
+                            };
+                            var getFilesData = function(){
+                                return filesService.find({
+                                    search: path
+                                })
+                                    .success(function (albumCover) {
+                                        $scope.filesData = albumCover.item[0];
                                     })
                                     .error(function (error) {
-                                        console.log(error)
+                                        console.log(error); //jshint ignore: line
                                     })
                                     .finally(function() {
                                     });
-                            },
-                            updateFilesData = function(){
+                            };
+                            var updateFilesData = function(){
                                 if($scope.filesData){
-                                    filesService.update($scope.filesData)
-                                    .success(function (data) {
-                                        $scope.data = data;
-                                        $scope.backToDetails;
-                                    })
-                                    .error(function (error) {
-                                        console.log(error)
-                                    });
+                                    return filesService.update($scope.filesData)
+                                        .success(function (data) {
+                                            $scope.data = data;
+                                        })
+                                        .error(function (error) {
+                                            console.log(error); //jshint ignore: line
+                                        })
+                                        .finally(function(){
+                                            if($scope.filesData.id !== $scope.album.coverId) {
+                                                $scope.album.coverId = $scope.filesData.id;
+                                                editAlbum();
+                                            }
+                                        });
                                 }
 
                             };
+                            var isCover = function(){
+                                if($scope.file.blob){
+                                    file = $scope.file.blob;
+                                    path = $scope.album.id + '/cover.jpg';
+                                }
+                            };
 
                             if($scope.file.blob) {
-                                saveCover()
-                                    .then(saveAlbum)
+                                editAlbum()
+                                    .then(isCover)
+                                    .then(saveCover)
                                     .then(getFilesData)
-                                    .then($scope.backToDetails);
-                            } else {
-                                saveAlbum()
-                                    .then($scope.backToDetails);
-                            }
+                                    .then(updateFilesData)
+                                    .then(getAlbum)
+                                    .then($scope.backToDetails());
+                                }
+                                else {
+                                editAlbum()
+                                    .then(getAlbum)
+                                    .then($scope.backToDetails());
+                                }
                         };
 
                         $scope.cancel = function () {
                             $state.go('master.main.profile', {artistId: $scope.artistId}, {reload:true});
                         };
 
-
+                        //this i'll do later
                         $scope.addSong = function () {
                             /*pseudo code
                             upload stream

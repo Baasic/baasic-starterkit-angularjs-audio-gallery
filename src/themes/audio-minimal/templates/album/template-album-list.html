@@ -19,5 +19,8 @@
             <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>
             <a ng-if="profile.id == $root.user.id" href="#" ng-click="album.id ? deleteAlbum($index) : cancelEdit()" class="btn btn--primary btn--sml">delete album</a>
         </div>
+        <div class="">
+            {{album}}
+        </div>
     </div>
 </div>

@@ -28,9 +28,10 @@ angular.module('media-gallery')
                                 });
                         }
                         function loadProfileCover() {
-                            filesService.streams.get($scope.profile.coverId, {
+                            filesService.get($scope.profile.coverId, {
                             })
-                                .success(function() {
+                                .success(function (cover) {
+                                    $scope.cover = cover;
                                 })
                                 .error(function(error) {
                                     $scope.error = error;

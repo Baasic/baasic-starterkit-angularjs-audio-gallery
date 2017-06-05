@@ -4,7 +4,8 @@
             <div class="container">
                 <div class="profile__about col-sml-12">
                     <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2">
-                        <img ng-src="{{profile.avatar.links('stream-token').href}}" class="profile__avatar">
+                        <img ng-if="profile.avatar" ng-src="{{profile.avatar.links('stream-token').href}}" class="profile__avatar" />
+                        <img ng-if="!profile.avatar" src="./assets/img/avatar-1.png" class="profile__avatar" />
                     </div>
                     <div class="col-sml-12 col-lrg-8">
                         <h1 class="profile__title profile__title--main">{{profile.displayName}}</h1>
