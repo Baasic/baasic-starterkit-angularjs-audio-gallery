@@ -91,7 +91,7 @@
 * any vendor prefixes since autoprefixer will use project specific vendor prefixes
 */
 @import plugins.fontawesome.css;
-@import plugins.aplayer.css;
+@import plugins.player.css;
 @import plugins.recaptcha.css;
 /* @import plugins.remodal.css; */
 

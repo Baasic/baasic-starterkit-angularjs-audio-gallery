@@ -8,8 +8,9 @@
                     </label>
                     <img ng-if="!album.coverId" src="./assets/img/img.png"/>
                     <img ng-if="album.coverId" ng-src="https://api.baasic.com/v1/audiogallery/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
-                    <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg">
+                    <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" required>
                     <p ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+                    <p ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
                 </div>
 
                 <div ng-show="error">
@@ -40,10 +41,10 @@
         </form>
     </div>
     <div class="row col-sml-12">
-        <div ng-repeat="song in album.playlist as playlist">
+        <div ng-repeat="song in album.playlist">
             <div style="position:relative;margin: 20px 0;" class="col-sml-12">
                 <p class="label label--primary col-sml-12 col-med-6 col-lrg-9" style="display: inline-block">
-                    <span title="Delete this song from album" ng-click="deleteSong($index);" class="fa fa-times"></span>
+                    <span title="Delete this song from album" ng-click="deleteSong();" class="fa fa-times"></span>
                         {{song.artist}} - {{song.title}}
                 </p>
                 <audio controls style="display: inline-block" class="col-sml-12 col-med-6 col-lrg-3">
@@ -53,7 +54,6 @@
         </div>
         <div ng-if="!album.playlist.length">
             No songs uploaded for this album
-            <new-song></new-song>
         </div>
     </div>
     <album-songs></album-songs>

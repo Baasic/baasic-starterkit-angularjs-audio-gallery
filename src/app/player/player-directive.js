@@ -11,6 +11,12 @@
         controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService', 'baasicFilesService',
         function($scope, $state, $stateParams, $q, albumsService, filesService) {
 
+            //playlist open/close
+            $scope.playlistActive = false;
+            $scope.playlistToggle = function() {
+                $scope.playlistActive = !$scope.playlistActive;
+            };
+
             //temporary songs for player
             $scope.songs = [
                 /*{
@@ -32,21 +38,21 @@
                     title: 'Barrlping with Carl (featureblend.com)',
                     artist: 'Akon',
                     url: 'http://www.freshly-ground.com/misc/music/carl-3-barlp.mp3',
-                    cover: 'https://api.baasic.com/v1/audiogallery/file-streams/ryfVfhZlngRKxTF0WBrdC5'
+                    cover: 'https://api.baasic.com/v1/audiogallery/file-streams/dSwctoxAyg52rjF5W82Gv3'
                 },
                 {
                     id: 'four',
                     title: 'Angry cow sound?',
                     artist: 'A Cow',
                     url: 'http://www.freshly-ground.com/data/audio/binaural/Mak.mp3',
-                    cover: 'https://api.baasic.com/v1/audiogallery/file-streams/ryfVfhZlngRKxTF0WBrdC5'
+                    cover: 'https://api.baasic.com/v1/audiogallery/file-streams/dSwctoxAyg52rjF5W82Gv3'
                 },
                 {
                     id: 'five',
                     title: 'Things that open, close and roll',
                     artist: 'Someone',
                     url: 'http://www.freshly-ground.com/data/audio/binaural/Things%20that%20open,%20close%20and%20roll.mp3',
-                    cover: 'https://api.baasic.com/v1/audiogallery/file-streams/ryfVfhZlngRKxTF0WBrdC5'
+                    cover: 'https://api.baasic.com/v1/audiogallery/file-streams/dSwctoxAyg52rjF5W82Gv3'
                 }
             ];
 
