@@ -61,7 +61,7 @@ angular.module('media-gallery')
                                 window.confirm('You have to first delete all your albums to be able to delete your profile! Would you like to delete all your albums?');
                                 //pseudo TODO
                                 /*
-                                pronađi sve albume ovog profila i redom ih obriši
+                                pronađi sve albume ovog profila i redom ih obriši zajedno sa pjesmama i coverima, profile avatar i profile cover isto
                                 */
                             }
 

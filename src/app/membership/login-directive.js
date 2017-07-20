@@ -21,6 +21,8 @@ angular.module('media-gallery')
 						vm.user = {};
 						vm.user.options = ['session', 'sliding'];
 
+
+
 						(function(){
 						if(authService.getAccessToken()){
 							vm.isUserLoggedIn = true;

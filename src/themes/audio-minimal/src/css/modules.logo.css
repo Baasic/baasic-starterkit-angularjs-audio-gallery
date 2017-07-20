@@ -3,13 +3,16 @@
 \*------------------------------------*/
 
 .logo {
-    &--header {
-        display: inline-block;
-        float: left;
-        height: 3.5rem;
-        margin: 1rem 0;
+    &--big {
+        @mixin type-scale $type-xxlarge, 1.75;
+        letter-spacing: -$unit;
+        color: white;
+        text-decoration: none;
+        margin: 0;
+        opacity: .5;
+        transition: all 250ms ease-in-out;
         &:hover {
-            opacity: .75;
+            opacity: 1;
         }
     }
 }

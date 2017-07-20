@@ -1,27 +1,22 @@
 ﻿<header class="header">
-    <div class="container">
-        <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="form form--search">
+        <a ui-sref="master.main.index" class="logo--big">
+            SOUNDBOX
+        </a>
+        <!-- <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="display--ib">
             <label for="searchEntry">
                 <input type="text" name="searchEntry" class="input__search" ng-model="searchFor"/>
             </label>
-            <button type="submit" class="btn btn--search">
-                <span class="fa fa-search"></span>
-            </button>
-        </form>
-        <a ui-sref="master.main.index">
-            <img src="./assets/img/logo.svg" class="logo--header">
-        </a>
+        </form> -->
         <div ng-if="$root.user.isAuthenticated" class="header__buttons">
-            <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--med btn--secondary"><span class="fa fa-user"></span> Profile</a>
+            <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--sml btn--secondary"> Profile</a>
             <baasic-logout on-logout="setEmptyUser()">
-                <button ng-click="logout()" class="btn btn--med btn--primary"><span class="fa fa-sign-in"></span> Sign out</button>
+                <button ng-click="logout()" class="btn btn--sml btn--primary"> Sign out</button>
             </baasic-logout>
         </div>
         <div ng-if="!$root.user.isAuthenticated" class="header__buttons">
-            <a ui-sref="master.main.login" class="btn btn--med btn--primary"><span class="fa fa-sign-in"></span> sign in</a>
-            <a ui-sref="master.main.register" class="btn btn--med btn--secondary"><span class="fa fa-plus-circle"></span> sign up</a>
+            <a ui-sref="master.main.login" class="btn btn--sml btn--primary"> Sign In</a>
+            <a ui-sref="master.main.register" class="btn btn--sml btn--primary"> Sign Up</a>
         </div>
-    </div>
 </header>
 
 <main ui-view class="main">

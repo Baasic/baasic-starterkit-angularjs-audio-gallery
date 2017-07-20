@@ -21,8 +21,8 @@
                     }
                 };
             },
-            controller: ['$scope', '$state', '$q', '$window', 'FileReader','baasicUserProfileService', 'baasicUserProfileAvatarService', 'baasicFilesService',
-            function ($scope, $state, $q, $window, FileReader, profileService, avatarService, filesService) {
+            controller: ['$scope', '$state', '$q', '$window', 'FileReader','baasicUserProfileService', 'baasicUserProfileAvatarService',
+            function ($scope, $state, $q, $window, FileReader, profileService, avatarService) {
                 $scope.file = { filename: ''};
                 $scope.model = {};
                 $scope.artistId = $state.params.artistId;
@@ -41,40 +41,22 @@
                         console.log (error); // jshint ignore: line
                     })
                     .finally(function (){
-                        if ($scope.profile.coverId) {
-                            loadProfileCover();
+                        if (!$scope.profile) {
+
                         }
                     });
                 }
-                function loadProfileCover() {
-                    filesService.get($scope.profile.coverId)
-                    .success(function (cover) {
-                        $scope.cover = cover;
-                    })
-                    .error(function (error){
-                        $scope.error = error;
-                    })
-                    .finally(function(){
-                    });
-                }
+
                 loadProfile();
 
-                /*TODO: avatar/profileCover preview */
+                /*TODO: avatar preview */
 
 
                 $scope.saveProfile = function (editProfile) {
                     $scope.profile = editProfile;
 
-                    //set some stuff up for next actions
-                    var path = $scope.artistId + '/profileCover.jpg';
-                    var coverId = $scope.profile.coverId;
-                    var file;
+                    //set var avatarEdit for use in functions later
                     var avatarEdit;
-
-                    //set profile cover image file to scope if exists
-                    if($scope.file.filename) {
-                        file = $scope.file.blob;
-                    }
 
                     //set promises for add or update avatar
                     if($scope.profile.avatar) {
@@ -88,42 +70,7 @@
                         }
                     }
                     // functions that can be performed
-                    var addCover = function(path, file) {
-                        $scope.profile.coverRnd = Math.random(10).toString().substring(7);
-                        return filesService.streams.create(path, file)
-                        .success(function(fileData) {
-                            angular.extend($scope.model, fileData);
-                            $scope.fileData = fileData;
-                            $scope.profile.coverId = $scope.fileData.id;
-                        })
-                        .error(function(error) {
-                            console.log(error); // jshint ignore: line
-                        })
-                        .finally(function(){
-                            if($scope.profile.avatar) {
-                                if(!$scope.profile.avatar.change) {
-                                    updateProfile();
-                                }
-                            }
-                        });
-                    },
-                    updateCover = function(coverId, file) {
-                        $scope.profile.coverRnd = Math.random(10).toString().substring(7);
-                        return filesService.streams.update(coverId, file)
-                        .success(function() {
-                        })
-                        .error(function(error) {
-                            console.log(error); // jshint ignore: line
-                        })
-                        .finally(function(){
-                            if($scope.profile.avatar) {
-                                if(!$scope.profile.avatar.change) {
-                                    updateProfile();
-                                }
-                            }
-                        });
-                    },
-                    saveAvatar = function() {
+                    var saveAvatar = function() {
                         return avatarEdit
                         .success(function(data, stream) {
                             $scope.avatarData = data;
@@ -153,25 +100,17 @@
                         });
                     };
 
-                    //actions to do when you choose image for profile cover
-                    if($scope.file.filename) {
-                        //$scope.$root.loader.suspend();
-                        if($scope.profile.coverId) {
-                            updateCover(coverId, file);
-                        } else {
-                            addCover(path, file);
-                        }
-
-                    }
                     if($scope.profile.avatar) {
                         if($scope.profile.avatar.change) {
                             saveAvatar();
                         }
                     }
 
-                    //update profile if no cover or avatar selected for upload
-                    if(!$scope.file.filename || !$scope.profile.avatar) {
-                        updateProfile();
+                    //update profile if no  avatar selected for upload
+                    if($scope.profile.avatar) {
+                        if(!$scope.profile.avatar.change) {
+                            updateProfile();
+                        }
                     }
                 };
 

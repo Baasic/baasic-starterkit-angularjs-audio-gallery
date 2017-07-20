@@ -9,4 +9,7 @@
     &--rel {
         position: relative;
     }
+    &--fix {
+        position: fixed;
+    }
 }

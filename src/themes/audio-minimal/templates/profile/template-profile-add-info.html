@@ -1,0 +1,72 @@
+<div class="main">
+    <div class="profile__header" ng-style="{'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url(https://api.baasic.com/beta/audiogallery/file-streams/{{profile.coverId}}?rnd={{profile.coverRnd}})'}">
+        <div class="container">
+            <form novalidate name="addProfile" ng-submit="saveProfile(profile);saveCover();">
+                <div class="profile__about col-sml-12">
+                    <div class="col-sml-12">
+                        <label for="displayName" class="label label--primary">Artist / Band Name</label>
+                        <input name="displayName" id="displayName" ng-model="profile.displayName" type="text" placeholder="Artist/Band Name" class="input input--text" required>
+                        <div class="col-sml-12 col-lrg-6 col-xlrg-6">
+                            <label for="genre" class="label label--primary">Genre</label>
+                            <input name="genre" id="genre" ng-model="profile.genre" type="text" placeholder="Enter Music Genre" class="input input--text display--ib" required>
+                        </div>
+                        <div class="col-sml-12 col-lrg-6 col-xlrg-6">
+                            <label for="country" class="label label--primary">Country</label>
+                            <input name="country" id="country" ng-model="profile.country" type="text" placeholder="Enter Country" class="input input--text display--ib" required>
+                        </div>
+                        <label for="about" class="label label--primary">About Artis / Band</label>
+                        <textarea name="about" id="about" rows="5" type="text" ng-model="profile.aboutArtist" class="input input--text" placeholder="Short Artist/Band biography"></textarea>
+                        <div class="profile__social spc--bottom--med">
+                            <label class="label label--primary">Enter Social Links</label>
+                            <div class="profile__social__edit">
+                                <label for="bandcamp" title="Enter bandcamp link">
+                                    <img ng-src="./assets/img/bandcamp.svg" class="profile__social__link" />
+                                </label>
+                                <input type="text" id="bandcamp" name="bandcamp" ng-model="profile.bandcamp" placeholder="Bandcamp" class="input input--text ">
+                            </div>
+                            <div class="profile__social__edit">
+                                <label for="myspace" title="Enter myspace link">
+                                    <img ng-src="./assets/img/myspace.svg" class="profile__social__link" />
+                                </label>
+                                <input type="text" id="myspace" name="myspace" ng-model="profile.myspace" placeholder="Myspace" class="input input--text ">
+                            </div>
+                            <div class="profile__social__edit">
+                                <label for="lastfm" title="Enter lastfm link">
+                                    <img ng-src="./assets/img/lastfm.svg" class="profile__social__link" />
+                                </label>
+                                <input type="text" id="lastfm" name="lastfm" ng-model="profile.lastfm" placeholder="Lastfm" class="input input--text ">
+                            </div>
+                            <div class="profile__social__edit">
+                                <label for="soundcloud" title="Enter soundcloud link">
+                                    <img ng-src="./assets/img/soundcloud.svg" class="profile__social__link" />
+                                </label>
+                                <input type="text" id="soundcloud" name="soundcloud" ng-model="profile.soundcloud" placeholder="Soundcloud" class="input input--text ">
+                            </div>
+                            <div class="profile__social__edit">
+                                <label for="web" title="Enter official web link">
+                                    <img ng-src="./assets/img/web.svg" class="profile__social__link" />
+                                </label>
+                                <input type="text" id="web" name="web" ng-model="profile.web" placeholder="Official web" class="input input--text ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="$root.user.isAuthenticated" class="profile__edit">
+                    <button class="btn btn--primary btn--med" type="submit">Save</button>
+                    <!--ng-if="profile.id == $root.user.id"-->
+                    <button class="btn btn--primary btn--med" type="submit" ng-if="!profile.id.length">Add Profile</button>
+                    <a class="btn btn--primary btn--med" ui-sref="master.main.album-add({artistId : $root.user.id})" ng-if="profile.id.length">Add album</a>
+                    <a class="btn btn--primary btn--med" ui-sref="master.main.profile({artistId : $root.user.id})">Cancel</a>
+                </div>
+                <div ng-show="editProfile.$submitted || editProfile.displayName.$dirty">
+                    <span ng-show="editProfile.displayName.$error.required">
+                        Artist name field is required.
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <album-list artist-id="profile.id" profile-name="profile.displayName"></album-list>
+    </div>
+</div>

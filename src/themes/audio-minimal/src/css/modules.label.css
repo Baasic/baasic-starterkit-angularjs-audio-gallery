@@ -17,13 +17,11 @@
         padding: 6px;
         background-color: rgba(0,0,0,.75);
         @mixin type-scale $type-base, 1.25;
-
         cursor: pointer;
 
         &:hover {
-            color: $viridian;
+            color: $color-primary;
         }
-
         &--sml {
              max-width: 150px;
              bottom: 2rem;
@@ -32,8 +30,7 @@
             max-width: 250px;
         }
     }
-
     &--primary {
-@mixin type-scale $type-medium, 1.25;
+        @mixin type-scale $type-medium, 1.25;
     }
 }

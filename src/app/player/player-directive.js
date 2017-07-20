@@ -56,6 +56,10 @@
                 }
             ];
 
+            function addToPlaylist() {
+                
+            }
+
             function loadAlbums() {
                 $scope.albums = [];
 

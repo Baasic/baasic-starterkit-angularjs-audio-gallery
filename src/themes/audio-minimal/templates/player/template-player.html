@@ -1,20 +1,23 @@
 
-    <div class="">
+
         <div class="col-md-12">
             <h5>Songs</h5>
             <ul>
                 <li ng-repeat="song in songs">
                     <button music-player="play" add-song="song">{{ song.title }}</button>
                     <button music-player add-song="song">+</button>
+                    ------------
+                    {{song}}
                 </li>
             </ul>
+
             <button play-all="songs">Play all</button>
             <button play-all="songs" data-play="false">Add all</button>
         </div>
-    </div>
+
     <hr />
 
-<!-- player -->
+
 
     <div class="row">
         <div class="col col-sml-12">
@@ -29,7 +32,7 @@
                     <div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
                 </span>
 
-                <div class="" style="display:inline-block;float:right">
+                <div class="">
                     <a class="player__btn player__btn--prev" prev-track>Prev Track</a>
                     <a class="player__btn" ng-class="{'player__btn--play':!isPlaying, 'player__btn--pause':isPlaying }" play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</a>
                     <a class="player__btn player__btn--next" next-track>Next Track</a>
@@ -50,7 +53,7 @@
             <button class="player__btn player__btn--pause" pause-music>Pause</button>
             <button class="player__btn player__btn--stop" stop-music>Stop</button>
             <button class="player__btn" ng-class="{'player__btn--repeat--on':repeat, 'player__btn--repeat--off':!repeat}" repeat-music >Repeat ({{ repeat }})</button>
-            <button class="player__btn" ng-class="{'player__btn--play':!isPlaying, 'player__btn--pause':isPlaying }" play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+            <button class="player__btn" ng-class="{'player__btn--play':isPlaying === false, 'player__btn--pause':isPlaying===true }" play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
 
             Is Playing: {{ isPlaying }}
             <br/>
@@ -69,12 +72,12 @@
                 <li class="player__playlist__item" ng-class="{ 'active' : currentPlaying.id == song.id }" ng-repeat="song in playlist">
                     <a class="player__playlist__item__title" play-from-playlist="song">{{ song.title }}</a>
 
-                    <!--
+
                     -
                     <a class="" remove-from-playlist="song" data-index="{{$index}}">
                         <small>(remove)</small>
                     </a>
-                    -->
+
 
                     <span ng-if="currentPlaying.id == song.id"></span>
                 </li>
@@ -100,7 +103,7 @@
         </div>
         <div class="sm2-inline-element sm2-button-element">
             <div class="sm2-button-bd">
-                <a href="#play" class="sm2-inline-button sm2-icon-play-pause" play-pause-toggle>Play / pause</a>
+                <a href="#play" class="player__btn" ng-class="{'player__btn--play':isPlaying === false, 'player__btn--pause':isPlaying===true }" play-pause-toggle>Play / Pause</a>
             </div>
         </div>
 
@@ -182,8 +185,10 @@
                 <!-- standard one-line items -->
                 <li ng-repeat="song in playlist" ng-class="{ 'active' : currentPlaying.id == song.id }">
                     <a play-from-playlist="song">
-                        <b>{{ song.title }}</b> - {{ song.artist }}
+                        <b>{{ song.title }}</b> - {{ song.artist }} <button remove-from-playlist="song" data-index="{{$index}}" style="display:block;float:right;">remove</button>
                     </a>
+
+
                 </li>
 
             </ul>

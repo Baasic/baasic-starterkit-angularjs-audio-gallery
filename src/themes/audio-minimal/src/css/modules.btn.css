@@ -49,25 +49,18 @@
             background: color($color-secondary whiteness(+10%));
         }
     }
+    &--tertiary {
+        background: $viridian;
+        color: white;
+        &:hover {
+            background: color($viridian whiteness(+20%));
+        }
+    }
     &--ghost {
         background-color: transparent;
         color: $color-primary;
         &:hover {
             color: color($color-primary whiteness(+10%));
-        }
-    }
-    &--search {
-        background: none;
-        color: white;
-        border: 1px solid white;
-        border-left: 0;
-        padding: 11px 10px 12px 16px;
-        margin: -5px 0 0 -5px;
-        @mixin type-scale $type-xxlarge, 0;
-        transition: all .3s ease-in-out;
-        &:hover{
-            background-color: white;
-            color: $bg-header;
         }
     }
 
@@ -88,6 +81,10 @@
         height: calc($unit * 8);
         line-height: calc($unit * 8);
         padding: 0 calc($unit * 4);
+    }
+
+    &--wide {
+        width: 100%;
     }
 
 }

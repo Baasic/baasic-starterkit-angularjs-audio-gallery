@@ -4,73 +4,39 @@
 
 .profile {
     &__list {
-        padding: 20px;
-        @media (--screen-from-sml) {
-            padding: 20px 0;
-        }
+        padding: calc($unit*5);
         &__item {
-            padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+            padding: $unit;
+        }
+    }
+    &__header {
+        background: url(/assets/img/default-cover.jpg) center top no-repeat;
+        background-size: cover;
+        padding-top: calc($unit*13);
+    }
+    &__title {
+        text-transform: uppercase;
+    }
+    &__subtitle, &__description {
+        margin-bottom: calc($unit*2);
+    }
+    &__content {
+        padding: calc($unit*4);
+        &:after {
+            content: '';
+            clear: both;
+            display:table;
         }
     }
     &__avatar {
+        max-width: 200px;
+        width: 100%;
+        float: right;
+    }
+    &__info {
         display: inline-block;
-        float: left;
-        width: 150px;
-        height: 150px;
-        margin: 0 1.5rem 2rem 0;
-    }
-    &__artist {
-        &__link {
-            display: block;
-            color: $color-primary;
-            font-family: $ff-sans;
-            @mixin type-scale $type-medium, 1.25;
-            text-decoration: none;
-            transition: all .3s ease-in-out;
-
-            &:hover {
-                color: $color-secondary;
-                opacity: 0.75;
-            }
-        }
-    }
-    &__title {
-        text-transform:  uppercase;
-        letter-spacing: 2px;
-        @mixin type-scale $type-xlarge, 2;
-
-        &--main {
-            font-family: $ff-sans;
-            @mixin type-scale $type-xxxlarge, 2;
-        }
-        &--subtitle {
-            display: block;
-            font-family: $ff-serif;
-            @mixin type-scale $type-medium, 1.5;
-        }
-    }
-    &__about {
-        margin: 3rem 0.5rem;
-        @media (--screen-from-med) {
-            margin: 3rem 0;
-        }
-        &__text {
-            margin-bottom: 2rem;
-            @mixin type-scale $type-base, 1;
-        }
-
-    }
-    &__header {
-        background: center top no-repeat;
-        background-size: cover;
-        &__overlay {
-            position: absolute;
-            background: rgba(0,0,0,0.7);
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-        }
+        vertical-align: top;
+        max-width: calc(100% - 220px);
     }
     &__social {
         display: block;
@@ -78,22 +44,14 @@
             display: inline-block;
             width: 32px;
             height: auto;
-            float:  left;
             transition: all .3s ease-in-out;
 
             &:hover {
                 opacity: 0.7;
             }
         }
-        &__edit {
-            display: inline-block;
-            margin: 1rem 1.5rem 1rem 0;
-        }
     }
-    &__edit {
-        display: inline-block;
-        vertical-align: bottom;
-        margin: 1rem;
-        float: right;
+    &__edit-buttons {
+        margin: calc($unit*4) 0 calc($unit*2) 0;
     }
 }

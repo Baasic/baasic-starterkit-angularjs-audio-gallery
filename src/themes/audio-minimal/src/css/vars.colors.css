@@ -17,6 +17,7 @@ $gray1: #2D2D2D;
 $gray2: #353535;
 $gray3: #444444;
 $gray4: #727272;
+$gray5: #f2f2f2;
 
 /**
  * Global text color
@@ -26,26 +27,27 @@ $color-text:        #333;
 /**
  * Theme colors
  */
-/*$color-primary:     $yellowred;
+$color-primary:     $shamrock;
 $color-secondary: 	$moonstone;
 $color-tertiary:    $tangelo;
 $color-quartenary:  $viridian;
-*/
-/* Test colors */
+
+/* Test colors *//*
 $color-primary:     $gray1;
 $color-secondary:   $gray2;
 $color-tertiary:    $gray3;
 $color-quartenary:  $gray4;
-
+*/
 
 /**
  * Background-colors
  */
-$bg-header:         $tangelo;
+$bg-header:         $shamrock;
 
 /**
  * Utility colors
  */
 $color-warning:     #F44336;
 $color-success:     #4CAF50;
+$color-alert:       $tangelo;
 $color-note:        #FFEB3B;

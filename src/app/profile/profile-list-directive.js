@@ -11,7 +11,6 @@ angular.module('media-gallery')
                 controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService',
                     function ($scope, $state, $stateParams, $q, baasicUserProfileService) {
 
-
                             $scope.$root.loader.suspend();
 
                             baasicUserProfileService.find({
@@ -40,8 +39,8 @@ angular.module('media-gallery')
                                 $scope.$root.loader.resume();
                             });
 
+                        }
 
-                    }
                 ],
                 templateUrl: 'templates/profile/template-profile-list.html'
             };

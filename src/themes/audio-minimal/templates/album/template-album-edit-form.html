@@ -1,5 +1,6 @@
 <div class="container">
     <div class="album__wrapper row col-sml-12">
+        <a href="#" ng-click="getAlbumData()">GET ALBUM DATA</a>
         <form novalidate name="editAlbum" ng-submit="saveAlbum(album)">
             <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
                 <div>
@@ -7,10 +8,12 @@
                         <span>Change Cover</span>
                     </label>
                     <img ng-if="!album.coverId" src="./assets/img/img.png"/>
-                    <img ng-if="album.coverId" ng-src="https://api.baasic.com/v1/audiogallery/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
+                    <img ng-if="album.coverId" ng-src="https://api.baasic.com/beta/audiogallery/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
                     <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg">
-                    <p ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+                    <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
                 </div>
+
+                {{file.filename}}
 
                 <div ng-show="error">
                     {{ error }}
@@ -19,19 +22,19 @@
 
             <div class="album__about col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
                     <label for="albumName" class="label label--primary">Album Name</label>
-                    <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input__text" required />
+                    <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
                     <input name="artistId" ng-model="album.artistId" type="hidden" />
                     <label for="albumReleaseYear" class="label label--primary">Release Year</label>
-                    <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input__text" required />
+                    <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input input--text" required />
                 <div ng-show="editAlbum.$submitted || editAlbum.albumName.$dirty">
-                    <p ng-show="editAlbum.albumName.$error.required"> Album name is required. </p>
+                    <p class="validation validation--alert" ng-show="editAlbum.albumName.$error.required"> Album name is required. </p>
                 </div>
                 <div ng-show="editAlbum.$submitted || editAlbum.releaseYear.$dirty">
-                    <p ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
-                    <p ng-show="editAlbum.input.$errorpe"> Please Enter Four Digit Number Only</p>
+                    <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
+                    <p class="validation validation--error" ng-show="editAlbum.input.$error"> Please Enter Four Digit Number Only</p>
                 </div>
                 <label for="aboutAlbum" class="label label--primary">About Album</label>
-                <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input__text"></textarea>
+                <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input input--text"></textarea>
                 <div>
                     <button type="submit" class="btn btn--quinary btn--med push">Save</button>
                     <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
@@ -41,12 +44,12 @@
     </div>
     <div class="row col-sml-12">
         <div ng-repeat="song in album.playlist as playlist">
-            <div style="position:relative;margin: 20px 0;" class="col-sml-12">
-                <p class="label label--primary col-sml-12 col-med-6 col-lrg-9" style="display: inline-block">
+            <div class="col-sml-12">
+                <p class="label label--primary col-sml-12 col-med-6 col-lrg-9">
                     <span title="Delete this song from album" ng-click="deleteSong($index);" class="fa fa-times"></span>
                         {{song.artist}} - {{song.title}}
                 </p>
-                <audio controls style="display: inline-block" class="col-sml-12 col-med-6 col-lrg-3">
+                <audio controls class="col-sml-12 col-med-6 col-lrg-3">
                     <source ng-src="{{song.url | trusted}}" type="audio/mpeg"/>
                 </audio>
             </div>

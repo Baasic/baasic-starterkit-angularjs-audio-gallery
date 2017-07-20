@@ -4,7 +4,7 @@
 
 .album {
     &__wrapper {
-        padding: 2rem 1rem 0 0.5rem;
+        padding: $unit;
     }
     &__name {
         letter-spacing: 0.5px;
@@ -16,7 +16,7 @@
         &--secondary {
             max-width: 250px;
             width: 100%;
-            margin-top: 8px;
+            margin-top: $unit;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -25,6 +25,7 @@
     }
     &__link {
         display: block;
+        position: relative;
         color: $color-primary;
         font-family: $ff-sans;
         @mixin type-scale $type-medium, 1.25;
@@ -35,18 +36,30 @@
             color: $color-secondary;
             opacity: 0.75;
         }
-        &--first {
-            padding: 0 1.25rem 1.25rem 0;
-        }
+
     }
     &__about {
-        margin-top: 2rem;
+        margin-top: calc($unit*2);
         @media (--screen-from-sml) {
-            padding: 0 15px;
+            padding: 0 calc($unit*2);
             margin-top: 0;
         }
     }
     &__cover {
-        max-width: 150px;
+        max-width: calc($unit*24);
+    }
+    &__playlist {
+        list-style: none;
+        display: inline-block;
+        padding: 0;
+        &__item {
+            display: block;
+            &:nth-child(odd) {
+                background: white;
+            }
+            &:nth-child(even) {
+                background: none;
+            }
+        }
     }
 }

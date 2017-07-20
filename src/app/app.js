@@ -79,6 +79,10 @@ angular.module('media-gallery', [
                     url: 'artist/{artistId}',
                     templateUrl: 'templates/profile/profile-detail.html'
                 })
+                .state('master.main.profile-add', {
+                    url: 'artist/add/{artistId}',
+                    templateUrl: 'templates/profile/profile-add.html'
+                })
                 .state('master.main.profile-edit', {
                     url: 'artist/edit/{artistId}',
                     templateUrl: 'templates/profile/profile-edit.html'
@@ -94,14 +98,6 @@ angular.module('media-gallery', [
                 .state('master.main.album-edit', {
                     url: 'edit-album/{albumId}',
                     templateUrl: 'templates/album/album-edit.html'
-                })
-                .state('master.main.song-list', {
-                    url: '{albumId}/song-list',
-                    templateUrl: 'templates/album/album-song-list.html'
-                })
-                .state('master.main.add-song', {
-                    url: '{albumId}/add-songs',
-                    templateUrl: 'templates/album/album-songs-edit.html'
                 })
                 .state('master.main.search', {
                     url: 'search?{search,type}',
@@ -131,6 +127,8 @@ angular.module('media-gallery', [
                 return str ? str : '';
             };
 
+
+
             $rootScope.baseHref = rightTrim($browser.baseHref.href, ('/'));
             if ($rootScope.baseHref === '/') {
                 $rootScope.baseHref = '';
@@ -141,6 +139,8 @@ angular.module('media-gallery', [
                     isAuthenticated: false
                 };
             };
+
+
         }
     ])
     .controller('LoginCtrl', ['$scope', '$state',

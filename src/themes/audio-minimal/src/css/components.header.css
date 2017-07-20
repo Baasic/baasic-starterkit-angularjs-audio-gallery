@@ -3,12 +3,15 @@
 \*------------------------------------*/
 
 .header {
+    position: fixed;
     width: 100%;
-    background: $color-primary;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: calc($unit*2) calc($unit*4);
+    border-top: $unit solid $bg-header;
+
 
     &__buttons {
-        display: inline-block;
         float: right;
-        margin-top: 1.5rem;
     }
 }

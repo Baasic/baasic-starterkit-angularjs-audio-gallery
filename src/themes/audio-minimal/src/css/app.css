@@ -53,9 +53,11 @@
 @import modules.container.css;
 @import modules.logo.css;
 @import modules.form.css;
+@import modules.hero.css;
 @import modules.input.css;
 @import modules.loader.css;
 @import modules.label.css;
+@import modules.validation.css;
 
 /**
 * Import: components
@@ -65,11 +67,11 @@
 /* @import components.footer.css; */
 @import components.profile.css;
 @import components.album.css;
+@import components.scrollbar.css;
 /**
 * Import: views
 * Description: specific website/app views (example: 404 view, login view)
 */
-@import views.main.css;
 @import views.404.css;
 
 /**

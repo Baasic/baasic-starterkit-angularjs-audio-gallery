@@ -1,43 +1,44 @@
+<section class="hero hero--register">
+    <div class="hero__content">
+        <h2 class="hero__title">Register</h2>
+        <h4 class="hero__text">Register and share your music with the world.</h4>
+    </div>
+</section>
 <div class="container container--membership">
-    <h1 class="spc--bottom--lrg">Register</h1>
-    <form name="registrationForm" novalidate ng-submit="vm.register()">
+    <form name="registrationForm" novalidate ng-submit="vm.register()" class="form form--sml form--centered">
         <div class="group">
             <div class="form__field--half">
-                <label class="form__label" for="email">Email</label>
                 <input class="input input--text" type="email" id="email" name="email" ng-model="vm.user.email" required placeholder="Enter your email" />
                 <div ng-show="registrationForm.$submitted || registrationForm.email.$touched">
-                    <p class="alert alert--warning" ng-show="registrationForm.email.$error.required">Email is required.</p>
-                    <p class="alert alert--warning" ng-show="registrationForm.email.$error.email">Please enter the correct email address</p>
+                    <p class="validation validation--alert" ng-show="registrationForm.email.$error.required">Email is required.</p>
+                    <p class="validation validation--error" ng-show="registrationForm.email.$error.email">Please enter the correct email address</p>
                 </div>
             </div>
             <div class="form__field--half">
-                <label class="form__label" for="userName">Username</label>
                 <input class="input input--text" type="text" id="userName" name="userName" ng-model="vm.user.userName" required placeholder="Enter your username" />
                 <div ng-show="registrationForm.$submitted || registrationForm.userName.$touched">
-                    <p class="alert alert--warning" ng-show="registrationForm.userName.$error.required">Username is required.</p>
+                    <p class="validation validation--alert" ng-show="registrationForm.userName.$error.required">Username is required.</p>
                 </div>
             </div>
         </div>
         <div class="group">
             <div class="form__field--half">
-                <label class="form__label" for="password">Password</label>
                 <input class="input input--text" type="password" id="password" name="password" ng-model="vm.user.password" required placeholder="Password" autocomplete="off" />
                 <div ng-show="registrationForm.$submitted || registrationForm.password.$touched">
-                    <p class="alert alert--warning" ng-show="registrationForm.password.$error.required">Password is required.</p>
+                    <p class="validation validation--alert" ng-show="registrationForm.password.$error.required">Password is required.</p>
                 </div>
             </div>
             <div class="form__field--half">
-                <label class="form__label" for="confirmPassword">Confirm Password</label>
                 <input class="input input--text" type="password" id="confirmPassword" name="confirmPassword" ng-model="vm.user.confirmPassword" required placeholder="Confirm Password" autocomplete="off" />
                 <div ng-show="registrationForm.$submitted || registrationForm.confirmPassword.$touched">
-                    <p class="alert alert--warning" ng-show="registrationForm.confirmPassword.$error.required">Confirm Password is required.</p>
-                    <p class="alert alert--warning" ng-show="registrationForm.confirmPassword.$viewValue != '' && (registrationForm.password.$viewValue != registrationForm.confirmPassword.$viewValue)">Password and Confirm Password do not match.</p>
+                    <p class="validation validation--alert" ng-show="registrationForm.confirmPassword.$error.required">Confirm Password is required.</p>
+                    <p class="validation validation--error" ng-show="registrationForm.confirmPassword.$viewValue != '' && (registrationForm.password.$viewValue != registrationForm.confirmPassword.$viewValue)">Password and Confirm Password do not match.</p>
                 </div>
             </div>
         </div>
         <div baasic-recaptcha class="recaptcha"></div>
-        <div class="form__field spc--top--med">
-            <button class="btn btn--secondary btn--med g-recaptcha" type="submit" data-sitekey="6Lf9xRYUAAAAAGM2pIRSQpipXoRyLJweTfKB1CXN"
+        <div class="form__field">
+            <button class="btn btn--secondary btn--lrg btn--wide g-recaptcha" type="submit" data-sitekey=""
             data-callback="YourOnSubmitFn">Register</button>
         </div>
         <div ng-if="vm.message">

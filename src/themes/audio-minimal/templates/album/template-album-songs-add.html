@@ -2,11 +2,11 @@
     <div>
         <label for="song-title-{{$index}}">Song Title</label>
         <input type="text" id="title" name="title" ng-model="song.title" required />
-        <p ng-show="(newSong.$submitted || newSong.title.$touched) && newSong.title.$error.required">Title is required.</p>
+        <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.title.$touched) && newSong.title.$error.required">Title is required.</p>
     </div>
     <div>
         <input type="file" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3, audio/wav, audio/x-wav" file-types=".mp2, .mp3, .mpa, .mpg, .mpga, .wav">
-        <p ng-show="(newSong.$submitted || newSong.$touched) && newSong.$error.fileType">Allowed extensions are: mp2, mp3, mpa, mpg, mpga and wav </p>
+        <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.$touched) && newSong.$error.fileType">Allowed extensions are: mp2, mp3, mpa, mpg, mpga and wav </p>
     </div>
     <input type="hidden" ng-model="song.url">
     <input type="hidden" ng-model="song.pic">
@@ -15,22 +15,22 @@
         <button type="submit">Save</button>
         <button type="button" ng-click="cancel()">Cancel</button>
     </div>
-    <div ng-show="error">
+    <div ng-show="error" class="validation validation--error">
         {{ error }}
     </div>
 </form>
 
 
 <div ng-repeat="song in album.playlist">
-    <form name="newSong" novalidate ng-submit="addSong(song)">
+    <form name="editSong" novalidate ng-submit="editSong(song)">
         <div>
             <label for="song-title-{{$index}}">Song Title</label>
             <input type="text" id="title" name="title" ng-model="song.title" required />
-            <p ng-show="(newSong.$submitted || newSong.title.$touched) && newSong.title.$error.required">Title is required.</p>
+            <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.title.$touched) && newSong.title.$error.required">Title is required.</p>
         </div>
         <div>
             <input type="file" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3, audio/wav, audio/x-wav" file-types=".mp2, .mp3, .mpa, .mpg, .mpga, .wav">
-            <p ng-show="(newSong.$submitted || newSong.$touched) && newSong.$error.fileType">Allowed extensions are: mp2, mp3, mpa, mpg, mpga and wav </p>
+            <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.$touched) && newSong.$error.fileType">Allowed extensions are: mp2, mp3, mpa, mpg, mpga and wav </p>
         </div>
         <input type="hidden" ng-model="song.url">
         <input type="hidden" ng-model="song.pic">
@@ -39,7 +39,7 @@
             <button type="submit">Save</button>
             <button type="button" ng-click="cancel()">Cancel</button>
         </div>
-        <div ng-show="error">
+        <div ng-show="error" class="validation validation--error">
             {{ error }}
         </div>
     </form>

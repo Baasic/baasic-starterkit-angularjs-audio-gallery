@@ -4,7 +4,6 @@
 angular.module('media-gallery')
     .directive('albumEdit', ['$parse',
         function albumList($parse) {
-
             return {
                 restrict: 'AE',
                 scope: true,
@@ -39,7 +38,7 @@ angular.module('media-gallery')
                             $state.go('master.main.profile', {artistId : $scope.$root.user.id});
                         };
 
-                        //get me selected album
+                        //get me album
                         function getAlbum() {
                             albumsService.get($scope.albumId)
                                 .success(function (album) {
@@ -53,65 +52,117 @@ angular.module('media-gallery')
                         }
                         getAlbum();
 
+                        //update album cover
+                        var updateCoverStream = function() {
+                            file = $scope.file.blob;
+                            return filesService.streams.update(path, file)
+                                .success(function() {
+                                    console.log ('stream uploaded successfuly'); // jshint ignore: line
+                                })
+                                .error(function(error){
+                                    console.log(error); //jshint ignore: line
+                                })
+                                .finally(function() {
+                                    getCoverData();
+                                });
+                        };
+
+                        //get me cover data
+                        var getCoverData = function() {
+                            filesService.find(path)
+                                .success(function(coverData){
+                                    $scope.coverData = coverData.item[0];
+                                    if(!$scope.album.coverId) {
+                                        $scope.album.coverId = $scope.coverData.id;
+                                    }
+                                })
+                                .error(function(error) {
+                                    console.log(error); //jshint ignore: line
+                                })
+                                .finally(function(){
+                                    updateAlbum();
+                                });
+                        };
+
+                        //update album data
+                        var updateAlbum = function() {
+                            return albumsService.update($scope.album)
+                                .success(function(album){
+                                    if(album){
+                                        $scope.album = album;
+                                    }
+                                })
+                                .error(function(error) {
+                                    console.log(error); //jshint ignore: line
+                                })
+                                .finally(function() {
+                                    loadAlbum();
+                                });
+                        };
+
+                        //reload album
+                        var loadAlbum = function() {
+                            return albumsService.get($scope.album.id)
+                                .success(function(){
+                                })
+                                .error(function(error){
+                                    console.log(error); //jshint ignore: line
+                                })
+                                .finally(function(){
+                                    $scope.backToDetails();
+                                });
+                        };
+
+                        //find selected song in array
+                        var findSong = function($index){
+                            var songId = $scope.playlist[$index].id;
+                            $scope.album.playlist.splice($index, 1);
+                            return filesService.get(songId)
+                                .success(function(songData) {
+                                    $scope.songData = songData;
+                                    $scope.songId = songData.id;
+                                    removeSong();
+                                })
+                                .error(function(error) {
+                                    console.log(error); //jshint ignore:line
+                                })
+                                .finally(function() {
+                                    removeFromPlaylist();
+                                });
+                        };
+
+                        //remove selected song from playlist
+                        var removeFromPlaylist = function(){
+                            return albumsService.update($scope.album)
+                                .success(function(data){
+                                    $scope.songData = data;
+                                    console.log('succesfully deleted song from playlist'); //jshint ignore: line
+                                })
+                                .error(function(error) {
+                                    console.log(error); //jshint ignore:line
+                                })
+                                .finally(function(){
+                                    getAlbum();
+                                });
+                        };
+
+                        //remove selected song from system
+                        var removeSong = function(){
+                            return filesService.remove($scope.songData)
+                                .success(function(){
+                                    console.log('song successfully deleted from system'); //jshint ignore: line
+                                })
+                                .error(function(error) {
+                                    console.log(error); //jshint ignore:line
+                                })
+                                .finally(function(){
+                                });
+                        };
+
+                        //save album on button click
                         $scope.saveAlbum = function(saveAlbum) {
                             $scope.album = saveAlbum;
                             $scope.album.rnd = Math.random(10).toString().substring(7);
-
-                            var updateCoverStream = function() {
-                                file = $scope.file.blob;
-                                return filesService.streams.update(path, file)
-                                    .success(function() {
-                                        console.log ('stream uploaded successfuly'); // jshint ignore: line
-                                    })
-                                    .error(function(error){
-                                        console.log(error); //jshint ignore: line
-                                    })
-                                    .finally(function() {
-                                        getCoverData();
-                                    });
-                            };
-                            var getCoverData = function() {
-                                filesService.find(path)
-                                    .success(function(coverData){
-                                        $scope.coverData = coverData.item[0];
-                                        if(!$scope.album.coverId) {
-                                            $scope.album.coverId = $scope.coverData.id;
-                                        }
-                                    })
-                                    .error(function(error) {
-                                        console.log(error); //jshint ignore: line
-                                    })
-                                    .finally(function(){
-                                        updateAlbum();
-                                    });
-                            };
-
-                            var updateAlbum = function() {
-                                return albumsService.update($scope.album)
-                                    .success(function(album){
-                                        if(album){
-                                            $scope.album = album;
-                                        }
-                                    })
-                                    .error(function(error) {
-                                        console.log(error); //jshint ignore: line
-                                    })
-                                    .finally(function() {
-                                        loadAlbum();
-                                    });
-                            };
-
-                            var loadAlbum = function() {
-                                return albumsService.get($scope.album.id)
-                                    .success(function(){
-                                    })
-                                    .error(function(error){
-                                        console.log(error); //jshint ignore: line
-                                    })
-                                    .finally(function(){
-                                        $scope.backToDetails();
-                                    });
-                            };
 
                             if($scope.file.blob) {
                                 updateCoverStream();
@@ -120,50 +171,9 @@ angular.module('media-gallery')
                             }
                         };
 
-                        $scope.cancel = function () {
-                            $state.go('master.main.profile', {artistId: $scope.artistId}, {reload:true});
-                        };
-
-                        //this i'll do later
-                        $scope.addSong = function () {
-                            /*pseudo code
-                            upload stream
-                            add playlist entry
-                            */
-                        };
-
+                        //delete song on button click
                         $scope.deleteSong = function ($index) {
-                            var songIndex = $index;
-                            var songId;
-                            var findSong = function(songIndex){
-                                var songId = $scope.playlist[songIndex].id;
-                                $scope.album.playlist.splice($scope.playlist[songIndex], 1);
-                                filesService.remove(songId)
-                                .success(function(data){
-                                    $scope.songData = data;
-                                    console.log('succesfully deleted song'); //jshint ignore: line
-                                })
-                                .finally(function(){
-                                    removeSong();
-                                });
-                            };
-                            var removeSong = function(){
-                                filesService.remove($scope.songData)
-                                .success(function(){
-                                    console.log('song successfully deleted'); //jshint ignore: line
-                                })
-                                .finally(function(){
-                                    updatePlaylist();
-                                });
-                            };
-                            var updatePlaylist = function(){
-                                albumsService.update($scope.album)
-                                .success(function(album){
-                                    $scope.album = album;
-                                });
-                            };
-
-                        findSong(songIndex);
+                            findSong($index);
                         };
 
                         $scope.cancelEdit = function () {
@@ -175,5 +185,4 @@ angular.module('media-gallery')
             };
         }
     ]);
-
 }(angular));
