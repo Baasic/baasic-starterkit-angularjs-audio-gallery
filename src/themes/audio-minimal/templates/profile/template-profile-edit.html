@@ -2,7 +2,7 @@
     <div ng-if="profile.id === $root.user.id">
         <div class="profile__header" ng-style="{'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url({{profile.avatar.links('stream-token').href}}?rnd={{profile.coverRnd}})'}">
             <div class="container">
-                <form novalidate name="editProfile" ng-submit="saveProfile(profile);saveCover();">
+                <form novalidate name="editProfile" ng-submit="saveCover();saveProfile(profile);">
                     <div class="profile__about col-sml-12">
                         <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 position--rel">
                             <img ng-if="!imageSrc" class="profile__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
@@ -66,8 +66,8 @@
                             </div>
                             <div>
                                 <label for="profileCover" class="btn btn--primary btn--med">
-                                    <span ng-if="!profileCover.links('stream-token').href">Add Profile Cover Image</span>
-                                    <span ng-if="profileCover.links('stream-token').href">Change Profile Cover Image</span>
+                                    <span ng-if="!profile.coverId">Add Profile Cover Image</span>
+                                    <span ng-if="profile.coverId">Change Profile Cover Image</span>
                                 </label>
                                 <input id="profileCover" name="profileCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="display--n">
                                 <p class="validation validation--alert" ng-show="(editProfile.profileCover.$submitted || editProfile.profileCover.$touched) && editProfile.profileCover.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>

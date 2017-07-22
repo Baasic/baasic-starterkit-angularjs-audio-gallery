@@ -20,6 +20,9 @@ angular.module('media-gallery')
                                 })
                                 .error(function (error) {
                                     console.log (error); // jshint ignore: line
+                                    if (error === '"Resource not found."') {
+                                        $state.go('master.main.profile-add', {artistId: $state.params.artistId});
+                                    }
                                 })
                                 .finally(function (){
                                     if ($scope.profile.coverId) {
