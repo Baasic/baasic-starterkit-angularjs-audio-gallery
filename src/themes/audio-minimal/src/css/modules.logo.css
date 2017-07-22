@@ -3,16 +3,20 @@
 \*------------------------------------*/
 
 .logo {
+    margin: 0;
+    color: black;
+    opacity: .5;
+    text-decoration: none;
+    transition: all 250ms ease-in-out;
+
+    &:hover {
+        opacity: 1;
+    }
     &--big {
         @mixin type-scale $type-xxlarge, 1.75;
-        letter-spacing: -$unit;
-        color: white;
-        text-decoration: none;
-        margin: 0;
-        opacity: .5;
-        transition: all 250ms ease-in-out;
-        &:hover {
-            opacity: 1;
-        }
+    }
+    &--small {
+        @mixin type-scale $type-medium, 1.25;
+
     }
 }
