@@ -55,7 +55,16 @@ angular.module('media-gallery')
                         //update album cover
                         var updateCoverStream = function() {
                             file = $scope.file.blob;
-                            return filesService.streams.update(path, file)
+                            var promise;
+
+                            if($scope.album.coverId) {
+                                promise = filesService.streams.update(path, file);
+                            } else {
+                                promise = filesService.streams.create(path, file);
+                                $scope.album.rnd = Math.random(10).toString().substring(7);
+                            }
+
+                            return promise
                                 .success(function() {
                                     console.log ('stream uploaded successfuly'); // jshint ignore: line
                                 })

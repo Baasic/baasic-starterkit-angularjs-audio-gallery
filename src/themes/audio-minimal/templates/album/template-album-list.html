@@ -25,7 +25,7 @@
             <li class="album__playlist__item" ng-repeat="song in album.playlist">
                 {{$index+1}}. {{song.title}}
             </li>
-            <button class="btn btn--primary btn--med" ng-click="addToPlaylist()">Add to playlist</button>
+            <button class="btn btn--primary btn--med" play-all="album.playlist">Play album</button>
         </ul>
 
     </div>
