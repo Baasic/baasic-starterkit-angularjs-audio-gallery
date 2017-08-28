@@ -79,10 +79,6 @@ angular.module('media-gallery', [
                     url: 'artist/{artistId}',
                     templateUrl: 'templates/profile/profile-detail.html'
                 })
-                .state('master.main.profile-add', {
-                    url: 'artist/add/{artistId}',
-                    templateUrl: 'templates/profile/profile-add.html'
-                })
                 .state('master.main.profile-edit', {
                     url: 'artist/edit/{artistId}',
                     templateUrl: 'templates/profile/profile-edit.html'

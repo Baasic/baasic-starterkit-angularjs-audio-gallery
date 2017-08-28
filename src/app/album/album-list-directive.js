@@ -51,7 +51,6 @@
                     loadAlbumCovers();
                 });
             }
-
             loadAlbums();
 
             $scope.backToDetails = function backToDetails() {
@@ -81,7 +80,39 @@
                                 console.log(error); //jshint ignore: line
                             })
                             .finally(function(){
+                                if($scope.albums[album].playlist.length) {
+                                    deleteAlbumSongs();
+                                } else {
+                                    deleteAlbumData();
+                                }
+                            });
+                    };
+                    var deleteAlbumSongs = function(){
+                        var idList = [];
+                        var playlist = $scope.albums[album].playlist;
+                        var length = $scope.albums[album].playlist.length;
+
+                        function createList(list) {
+                          for (var i=0; i<length; i++) {
+                            idList.push({id: list[i].id});
+                          }
+                          return idList;
+                        }
+
+                        if (playlist.length) {
+                            createList(playlist);
+                        }
+
+                        return filesService.batch.remove(idList)
+                            .success(function (data) {
+                                 console.log(data); //jshint ignore: line
+                            })
+                            .error(function (error) {
+                                console.log(error); //jshint ignore: line
+                            })
+                            .finally(function () {
                                 deleteAlbumData();
+
                             });
                     };
                     var deleteAlbumData = function() {

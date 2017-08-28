@@ -1,5 +1,5 @@
-﻿<header class="header" change-class-on-scroll offset="20" scroll-class="header--secondary">
-        <a ui-sref="master.main.index" class="logo logo--big" change-class-on-scroll offset="20" scroll-class="logo--small">
+﻿<header class="header">
+        <a ui-sref="master.main.index" class="logo logo--small">
             SOUNDBOX
         </a>
         <!-- <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="display--ib">
@@ -18,6 +18,12 @@
             <a ui-sref="master.main.register" class="btn btn--sml btn--primary"> Sign Up</a>
         </div>
 </header>
+
+<div class="row" change-class-on-scroll offset="55" scroll-class="search--fixed">
+    <div class="col col-sml-12">
+        <input type="text" class="input__search"/>
+    </div>
+</div>
 
 <main ui-view class="main">
 </main>

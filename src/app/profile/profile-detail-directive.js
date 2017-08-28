@@ -12,6 +12,7 @@ angular.module('media-gallery')
                     function baasicProfileDetail($scope, $state, $stateParams, $q, profileService, filesService) {
                         function loadProfile() {
                             $scope.albums = [];
+                            var profileExists;
                             profileService.get($state.params.artistId, {
                                 embed: 'avatar'
                             })
@@ -21,31 +22,19 @@ angular.module('media-gallery')
                                 .error(function (error) {
                                     console.log (error); // jshint ignore: line
                                     if (error === '"Resource not found."') {
-                                        $state.go('master.main.profile-add', {artistId: $state.params.artistId});
+                                        $state.go('master.main.profile-edit', {artistId: $state.params.artistId});
                                     }
                                 })
                                 .finally(function (){
-                                    if ($scope.profile.coverId) {
-                                        loadProfileCover();
+                                    if($scope.profile) {
+                                        profileExists = true;
+                                    } else {
+                                        profileExists = false;
                                     }
                                 });
                         }
-                        function loadProfileCover() {
-                            filesService.get($scope.profile.coverId, {
-                            })
-                                .success(function (cover) {
-                                    $scope.cover = cover;
-                                })
-                                .error(function(error) {
-                                    $scope.error = error;
-                                })
-                                .finally(function() {
-
-                                });
-                        }
-
+                        
                         loadProfile();
-
 
                         $scope.deleteProfile = function() {
                             if($scope.albums.length === 0) {
@@ -64,7 +53,7 @@ angular.module('media-gallery')
                                 window.confirm('You have to first delete all your albums to be able to delete your profile! Would you like to delete all your albums?');
                                 //pseudo TODO
                                 /*
-                                pronađi sve albume ovog profila i redom ih obriši zajedno sa pjesmama i coverima, profile avatar i profile cover isto
+                                pronađi sve albume ovog profila i redom ih obriši zajedno sa pjesmama, profile avatar isto
                                 */
                             }
 

@@ -21,4 +21,9 @@
             color:  black;
         }
     }
+    &__search {
+        width: 100%;
+        padding: calc($unit*2);
+        border: 5px solid $color-primary;
+    }
 }

@@ -26,6 +26,9 @@
                 $scope.file = { filename: ''};
                 $scope.model = {};
                 $scope.artistId = $state.params.artistId;
+                var profileExists;
+                var profileEdit;
+                var avatarEdit;
 
                 if (!$scope.$root.user.isAuthenticated) {
                     $state.go('master.main.profile', {artistId: $state.params.artistId});
@@ -41,22 +44,18 @@
                         console.log (error); // jshint ignore: line
                     })
                     .finally(function (){
-                        if (!$scope.profile) {
-
+                        if($scope.profile) {
+                            profileExists = true;
+                        } else {
+                            profileExists = false;
                         }
                     });
                 }
 
                 loadProfile();
 
-                /*TODO: avatar preview */
-
-
-                $scope.saveProfile = function (editProfile) {
-                    $scope.profile = editProfile;
-
-                    //set var avatarEdit for use in functions later
-                    var avatarEdit;
+                $scope.editProfile = function(profile) {
+                    $scope.profile = profile;
 
                     //set promises for add or update avatar
                     if($scope.profile.avatar) {
@@ -69,8 +68,15 @@
                             }
                         }
                     }
+                    //set promises for add or update profile
+                    if(profileExists) {
+                        profileEdit = profileService.update($scope.profile);
+                    } else {
+                        profileEdit = profileService.create($scope.profile);
+                    }
+                    
                     // functions that can be performed
-                    var saveAvatar = function() {
+                    function saveAvatar() {
                         return avatarEdit
                         .success(function(data, stream) {
                             $scope.avatarData = data;
@@ -82,12 +88,10 @@
                         .finally(function (){
                             updateProfile();
                         });
-                    },
-                    backToProfile = function() {
-                        $state.go('master.main.profile', {artistId: $state.params.artistId}, {reload:true});
-                    },
-                    updateProfile = function() {
-                        return profileService.update($scope.profile)
+                    }
+
+                    function updateProfile() {
+                        return profileEdit
                         .success (function(data){
                             $scope.profile = data;
                         })
@@ -98,17 +102,18 @@
                             loadProfile();
                             backToProfile();
                         });
-                    };
+                    }
+
+                    function backToProfile() {
+                        $state.go('master.main.profile', {artistId: $state.params.artistId}, {reload:true});
+                    }
+
+
 
                     if($scope.profile.avatar) {
                         if($scope.profile.avatar.change) {
                             saveAvatar();
-                        }
-                    }
-
-                    //update profile if no  avatar selected for upload
-                    if($scope.profile.avatar) {
-                        if(!$scope.profile.avatar.change) {
+                        } else {
                             updateProfile();
                         }
                     }

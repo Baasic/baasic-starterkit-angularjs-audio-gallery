@@ -3,22 +3,15 @@
 \*------------------------------------*/
 
 .header {
-    position: fixed;
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
     padding: calc($unit*2) calc($unit*4);
-    background-color: rgba(255,255,255,0.5);
+    background-color: white;
     border-top: $unit solid $bg-header;
     z-index: 1;
-    transition: all 250ms ease-in-out;
 
     &__buttons {
         float: right;
-    }
-
-    &--secondary {
-        background-color: rgba(255,255,255,1);
-        border: 0px solid $bg-header;
     }
 }

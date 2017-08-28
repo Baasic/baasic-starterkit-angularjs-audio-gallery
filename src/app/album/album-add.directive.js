@@ -44,7 +44,7 @@ angular.module('media-gallery')
                             $scope.album = saveAlbum;
                             $scope.album.rnd = Math.random(10).toString().substring(7);
 
-                            var createAlbum = function() {
+                            function createAlbum() {
                                 $scope.album.artistId = $scope.artistId;
                                 return albumsService.create($scope.album)
                                     .success(function(album){
@@ -57,9 +57,9 @@ angular.module('media-gallery')
                                     .finally(function() {
                                         getAlbum();
                                     });
-                            };
+                            }
 
-                            var getAlbum = function() {
+                            function getAlbum() {
                                 //if exist fetch me album data
                                 if($scope.albumId) {
                                     albumsService.get($scope.albumId)
@@ -75,9 +75,9 @@ angular.module('media-gallery')
                                 } else { //if not existant, make me empty object
                                     $scope.album = {};
                                 }
-                            };
+                            }
 
-                            var addCoverStream = function() {
+                            function addCoverStream() {
                                 file = $scope.file.blob;
                                 if($scope.album.id){
                                     path = $scope.album.id + '/albumCover.jpg';
@@ -92,9 +92,9 @@ angular.module('media-gallery')
                                     .finally(function() {
                                         getCoverData();
                                     });
-                            };
+                            }
 
-                            var getCoverData = function() {
+                            function getCoverData() {
                                 filesService.find(path)
                                     .success(function(coverData){
                                         $scope.coverData = coverData.item[0];
@@ -108,8 +108,8 @@ angular.module('media-gallery')
                                     .finally(function(){
                                         updateAlbum();
                                     });
-                            };
-                            var updateAlbum = function() {
+                            }
+                            function updateAlbum() {
                                 return albumsService.update($scope.album)
                                     .success(function(album){
                                         if(album){
@@ -122,28 +122,9 @@ angular.module('media-gallery')
                                     .finally(function() {
                                         $scope.backToDetails();
                                     });
-                            };
+                            }
 
                             createAlbum();
-
-                        $scope.cancel = function () {
-                            $state.go('master.main.profile', {artistId: $scope.artistId}, {reload:true});
-                        };
-
-                        //this i'll do later
-                        $scope.addSong = function () {
-                            /*pseudo code
-                            upload stream
-                            add playlist entry
-                            */
-                        };
-
-                        $scope.deleteSong = function () {
-                            /*pseudo code
-                            delete playlist entry
-                            delete stream(file)
-                            */
-                        };
 
                         $scope.cancelEdit = function () {
                             $scope.backToDetails();
