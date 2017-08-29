@@ -54,7 +54,7 @@
 
                 loadProfile();
 
-                $scope.editProfile = function(profile) {
+                $scope.saveProfile = function(profile) {
                     $scope.profile = profile;
 
                     //set promises for add or update avatar
@@ -74,7 +74,7 @@
                     } else {
                         profileEdit = profileService.create($scope.profile);
                     }
-                    
+
                     // functions that can be performed
                     function saveAvatar() {
                         return avatarEdit
