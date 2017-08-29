@@ -28,13 +28,14 @@
                 $scope.artistId = $state.params.artistId;
                 var profileExists;
                 var profileEdit;
+                var avatarChange;
                 var avatarEdit;
 
                 if (!$scope.$root.user.isAuthenticated) {
                     $state.go('master.main.profile', {artistId: $state.params.artistId});
                 }
                 function loadProfile() {
-                    profileService.get($state.params.artistId, {
+                    profileService.get($scope.artistId, {
                         embed: 'avatar'
                     })
                     .success(function (profile) {
@@ -56,18 +57,8 @@
 
                 $scope.saveProfile = function(profile) {
                     $scope.profile = profile;
+                    $scope.profile.id = $scope.artistId;
 
-                    //set promises for add or update avatar
-                    if($scope.profile.avatar) {
-                        if($scope.profile.avatar.change){
-                            $scope.profile.avatar.rnd =  Math.random(10).toString().substring(7);
-                            if ($scope.profile.avatar.id) {
-                                avatarEdit = avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob);
-                            } else {
-                                avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob);
-                            }
-                        }
-                    }
                     //set promises for add or update profile
                     if(profileExists) {
                         profileEdit = profileService.update($scope.profile);
@@ -75,7 +66,24 @@
                         profileEdit = profileService.create($scope.profile);
                     }
 
+                    //set promises for add or update avatar
+                    if($scope.profile.avatar) {
+                        if($scope.profile.avatar.change){
+                            $scope.profile.avatar.rnd =  Math.random(10).toString().substring(7);
+                            avatarChange = true;
+                            if ($scope.profile.avatar.id) {
+                                avatarEdit = avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob);
+                            } else {
+                                avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob);
+                            }
+                        }
+                    }
+
                     // functions that can be performed
+                    function backToProfile() {
+                        $state.go('master.main.profile', {artistId: $scope.profile.id}, {reload:true});
+                    }
+
                     function saveAvatar() {
                         return avatarEdit
                         .success(function(data, stream) {
@@ -86,10 +94,10 @@
                             console.log(error); //jshint ignore: line
                         })
                         .finally(function (){
-                            updateProfile();
+                            loadProfile();
+                            backToProfile();
                         });
                     }
-
                     function updateProfile() {
                         return profileEdit
                         .success (function(data){
@@ -99,28 +107,22 @@
                             console.log(error); //jshint ignore: line
                         })
                         .finally (function(){
-                            loadProfile();
-                            backToProfile();
+                            console.log($scope.profile); // jshint ignore: line
+                            if (avatarChange) {
+                                saveAvatar();
+                            } else {
+                                loadProfile();
+                                backToProfile();
+                            }
                         });
                     }
 
-                    function backToProfile() {
-                        $state.go('master.main.profile', {artistId: $state.params.artistId}, {reload:true});
-                    }
+                    updateProfile();
 
-
-
-                    if($scope.profile.avatar) {
-                        if($scope.profile.avatar.change) {
-                            saveAvatar();
-                        } else {
-                            updateProfile();
-                        }
-                    }
                 };
 
                 $scope.cancelEdit = function cancelEdit() {
-                    $state.go('master.main.profile', {artistId: $state.params.artistId});
+                    $state.go('master.main.profile', {artistId: $scope.profile.id});
                 };
             }
         ],

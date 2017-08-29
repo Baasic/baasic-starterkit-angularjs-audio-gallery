@@ -34,7 +34,7 @@
                 <label for="aboutAlbum" class="label label--primary">About Album</label>
                 <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input input--text"></textarea>
                 <div>
-                    <button type="submit" class="btn btn--quinary btn--med push">Save</button>
+                    <button type="submit" class="btn btn--quinary btn--med push">Save & Continue</button>
                     <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
                 </div>
             </div>
@@ -52,10 +52,5 @@
                 </audio>
             </div>
         </div>
-        <div ng-if="!album.playlist.length">
-            No songs uploaded for this album
-        </div>
-        <new-song></new-song>
     </div>
-    <album-songs></album-songs>
 </div>
