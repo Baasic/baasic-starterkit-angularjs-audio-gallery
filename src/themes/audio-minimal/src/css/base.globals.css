@@ -16,6 +16,7 @@ body {
     background: $gray5;
     overflow-x: hidden;
     color: $color-text;
+    padding-bottom: 50px;
 }
 
 img {

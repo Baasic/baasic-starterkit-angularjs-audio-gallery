@@ -68,6 +68,7 @@
 @import components.profile.css;
 @import components.album.css;
 @import components.scrollbar.css;
+@import components.menu.css;
 /**
 * Import: views
 * Description: specific website/app views (example: 404 view, login view)

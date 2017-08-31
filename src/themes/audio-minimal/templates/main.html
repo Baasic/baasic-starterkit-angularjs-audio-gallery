@@ -1,29 +1,48 @@
 ﻿<header class="header">
-        <a ui-sref="master.main.index" class="logo logo--small">
-            SOUNDBOX
-        </a>
         <!-- <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="display--ib">
             <label for="searchEntry">
                 <input type="text" name="searchEntry" class="input__search" ng-model="searchFor"/>
             </label>
         </form> -->
-        <div ng-if="$root.user.isAuthenticated" class="header__buttons">
-            <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--sml btn--secondary"> Profile</a>
-            <baasic-logout on-logout="setEmptyUser()">
-                <button ng-click="logout()" class="btn btn--sml btn--primary"> Sign out</button>
-            </baasic-logout>
+
+        <div class="row" change-class-on-scroll offset="55" scroll-class="search--fixed">
+            <div class="col col-sml-12">
+                <input type="text" class="input__search"/>
+            </div>
         </div>
-        <div ng-if="!$root.user.isAuthenticated" class="header__buttons">
-            <a ui-sref="master.main.login" class="btn btn--sml btn--primary"> Sign In</a>
-            <a ui-sref="master.main.register" class="btn btn--sml btn--primary"> Sign Up</a>
+        <div class="menu" ng-class="{'opened':menuOpen}" >
+            <button class="menu__icon hamburger hamburger--3dx" type="button" ng-class="{'is-active':menuOpen}" ng-click="menuOpen = !menuOpen">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+
+            <a ui-sref="master.main.index" class="logo logo--small">
+                SOUNDBOX
+            </a>
+            <nav ng-if="$root.user.isAuthenticated">
+                <ul>
+                    <li>
+                        <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--sml btn--secondary"> Profile</a>
+                    </li>
+                    <li>
+                        <baasic-logout on-logout="setEmptyUser()">
+                            <button ng-click="logout()" class="btn btn--sml btn--primary"> Sign out</button>
+                        </baasic-logout>
+                    </li>
+                </ul>
+            </nav>
+            <nav ng-if="!$root.user.isAuthenticated">
+                <ul>
+                    <li><a ui-sref="master.main.login" class="btn btn--sml btn--primary"> Sign In</a></li>
+                    <li><a ui-sref="master.main.register" class="btn btn--sml btn--primary"> Sign Up</a></li>
+                </ul>
+            </nav>
+            <div class="menu__bottom">
+                powered by baasic
+            </div>
         </div>
 </header>
-
-<div class="row" change-class-on-scroll offset="55" scroll-class="search--fixed">
-    <div class="col col-sml-12">
-        <input type="text" class="input__search"/>
-    </div>
-</div>
 
 <main ui-view class="main">
 </main>

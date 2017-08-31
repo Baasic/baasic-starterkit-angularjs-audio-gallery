@@ -13,6 +13,12 @@ $moonstone: #66b9bf;
 $tangelo: #e37222;
 $shamrock: #2ecc71;
 
+$cinnabar: #de443a;
+$mantis: #8acc6c;
+$allports: #1b5c95;
+
+
+
 $gray1: #2D2D2D;
 $gray2: #353535;
 $gray3: #444444;
@@ -27,9 +33,9 @@ $color-text:        #333;
 /**
  * Theme colors
  */
-$color-primary:     $shamrock;
-$color-secondary: 	$moonstone;
-$color-tertiary:    $tangelo;
+$color-primary:     $mantis;
+$color-secondary: 	$allports;
+$color-tertiary:    $cinnabar;
 $color-quartenary:  $viridian;
 
 /* Test colors *//*

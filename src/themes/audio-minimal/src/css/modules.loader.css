@@ -8,7 +8,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: $bg-header;
+    background: linear-gradient(45deg, $color-primary 0%,$color-secondary 100%);
     z-index: 2;
     transition: all .3s ease-in-out;
     &__content {
