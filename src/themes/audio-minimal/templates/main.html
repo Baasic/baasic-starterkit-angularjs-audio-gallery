@@ -11,11 +11,9 @@
             </div>
         </div>
         <div class="menu" ng-class="{'opened':menuOpen}" >
-            <button class="menu__icon hamburger hamburger--3dx" type="button" ng-class="{'is-active':menuOpen}" ng-click="menuOpen = !menuOpen">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </button>
+            <div class="menu__icon hamburger hamburger--elastic" ng-class="{'is-active':menuOpen}" ng-click="menuOpen = !menuOpen">
+                <div class="hamburger-inner"></div>
+            </div>
 
             <a ui-sref="master.main.index" class="logo logo--small">
                 SOUNDBOX

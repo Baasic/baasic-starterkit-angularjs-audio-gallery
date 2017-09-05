@@ -40,27 +40,27 @@ angular.module('media-gallery')
                         $scope.deleteProfile = function() {
 
                             var avatarId = $scope.profile.avatar.avatarFileEntryId;
-                            function deleteAvatar () {
-                                return avatarService.streams.get(avatarId)
-                                .success(function (fileEntry) {
-                                    $scope.avatar = fileEntry;
-                                })
-                                .error(function (error) {
-                                    $scope.error = error;
-                                })
-                                .finally(function () {
-                                    avatarService.unlink($scope.avatar)
-                                    .success(function () {
-                                    })
-                                    .error(function (error) {
-                                        $scope.error = error;
-                                    })
-                                    .finally(function(){
-                                        console.log('should be deleted now'); // jshint ignore: line
-                                        deleteData();
-                                    });
-                                });
-                            }
+                            // function deleteAvatar () {
+                            //     return avatarService.streams.get(avatarId)
+                            //     .success(function (fileEntry) {
+                            //         $scope.avatar = fileEntry;
+                            //     })
+                            //     .error(function (error) {
+                            //         $scope.error = error;
+                            //     })
+                            //     .finally(function () {
+                            //         avatarService.unlink($scope.avatar)
+                            //         .success(function () {
+                            //         })
+                            //         .error(function (error) {
+                            //             $scope.error = error;
+                            //         })
+                            //         .finally(function(){
+                            //             console.log('should be deleted now'); // jshint ignore: line
+                            //             deleteData();
+                            //         });
+                            //     });
+                            // }
 
                             function deleteData () {
                                 return profileService.remove($scope.profile)
@@ -76,7 +76,7 @@ angular.module('media-gallery')
 
                             if($scope.albums.length === 0) {
                                 if (window.confirm('By deleting your profile, all your data will be irrecoverably lost. Are you sure that you want to delete your profile?')) {
-                                    deleteAvatar();
+                                    deleteData();
                                 }
                             } else {
                                 window.confirm('You have to first delete all your albums to be able to delete your profile! Would you like to delete all your albums?');
