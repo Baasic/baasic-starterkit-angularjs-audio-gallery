@@ -42,7 +42,7 @@
                         $scope.profile = profile;
                     })
                     .error(function (error) {
-                        console.log (error); // jshint ignore: line
+                        $scope.error = error;
                     })
                     .finally(function (){
                         if($scope.profile) {
@@ -91,7 +91,7 @@
                             $scope.avatarStream = stream;
                         })
                         .error(function(error) {
-                            console.log(error); //jshint ignore: line
+                            $scope.error = error;
                         })
                         .finally(function (){
                             loadProfile();
@@ -104,10 +104,10 @@
                             $scope.profile = data;
                         })
                         .error (function(error){
-                            console.log(error); //jshint ignore: line
+                            $scope.error = error;
                         })
                         .finally (function(){
-                            console.log($scope.profile); // jshint ignore: line
+                            $scope.error = error;
                             if (avatarChange) {
                                 saveAvatar();
                             } else {

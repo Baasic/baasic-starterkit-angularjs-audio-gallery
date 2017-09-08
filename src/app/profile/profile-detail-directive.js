@@ -10,6 +10,7 @@ angular.module('media-gallery')
                 scope: '=',
                 controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService', 'baasicUserProfileAvatarService', 'baasicFilesService', 'albumsService',
                     function baasicProfileDetail($scope, $state, $stateParams, $q, profileService, avatarService ,filesService, albumsService) {
+                        
                         function loadProfile() {
                             $scope.albums = [];
                             $scope.artistId = $state.params.artistId;
@@ -21,7 +22,7 @@ angular.module('media-gallery')
                                     $scope.profile = profile;
                                 })
                                 .error(function (error) {
-                                    console.log (error); // jshint ignore: line
+                                    $scope.error = error;
                                     if (error === '"Resource not found."') {
                                         $state.go('master.main.profile-edit', {artistId: $state.params.artistId});
                                     }
@@ -38,7 +39,6 @@ angular.module('media-gallery')
                         loadProfile();
 
                         $scope.deleteProfile = function() {
-                            console.log($scope);
                             var avatarId = $scope.profile.id;
                             var avatarToDelete = null;
 

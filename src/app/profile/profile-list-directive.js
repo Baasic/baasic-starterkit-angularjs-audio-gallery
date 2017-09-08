@@ -12,9 +12,6 @@ angular.module('media-gallery')
 
                         $scope.$root.loader.suspend();
 
-                        console.log('logging state inside profile-list directive');
-                        console.log($state); //jshint ignore: line
-
                         function loadProfiles() {
                             baasicUserProfileService.find({
                                 page: $state.params.page || 1,
@@ -34,7 +31,7 @@ angular.module('media-gallery')
                                 $scope.hasProfiles = profiles.totalRecords > 0;
                             })
                             .error(function (error) {
-                                console.log(error); //jshint ignore: line
+                                $scope.error = error;
                             })
                             .finally(function () {
                                 $scope.$root.loader.resume();

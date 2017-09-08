@@ -33,7 +33,7 @@ angular.module('media-gallery')
                                     $scope.artistId = $scope.album.artistId;
                                 })
                                 .error(function(error){
-                                    console.log(error); //jshint ignore: line
+                                    $scope.error = error;
                                 })
                                 .finally(function(){
                                     getArtist();
@@ -46,7 +46,7 @@ angular.module('media-gallery')
                                     $scope.artistName = artist.displayName;
                                 })
                                 .error(function(error){
-                                    console.log(error); //jshint ignore: line
+                                    $scope.error = error;
                                 })
                                 .finally(function(){
                                     uploadSong();
@@ -54,13 +54,12 @@ angular.module('media-gallery')
                             };
 
                             var uploadSong = function(){
-                                console.log('upload song'); //jshint ignore: line
                                 
                                 filesService.streams.create(path, file)
                                 .success(function(){
                                 })
                                 .error(function(error){
-                                    console.log(error); //jshint ignore: line
+                                    $scope.error = error;
                                 })
                                 .finally(function(){
                                     getSongData();
@@ -79,7 +78,7 @@ angular.module('media-gallery')
                                         $scope.song.url = 'https://api.baasic.com/v1/bmsk-audio/file-streams/' + $scope.song.id;
                                     })
                                     .error(function(error){
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         $scope.album.playlist.push($scope.song);
@@ -92,7 +91,7 @@ angular.module('media-gallery')
                                     .success(function(){
                                     })
                                     .error(function(error){
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         refreshAlbum();
@@ -100,14 +99,13 @@ angular.module('media-gallery')
                             };
 
                             var refreshAlbum = function(){
-                                console.log('refreshing album'); //jshint ignore: line
                                 return albumsService.get($scope.albumId, {
                                 })
                                     .success(function(album){
                                         $scope.album = album;
                                     })
                                     .error(function(error){
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                     });
@@ -116,7 +114,6 @@ angular.module('media-gallery')
                             if(file.type === 'mp3' || file.type === 'm4a') {
                                 getAlbum();
                             } else {
-                                console.log('invalid file type');
                                 $scope.invalidFileType = true;
                             }
                         };
@@ -136,7 +133,7 @@ angular.module('media-gallery')
                                         $scope.artistId = $scope.album.artistId;
                                     })
                                     .error(function(error){
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         getArtist();
@@ -148,7 +145,7 @@ angular.module('media-gallery')
                                         $scope.artistName = artist.displayName;
                                     })
                                     .error(function(error){
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         uploadSong();
@@ -159,7 +156,7 @@ angular.module('media-gallery')
                                     .success(function(){
                                     })
                                     .error(function(error){
-                                        console.log(error);  //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         getSongData();
@@ -176,7 +173,7 @@ angular.module('media-gallery')
                                         $scope.song.url = 'https://api.baasic.com/v1/bmsk-audio/file-streams/'+ $scope.song.id;
                                     })
                                     .error(function(error){
-                                        console.log(error);  //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         updateAlbum();
@@ -187,7 +184,7 @@ angular.module('media-gallery')
                                     .success(function(){
                                     })
                                     .error(function(error){
-                                        console.log(error);  //jshint ignore: line
+                                        $scope.error = error;  //jshint ignore: line
                                     })
                                     .finally(function(){
                                         refreshAlbum();
@@ -200,7 +197,7 @@ angular.module('media-gallery')
                                         $scope.album = album;
                                     })
                                     .error(function(error){
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error; //jshint ignore: line
                                     })
                                     .finally(function(){
                                     });
@@ -209,7 +206,6 @@ angular.module('media-gallery')
                             if(file.type === 'mp3' || file.type === 'm4a') {
                                 getAlbum();
                             } else {
-                                console.log('invalid file type');
                                 $scope.invalidFileType = true;
                             }
                         };
