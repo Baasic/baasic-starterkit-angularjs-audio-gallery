@@ -26,6 +26,7 @@
 
             function loadAlbums() {
                 $scope.albums = [];
+                console.log($state);
 
                 albumsService.find({
                     page: 1,
@@ -61,57 +62,36 @@
                 if (window.confirm('Are you sure you want to delete album ' + $scope.albums[album].name + '?')) {
                     var coverId = $scope.albums[album].coverId;
 
-                    function getAlbumCover() {
-                        console.log('get album cover'); //jshint ignore: line
+                    var getAlbumCover = function() {
                         filesService.get(coverId)
                             .success(function(cover){
-                                console.log('get album cover - success'); //jshint ignore: line
                                 $scope.cover = cover;
                             })
                             .error(function(error){
-                                console.log('get album cover - error'); //jshint ignore: line
                                 console.log(error); // jshint ignore:line
                             })
                             .finally(function(){
                                 deleteAlbumCover();
                             });
                     };
-                    function deleteAlbumCover(){
-                        console.log('delete album cover'); //jshint ignore: line
+
+                    var deleteAlbumCover = function(){
                         if($scope.cover) {
                             filesService.remove($scope.cover)
                                 .success(function(){
-                                    console.log('delete album cover - success'); //jshint ignore: line
+                                    deleteAlbumSongs();
                                 })
                                 .error(function(error){
-                                    console.log('delete album cover - error'); //jshint ignore: line
                                     console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
-                                    console.log($scope.albums[album]) //jshint ignore: line
-                                    if($scope.albums[album].playlist) {
-                                        if($scope.albums[album].playlist.length){
-                                            deleteAlbumSongs();
-                                        } else {
-                                            deleteAlbumData();
-                                        }
-                                    } else {
-                                        deleteAlbumData();
-                                    }
                                 });
+
                         } else {
-                            if($scope.albums[album].playlist) {
-                                if($scope.albums[album].playlist.length){
-                                    deleteAlbumSongs();
-                                } else {
-                                    deleteAlbumData();
-                                }
-                            } else {
-                                deleteAlbumData();
-                            }                            
+                            deleteAlbumSongs();
                         }
-                    }
-                    
+                    };
+
                     var deleteAlbumSongs = function(){
                         console.log('delete album songs'); //jshint ignore: line
                         var idList = [];
@@ -129,7 +109,6 @@
                             createList(playlist);
                         }
 
-                        console.log('batch removing songs'); //jshint ignore: line
                         return filesService.batch.remove(idList)
                             .success(function (data) {
                                  console.log(data); //jshint ignore: line
@@ -139,12 +118,10 @@
                             })
                             .finally(function () {
                                 deleteAlbumData();
-
                             });
                     };
 
                     var deleteAlbumData = function() {
-                        console.log('delete album data'); //jshint ignore: line
                         albumsService.remove($scope.albums[album])
                             .success(function () {
                                 $scope.albums.splice(album,1);

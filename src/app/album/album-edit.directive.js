@@ -45,7 +45,7 @@ angular.module('media-gallery')
                                     $scope.album = album;
                                 })
                                 .error(function (error) {
-                                    console.log(error); // jshint ignore: line
+                                    console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
                                 });
@@ -66,7 +66,6 @@ angular.module('media-gallery')
 
                             return promise
                                 .success(function() {
-                                    console.log ('stream uploaded successfuly'); // jshint ignore: line
                                 })
                                 .error(function(error){
                                     console.log(error); //jshint ignore: line
@@ -133,7 +132,7 @@ angular.module('media-gallery')
                                     removeSong();
                                 })
                                 .error(function(error) {
-                                    console.log(error); //jshint ignore:line
+                                    console.log(error); //jshint ignore: line
                                 })
                                 .finally(function() {
                                     removeFromPlaylist();
@@ -145,10 +144,9 @@ angular.module('media-gallery')
                             return albumsService.update($scope.album)
                                 .success(function(data){
                                     $scope.songData = data;
-                                    console.log('succesfully deleted song from playlist'); //jshint ignore: line
                                 })
                                 .error(function(error) {
-                                    console.log(error); //jshint ignore:line
+                                    console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
                                     getAlbum();
@@ -159,10 +157,9 @@ angular.module('media-gallery')
                         var removeSong = function(){
                             return filesService.remove($scope.songData)
                                 .success(function(){
-                                    console.log('song successfully deleted from system'); //jshint ignore: line
                                 })
                                 .error(function(error) {
-                                    console.log(error); //jshint ignore:line
+                                    console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
                                 });

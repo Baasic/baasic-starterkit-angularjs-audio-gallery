@@ -13,13 +13,6 @@ angular.module('media-gallery')
                         $scope.model = {};
                         $scope.albumId = $state.params.albumId;
 
-                        //TODO:
-                        //1. get album
-                        //2. get artist using data from album
-                        //3. upload song file to server
-                        //4. get song data
-                        //5. update album to use the song data
-                        //6. refresh album
                         $scope.addSong = function(song) {
                             $scope.songTitle = song.title;
                             if($scope.file) {
@@ -44,7 +37,8 @@ angular.module('media-gallery')
                                 .finally(function(){
                                     getArtist();
                                 });
-                            };
+                            }
+
                             var getArtist = function(){
                                 profileService.get($scope.artistId)
                                 .success(function(artist){
@@ -57,51 +51,55 @@ angular.module('media-gallery')
                                     uploadSong();
                                 });
                             };
+
                             var uploadSong = function(){
-                                console.log('upload song');
+                                console.log('upload song'); //jshint ignore: line
                                 
                                 filesService.streams.create(path, file)
-                                .success(function(result){
-                                    console.log(result); //jshint ignore: line
+                                .success(function(){
                                 })
                                 .error(function(error){
-                                    console.log(error);  //jshint ignore: line
+                                    console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
-                                    //getSongData();
+                                    getSongData();
                                 });
                                 
                             };
+
                             var getSongData = function(){
                                 return filesService.find(path)
                                     .success(function(songData){
                                         $scope.song = songData.item[0];
                                         $scope.song.artist = $scope.artistName;
                                         $scope.song.title = $scope.songTitle;
+                                        //TODO: hard coded path
                                         $scope.song.cover = 'https://api.baasic.com/v1/bmsk-audio/file-streams/' + $scope.album.coverId;
                                         $scope.song.url = 'https://api.baasic.com/v1/bmsk-audio/file-streams/' + $scope.song.id;
                                     })
                                     .error(function(error){
-                                        console.log(error);  //jshint ignore: line
+                                        console.log(error); //jshint ignore: line
                                     })
                                     .finally(function(){
                                         $scope.album.playlist.push($scope.song);
                                         updateAlbum();
                                     });
                             };
+
                             var updateAlbum = function(){
                                 return albumsService.update($scope.album)
                                     .success(function(){
-                                        console.log('album sucessfully updated its playlist'); //jshint ignore: line
                                     })
                                     .error(function(error){
-                                        console.log(error);  //jshint ignore: line
+                                        console.log(error); //jshint ignore: line
                                     })
                                     .finally(function(){
                                         refreshAlbum();
                                     });
                             };
+
                             var refreshAlbum = function(){
+                                console.log('refreshing album'); //jshint ignore: line
                                 return albumsService.get($scope.albumId, {
                                 })
                                     .success(function(album){
@@ -113,6 +111,7 @@ angular.module('media-gallery')
                                     .finally(function(){
                                     });
                             };
+                            
                             getAlbum();
                         };
 
@@ -167,20 +166,19 @@ angular.module('media-gallery')
                                         $scope.song.artist = $scope.artistName;
                                         $scope.song.title = $scope.songTitle;
                                         $scope.song.pic = $scope.album.coverId;
+                                        //TODO: hard coded path
                                         $scope.song.url = 'https://api.baasic.com/v1/bmsk-audio/file-streams/'+ $scope.song.id;
                                     })
                                     .error(function(error){
                                         console.log(error);  //jshint ignore: line
                                     })
                                     .finally(function(){
-                                        //$scope.album.playlist.push($scope.song); - just when adding to playlist
                                         updateAlbum();
                                     });
                             };
                             var updateAlbum = function(){
                                 return albumsService.update($scope.album)
                                     .success(function(){
-                                        console.log('album sucessfully updated its playlist'); //jshint ignore: line
                                     })
                                     .error(function(error){
                                         console.log(error);  //jshint ignore: line
@@ -203,6 +201,7 @@ angular.module('media-gallery')
                             };
                             getAlbum();
                         };
+
                         $scope.cancel = function() {
                             $state.go('master.main.profile', {artistId: $scope.artistId}, {reload:true});
                         };
