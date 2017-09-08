@@ -12,6 +12,7 @@ angular.module('media-gallery')
                         $scope.file = { filename: ''};
                         $scope.model = {};
                         $scope.albumId = $state.params.albumId;
+                        $scope.invalidFileType = false;
 
                         $scope.addSong = function(song) {
                             $scope.songTitle = song.title;
@@ -112,7 +113,12 @@ angular.module('media-gallery')
                                     });
                             };
                             
-                            getAlbum();
+                            if(file.type === 'mp3' || file.type === 'm4a') {
+                                getAlbum();
+                            } else {
+                                console.log('invalid file type');
+                                $scope.invalidFileType = true;
+                            }
                         };
 
                         $scope.editSong = function(song) {
@@ -199,7 +205,13 @@ angular.module('media-gallery')
                                     .finally(function(){
                                     });
                             };
-                            getAlbum();
+                            
+                            if(file.type === 'mp3' || file.type === 'm4a') {
+                                getAlbum();
+                            } else {
+                                console.log('invalid file type');
+                                $scope.invalidFileType = true;
+                            }
                         };
 
                         $scope.cancel = function() {

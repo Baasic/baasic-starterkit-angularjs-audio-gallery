@@ -5,8 +5,8 @@
         <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.title.$touched) && newSong.title.$error.required">Title is required.</p>
     </div>
     <div>
-        <input type="file" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3, audio/wav, audio/x-wav" file-types=".mp2, .mp3, .mpa, .mpg, .mpga, .wav">
-        <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.$touched) && newSong.$error.fileType">Allowed extensions are: mp2, mp3, mpa, mpg, mpga and wav </p>
+        <input type="file" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3" file-types=".mp3, .m4a">
+        <p class="validation validation--alert" ng-show="((newSong.$submitted || newSong.$touched) && newSong.$error.fileType) || invalidFileType">Allowed extensions are: .mp3 and .m4a </p>
     </div>
     <input type="hidden" ng-model="song.url">
     <input type="hidden" ng-model="song.pic">
@@ -29,8 +29,8 @@
             <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.title.$touched) && newSong.title.$error.required">Title is required.</p>
         </div>
         <div>
-            <input type="file" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3, audio/wav, audio/x-wav" file-types=".mp2, .mp3, .mpa, .mpg, .mpga, .wav">
-            <p class="validation validation--alert" ng-show="(newSong.$submitted || newSong.$touched) && newSong.$error.fileType">Allowed extensions are: mp2, mp3, mpa, mpg, mpga and wav </p>
+            <input type="file" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3" file-types=".mp3, .m4a">
+            <p class="validation validation--alert" ng-show="((newSong.$submitted || newSong.$touched) && newSong.$error.fileType) || invalidFileType">Allowed extensions are: mpr and m4a </p>
         </div>
         <input type="hidden" ng-model="song.url">
         <input type="hidden" ng-model="song.pic">
