@@ -41,222 +41,228 @@ angular.module('media-gallery')
                         $scope.deleteProfile = function() {
                             var avatarId = $scope.profile.id;
                             var avatarToDelete = null;
+                            var albumIdList = [];
+                            var albumList = $scope.albums;                                
+                            var albumCoverIdList = [];
+                            var albumCoverList = [];
+                            var albumListLength = $scope.albums.length;
+                            var songIdList = [];
+                            var albumsToDelete = [];
 
-                            function deleteAvatar () {                               
+                            if(albumListLength > 0) {
+                                createAlbumIdList(albumList);
+                                createAlbumCoverIdList(albumList);
+                                createSongIdList(albumList);
+                            }
+
+                            function deleteAllData() {
+                                getAvatar();
+                            }
+
+                            //iterate trough all albums and push their id's into albumIdList
+                            function createAlbumIdList(list) {
+                                for(var i = 0; i < albumListLength; i++) {
+                                    albumIdList.push({id: list[i].id});
+                                }
+                                return albumIdList;
+                            }
+
+                            //iterate trough all albums and push their cover ID's into albumCoverIdList
+                            function createAlbumCoverIdList(list) {
+                                for(var i = 0; i<albumListLength; i++) {
+                                    if(albumList[i].coverId) {
+                                        albumCoverIdList.push({id: list[i].coverId});
+                                    }
+                                }
+                                return albumCoverIdList;
+                            }
+
+                            //iterate trough a list of all albums
+                            //add the id of each song in each album's playlist to the list
+                            function createSongIdList(list) {
+                                for(var i=0; i<albumListLength; i++) {
+                                    if(list[i].playlist) {
+                                        var playlistLength = list[i].playlist.length;
+                                        if(playlistLength > 0) {
+                                            for(var j = 0; j < playlistLength; j++) {
+                                                songIdList.push({id: list[i].playlist[j].id});
+                                            }
+                                        }
+                                    }
+                                }
+                                return songIdList;
+                            }
+
+                            //gets the avatar
+                            //if there are albums linked to this profile, calls the function to get and delete albums and related data
+                            //if there are no albums, proceds to delete avatar and profile
+                            //if avatar is not found, it's assumed that it doesn't exist/is already deleted, so the function proceedsas, but does not call to delete avatar
+                            function getAvatar() {
                                 avatarService.get(avatarId)
-                                .success(function (fileEntry) {
+                                .success(function(fileEntry){
                                     avatarToDelete = fileEntry;
-                                })
-                                .error(function (error) {
-                                    $scope.error = error;
-                                })
-                                .finally(function () {
-                                    if(avatarToDelete) {
-                                        avatarService.unlink(avatarToDelete)
-                                        .success(function () {
-                                        })
-                                        .error(function (error) {
-                                            $scope.error = error;
-                                        })
-                                        .finally(function(){
-                                            deleteData();
-                                        });
+                                    if(albumListLength > 0) {
+                                        getAlbumCovers();
                                     }
                                     else {
-                                        deleteData();
+                                        deleteAvatar();
                                     }
-                                });
-                            }
-
-                            function deleteData () {
-                                return profileService.remove($scope.profile)
-                                .success(function () {
                                 })
-                                .error(function (error) {
+                                .error(function(error){
                                     $scope.error = error;
-                                })
-                                .finally(function () {
-                                    $state.go('master.main.index');
+                                    if(error === '"Resource not found."'){
+                                        if(albumListLength > 0) {
+                                            getAlbumCovers();
+                                        }
+                                        else {
+                                            deleteProfileData();
+                                        }
+                                    }
+                                    
                                 });
                             }
 
-                            //deletes all albums for a given profile.
-                            function deleteAlbums () {
-                                var albumIdList = [];
-                                var albumList = $scope.albums;                                
-                                var albumCoverIdList = [];
-                                var albumCoverList = [];
-                                var albumListLength = $scope.albums.length;
-                                var songIdList = [];
-                                var albumsToDelete = [];
-
-                                //iterate trough all albums and push their id's into albumIdList
-                                function createAlbumIdList(list) {
-                                    for(var i = 0; i < albumListLength; i++) {
-                                        albumIdList.push({id: list[i].id});
-                                    }
-                                    return albumIdList;
-                                }
-
-                                //iterate trough all albums and push their cover ID's into albumCoverIdList
-                                function createAlbumCoverIdList(list) {
-                                    for(var i = 0; i<albumListLength; i++) {
-                                        if(albumList[i].coverId) {
-                                            albumCoverIdList.push({id: list[i].coverId});
-                                        }
-                                    }
-                                    return albumCoverIdList;
-                                }
-
-                                //iterate trough a list of all albums
-                                //add the id of each song in each album's playlist to the list
-                                function createSongIdList(list) {
-                                    for(var i=0; i<albumListLength; i++) {
-                                        if(list[i].playlist) {
-                                            var playlistLength = list[i].playlist.length;
-                                            if(playlistLength > 0) {
-                                                for(var j = 0; j < playlistLength; j++) {
-                                                    songIdList.push({id: list[i].playlist[j].id});
-                                                }
-                                            }
-                                        }
-                                    }
-                                    return songIdList;
-                                }
-                                
-                                //call these functions only if some albums exist
-                                if(albumListLength > 0) {
-                                    createAlbumIdList(albumList);
-                                    createAlbumCoverIdList(albumList);
-                                    createSongIdList(albumList);
-                                }
-                                else {
-                                    deleteAvatar();
-                                }
-
-                                //get all album covers
-                                function getAlbumCovers() {
-                                    var i = 0;
-                                    function chainedPromise() {
-                                        filesService.get(albumCoverIdList[i])
-                                        .success(function(data){
-                                            albumCoverList.push(data);
-                                        })
-                                        .error(function(error){
-                                            $scope.error = error;
-                                        })
-                                        .finally(function(){
-                                            if(i >= albumCoverIdList.length - 1) {
-                                                deleteAlbumCovers();
-                                            }
-                                            else {
-                                                i++;
-                                                chainedPromise();
-                                            }
-                                        });
-                                    }
-                                    chainedPromise();
-                                }
-
-                                //delete all album covers previously retrieved
-                                function deleteAlbumCovers() {
-                                    var i = 0;
-                                    function chainedPromise() {
-                                        filesService.remove(albumCoverList[i])
-                                        .success(function(){
-                                        })
-                                        .error(function(error) {
-                                            $scope.error = error;
-                                        })
-                                        .finally(function(){
-                                            if(i >= albumCoverList.length - 1 ) {
-                                                deleteSongs();
-                                            }
-                                            else {
-                                                i++;
-                                                chainedPromise();
-                                            }
-                                        });
-                                    }
-                                    chainedPromise();
-                                }
-
-                                //TODO: test this once song upload is fixed
-                                //calls fileService.batchDelete and removes all ongs using their id's
-                                function deleteSongs () {
-                                    filesService.batch.remove(songIdList)
-                                    .success(function(){
+                            //gets all album covers
+                            function getAlbumCovers() {
+                                var i = 0;
+                                function chainedPromise() {
+                                    filesService.get(albumCoverIdList[i])
+                                    .success(function(data) {
+                                        albumCoverList.push(data);
                                     })
                                     .error(function(error){
                                         $scope.error = error;
                                     })
                                     .finally(function(){
-                                        getAlbumData();
+                                        if(i >= albumCoverIdList.length - 1) {
+                                            getAlbumData();
+                                        }
+                                        else {
+                                            i++;
+                                            chainedPromise();
+                                        }
                                     });
                                 }
 
-                                //gets data for all albums
-                                function getAlbumData() {
-                                    var i = 0;
-                                    function chainedPromise() {
-                                        albumsService.get(albumList[i])
-                                        .success(function(data) {
-                                            albumsToDelete.push(data);
-                                        })
-                                        .error(function(error) {
-                                            $scope.error = error;
-                                        })
-                                        .finally(function() {
-                                            if(i >= albumList.length - 1) {
-                                                deleteAlbumData();
-                                            }
-                                            else {
-                                                i++;
-                                                chainedPromise();
-                                            }
-                                        });
-                                    }
-                                    chainedPromise();
-                                }
+                                chainedPromise();
+                            }
 
-                                //deletes all albums using the retrieved data
-                                function deleteAlbumData () {
-                                    var i = 0;
-                                    function chainedPromise() {
-                                        albumsService.remove(albumsToDelete[i])
-                                        .success(function() {
-                                        })
-                                        .error(function(error) {
-                                            $scope.error = error;
-                                        })
-                                        .finally(function(){
-                                            if(i === albumsToDelete.length - 1) {
-                                                deleteAvatar();
-                                            }
-                                            else {
-                                                i++;
-                                                chainedPromise();
-                                            }
-                                        });
-                                    }
-                                    chainedPromise();
+                            //gets data for all albums
+                            function getAlbumData() {
+                                var i = 0;
+                                function chainedPromise() {
+                                    albumsService.get(albumList[i])
+                                    .success(function(data) {
+                                        albumsToDelete.push(data);
+                                    })
+                                    .error(function(error) {
+                                        $scope.error = error;
+                                    })
+                                    .finally(function() {
+                                        if(i >= albumList.length - 1) {
+                                            deleteSongs();
+                                        }
+                                        else {
+                                            i++;
+                                            chainedPromise();
+                                        }
+                                    });
                                 }
+                                chainedPromise();
+                            }
 
-                                if(albumList.length > 0 ) {
-                                    getAlbumCovers();
+                            //calls fileService.batchDelete and removes all ongs using their id's
+                            function deleteSongs () {
+                                if(songIdList.length > 0) {
+                                    filesService.batch.remove(songIdList)
+                                    .success(function(){
+                                        deleteAlbumCovers();
+                                    })
+                                    .error(function(error){
+                                        $scope.error = error;
+                                    });
                                 }
                                 else {
-                                    deleteAvatar();
+                                    deleteAlbumCovers();
                                 }
                             }
-                            
-                            function deleteAllData() {
-                                if($scope.albums.length > 0 ) {
-                                    deleteAlbums();
+
+                            //delete all album covers previously retrieved
+                            function deleteAlbumCovers() {
+                                var i = 0;
+                                function chainedPromise() {
+                                    filesService.remove(albumCoverList[i])
+                                    .success(function(){
+                                    })
+                                    .error(function(error) {
+                                        $scope.error = error;
+                                    })
+                                    .finally(function(){
+                                        if(i >= albumCoverList.length - 1 ) {
+                                            deleteAlbumData();
+                                        }
+                                        else {
+                                            i++;
+                                            chainedPromise();
+                                        }
+                                    });
+                                }
+                                if(albumCoverList.length > 0){
+                                    chainedPromise();                                    
                                 }
                                 else {
-                                    deleteAvatar();
+                                    deleteAlbumData();
                                 }
+                            }
+
+                            //deletes all albums using the retrieved data
+                            function deleteAlbumData () {
+                                var i = 0;
+                                function chainedPromise() {
+                                    albumsService.remove(albumsToDelete[i])
+                                    .success(function() {
+                                    })
+                                    .error(function(error) {
+                                        $scope.error = error;
+                                    })
+                                    .finally(function(){
+                                        if(i === albumsToDelete.length - 1) {
+                                            deleteAvatar();
+                                        }
+                                        else {
+                                            i++;
+                                            chainedPromise();
+                                        }
+                                    });
+                                }
+                                chainedPromise();
+                            }
+
+                            function deleteAvatar() {
+                                if(avatarToDelete) {
+                                    avatarService.unlink(avatarToDelete)
+                                    .success(function() {
+                                    })
+                                    .error(function(error){
+                                        $scope.error = error;
+                                    })
+                                    .finally(function() {
+                                        deleteProfileData();
+                                    });
+                                }
+                                else {
+                                    deleteProfileData();
+                                }
+                            }
+
+                            function deleteProfileData () {
+                                return profileService.remove($scope.profile)
+                                .success(function () {
+                                    $state.go('master.main.index');
+                                })
+                                .error(function (error) {
+                                    $scope.error = error;
+                                });
                             }
 
                             //popup confirmation window

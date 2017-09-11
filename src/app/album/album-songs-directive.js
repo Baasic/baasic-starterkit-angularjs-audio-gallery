@@ -110,12 +110,15 @@ angular.module('media-gallery')
                                     .finally(function(){
                                     });
                             };
-                            
-                            if($scope.file.type === 'mp3' || $scope.file.type === 'm4a') {
+
+                            ///check file type before uploading
+                            if($scope.file.blob.type === 'audio/mp3' || $scope.file.blob.type === 'audio/m4a') {
                                 getAlbum();
                             } else {
                                 $scope.invalidFileType = true;
                             }
+
+
                         };
 
                         $scope.editSong = function(song) {
@@ -203,7 +206,7 @@ angular.module('media-gallery')
                                     });
                             };
                             
-                            if($scope.file.type === 'mp3' || $scope.file.type === 'm4a') {
+                            if($scope.file.blob.type === 'audio/mp3' || $scope.file.blob.type === 'audio/m4a') {
                                 getAlbum();
                             } else {
                                 $scope.invalidFileType = true;
