@@ -151,14 +151,17 @@ angular.module('media-gallery', [
 
         $scope.searchFor = $stateParams.search || '';
 
-    $scope.searchSite = function searchProfile() {
-        $state.go('master.main.index', { search: $scope.searchFor, page: 1 });
-    };
-    $scope.resetSearch = function resetSearch() {
-        $scope.searchFor = '';
-        $state.go('master.main.index', { search: $scope.searchFor, page: 1});
-    };
-}])
+        $scope.searchSite = function searchSite() {
+            if($scope.searchFor) {
+                $state.go('master.main.search', { search: $scope.searchFor });
+            }
+        };
+
+        $scope.resetSearch = function resetSearch() {
+            $scope.searchFor = '';
+            $state.go('master.main.search', { search: $scope.searchFor });
+        };
+    }])
     .run(['$rootScope', '$window', 'baasicAuthorizationService',
         function moduleRun($rootScope, $window, baasicAuthService) {
 

@@ -1,15 +1,21 @@
 ﻿<header class="header">
-        <!-- <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="display--ib">
-            <label for="searchEntry">
-                <input type="text" name="searchEntry" class="input__search" ng-model="searchFor"/>
-            </label>
-        </form> -->
-
+    <div class="row" change-class-on-scroll offset="55" scroll-class="search--fixed">
+        <div class="col col-sml-12">
+            <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="display--ib">
+                <label for="searchEntry">
+                    <input type="text" name="searchEntry" class="input__search" ng-model="searchFor"/>
+                </label>
+            </form>
+        </div>
+    </div>
+   
+        <!--
         <div class="row" change-class-on-scroll offset="55" scroll-class="search--fixed">
             <div class="col col-sml-12">
                 <input type="text" class="input__search"/>
             </div>
         </div>
+        -->
         <div class="menu" ng-class="{'opened':menuOpen}" >
             <div class="menu__icon hamburger hamburger--elastic" ng-class="{'is-active':menuOpen}" ng-click="menuOpen = !menuOpen">
                 <div class="hamburger-inner"></div>

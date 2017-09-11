@@ -111,7 +111,7 @@ angular.module('media-gallery')
                                     });
                             };
                             
-                            if(file.type === 'mp3' || file.type === 'm4a') {
+                            if($scope.file.type === 'mp3' || $scope.file.type === 'm4a') {
                                 getAlbum();
                             } else {
                                 $scope.invalidFileType = true;
@@ -203,7 +203,7 @@ angular.module('media-gallery')
                                     });
                             };
                             
-                            if(file.type === 'mp3' || file.type === 'm4a') {
+                            if($scope.file.type === 'mp3' || $scope.file.type === 'm4a') {
                                 getAlbum();
                             } else {
                                 $scope.invalidFileType = true;

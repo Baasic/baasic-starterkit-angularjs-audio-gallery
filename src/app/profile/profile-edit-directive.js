@@ -107,7 +107,6 @@
                             $scope.error = error;
                         })
                         .finally (function(){
-                            $scope.error = error;
                             if (avatarChange) {
                                 saveAvatar();
                             } else {

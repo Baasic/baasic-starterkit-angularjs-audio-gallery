@@ -2,28 +2,31 @@
     'use strict';
 
 angular.module('media-gallery')
-    .controller('SongSearchResultsCtrl', ['$scope', '$state', 'baasicFilesService',
-        function ($scope, $state, baasicFilesService) {
+    .controller('SearchResultsCtrl', ['$scope', '$state', 'baasicUserProfileService',
+        function ($scope, $state, baasicUserProfileService) {
 
 
-            function parseCollection(collection) {
+            function parseProfileList(profileList) {
                 $scope.pagerData = {
-                    currentPage: collection.page,
-                    pageSize: collection.recordsPerPage,
-                    totalRecords: collection.totalRecords
+                    currentPage: profileList.page,
+                    pageSize: profileList.recordsPerPage,
+                    totalRecords: profileList.totalRecords,
+                    hasPrevious: profileList.page > 1,
+                    hasNext: profileList.page < Math.ceil(profileList.totalRecords/profileList.recordsPerPage)
                 };
 
-                $scope.collection = collection;
-
-                $scope.hasPhotos = collection.totalRecords > 0;
+                $scope.profiles = profileList;
+                $scope.hasProfiles = profileList.totalRecords > 0;
             }
 
-            $scope.hasSongs = false;
-
             var options = {
-                rpp: 10
+                rpp: 10,
+                search: $state.params.search,
+                embed: 'avatar',                
+                page: $state.params.page || 1
             };
 
+            /*
             if ($state.params.search || $state.params.type) {
                 var folderPath = '';
                 switch ($state.params.type.toLowerCase()) {
@@ -36,26 +39,34 @@ angular.module('media-gallery')
                 }
                 options.search = folderPath + ($state.params.search || '');
             }
+            */
 
-            baasicFilesService.find(options)
-                .success(parseCollection)
+            baasicUserProfileService.find(options)
+                .success(function(result){
+                    parseProfileList(result);
+                }) 
                 .error(function (error) {
-                    conosle.log(error); // jshint ignore: line
-                });
+                    $scope.error = error;
+                }
+            );
 
             $scope.prevPage = function prevPage() {
-                baasicFilesService.previous($scope.collection)
-                    .success(parseCollection)
+                baasicUserProfileService.previous($scope.profiles)
+                    .success(function(result){
+                        parseProfileList(result);
+                    })
                     .error(function (error) {
-                        conosle.log(error); // jshint ignore: line
-                    });
+                        $scope.error = error;
+                    }); 
             };
 
             $scope.nextPage = function nextPage() {
-                baasicFilesService.next($scope.collection)
-                    .success(parseCollection)
+                baasicUserProfileService.next($scope.profiles)
+                    .success(function(result) {
+                        parseProfileList(result);
+                    })
                     .error(function (error) {
-                        conosle.log(error); // jshint ignore: line
+                        $scope.error = error;
                     });
             };
         }

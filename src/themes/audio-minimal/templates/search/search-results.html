@@ -1,0 +1,24 @@
+<div class="container container--big container--light">
+    <section class="profile__list row">
+        <div class="col col-sml-6 col-med-4 col-lrg-3 col-xlrg-2" ng-repeat="profile in profiles.item" ng-if="profiles.item.length">
+            <a ui-sref="master.main.profile({artistId: profile.id})" class="profile__artist__link profile__artist__link--name">
+                <div class="profile__content">
+                    <div class="profile__list__avatar__wrapper">
+                        <img ng-if="!profile.avatar" src="./assets/img/avatar-1.png" class="profile__list__avatar">
+                        <img ng-if="profile.avatar" class="profile__list__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                    </div>
+                    <p class="profile__artist__name">{{profile.displayName}}</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="no-profile" ng-if="!profiles.item.length">
+        <p>No artists found!</p>
+    </section>
+    <pager pager-data="profiles.pagerData" ng-show="profiles.pagerData.hasPrevious || profiles.pagerData.hasNext" class="pager">
+        <hr>
+        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage - 1})" class="btn --light --med" ng-show="profiles.pagerData.hasPrevious">Prev</a>
+        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage + 1})" class="btn --light --med" ng-show="profiles.pagerData.hasNext">Next</a>
+    </pager>
+</div>
