@@ -17,7 +17,6 @@ angular.module('media-gallery', [
     .config(['$locationProvider', '$urlRouterProvider', '$stateProvider', 'baasicAppProvider', 'baasicAppConfigProvider',
         function config($locationProvider, $urlRouterProvider, $stateProvider, baasicAppProvider, baasicAppConfigProvider) {
 
-
             baasicAppProvider.create(baasicAppConfigProvider.config.apiKey, {
                 apiRootUrl: baasicAppConfigProvider.config.apiRootUrl,
                 apiVersion: baasicAppConfigProvider.config.apiVersion
@@ -123,8 +122,6 @@ angular.module('media-gallery', [
                 return str ? str : '';
             };
 
-
-
             $rootScope.baseHref = rightTrim($browser.baseHref.href, ('/'));
             if ($rootScope.baseHref === '/') {
                 $rootScope.baseHref = '';
@@ -135,8 +132,6 @@ angular.module('media-gallery', [
                     isAuthenticated: false
                 };
             };
-
-
         }
     ])
     .controller('LoginCtrl', ['$scope', '$state',

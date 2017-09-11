@@ -26,6 +26,7 @@ angular.module('media-gallery')
                         $scope.artistId = $state.params.artistId;
                         $scope.file = {filename: ''};
                         $scope.model = {};
+                        $scope.hasFileSelected = false;
                         var file;
                         var path;
 
@@ -100,6 +101,7 @@ angular.module('media-gallery')
                                         $scope.coverData = coverData.item[0];
                                         if(!$scope.album.coverId) {
                                             $scope.album.coverId = $scope.coverData.id;
+                                            $scope.hasFileSelected = false;
                                         }
                                     })
                                     .error(function(error) {
@@ -125,11 +127,25 @@ angular.module('media-gallery')
                             }
 
                             createAlbum();
+                        };
 
                         $scope.cancelEdit = function () {
                             $scope.backToDetails();
                         };
-                    };
+
+                        $scope.logTheScope = function () {
+                            console.log($scope);
+                        }
+
+                        $scope.refreshSelectedImage = function() {
+                            var img = $scope.file;
+                            console.log($scope.file);
+                            console.log($scope.file.filename);
+                            console.log($scope.file);
+                            var url = (window.URL || window.webkitURL).createObjectURL(img);
+                            $scope.imgSrc = url;
+                            $scope.hasFileSelected = true;
+                        };                        
                 }],
                 templateUrl: 'templates/album/template-album-add-form.html'
             };

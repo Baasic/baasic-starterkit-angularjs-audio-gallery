@@ -106,7 +106,7 @@
                     var playlist = $scope.albums[album].playlist;
                     var length = 0;
                     if($scope.albums[album].playlist) {
-                        var length = $scope.albums[album].playlist.length;
+                        length = $scope.albums[album].playlist.length;
                     }
 
                     function createList(list) {
@@ -147,7 +147,7 @@
                         $scope.backToDetails();
                     });
                 }
-            }
+            };
         }],
     };
 });

@@ -1,14 +1,18 @@
 <div class="container">
     <div class="album__wrapper row col-sml-12">
+        <button ng-click="logTheScope()">Log the scope</button>
         <form novalidate name="editAlbum" ng-submit="saveAlbum(album)">
             <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
                 <div>
-                    <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--med"><i class="fa fa-camera"></i>
+                    <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--med">
+                        <i class="fa fa-camera"></i>
                         <span>Change Cover</span>
                     </label>
-                    <img ng-if="!album.coverId" src="./assets/img/img.png"/>
-                    <img ng-if="album.coverId" ng-src="https://api.baasic.com/v1/bmsk-audio/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
-                    <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" required>
+                    <img ng-if="!album.coverId && !hasFileSelected" src="./assets/img/img.png"/>
+                    <img ng-if="album.coverId && !hasFileSelected" ng-src="https://api.baasic.com/v1/bmsk-audio/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
+                    <img ng-if="hasFileSelected" ng-src="{{imgSrc}}">
+                    <input class="display--n" ng-change="refreshSelectedImage()" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" required>
+                    
                     <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
                     <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
                 </div>
