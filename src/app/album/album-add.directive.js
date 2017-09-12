@@ -21,10 +21,11 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp',
-                    function ($scope, $state, $q, albumsService, filesService, baasicApp) {
+                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp', 'FileReader',
+                    function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader) {
                         var app = baasicApp.get();
-                        $scope.apiUrl = app.getApiUrl();                       
+                        $scope.apiUrl = app.getApiUrl();  
+                        $scope.hasImageSelected = false;                        
                         $scope.artistId = $state.params.artistId;
                         $scope.file = {filename: ''};
                         $scope.model = {};
@@ -139,17 +140,18 @@ angular.module('media-gallery')
                             console.log($scope);
                         };
 
-                        $scope.refreshSelectedImage = function() {
-                            /*
-                            var img = $scope.file;
+                        $scope.previewSelectedImage = function previewSelectedImage() { 
+                            $scope.hasImageSelected = true;
                             console.log($scope.file);
-                            console.log($scope.file.filename);
-                            console.log($scope.file);
-                            var url = (window.URL || window.webkitURL).createObjectURL(img);
-                            $scope.imgSrc = url;
-                            $scope.hasFileSelected = true;
-                            */
-                        };                        
+                            console.log($scope.file.blob); //logs undefined when called first time, 
+        
+                            FileReader.readAsDataURL($scope.file.blob, $scope)
+                            .then(function(response){
+                                $scope.selectedImage = response;
+                            }, function(error) {
+                                $scope.error = error;
+                            });
+                        };                       
                 }],
                 templateUrl: 'templates/album/template-album-add-form.html'
             };

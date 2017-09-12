@@ -8,10 +8,10 @@
                         <i class="fa fa-camera"></i>
                         <span>Change Cover</span>
                     </label>
-                    <img ng-if="!album.coverId && !hasFileSelected" src="./assets/img/img.png"/>
-                    <img ng-if="album.coverId && !hasFileSelected" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
-                    <img ng-if="hasFileSelected" ng-src="{{imgSrc}}">
-                    <input class="display--n" ng-change="refreshSelectedImage()" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" required>
+                    <img ng-if="!album.coverId && !hasImageSelected" src="./assets/img/img.png"/>
+                    <img ng-if="album.coverId && !hasImageSelected" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
+                    <img ng-if="hasImageSelected" ng-src="{{selectedImage}}">
+                    <input class="display--n" ng-change="previewSelectedImage()" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" required>
                     
                     <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
                     <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>

@@ -20,13 +20,14 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp',
-                    function ($scope, $state, $q, albumsService, filesService, baasicApp) {
+                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp', 'FileReader',
+                    function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader) {
                         var app = baasicApp.get();
                         $scope.apiUrl = app.getApiUrl();
                         
                         $scope.albumId = $state.params.albumId;
-                        $scope.file = {filename: ''};
+                        $scope.file = {filename: '', blob: {}};
+                        $scope.hasImageSelected = false;
                         $scope.model = {};
                         var file;
                         var path = $scope.albumId + '/albumCover.jpg';
@@ -187,6 +188,19 @@ angular.module('media-gallery')
 
                         $scope.cancelEdit = function () {
                             $scope.backToDetails();
+                        };
+
+                        $scope.previewSelectedImage = function previewSelectedImage() {
+                            $scope.hasImageSelected = true;
+                            console.log($scope.file);
+                            console.log($scope.file.blob); //logs undefined
+        
+                            FileReader.readAsDataURL($scope.file.blob, $scope)
+                            .then(function(response){
+                                $scope.selectedImage = response;
+                            }, function(error) {
+                                $scope.error = error;
+                            });
                         };
                     }
                 ],

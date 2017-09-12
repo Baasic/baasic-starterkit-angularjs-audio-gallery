@@ -121,20 +121,18 @@
 
                 };
 
-                $scope.previewAvatar = function previewAvatar() {
-                    /*
+                $scope.previewSelectedImage = function previewSelectedImage() {
                     $scope.hasImageSelected = true;
                     console.log($scope.profile.avatar);
                     console.log($scope.profile.avatar.blob); //logs undefined
-                    console.log($scope.profile.avatar.avatarFileEntry);
 
-                    
                     FileReader.readAsDataURL($scope.profile.avatar.blob, $scope)
-                    .then()
-                    */
-                    
-
-                }
+                    .then(function(response){
+                        $scope.selectedImage = response;
+                    }, function(error) {
+                        $scope.error = error;
+                    });
+                };
 
                 $scope.cancelEdit = function cancelEdit() {
                     $state.go('master.main.profile', {artistId: $scope.profile.id});
