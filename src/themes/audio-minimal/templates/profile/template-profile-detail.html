@@ -1,41 +1,39 @@
     <div ng-if="profile">
-        <div class="profile__header" ng-style="{'background-position':'center center', 'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url({{profile.avatar.links('stream-token').href}})'}">
-            <div class="profile__content">
-                <div class="profile__info display--ib ">
-                    <h1 class="profile__title">{{profile.displayName}}</h1>
-                    <h3 class="profile__subtitle">{{profile.genre}} <span ng-if="profile.genre.length && profile.country.length"> | </span> {{profile.country}}</h3>
-                    <p class="profile__description">{{profile.aboutArtist}}</p>
-                    <div class="profile__social">
-                        <a class="profile__social__link" ng-if="profile.bandcamp.length" ng-href="{{profile.bandcamp}}" title="Visit {{profile.displayName}} on Bandcamp">
+        <div class="" ng-style="{'background-position':'center center', 'background-image': 'linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url({{profile.avatar.links('stream-token').href}})'}">
+            <div class="">
+                <div class="">
+                    <h1 class="">{{profile.displayName}}</h1>
+                    <h3 class="">{{profile.genre}} <span ng-if="profile.genre.length && profile.country.length"> | </span> {{profile.country}}</h3>
+                    <p class="">{{profile.aboutArtist}}</p>
+                    <div class="">
+                        <a class="" ng-if="profile.bandcamp.length" ng-href="{{profile.bandcamp}}" title="Visit {{profile.displayName}} on Bandcamp">
                             <img ng-src="./assets/img/bandcamp.svg" width="32" />
                         </a>
-                        <a class="profile__social__link" ng-if="profile.myspace.length" ng-href="{{profile.myspace}}" title="Visit {{profile.displayName}} on MySpace">
+                        <a class="" ng-if="profile.myspace.length" ng-href="{{profile.myspace}}" title="Visit {{profile.displayName}} on MySpace">
                             <img ng-src="./assets/img/myspace.svg" width="32" />
                         </a>
-                        <a class="profile__social__link" ng-if="profile.lastfm.length" ng-href="{{profile.lastfm}}" title="Visit {{profile.displayName}} on Last.fm">
+                        <a class="" ng-if="profile.lastfm.length" ng-href="{{profile.lastfm}}" title="Visit {{profile.displayName}} on Last.fm">
                             <img ng-src="./assets/img/lastfm.svg" width="32" />
                         </a>
-                        <a class="profile__social__link" ng-if="profile.soundcloud.length" ng-href="{{profile.soundcloud}}" title="Visit {{profile.displayName}} on Soundcloud">
+                        <a class="" ng-if="profile.soundcloud.length" ng-href="{{profile.soundcloud}}" title="Visit {{profile.displayName}} on Soundcloud">
                             <img ng-src="./assets/img/soundcloud.svg" width="32" />
                         </a>
-                        <a class="profile__social__link" ng-if="profile.web.length" ng-href="{{profile.web}}" title="Visit {{profile.displayName}} Official Web Page">
+                        <a class="" ng-if="profile.web.length" ng-href="{{profile.web}}" title="Visit {{profile.displayName}} Official Web Page">
                             <img ng-src="./assets/img/web.svg" width="32" />
                         </a>
                     </div>
                 </div>
-                <div class="profile__avatar display--ib">
-                    <img ng-if="profile.avatar" ng-src="{{profile.avatar.links('stream-token').href}}" class="profile__avatar" />
-                    <img ng-if="!profile.avatar" src="./assets/img/avatar-1.png" class="profile__avatar" />
+                <div class="">
+                    <img ng-if="profile.avatar" ng-src="{{profile.avatar.links('stream-token').href}}" class="" />
+                    <img ng-if="!profile.avatar" src="./assets/img/avatar-1.png" class="" />
                 </div>
-                <div ng-if="$root.user.isAuthenticated" class="profile__edit-buttons">
+                <div ng-if="$root.user.isAuthenticated" class="">
                     <a class="btn btn--primary btn--med" ui-sref="master.main.profile-edit({artistId : $root.user.id})" ng-if="profile.id == $root.user.id">EDIT PROFILE</a>
                     <a class="btn btn--primary btn--med" ui-sref="master.main.album-add({artistId : $root.user.id})" ng-if="profile.id == $root.user.id">ADD ALBUM</a>
                     <a class="btn btn--primary btn--med" ui-sref="master.main.profile-add({artistId : $root.user.id})" ng-if="!profile.id.length">ADD PROFILE</a>
                     <a class="btn btn--secondary btn--med" href="#" ng-click="deleteProfile();" ng-if="profile.id == $root.user.id">DELETE PROFILE</a>
                 </div>
             </div>
-
-
         </div>
         <div class="container">
             <album-list artist-id="profile.id" profile-name="profile.displayName"></album-list>
