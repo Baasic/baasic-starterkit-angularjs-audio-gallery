@@ -21,8 +21,8 @@
                     }
                 };
             },
-            controller: ['$scope', '$state', '$q', '$window', 'FileReader','baasicUserProfileService', 'baasicUserProfileAvatarService',
-            function ($scope, $state, $q, $window, FileReader, profileService, avatarService) {
+            controller: ['$scope', '$state', '$q', '$window', 'FileReader','baasicUserProfileService', 'baasicUserProfileAvatarService', '$timeout',
+            function ($scope, $state, $q, $window, FileReader, profileService, avatarService, $timeout) {
                 $scope.file = { filename: ''};
                 $scope.model = {};
                 $scope.artistId = $state.params.artistId;
@@ -122,15 +122,14 @@
                 };
 
                 $scope.previewSelectedImage = function previewSelectedImage() {
-                    $scope.hasImageSelected = true;
-                    console.log($scope.profile.avatar);
-                    console.log($scope.profile.avatar.blob); //logs undefined
-
-                    FileReader.readAsDataURL($scope.profile.avatar.blob, $scope)
-                    .then(function(response){
-                        $scope.selectedImage = response;
-                    }, function(error) {
-                        $scope.error = error;
+                    $timeout(function() {
+                        $scope.hasImageSelected = true;
+                        FileReader.readAsDataURL($scope.profile.avatar.blob, $scope)
+                        .then(function(response){
+                            $scope.selectedImage = response;
+                        }, function(error) {
+                            $scope.error = error;
+                        });
                     });
                 };
 
