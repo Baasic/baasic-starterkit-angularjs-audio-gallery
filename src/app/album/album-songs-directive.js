@@ -7,8 +7,8 @@ angular.module('media-gallery')
             return {
                 restrict: 'E',
                 scope: '=',
-                controller: ['$scope', '$state', 'baasicFilesService', 'albumsService','baasicUserProfileService',
-                    function ($scope, $state, filesService, albumsService, profileService) {
+                controller: ['$scope', '$rootScope', '$state', 'baasicFilesService', 'albumsService','baasicUserProfileService',
+                    function ($scope, $rootScope, $state, filesService, albumsService, profileService) {
                         $scope.file = { filename: ''};
                         $scope.model = {};
                         $scope.albumId = $state.params.albumId;
@@ -73,9 +73,8 @@ angular.module('media-gallery')
                                         $scope.song = songData.item[0];
                                         $scope.song.artist = $scope.artistName;
                                         $scope.song.title = $scope.songTitle;
-                                        //TODO: hard coded path
-                                        $scope.song.cover = 'https://api.baasic.com/v1/bmsk-audio/file-streams/' + $scope.album.coverId;
-                                        $scope.song.url = 'https://api.baasic.com/v1/bmsk-audio/file-streams/' + $scope.song.id;
+                                        $scope.song.cover = $rootScope.baseApiUrl + '/file-streams/' + $scope.album.coverId;
+                                        $scope.song.url = $rootScope.baseApiUrl + '/file-streams/' + $scope.song.id;
                                     })
                                     .error(function(error){
                                         $scope.error = error;
@@ -173,7 +172,7 @@ angular.module('media-gallery')
                                         $scope.song.title = $scope.songTitle;
                                         $scope.song.pic = $scope.album.coverId;
                                         //TODO: hard coded path
-                                        $scope.song.url = 'https://api.baasic.com/v1/bmsk-audio/file-streams/'+ $scope.song.id;
+                                        $scope.song.url = $rootScope.baseApiUrl + '/file-streams/'+ $scope.song.id;
                                     })
                                     .error(function(error){
                                         $scope.error = error;

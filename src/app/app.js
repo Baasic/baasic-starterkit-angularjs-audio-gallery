@@ -105,8 +105,11 @@ angular.module('media-gallery', [
         }
     ])
     .constant('recaptchaKey', '6Lf9xRYUAAAAAGM2pIRSQpipXoRyLJweTfKB1CXN')
-    .controller('MainCtrl', ['$scope', '$state', '$rootScope', '$browser',
-        function MainCtrl($scope, $state, $rootScope, $browser) {
+    .constant('constBaseApiUrl', 'https://api.baasic.com/beta/bmsk-audio')
+    .controller('MainCtrl', ['$scope', '$state', '$rootScope', '$browser', 'constBaseApiUrl',
+        function MainCtrl($scope, $state, $rootScope, $browser, constBaseApiUrl) {
+            //TODO: read constBaseApiUrl from a sonfiguration file
+            $rootScope.baseApiUrl = constBaseApiUrl;
 
             // http://stackoverflow.com/questions/8141718/javascript-need-to-do-a-right-trim
             var rightTrim = function (str, ch) {
@@ -180,7 +183,7 @@ angular.module('media-gallery', [
                 };
             }
 
-            $rootScope.user = user;
+            $rootScope.user = user;       
         }
     ]);
 

@@ -135,7 +135,7 @@ angular.module('media-gallery')
 
                         $scope.logTheScope = function () {
                             console.log($scope);
-                        }
+                        };
 
                         $scope.refreshSelectedImage = function() {
                             var img = $scope.file;
