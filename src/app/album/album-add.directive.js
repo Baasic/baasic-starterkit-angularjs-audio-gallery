@@ -21,8 +21,8 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp', 'FileReader',
-                    function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader) {
+                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp', 'FileReader', '$timeout',
+                    function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader, $timeout) {
                         var app = baasicApp.get();
                         $scope.apiUrl = app.getApiUrl();  
                         $scope.hasImageSelected = false;                        
@@ -136,22 +136,17 @@ angular.module('media-gallery')
                             $scope.backToDetails();
                         };
 
-                        $scope.logTheScope = function () {
-                            console.log($scope);
-                        };
-
-                        $scope.previewSelectedImage = function previewSelectedImage() { 
-                            $scope.hasImageSelected = true;
-                            console.log($scope.file);
-                            console.log($scope.file.blob); //logs undefined when called first time, 
-        
-                            FileReader.readAsDataURL($scope.file.blob, $scope)
-                            .then(function(response){
-                                $scope.selectedImage = response;
-                            }, function(error) {
-                                $scope.error = error;
+                        $scope.previewSelectedImage = function previewSelectedImage() {
+                            $timeout(function() {
+                                $scope.hasImageSelected = true;        
+                                FileReader.readAsDataURL($scope.file.blob, $scope)
+                                .then(function(response){
+                                    $scope.selectedImage = response;
+                                }, function(error) {
+                                    $scope.error = error;
+                                });
                             });
-                        };                       
+                        };                      
                 }],
                 templateUrl: 'templates/album/template-album-add-form.html'
             };

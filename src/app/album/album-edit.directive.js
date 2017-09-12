@@ -20,8 +20,8 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp', 'FileReader',
-                    function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader) {
+                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp', 'FileReader', '$timeout',
+                    function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader, $timeout) {
                         var app = baasicApp.get();
                         $scope.apiUrl = app.getApiUrl();
                         
@@ -191,15 +191,14 @@ angular.module('media-gallery')
                         };
 
                         $scope.previewSelectedImage = function previewSelectedImage() {
-                            $scope.hasImageSelected = true;
-                            console.log($scope.file);
-                            console.log($scope.file.blob); //logs undefined
-        
-                            FileReader.readAsDataURL($scope.file.blob, $scope)
-                            .then(function(response){
-                                $scope.selectedImage = response;
-                            }, function(error) {
-                                $scope.error = error;
+                            $timeout(function() {
+                                $scope.hasImageSelected = true;      
+                                FileReader.readAsDataURL($scope.file.blob, $scope)
+                                .then(function(response){
+                                    $scope.selectedImage = response;
+                                }, function(error) {
+                                    $scope.error = error;
+                                });
                             });
                         };
                     }
