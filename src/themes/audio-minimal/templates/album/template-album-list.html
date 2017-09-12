@@ -2,7 +2,7 @@
     <div ng-if="albums.length" ng-repeat="album in albums">
         <div ng-if="$first" class="album__wrapper col-sml-12">
             <a href="#" class="album__link album__link--first col-sml-12 col-lrg-3" title="Click to load album {{album.name}} by {{profile.displayName}} released in {{album.releaseYear}}">
-                <img play-all="songs" data-play="false" src="./assets/img/img.png" ng-src="{{baseApiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" />
+                <img play-all="songs" data-play="false" src="./assets/img/img.png" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" />
             </a>
             <div class="album__about col-sml-12 col-lrg-8">
                 <h3 class="album__name album__name--primary">{{album.name}} ({{album.releaseYear}})</h3>
@@ -13,7 +13,7 @@
         </div>
         <div ng-if="!$first" class="album__wrapper col-sml-6 col-lrg-2">
             <a href="#" class="album__link" title="Click to load album {{album.name}} by {{profileName}} released in {{album.releaseYear}}">
-                <img play-all="songs" data-play="false" src="./assets/img/img.png" ng-src="{{baseApiUrl}}/file-streams/{{album.coverId}}?rnd{{album.rnd}}" />
+                <img play-all="songs" data-play="false" src="./assets/img/img.png" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd{{album.rnd}}" />
                 <h3 class="album__name album__name--secondary">{{album.name}}</h3>
             </a>
             <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>

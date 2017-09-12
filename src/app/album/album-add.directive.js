@@ -21,8 +21,10 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService',
-                    function ($scope, $state, $q, albumsService, filesService) {
+                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp',
+                    function ($scope, $state, $q, albumsService, filesService, baasicApp) {
+                        var app = baasicApp.get();
+                        $scope.apiUrl = app.getApiUrl();                       
                         $scope.artistId = $state.params.artistId;
                         $scope.file = {filename: ''};
                         $scope.model = {};
@@ -138,6 +140,7 @@ angular.module('media-gallery')
                         };
 
                         $scope.refreshSelectedImage = function() {
+                            /*
                             var img = $scope.file;
                             console.log($scope.file);
                             console.log($scope.file.filename);
@@ -145,6 +148,7 @@ angular.module('media-gallery')
                             var url = (window.URL || window.webkitURL).createObjectURL(img);
                             $scope.imgSrc = url;
                             $scope.hasFileSelected = true;
+                            */
                         };                        
                 }],
                 templateUrl: 'templates/album/template-album-add-form.html'

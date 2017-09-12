@@ -30,6 +30,7 @@
                 var profileEdit;
                 var avatarChange;
                 var avatarEdit;
+                $scope.hasImageSelected = false;
 
                 if (!$scope.$root.user.isAuthenticated) {
                     $state.go('master.main.profile', {artistId: $state.params.artistId});
@@ -119,6 +120,21 @@
                     updateProfile();
 
                 };
+
+                $scope.previewAvatar = function previewAvatar() {
+                    /*
+                    $scope.hasImageSelected = true;
+                    console.log($scope.profile.avatar);
+                    console.log($scope.profile.avatar.blob); //logs undefined
+                    console.log($scope.profile.avatar.avatarFileEntry);
+
+                    
+                    FileReader.readAsDataURL($scope.profile.avatar.blob, $scope)
+                    .then()
+                    */
+                    
+
+                }
 
                 $scope.cancelEdit = function cancelEdit() {
                     $state.go('master.main.profile', {artistId: $scope.profile.id});

@@ -8,8 +8,10 @@
         restrict: 'AE',
         templateUrl:'templates/album/template-album-list.html',
         scope: '=',
-        controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService', 'baasicFilesService',
-        function($scope, $state, $stateParams, $q, albumsService, filesService) {
+        controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService', 'baasicFilesService', 'baasicApp',
+        function($scope, $state, $stateParams, $q, albumsService, filesService, baasicApp) {
+            var app = baasicApp.get();
+            $scope.apiUrl = app.getApiUrl();
 
             function loadAlbumCovers (){
                 return filesService.streams.get($scope.album.coverId)

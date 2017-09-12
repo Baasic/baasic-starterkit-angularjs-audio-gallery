@@ -20,8 +20,11 @@ angular.module('media-gallery')
                         }
                     };
                 },
-                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService',
-                    function ($scope, $state, $q, albumsService, filesService) {
+                controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp',
+                    function ($scope, $state, $q, albumsService, filesService, baasicApp) {
+                        var app = baasicApp.get();
+                        $scope.apiUrl = app.getApiUrl();
+                        
                         $scope.albumId = $state.params.albumId;
                         $scope.file = {filename: ''};
                         $scope.model = {};

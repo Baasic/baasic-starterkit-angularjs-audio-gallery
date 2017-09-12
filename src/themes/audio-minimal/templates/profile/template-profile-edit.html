@@ -4,14 +4,18 @@
             <form novalidate name="editProfile" ng-submit="saveProfile(profile)">
                 <div class="profile__about col-sml-12">
                     <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 position--rel">
-                        <img ng-if="!imageSrc" class="profile__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-                        <img ng-if="imageSrc" class="profile__avatar" ng-src="{{imageSrc}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-
+                        <img ng-if="!imageSrc && !hasImageSelected" class="profile__avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                        <img ng-if="imageSrc && !hasImageSelected" class="profile__avatar" ng-src="{{imageSrc}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                        <img ng-if="hasImageSelected" class="profile__avatar" ng-src="" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                        
                         <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files label--files--sml"><i class="fa fa-camera"></i>
                             <span ng-if="!profile.avatar">Add Avatar</span>
                             <span ng-if="profile.avatar">Change Avatar</span>
                         </label>
-                        <input type="file" ng-change="previewAvatar()" name="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input input--file">
+                        
+                        <input type="file" name="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input input--file" ng-change="previewAvatar()">
+                        
+                        
                         <p class="validation validation--alert" ng-show="(editProfile.$submitted || editProfile.$touched) && editProfile.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
                         <div ng-show="error" class="validation validation--error">
                             {{ error }}

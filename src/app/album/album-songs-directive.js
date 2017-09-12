@@ -7,13 +7,15 @@ angular.module('media-gallery')
             return {
                 restrict: 'E',
                 scope: '=',
-                controller: ['$scope', '$rootScope', '$state', 'baasicFilesService', 'albumsService','baasicUserProfileService',
-                    function ($scope, $rootScope, $state, filesService, albumsService, profileService) {
+                controller: ['$scope', '$rootScope', '$state', 'baasicFilesService', 'albumsService','baasicUserProfileService', 'baasicApp',
+                    function ($scope, $rootScope, $state, filesService, albumsService, profileService, baasicApp ) {
                         $scope.file = { filename: ''};
                         $scope.model = {};
                         $scope.albumId = $state.params.albumId;
                         $scope.invalidFileType = false;
-
+                        var app = baasicApp.get();
+                        $scope.apiUrl = app.getApiUrl();
+                        
                         $scope.addSong = function(song) {
                             $scope.songTitle = song.title;
                             if($scope.file) {
@@ -73,8 +75,8 @@ angular.module('media-gallery')
                                         $scope.song = songData.item[0];
                                         $scope.song.artist = $scope.artistName;
                                         $scope.song.title = $scope.songTitle;
-                                        $scope.song.cover = $rootScope.baseApiUrl + '/file-streams/' + $scope.album.coverId;
-                                        $scope.song.url = $rootScope.baseApiUrl + '/file-streams/' + $scope.song.id;
+                                        $scope.song.cover = $rootScope.apiUrl + '/file-streams/' + $scope.album.coverId;
+                                        $scope.song.url = $rootScope.apiUrl + '/file-streams/' + $scope.song.id;
                                     })
                                     .error(function(error){
                                         $scope.error = error;
@@ -172,7 +174,7 @@ angular.module('media-gallery')
                                         $scope.song.title = $scope.songTitle;
                                         $scope.song.pic = $scope.album.coverId;
                                         //TODO: hard coded path
-                                        $scope.song.url = $rootScope.baseApiUrl + '/file-streams/'+ $scope.song.id;
+                                        $scope.song.url = $rootScope.apiUrl + '/file-streams/'+ $scope.song.id;
                                     })
                                     .error(function(error){
                                         $scope.error = error;

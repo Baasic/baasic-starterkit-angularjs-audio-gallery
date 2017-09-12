@@ -8,7 +8,7 @@
                         <span>Change Cover</span>
                     </label>
                     <img ng-if="!album.coverId" src="./assets/img/img.png"/>
-                    <img ng-if="album.coverId" ng-src="{{baseApiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
+                    <img ng-if="album.coverId" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
                     <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg">
                     <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
                 </div>
