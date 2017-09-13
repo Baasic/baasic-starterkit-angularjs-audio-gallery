@@ -75,8 +75,8 @@ angular.module('media-gallery')
                                         $scope.song = songData.item[0];
                                         $scope.song.artist = $scope.artistName;
                                         $scope.song.title = $scope.songTitle;
-                                        $scope.song.cover = $rootScope.apiUrl + '/file-streams/' + $scope.album.coverId;
-                                        $scope.song.url = $rootScope.apiUrl + '/file-streams/' + $scope.song.id;
+                                        $scope.song.cover = $scope.apiUrl + '/file-streams/' + $scope.album.coverId;
+                                        $scope.song.url = $scope.apiUrl + '/file-streams/' + $scope.song.id;
                                     })
                                     .error(function(error){
                                         $scope.error = error;
@@ -168,7 +168,7 @@ angular.module('media-gallery')
                                         $scope.song.title = $scope.songTitle;
                                         $scope.song.pic = $scope.album.coverId;
                                         //TODO: hard coded path
-                                        $scope.song.url = $rootScope.apiUrl + '/file-streams/'+ $scope.song.id;
+                                        $scope.song.url = $scope.apiUrl + '/file-streams/'+ $scope.song.id;
                                     })
                                     .error(function(error){
                                         $scope.error = error;

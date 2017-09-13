@@ -22,7 +22,6 @@
                     $scope.error = error;
                 })
                 .finally(function(){
-
                 });
             }
 
@@ -38,7 +37,8 @@
                 })
                 .success(function(data) {
                     $scope.albums = data.item;
-
+                    console.log($scope.albums);
+                    
                     $scope.pagerData = {
                         currentPage: data.page,
                         pageSize: data.recordsPerPage,
@@ -46,8 +46,8 @@
                     };
                 })
                 .error(function(error) {
-                        $scope.error = error;
-                    })
+                    $scope.error = error;
+                })
                 .finally(function() {
                     $scope.$parent.albums = $scope.albums;
                     loadAlbumCovers();
@@ -59,7 +59,21 @@
                 $state.go('master.main.profile', {artistId : $scope.artistId});
             };
 
-
+            /*
+            $scope.populatePlaylist = function populatePlaylist(album) {
+                $scope.songs = [];
+                for(var i = 0; i< album.playlist.length; i++){
+                    var song = {
+                        url: $scope.apiUrl + '/file-streams/' + album.playlist[i].id,
+                        coverUrl: $scope.apiUrl + '/file-streams/' + album.coverId,
+                        title: album.playlist[i].title,
+                        artist: album.playlist[i].artist
+                    };
+                    $scope.songs.push(song);
+                }
+                console.log($scope.songs);
+            };
+            */
 
             $scope.deleteAlbum = function(album) {
                 if (window.confirm('Are you sure you want to delete album ' + $scope.albums[album].name + '?')) {
