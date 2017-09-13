@@ -1,51 +1,28 @@
-﻿<header class="header">
-    <div class="row" change-class-on-scroll offset="55" scroll-class="search--fixed">
-        <div class="col col-sml-12">
-            <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="display--ib">
-                <label for="searchEntry">
-                    <input type="text" name="searchEntry" class="input__search" ng-model="searchFor"/>
-                </label>
-            </form>
-        </div>
+﻿<header class="header row">
+    <div class="col col-sml-2">
+        <a ui-sref="master.main.index" class="logo logo--small">
+            SOUNDBOX
+        </a>
     </div>
-   
-        <!--
-        <div class="row" change-class-on-scroll offset="55" scroll-class="search--fixed">
-            <div class="col col-sml-12">
-                <input type="text" class="input__search"/>
-            </div>
-        </div>
-        -->
-        <div class="menu" ng-class="{'opened':menuOpen}" >
-            <div class="menu__icon hamburger hamburger--elastic" ng-class="{'is-active':menuOpen}" ng-click="menuOpen = !menuOpen">
-                <div class="hamburger-inner"></div>
-            </div>
-
-            <a ui-sref="master.main.index" class="logo logo--small">
-                SOUNDBOX
-            </a>
-            <nav ng-if="$root.user.isAuthenticated">
-                <ul>
-                    <li>
-                        <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--sml btn--secondary"> Profile</a>
-                    </li>
-                    <li>
-                        <baasic-logout on-logout="setEmptyUser()">
-                            <button ng-click="logout()" class="btn btn--sml btn--primary"> Sign out</button>
-                        </baasic-logout>
-                    </li>
-                </ul>
-            </nav>
-            <nav ng-if="!$root.user.isAuthenticated">
-                <ul>
-                    <li><a ui-sref="master.main.login" class="btn btn--sml btn--primary"> Sign In</a></li>
-                    <li><a ui-sref="master.main.register" class="btn btn--sml btn--primary"> Sign Up</a></li>
-                </ul>
-            </nav>
-            <div class="menu__bottom">
-                powered by baasic
-            </div>
-        </div>
+    <div class="col col-sml-8">
+        <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();">
+            <label for="searchEntry">
+                <input type="text" name="searchEntry" class="input__search" ng-model="searchFor" style="display:block"/>
+            </label>
+        </form>
+    </div>
+    <div class="col col-sml-2">
+        <nav ng-if="$root.user.isAuthenticated">
+            <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--sml btn--secondary"> Profile</a>
+            <baasic-logout on-logout="setEmptyUser()">
+                <button ng-click="logout()" class="btn btn--sml btn--primary"> Sign out</button>
+            </baasic-logout>
+        </nav>
+        <nav ng-if="!$root.user.isAuthenticated">
+            <a ui-sref="master.main.login" class="btn btn--sml btn--primary"> Sign In</a>
+            <a ui-sref="master.main.register" class="btn btn--sml btn--primary"> Sign Up</a>
+        </nav>
+    </div>
 </header>
 
 <main ui-view class="main">

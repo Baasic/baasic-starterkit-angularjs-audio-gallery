@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="album__wrapper row col-sml-12">
+    <div class="row">
         <form novalidate name="editAlbum" ng-submit="saveAlbum(album)">
-            <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
+            <div class="col col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
                 <div>
                     <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--med">
                         <i class="fa fa-camera"></i>
@@ -11,7 +11,7 @@
                     <img ng-if="album.coverId && !hasImageSelected" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
                     <img ng-if="hasImageSelected" ng-src="{{selectedImage}}">
                     <input class="display--n" ng-change="previewSelectedImage()" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" required>
-                    
+
                     <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
                     <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
                 </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="album__about col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
+            <div class="col col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
                     <label for="albumName" class="label label--primary">Album Name</label>
                     <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
                     <input name="artistId" ng-model="album.artistId" type="hidden" />
@@ -43,17 +43,17 @@
             </div>
         </form>
     </div>
-    <div class="row col-sml-12">
-        <div ng-repeat="song in album.playlist">
-            <div class="col-sml-12">
-                <p class="label label--primary col-sml-12 col-med-6 col-lrg-9">
-                    <span title="Delete this song from album" ng-click="deleteSong();" class="fa fa-times"></span>
-                        {{song.artist}} - {{song.title}}
-                </p>
-                <audio controls class="col-sml-12 col-med-6 col-lrg-3">
-                    <source ng-src="{{song.url | trusted}}" type="audio/mpeg"/>
-                </audio>
-            </div>
-        </div>
+
+    <div ng-repeat="song in album.playlist" class="">
+
+        <p class="label label--primary">
+            <span title="Delete this song from album" ng-click="deleteSong();" class="fa fa-times"></span>
+                {{song.artist}} - {{song.title}}
+        </p>
+        <audio controls class="">
+            <source ng-src="{{song.url | trusted}}" type="audio/mpeg"/>
+        </audio>
+
     </div>
+
 </div>
