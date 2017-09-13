@@ -29,7 +29,7 @@ angular.module('media-gallery')
                         $scope.artistId = $state.params.artistId;
                         $scope.file = {filename: ''};
                         $scope.model = {};
-                        $scope.hasFileSelected = false;
+                        $scope.invalidImageFileType = true;
                         var file;
                         var path;
 
@@ -56,7 +56,7 @@ angular.module('media-gallery')
                                         $scope.albumId = $scope.album.id;
                                     })
                                     .error(function(error) {
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function() {
                                         getAlbum();
@@ -71,7 +71,7 @@ angular.module('media-gallery')
                                             $scope.album = album;
                                         })
                                         .error(function (error) {
-                                            console.log(error); // jshint ignore: line
+                                            $scope.error = error;
                                         })
                                         .finally(function(){
                                             addCoverStream();
@@ -88,10 +88,9 @@ angular.module('media-gallery')
                                 }
                                 return filesService.streams.create(path, file)
                                     .success(function() {
-                                        console.log ('stream uploaded successfuly'); // jshint ignore: line
                                     })
                                     .error(function(error){
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function() {
                                         getCoverData();
@@ -104,11 +103,11 @@ angular.module('media-gallery')
                                         $scope.coverData = coverData.item[0];
                                         if(!$scope.album.coverId) {
                                             $scope.album.coverId = $scope.coverData.id;
-                                            $scope.hasFileSelected = false;
+                                            $scope.hasImageSelected = false;
                                         }
                                     })
                                     .error(function(error) {
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         updateAlbum();
@@ -122,7 +121,7 @@ angular.module('media-gallery')
                                         }
                                     })
                                     .error(function(error) {
-                                        console.log(error); //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function() {
                                         $scope.backToDetails();
@@ -138,13 +137,19 @@ angular.module('media-gallery')
 
                         $scope.previewSelectedImage = function previewSelectedImage() {
                             $timeout(function() {
-                                $scope.hasImageSelected = true;        
-                                FileReader.readAsDataURL($scope.file.blob, $scope)
-                                .then(function(response){
-                                    $scope.selectedImage = response;
-                                }, function(error) {
-                                    $scope.error = error;
-                                });
+                                if($scope.file.blob.type === 'image/png' || $scope.file.blob.type === 'image/jpeg' || $scope.file.blob.type === 'image/jpg' ) {                       
+                                    $scope.invalidImageFileType = false;   
+                                    $scope.hasImageSelected = true;        
+                                    FileReader.readAsDataURL($scope.file.blob, $scope)
+                                    .then(function(response){
+                                        $scope.selectedImage = response;
+                                    }, function(error) {
+                                        $scope.error = error;
+                                    });
+                                }
+                                else {
+                                    $scope.invalidImageFileType = true;
+                                }
                             });
                         };                      
                 }],

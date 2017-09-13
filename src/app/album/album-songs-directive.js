@@ -7,12 +7,12 @@ angular.module('media-gallery')
             return {
                 restrict: 'E',
                 scope: '=',
-                controller: ['$scope', '$rootScope', '$state', 'baasicFilesService', 'albumsService','baasicUserProfileService', 'baasicApp',
-                    function ($scope, $rootScope, $state, filesService, albumsService, profileService, baasicApp ) {
+                controller: ['$scope', '$rootScope', '$state', 'baasicFilesService', 'albumsService','baasicUserProfileService', 'baasicApp', '$timeout',
+                    function ($scope, $rootScope, $state, filesService, albumsService, profileService, baasicApp, $timeout ) {
                         $scope.file = { filename: ''};
                         $scope.model = {};
                         $scope.albumId = $state.params.albumId;
-                        $scope.invalidFileType = false;
+                        $scope.invalidAudioFileType = false;
                         var app = baasicApp.get();
                         $scope.apiUrl = app.getApiUrl();
                         
@@ -64,7 +64,7 @@ angular.module('media-gallery')
                                     $scope.error = error;
                                 })
                                 .finally(function(){
-                                    getSongData();
+                                    getSongData();                                  
                                 });
                                 
                             };
@@ -111,15 +111,9 @@ angular.module('media-gallery')
                                     .finally(function(){
                                     });
                             };
-
-                            ///check file type before uploading
-                            if($scope.file.blob.type === 'audio/mp3' || $scope.file.blob.type === 'audio/m4a') {
+                            if(!$scope.invalidAudioFileType){
                                 getAlbum();
-                            } else {
-                                $scope.invalidFileType = true;
                             }
-
-
                         };
 
                         $scope.editSong = function(song) {
@@ -206,12 +200,19 @@ angular.module('media-gallery')
                                     .finally(function(){
                                     });
                             };
-                            
-                            if($scope.file.blob.type === 'audio/mp3' || $scope.file.blob.type === 'audio/m4a') {
+                            if(!$scope.invalidAudioFileType){
                                 getAlbum();
-                            } else {
-                                $scope.invalidFileType = true;
                             }
+                        };
+
+                        $scope.checkAudioFileType = function() {
+                            $timeout(function() {
+                                if($scope.file.blob.type === 'audio/mp3' || $scope.file.blob.type === 'audio/m4a') {
+                                    $scope.invalidAudioFileType = false;
+                                } else {
+                                    $scope.invalidAudioFileType = true;
+                                }
+                            });
                         };
 
                         $scope.cancel = function() {
