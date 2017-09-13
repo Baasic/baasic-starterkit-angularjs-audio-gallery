@@ -3,33 +3,41 @@
         <form novalidate name="editAlbum" ng-submit="saveAlbum(album)">
             <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
                 <div>
-                    <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--med"><i class="fa fa-camera"></i>
+                    <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--med">
+                        <i class="fa fa-camera"></i>
                         <span>Change Cover</span>
                     </label>
+
                     <img ng-if="!album.coverId && !hasImageSelected" src="./assets/img/img.png"/>
                     <img ng-if="album.coverId && !hasImageSelected" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
                     <img ng-if="hasImageSelected" ng-src="{{selectedImage}}" width="250" alt="Selected avatar" title="Selected avatar"/>
                     <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()">
-                    <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+                    
+                    <p class="validation validation--alert" ng-show="(editAlbum.$submitted && editAlbum.$error.fileType) || (invalidImageFileType && imageInputChanged)">Allowed extensions are: png, jpeg, jpg</p>
                 </div>
+            <!--
                 <div ng-show="error">
                     {{ error }}
                 </div>
+            -->
             </div>
 
             <div class="album__about col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
-                    <label for="albumName" class="label label--primary">Album Name</label>
-                    <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
-                    <input name="artistId" ng-model="album.artistId" type="hidden" />
-                    <label for="albumReleaseYear" class="label label--primary">Release Year</label>
-                    <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input input--text" required />
-                <div ng-show="editAlbum.$submitted || editAlbum.albumName.$dirty">
-                    <p class="validation validation--alert" ng-show="editAlbum.albumName.$error.required"> Album name is required. </p>
+                <label for="albumName" class="label label--primary">Album Name</label>
+                <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
+                <div ng-show="editAlbum.$submitted || editAlbum.albumName.$dirty || editAlbum.albumName.$invalid">
+                    <p class="validation validation--alert" ng-show="editAlbum.albumName.$error.required || editAlbum.albumName.$invalid"> Album name is required. </p>
                 </div>
-                <div ng-show="editAlbum.$submitted || editAlbum.releaseYear.$dirty">
-                    <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
+                    
+                <input name="artistId" ng-model="album.artistId" type="hidden" />
+
+                <label for="albumReleaseYear" class="label label--primary">Release Year</label>
+                <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input input--text" required />
+                <div ng-show="editAlbum.$submitted || editAlbum.releaseYear.$dirty || editAlbum.albumReleaseYear.$invalid">
+                    <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required || editAlbum.albumReleaseYear.$invalid"> Year of album release is required. </p>
                     <p class="validation validation--error" ng-show="editAlbum.input.$error"> Please Enter Four Digit Number Only</p>
                 </div>
+
                 <label for="aboutAlbum" class="label label--primary">About Album</label>
                 <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input input--text"></textarea>
                 <div>
