@@ -33,7 +33,7 @@
     <form name="editSong" novalidate ng-submit="saveEditedSong(song)">
         <div class="col-sml-12 col-med-4 col-lrg-4">
             <label for="song-title-{{$index}}">Song Title</label>
-            <input type="text" id="title" name="title" ng-model="song.title" required />
+            <input type="text" id="title" name="title" ng-model="updateFileArray[$index].title" required />
         </div>
         <div class="col-sml-12 col-med-4 col-lrg-4">
             <input type="file" file-model="updateFileArray[$index].file.blob" ng-model="updateFileArray[$index].file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3" file-types=".mp3, .m4a" ng-change="checkUpdateFileType($index)">

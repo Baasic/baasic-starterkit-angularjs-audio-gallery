@@ -17,7 +17,7 @@ angular.module('media-gallery')
                         $scope.apiUrl = app.getApiUrl();
 
                         $scope.updateFileArray = [];
-                                        
+
                         $scope.addSong = function(song) {
                             $scope.songTitle = song.title;
                             if($scope.file) {
@@ -136,18 +136,21 @@ angular.module('media-gallery')
                         $scope.saveEditedSong = function(song) {
                             $scope.songTitle = song.title;
                             var file = {};
-                            var path = '';
+                            var oldPath = song.path;
+                            var title = '';
 
                             var index = $scope.album.playlist.indexOf(song);
                             var obj = $scope.updateFileArray[index];
 
                             console.log(obj);
-                            if(obj) {
+                            if(obj.file) {
                                 file = obj.file.blob;
-                                path = $scope.albumId + '/' + obj.file.blob.name;
+                            }
+                            if(obj.title) {
+                                title = obj.title;
                             }
                             console.log(file);
-                            console.log(path);
+                            console.log(oldPath);
 
                             var getAlbum = function() {
                                 return albumsService.get($scope.albumId, {
@@ -173,16 +176,16 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
-                                        if(path === ''){
+                                        if(!file){
                                             getSongData();
                                         }
                                         else {
-                                            uploadSong();
+                                            updateSong();
                                         }
                                     });
                             };
-                            var uploadSong = function(){
-                                return filesService.streams.update(path, file)
+                            var updateSong = function(){
+                                return filesService.streams.update(oldPath, file)
                                     .success(function(){
                                     })
                                     .error(function(error){
@@ -193,11 +196,16 @@ angular.module('media-gallery')
                                     });
                             };
                             var getSongData = function(){
-                                return filesService.find(path)
+                                return filesService.find(oldPath)
                                     .success(function(songData){
                                         $scope.song = songData.item[0];
                                         $scope.song.artist = $scope.artistName;
-                                        $scope.song.title = $scope.songTitle;
+                                        if(title === ''){
+                                            $scope.song.title = $scope.songTitle;
+                                        }
+                                        else {
+                                            $scope.song.title = title;
+                                        }
                                         $scope.song.pic = $scope.album.coverId;
                                         $scope.song.url = $scope.apiUrl + '/file-streams/'+ $scope.song.id;
                                     })
@@ -209,6 +217,7 @@ angular.module('media-gallery')
                                     });
                             };
                             var updateAlbum = function(){
+                                $scope.album.playlist[index] = $scope.song;
                                 return albumsService.update($scope.album)
                                     .success(function(){
                                     })
