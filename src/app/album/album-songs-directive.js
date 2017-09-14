@@ -15,7 +15,9 @@ angular.module('media-gallery')
                         $scope.invalidAudioFileType = false;
                         var app = baasicApp.get();
                         $scope.apiUrl = app.getApiUrl();
-                        
+
+                        $scope.updateFileArray = [];
+                                        
                         $scope.addSong = function(song) {
                             $scope.songTitle = song.title;
                             if($scope.file) {
@@ -109,6 +111,11 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
+                                        //TODO: set the new song form input to pristine state.
+                                        //this is a temporary hack
+                                        document.getElementById('newSongTitle').value = null;
+                                        document.getElementById('newSongFile').value = null;
+                                        $scope.newSong.$setPristine();
                                     });
                             };
                             if(!$scope.invalidAudioFileType){
@@ -116,12 +123,32 @@ angular.module('media-gallery')
                             }
                         };
 
-                        $scope.editSong = function(song) {
+                        $scope.checkUpdateFileType = function(index) {
+                            $timeout(function() {
+                                if($scope.updateFileArray[index].file.blob.type === 'audio/mp3' || $scope.updateFileArray[index].file.blob.type === 'audio/m4a') {
+                                    $scope.updateFileArray[index].invalid = false;
+                                } else {
+                                    $scope.updateFileArray[index].invalid = true;
+                                }
+                            });                            
+                        }
+
+                        $scope.saveEditedSong = function(song) {
                             $scope.songTitle = song.title;
-                            if($scope.file) {
-                                var file = $scope.file.blob;
-                                var path = $scope.albumId + '/' + $scope.file.blob.name;
+                            var file = {};
+                            var path = '';
+
+                            var index = $scope.album.playlist.indexOf(song);
+                            var obj = $scope.updateFileArray[index];
+
+                            console.log(obj);
+                            if(obj) {
+                                file = obj.file.blob;
+                                path = $scope.albumId + '/' + obj.file.blob.name;
                             }
+                            console.log(file);
+                            console.log(path);
+
                             var getAlbum = function() {
                                 return albumsService.get($scope.albumId, {
                                 })
@@ -146,7 +173,12 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
-                                        uploadSong();
+                                        if(path === ''){
+                                            getSongData();
+                                        }
+                                        else {
+                                            uploadSong();
+                                        }
                                     });
                             };
                             var uploadSong = function(){
@@ -167,7 +199,6 @@ angular.module('media-gallery')
                                         $scope.song.artist = $scope.artistName;
                                         $scope.song.title = $scope.songTitle;
                                         $scope.song.pic = $scope.album.coverId;
-                                        //TODO: hard coded path
                                         $scope.song.url = $scope.apiUrl + '/file-streams/'+ $scope.song.id;
                                     })
                                     .error(function(error){
@@ -182,7 +213,7 @@ angular.module('media-gallery')
                                     .success(function(){
                                     })
                                     .error(function(error){
-                                        $scope.error = error;  //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                         refreshAlbum();
@@ -195,14 +226,16 @@ angular.module('media-gallery')
                                         $scope.album = album;
                                     })
                                     .error(function(error){
-                                        $scope.error = error; //jshint ignore: line
+                                        $scope.error = error;
                                     })
                                     .finally(function(){
                                     });
                             };
-                            if(!$scope.invalidAudioFileType){
-                                getAlbum();
-                            }
+                           getAlbum();       
+                        };
+
+                        $scope.logScope = function() {
+                            console.log($scope);
                         };
 
                         $scope.checkAudioFileType = function() {
@@ -213,6 +246,9 @@ angular.module('media-gallery')
                                     $scope.invalidAudioFileType = true;
                                 }
                             });
+                        };
+
+                        $scope.cancelEdit = function() {
                         };
 
                         $scope.cancel = function() {
