@@ -37,7 +37,6 @@
                 })
                 .success(function(data) {
                     $scope.albums = data.item;
-                    console.log($scope.albums);
                     
                     $scope.pagerData = {
                         currentPage: data.page,

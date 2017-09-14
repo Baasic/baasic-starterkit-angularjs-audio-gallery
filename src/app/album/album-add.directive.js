@@ -43,6 +43,10 @@ angular.module('media-gallery')
                             $state.go('master.main.profile', {artistId : $scope.$root.user.id});
                         };
 
+                        $scope.goToEdit = function goToEdit() {
+                            $state.go('master.main.album-edit', {albumId : $scope.album.id});                                                                    
+                        };
+
                         //save album data and cover
                         $scope.saveAlbum = function(saveAlbum) {
                             $scope.album = saveAlbum;
@@ -76,7 +80,8 @@ angular.module('media-gallery')
                                         .finally(function(){
                                             addCoverStream();
                                         });
-                                } else { //if not existant, make me empty object
+                                } 
+                                else { //if not existant, make me empty object
                                     $scope.album = {};
                                 }
                             }
@@ -124,7 +129,10 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function() {
-                                        $scope.backToDetails();
+                                        console.log('scope album');
+                                        console.log($scope.album);
+
+                                        $scope.goToEdit();
                                     });
                             }
 
