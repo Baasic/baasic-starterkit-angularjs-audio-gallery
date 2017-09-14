@@ -36,6 +36,7 @@
                 if (!$scope.$root.user.isAuthenticated) {
                     $state.go('master.main.profile', {artistId: $state.params.artistId});
                 }
+
                 function loadProfile() {
                     profileService.get($scope.artistId, {
                         embed: 'avatar'
@@ -87,21 +88,20 @@
                     }
 
                     function saveAvatar() {
-                        $timeout(function(){
-                            return avatarEdit
-                            .success(function(data, stream) {
-                                $scope.avatarData = data;
-                                $scope.avatarStream = stream;
-                            })
-                            .error(function(error) {
-                                $scope.error = error;
-                            })
-                            .finally(function (){
-                                loadProfile();
-                                backToProfile();
-                            });
+                        return avatarEdit
+                        .success(function(data, stream) {
+                            $scope.avatarData = data;
+                            $scope.avatarStream = stream;
+                        })
+                        .error(function(error) {
+                            $scope.error = error;
+                        })
+                        .finally(function (){
+                            loadProfile();
+                            backToProfile();
                         });
                     }
+
                     function updateProfile() {
                         return profileEdit
                         .success (function(data){
@@ -136,9 +136,11 @@
                             }, function(error) {
                                 $scope.error = error;
                             });
-                        } else {
-                            $scope.invalidFileType = true;
                         } 
+                        else {
+                            $scope.invalidFileType = true;
+                        }
+                        $scope.file = $scope.profile.avatar; 
                     });
                 };
 
