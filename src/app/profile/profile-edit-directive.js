@@ -31,10 +31,12 @@
                 var avatarChange;
                 var avatarEdit;
                 $scope.hasImageSelected = false;
+                $scope.invalidFileType = false;                                            
 
                 if (!$scope.$root.user.isAuthenticated) {
                     $state.go('master.main.profile', {artistId: $state.params.artistId});
                 }
+
                 function loadProfile() {
                     profileService.get($scope.artistId, {
                         embed: 'avatar'
@@ -99,6 +101,7 @@
                             backToProfile();
                         });
                     }
+
                     function updateProfile() {
                         return profileEdit
                         .success (function(data){
@@ -123,13 +126,21 @@
 
                 $scope.previewSelectedImage = function previewSelectedImage() {
                     $timeout(function() {
-                        $scope.hasImageSelected = true;
-                        FileReader.readAsDataURL($scope.profile.avatar.blob, $scope)
-                        .then(function(response){
-                            $scope.selectedImage = response;
-                        }, function(error) {
-                            $scope.error = error;
-                        });
+                        ///check file type before uploading
+                        if($scope.profile.avatar.blob.type === 'image/png' || $scope.profile.avatar.blob.type === 'image/jpeg' || $scope.profile.avatar.blob.type === 'image/jpg' ) {                       
+                            $scope.invalidFileType = false;                            
+                            $scope.hasImageSelected = true;
+                            FileReader.readAsDataURL($scope.profile.avatar.blob, $scope)
+                            .then(function(response){
+                                $scope.selectedImage = response;
+                            }, function(error) {
+                                $scope.error = error;
+                            });
+                        } 
+                        else {
+                            $scope.invalidFileType = true;
+                        }
+                        $scope.file = $scope.profile.avatar; 
                     });
                 };
 

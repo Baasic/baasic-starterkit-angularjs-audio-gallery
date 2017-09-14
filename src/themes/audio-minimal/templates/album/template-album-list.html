@@ -10,8 +10,15 @@
                 <p>{{album.aboutAlbum}}</p>
                 <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--sml">edit album</a>
                 <a ng-if="profile.id == $root.user.id" href="javascript:void();" ng-click="album.id ? deleteAlbum($index) : cancelEdit()" class="btn btn--primary btn--sml">delete album</a>
-                <button ng-if="album.playlist && album.playlist.length" class="btn btn--primary btn--sml" play-all="album.playlist">Play album</button>
-                <button ng-if="!album.playlist || !album.playlist.length" class="btn btn--primary btn--sml" play-all="album.playlist" disabled="disabled">No songs for this album...</button>
+                <button ng-if="album.playlist && album.playlist.length" play-all="album.playlist" data-play="true" class="btn btn--primary btn--sml">Play album</button>
+                <button ng-if="!album.playlist || !album.playlist.length" class="btn btn--primary btn--sml" disabled="disabled">No songs for this album...</button>
+                <div ng-if="album.playlist && album.playlist.length">
+                    <ul>
+                        <li ng-repeat="song in album.playlist">
+                            {{$index+1}}. {{song.title}}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     <!--

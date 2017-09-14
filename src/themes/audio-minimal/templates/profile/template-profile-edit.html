@@ -17,33 +17,38 @@
 
 
                         <input type="file" name="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input input--file" ng-change="previewSelectedImage()">
-
-
-                        <p class="validation validation--alert" ng-show="(editProfile.$submitted || editProfile.$touched) && editProfile.$error.fileType">Allowed extensions are: png, jpeg, jpg</p>
+                        <p class="validation validation--alert" ng-show="(editProfile.profileAvatar.$invalid && !profile)||invalidFileType">Allowed extensions are: png, jpeg, jpg</p>
+                    <!--
                         <div ng-show="error" class="validation validation--error">
                             {{ error }}
                         </div>
+                    -->
                     </div>
+
                     <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
+
                         <label for="displayName" class="label label--primary">Artist / Band Name</label>
                         <input name="displayName" id="displayName" ng-model="profile.displayName" type="text" placeholder="Artist/Band Name" class="input input--text" required>
+                        <p class="validation validation--alert" ng-show="editProfile.displayName.$invalid">Name is Required</p>
 
                         <div class="row">
                             <div class="col col-lrg-6">
                                 <label for="genre" class="label label--primary">Genre</label>
                                 <input name="genre" id="genre" ng-model="profile.genre" type="text" placeholder="Enter Music Genre" class="input input--text display--ib" required>
+                                <p class="validation validation--alert" ng-show="editProfile.genre.$invalid">Genre is Required</p>
                             </div>
                             <div class="col col-lrg-6">
                                 <label for="country" class="label label--primary">Country</label>
                                 <input name="country" id="country" ng-model="profile.country" type="text" placeholder="Enter Country" class="input input--text display--ib" required>
+                                <p class="validation validation--alert" ng-show="editProfile.country.$invalid">Country is Required</p>
                             </div>
                         </div>
 
-
-                        <label for="about" class="label label--primary">About Artis / Band</label>
+                        
+                        <label for="about" class="label label--primary">About Artist / Band</label>
                         <textarea name="about" id="about" rows="5" type="text" ng-model="profile.aboutArtist" class="input input--text" placeholder="Short Artist/Band biography"></textarea>
 
-
+                        <div class="profile__social spc--bottom--med">                                    
 
                             <div class="row">
                             <div class="col col-lrg-6">
@@ -76,22 +81,27 @@
                                 </label>
                                 <input type="text" id="web" name="web" ng-model="profile.web" placeholder="Official web" class="input input--text ">
                             </div>
+
+                        </div>
                         </div>
                     </div>
                         <div ng-show="error" class="validation validation--error">
                             {{ error }}
                         </div>
-                    </div>
+                    -->
+                </div>
                 <div ng-if="$root.user.isAuthenticated" class="push">
                     <button class="btn btn--primary btn--med spc--bottom--sml" type="submit">Save</button>
                     <a class="btn btn--primary btn--med spc--bottom--sml" ui-sref="master.main.album-add({artistId : $root.user.id})" ng-if="profile.id.length">Add album</a>
                     <a class="btn btn--tertiary btn--med spc--bottom--sml" ui-sref="master.main.profile({artistId : $root.user.id})">Cancel</a>
                 </div>
+            <!--
                 <div ng-show="editProfile.$submitted || editProfile.displayName.$dirty">
                     <span ng-show="editProfile.displayName.$error.required" class="validation validation--alert">
                         Artist name field is required.
                     </span>
                 </div>
+            -->
             </form>
         </div>
 

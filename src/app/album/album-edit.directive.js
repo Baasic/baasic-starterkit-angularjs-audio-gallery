@@ -28,6 +28,8 @@ angular.module('media-gallery')
                         $scope.albumId = $state.params.albumId;
                         $scope.file = {filename: '', blob: {}};
                         $scope.hasImageSelected = false;
+                        $scope.invalidImageFileType = true;
+                        $scope.imageInputChanged = false;
                         $scope.model = {};
                         var file;
                         var path = $scope.albumId + '/albumCover.jpg';
@@ -192,13 +194,20 @@ angular.module('media-gallery')
 
                         $scope.previewSelectedImage = function previewSelectedImage() {
                             $timeout(function() {
-                                $scope.hasImageSelected = true;      
-                                FileReader.readAsDataURL($scope.file.blob, $scope)
-                                .then(function(response){
-                                    $scope.selectedImage = response;
-                                }, function(error) {
-                                    $scope.error = error;
-                                });
+                                $scope.imageInputChanged = true;
+                                if($scope.file.blob.type === 'image/png' || $scope.file.blob.type === 'image/jpeg' || $scope.file.blob.type === 'image/jpg' ) {                       
+                                    $scope.invalidImageFileType = false;   
+                                    $scope.hasImageSelected = true;        
+                                    FileReader.readAsDataURL($scope.file.blob, $scope)
+                                    .then(function(response){
+                                        $scope.selectedImage = response;
+                                    }, function(error) {
+                                        $scope.error = error;
+                                    });
+                                }
+                                else {
+                                    $scope.invalidImageFileType = true;
+                                }
                             });
                         };
                     }
