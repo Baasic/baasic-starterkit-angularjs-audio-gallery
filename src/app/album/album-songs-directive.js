@@ -133,6 +133,7 @@ angular.module('media-gallery')
                             });                            
                         }
 
+                        /*
                         $scope.saveEditedSong = function(song) {
                             $scope.songTitle = song.title;
                             var file = {};
@@ -142,19 +143,16 @@ angular.module('media-gallery')
                             var index = $scope.album.playlist.indexOf(song);
                             var obj = $scope.updateFileArray[index];
 
-                            console.log(obj);
                             if(obj.file) {
+                                console.log(obj.file);
                                 file = obj.file.blob;
                             }
-                            if(obj.title) {
+                            if(obj.title !== song.title) {
                                 title = obj.title;
                             }
-                            console.log(file);
-                            console.log(oldPath);
 
                             var getAlbum = function() {
-                                return albumsService.get($scope.albumId, {
-                                })
+                                return albumsService.get($scope.albumId, {})
                                     .success(function(album){
                                         $scope.album = album;
                                         $scope.playlist = album.playlist;
@@ -167,6 +165,7 @@ angular.module('media-gallery')
                                         getArtist();
                                     });
                             };
+
                             var getArtist = function(){
                                 return profileService.get($scope.artistId)
                                     .success(function(artist){
@@ -176,17 +175,20 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
-                                        if(!file){
-                                            getSongData();
+                                        if(file.type){
+                                            updateSong();
                                         }
                                         else {
-                                            updateSong();
+                                            getSongData();
                                         }
                                     });
                             };
+
                             var updateSong = function(){
+                                console.log('update song');
                                 return filesService.streams.update(oldPath, file)
-                                    .success(function(){
+                                    .success(function(response){
+                                        console.log(response);
                                     })
                                     .error(function(error){
                                         $scope.error = error;
@@ -195,9 +197,12 @@ angular.module('media-gallery')
                                         getSongData();
                                     });
                             };
+
                             var getSongData = function(){
+                                console.log('get song data');
                                 return filesService.find(oldPath)
                                     .success(function(songData){
+                                        console.log(song);
                                         $scope.song = songData.item[0];
                                         $scope.song.artist = $scope.artistName;
                                         if(title === ''){
@@ -216,6 +221,7 @@ angular.module('media-gallery')
                                         updateAlbum();
                                     });
                             };
+
                             var updateAlbum = function(){
                                 $scope.album.playlist[index] = $scope.song;
                                 return albumsService.update($scope.album)
@@ -228,6 +234,7 @@ angular.module('media-gallery')
                                         refreshAlbum();
                                     });
                             };
+
                             var refreshAlbum = function(){
                                 return albumsService.get($scope.albumId, {
                                 })
@@ -238,14 +245,17 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
+                                        //TODO: set the new song form input to pristine state.
+                                        //this is a temporary hack
+                                        document.getElementById('newSongTitle').value = null;
+                                        document.getElementById('newSongFile').value = null;
+                                        $scope.newSong.$setPristine();
                                     });
                             };
+
                            getAlbum();       
                         };
-
-                        $scope.logScope = function() {
-                            console.log($scope);
-                        };
+                        */
 
                         $scope.checkAudioFileType = function() {
                             $timeout(function() {
