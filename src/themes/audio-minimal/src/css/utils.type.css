@@ -44,7 +44,7 @@
             line-height: calc($unit * 20);
         }
     }
-/*    &--thin {
+/*  &--thin {
         font-weight: $type-weight-thin;
     }
     &--light {
@@ -64,6 +64,9 @@
     }
     &--uppercase {
         text-transform: uppercase;
+    }
+    &--capitalize {
+        text-transform: capitalize;
     }
     &--letterspace {
         &--narrow {

@@ -28,39 +28,48 @@
      * Button base project styling
      */
     font-family: $ff-sans;
-    font-weight: $type-weight-bold;
+    font-weight: $type-weight-regular;
     text-transform: uppercase;
     letter-spacing: .2em;
+    transition: all 250ms ease-in-out;
 
     /**
      * Button styles
      */
     &--primary {
-        background: $color-primary;
-        color: white;
+        background: transparent;
+        color: $color-primary;
+        border: 2px solid $color-primary;
         &:hover {
-            background: color($color-primary whiteness(+10%));
+            background: $color-primary;
+            color: white;
         }
     }
     &--secondary {
-        background: $color-secondary;
-        color: white;
+        background: transparent;
+        color: $color-secondary;
+        border: 2px solid $color-secondary;
         &:hover {
-            background: color($color-secondary whiteness(+10%));
+            background: $color-secondary;
+            color: white;
         }
     }
     &--tertiary {
-        background: $viridian;
-        color: white;
+        background: transparent;
+        color: $color-tertiary;
+        border: 2px solid $color-tertiary;
         &:hover {
-            background: color($viridian whiteness(+20%));
+            background: $color-tertiary;
+            color: white;
         }
     }
     &--ghost {
-        background-color: transparent;
-        color: $color-primary;
+        background: transparent;
+        color: white;
+        border: 2px solid white;
         &:hover {
-            color: color($color-primary whiteness(+10%));
+            background-color: white;
+            color: $color-text;
         }
     }
 

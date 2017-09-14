@@ -15,12 +15,13 @@
         left: 0;
         bottom: 0;
         padding: 6px;
-        background-color: rgba(0,0,0,.75);
+        background-color: $gray1;
         @mixin type-scale $type-base, 1.25;
         cursor: pointer;
+        opacity: 0.7;
 
         &:hover {
-            color: $color-primary;
+            opacity: 1;
         }
         &--sml {
              max-width: 150px;

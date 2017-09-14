@@ -69,6 +69,7 @@
 @import components.album.css;
 @import components.scrollbar.css;
 @import components.menu.css;
+@import components.search.css;
 /**
 * Import: views
 * Description: specific website/app views (example: 404 view, login view)
@@ -84,7 +85,9 @@
 @import utils.type.css;
 @import utils.position.css;
 @import utils.display.css;
-/* @import utils.floats.css; */
+@import utils.icon.css;
+@import utils.floats.css;
+@import utils.img.css;
 /* @import utils.visibility.css; */
 
 /**

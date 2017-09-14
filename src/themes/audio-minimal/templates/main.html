@@ -1,29 +1,26 @@
-﻿<header class="header row">
-    <div class="col col-sml-2">
-        <a ui-sref="master.main.index" class="logo logo--small">
-            SOUNDBOX
-        </a>
-    </div>
-    <div class="col col-sml-8">
-        <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();">
-            <label for="searchEntry">
-                <input type="text" name="searchEntry" class="input__search" ng-model="searchFor" style="display:block"/>
-            </label>
-        </form>
-    </div>
-    <div class="col col-sml-2">
-        <nav ng-if="$root.user.isAuthenticated">
-            <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--sml btn--secondary"> Profile</a>
-            <baasic-logout on-logout="setEmptyUser()">
-                <button ng-click="logout()" class="btn btn--sml btn--primary"> Sign out</button>
-            </baasic-logout>
-        </nav>
-        <nav ng-if="!$root.user.isAuthenticated">
-            <a ui-sref="master.main.login" class="btn btn--sml btn--primary"> Sign In</a>
-            <a ui-sref="master.main.register" class="btn btn--sml btn--primary"> Sign Up</a>
+<section class="search" ng-class="{'active': searchActive }">
+    <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="search__form">
+        <input type="text" name="searchEntry" placeholder="Search artists" class="input input--search" ng-model="searchFor"/>
+<a href="javascript:void(0);" ng-if="searchFor" ng-click="resetSearch()" class="input--search__reset">×</a>
+    </form>
+</section>
+<header class="header row">
+    <div class="col col-sml-12">
+        <a ui-sref="master.main.index" class="logo logo--header pull"></a>
+        <nav class="push">
+            <a href="javascript:void(0);" class="icon icon--lrg icon--search display--ib" ng-click="toggleSearch()"></a>
+            <div ng-if="$root.user.isAuthenticated" class="display--ib">
+                <a ui-sref="master.main.profile({artistId: $root.user.id})" class="icon icon--lrg icon--profile"></a>
+                <baasic-logout on-logout="setEmptyUser()">
+                    <a href="javascript:void(0)" ng-click="logout()" class="icon icon--lrg icon--logout"></a>
+                </baasic-logout>
+            </div>
+            <div ng-if="!$root.user.isAuthenticated" class="display--ib">
+                <a ui-sref="master.main.login" class="icon icon--lrg icon--login"></a>
+                <a ui-sref="master.main.register" class="icon icon--lrg icon--signup"></a>
+            </div>
         </nav>
     </div>
 </header>
-
 <main ui-view class="main">
 </main>

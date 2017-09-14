@@ -33,7 +33,7 @@ $color-text:        #333;
 /**
  * Theme colors
  */
-$color-primary:     $mantis;
+$color-primary:     $gray1;
 $color-secondary: 	$allports;
 $color-tertiary:    $cinnabar;
 $color-quartenary:  $viridian;

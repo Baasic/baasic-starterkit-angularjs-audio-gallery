@@ -4,26 +4,47 @@
 
 .input {
     width: 100%;
-    margin-bottom: calc($unit*4);
-    padding: calc($unit*2);
-    border: 2px solid transparent;
+    padding: $unit;
+    border-width: 1px;
+    border-style: solid;
+    border-color: color($color-text a(50%));
     transition: all 250ms ease-in-out;
 
     &--file {
         display: none;
     }
-    &--text {
+
+    &--text, &--search {
         @mixin type-scale $type-medium, 1.25;
 
         &:focus, &:hover {
             outline: 0;
-            border-color: $color-primary;
+            border-color: $color-text;
             color:  black;
         }
     }
-    &__search {
-        width: 100%;
+
+    &--text {
+        margin-bottom: calc($unit*2);
+    }
+
+    &--search {
         padding: calc($unit*2);
-        border: 5px solid $color-primary;
+        margin: $unit 0;
+        &__reset{
+            position: absolute;
+            top: calc($unit*3);
+            right: calc($unit*2);
+            transform: translate(-50%);
+            @mixin type-scale $type-xxlarge, 1.75;
+            font-weight: 700;
+            color: $color-tertiary;
+            text-decoration: none;
+            opacity: 0.5;
+            transition: all 250ms ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 }

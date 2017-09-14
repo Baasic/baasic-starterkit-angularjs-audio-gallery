@@ -3,16 +3,29 @@
 \*------------------------------------*/
 
 .profile {
+    /*profile list styling*/
     &__list {
-        padding: calc($unit*5);
-        &__item {
-            padding: $unit;
+        padding: calc($unit*4);
+        &__link {
+            color: $gray4;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 250ms ease-in-out;
+
+            &:hover, &:focus, &:active {
+                outline: 0;
+                opacity: 1;
+                color: $color-text;
+            }
         }
     }
+    /*profile detail styling*/
     &__header {
-        background: url(/assets/img/default-cover.jpg) center top no-repeat;
         background-size: cover;
-        padding-top: calc($unit*13);
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: calc($unit*4);
+        overflow: hidden;
     }
     &__title {
         text-transform: uppercase;
@@ -38,20 +51,13 @@
         vertical-align: top;
         max-width: calc(100% - 220px);
     }
-    &__social {
-        display: block;
-        &__link {
-            display: inline-block;
-            width: 32px;
-            height: auto;
-            transition: all .3s ease-in-out;
 
-            &:hover {
-                opacity: 0.7;
-            }
+    &__edit{
+        &__buttons {
+            margin: calc($unit*4) 0 calc($unit*2) 0;
         }
-    }
-    &__edit-buttons {
-        margin: calc($unit*4) 0 calc($unit*2) 0;
+        &__form {
+            overflow: hidden;
+        }
     }
 }

@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     stylish = require('jshint-stylish'),
     bower = require('./bower'),
     minifyCss = require('gulp-minify-css'),
+    plumber = require('gulp-plumber'),
     isWatching = false;
 
 var htmlminOpts = {
@@ -33,6 +34,8 @@ var customMedia = require('postcss-custom-media');
 var calc = require('postcss-calc');
 var colorFunction = require('postcss-color-function');
 var autoprefixer = require('autoprefixer');
+var postcssInlineSvg = require('postcss-inline-svg');
+var postcssSvgo = require('postcss-svgo');
 
 //Additional plugins
 var mixins = require('postcss-mixins'),
@@ -56,6 +59,10 @@ gulp.task('styles', function () {
     nested,
     // Add CSS color functions PostCSS support
     colorFunction,
+    // Reference an SVG file and control its attributes with CSS
+    postcssInlineSvg,
+    // Optimise inline SVG with PostCSS
+    postcssSvgo,
     // Add calc PostCSS support
     calc,
     // Add pxtorem PostCSS support
@@ -95,6 +102,13 @@ gulp.task('styles', function () {
 
     return gulp.src(
         './src/themes/' + theme + '/src/css/app.css')
+        // Prevent pipe breaking caused by errors from gulp plugins
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(postcss(processors))
         .pipe(gulp.dest('./.tmp/'))
         .pipe(g.cached('built-css'))
@@ -115,6 +129,10 @@ gulp.task('styles-dist', function () {
     nested,
     // Add CSS color functions PostCSS support
     colorFunction,
+    // Reference an SVG file and control its attributes with CSS
+    postcssInlineSvg,
+    // Optimise inline SVG with PostCSS
+    postcssSvgo,
     // Add calc PostCSS support
     calc,
     // Add pxtorem PostCSS support
@@ -154,6 +172,13 @@ gulp.task('styles-dist', function () {
     return gulp.src([
         './src/themes/' + theme + '/src/css/app.css'
     ])
+        // Prevent pipe breaking caused by errors from gulp plugins
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(postcss(processors))
         .pipe(minifyCss({processImport: false}))
         .pipe(gulp.dest('./dist/'));

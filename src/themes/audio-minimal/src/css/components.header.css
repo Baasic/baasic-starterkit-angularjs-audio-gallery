@@ -6,12 +6,6 @@
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
-    padding: calc($unit*2) calc($unit*4);
-    background-color: white;
-    border-top: $unit solid $bg-header;
-    z-index: 1;
+    padding: calc($unit*2) 0;
 
-    &__buttons {
-        float: right;
-    }
 }

@@ -132,6 +132,15 @@ angular.module('media-gallery', [
                     isAuthenticated: false
                 };
             };
+
+            $scope.searchActive = false;
+            $scope.toggleSearch = function toggleSearch() {
+                if($scope.searchActive) {
+                    $scope.searchActive = false;
+                } else {
+                    $scope.searchActive = true;
+                }
+            };
         }
     ])
     .controller('LoginCtrl', ['$scope', '$state',
@@ -180,7 +189,7 @@ angular.module('media-gallery', [
                 };
             }
 
-            $rootScope.user = user;       
+            $rootScope.user = user;
         }
     ]);
 
