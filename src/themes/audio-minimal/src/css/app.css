@@ -70,6 +70,7 @@
 @import components.scrollbar.css;
 @import components.menu.css;
 @import components.search.css;
+@import components.pager.css;
 /**
 * Import: views
 * Description: specific website/app views (example: 404 view, login view)

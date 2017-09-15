@@ -40,8 +40,8 @@
     &--logout {
         background-image: svg-load(../../assets/icons/logout.svg, fill: $color-text);
     }
-    &--signup {
-        background-image: svg-load(../../assets/icons/signup.svg, fill: $color-text);
+    &--register {
+        background-image: svg-load(../../assets/icons/register.svg, fill: $color-text);
     }
     &--profile {
         background-image: svg-load(../../assets/icons/profile.svg, fill: $color-text);
@@ -102,13 +102,13 @@
 
     /*social icons*/
     &--bandcamp {
-        background-image: svg-load(../../assets/icons/shuffle.svg, fill: $color-text);
+        background-image: svg-load(../../assets/icons/bandcamp.svg, fill: $color-text);
     }
     &--myspace {
-        background-image: svg-load(../../assets/icons/shuffle.svg, fill: $color-text);
+        background-image: svg-load(../../assets/icons/myspace.svg, fill: $color-text);
     }
     &--lastfm {
-        background-image: svg-load(../../assets/icons/shuffle.svg, fill: $color-text);
+        background-image: svg-load(../../assets/icons/lastfm.svg, fill: $color-text);
     }
     &--soundcloud {
         background-image: svg-load(../../assets/icons/soundcloud.svg, fill: $color-text);

@@ -1,7 +1,5 @@
 styling
 ------------
-paginacija
-dodati social ikone koje fale
 cijela album sekcija 
 cijela sekcija uploada pjesama
 cijeli player

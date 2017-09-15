@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
         <form novalidate name="editAlbum" ng-submit="saveAlbum(album)">
-            <div class="col col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
+            <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 spc--bottom--sml">
                 <div>
-                    <label for="albumCover" class="position--rel display--ib type--wide type--center type--color--negative label label--files label--files--med">
+                    <label for="albumCover" class="position--rel display--ib type--wide type--center type--color--negative label label--files">
                         <i class="fa fa-camera"></i>
                         <span>Add Cover</span>
                     </label>
@@ -22,7 +22,7 @@
             -->
             </div>
 
-            <div class="col col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
+            <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10 spc--bottom--sml">
 
                 <label for="albumName" class="label label--primary">Album Name</label>
                 <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
@@ -38,7 +38,7 @@
                     <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
                     <p class="validation validation--error" ng-show="editAlbum.albumName.$invalid"> Please Enter Four Digit Number Only</p>
                 </div>
-                
+
                 <label for="aboutAlbum" class="label label--primary">About Album</label>
                 <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input input--text"></textarea>
 

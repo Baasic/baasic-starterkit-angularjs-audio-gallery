@@ -2,8 +2,8 @@
     <section class="hero hero--cta">
         <div class="hero__content">
             <h2 class="hero__title spc--bottom--sml">Welcome to SOUNDBOX</h2>
-            <h3 class="hero__text spc--bottom--med">Register and share your music with the world completely free. <br/>Sign up, upload music  to your profile and share. Easy as that.</h3>
-            <a ui-sref="master.main.register" class="btn btn--med btn--ghost">Sign Up</a>
+            <h3 class="hero__text spc--bottom--med">Register and share your music with the world completely free.</h3>
+            <a ui-sref="master.main.register" class="btn btn--lrg btn--ghost">Register</a>
         </div>
     </section>
     <section class="profile__list row">
@@ -23,8 +23,7 @@
         </p>
     </section>
     <pager pager-data="profiles.pagerData" ng-show="profiles.pagerData.hasPrevious || profiles.pagerData.hasNext" class="pager">
-        <hr>
-        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage - 1})" class="btn --light --med" ng-show="profiles.pagerData.hasPrevious">Prev</a>
-        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage + 1})" class="btn --light --med" ng-show="profiles.pagerData.hasNext">Next</a>
+        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage - 1})" class="btn btn--med btn--primary pull" ng-show="profiles.pagerData.hasPrevious">< Prev</a>
+        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage + 1})" class="btn btn--med btn--primary push" ng-show="profiles.pagerData.hasNext">Next ></a>
     </pager>
 </div>
