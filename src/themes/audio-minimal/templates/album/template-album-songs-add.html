@@ -48,6 +48,6 @@
             <button type="button" ng-click="cancel()">Cancel</button>
         </div>
         <p class="validation validation--alert" ng-show="(editSong.$submitted || editSong.title.$touched) && editSong.title.$error.required">Title is required.</p>
-        <p class="validation validation--alert" ng-show="((editSong.$submitted || editSong.$touched) && editSong.$error.fileType) || songFileArray[$index].invalid">Allowed extensions are: mpr and m4a </p>
+        <p class="validation validation--alert" ng-show="((editSong.$submitted || editSong.$touched) && editSong.$error.fileType) || songFileArray[$index].invalid">Allowed extensions are: mp3 and m4a </p>
     </form>
 </div>

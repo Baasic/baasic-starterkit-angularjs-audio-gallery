@@ -22,7 +22,6 @@ angular.module('media-gallery')
 
                         $scope.$watch('album.playlist', function(){
                             if($scope.album){
-                                console.log($scope.album);
                                 if($scope.album.playlist.length) {
                                     $scope.songArray = angular.copy($scope.album.playlist);
                                 }
@@ -138,7 +137,8 @@ angular.module('media-gallery')
                         $scope.checkUpdateFileType = function(index) {
                             $timeout(function() {
                                 var obj = $scope.songFileArray[index];
-                                if(obj.file.blob.type === 'audio/mp3' || obj.file.blob.type === 'audio/m4a') {
+                                //audio/mp3 is for chrome, 
+                                if(obj.file.blob.type === 'audio/mp3' || obj.file.blob.type === 'audio/m4a' || obj.file.blob.type === 'audio/mpeg') {
                                     $scope.songFileArray[index].invalid = false;
                                 } else {
                                     $scope.songFileArray[index].invalid = true;
@@ -165,7 +165,6 @@ angular.module('media-gallery')
                             }
 
                             var getAlbum = function() {
-                                console.log('get album...');
                                 return albumsService.get($scope.albumId, {})
                                     .success(function(album){
                                         albumToUpdate = album;
@@ -181,7 +180,6 @@ angular.module('media-gallery')
                             };
 
                             var getArtist = function(){
-                                console.log('get artist...');                                
                                 return profileService.get(albumToUpdate.artistId)
                                     .success(function(artist){
                                         $scope.artistName = artist.displayName;
@@ -200,10 +198,8 @@ angular.module('media-gallery')
                             };
 
                             var updateSong = function(){
-                                console.log('update song...');
                                 return filesService.streams.update(path, fileToUpdate)
                                     .success(function(response){
-                                        console.log(response);
                                     })
                                     .error(function(error){
                                         $scope.error = error;
@@ -241,11 +237,9 @@ angular.module('media-gallery')
                             */
 
                             var updateAlbum = function(){
-                                console.log('updateAlbum...');
                                 if(titleToUpdate !== '') {
                                     albumToUpdate.playlist[index].title = titleToUpdate;
                                 }
-                                console.log(albumToUpdate);
                                 
                                 return albumsService.update(albumToUpdate)
                                     .success(function(){
@@ -260,7 +254,6 @@ angular.module('media-gallery')
                             };
 
                             var refreshAlbum = function(){
-                                console.log('refresh album...');
                                 return albumsService.get($scope.albumId, {
                                 })
                                     .success(function(album){
@@ -270,6 +263,8 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
+                                        //refresh song list here
+
                                         //TODO: set the new song form input to pristine state.
                                         //this is a temporary hack
                                         $scope.songFileArray = []; 
@@ -285,11 +280,9 @@ angular.module('media-gallery')
                            getAlbum();       
                         };
                         
-                        
-
                         $scope.checkAudioFileType = function() {
                             $timeout(function() {
-                                if($scope.file.blob.type === 'audio/mp3' || $scope.file.blob.type === 'audio/m4a') {
+                                if($scope.file.blob.type === 'audio/mp3' || $scope.file.blob.type === 'audio/m4a' || obj.file.blob.type === 'audio/mpeg') {
                                     $scope.invalidAudioFileType = false;
                                 } else {
                                     $scope.invalidAudioFileType = true;
