@@ -21,11 +21,6 @@
         <p class="validation validation--alert" ng-show="((newSong.$submitted || newSong.$touched) && newSong.$error.fileType) || invalidAudioFileType">Allowed extensions are: .mp3 and .m4a </p>
         <p class="validation validation--alert" ng-show="!newSong.$submitted && (newSong.title.$dirty && newSong.title.$error.required)">Title is required.</p>
     </div>
-<!--
-    <div ng-show="error" class="validation validation--error">
-        {{ error }}
-    </div>
--->
 </form>
 
 
