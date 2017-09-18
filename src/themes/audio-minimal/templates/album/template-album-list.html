@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col col-sml-12 col-xlrg-6 profile__list" ng-if="albums.length" ng-repeat="album in albums">
+    <div class="col col-sml-12 col-xlrg-6 profile__list" ng-if="albums.length" ng-repeat="album in modifiedAlbums">
         <div class="col col-sml-12 col-med-4 col-xxlrg-3">
             <img src="./assets/img/img.png" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" />
         </div>
@@ -11,8 +11,6 @@
             <button ng-if="album.playlist && album.playlist.length" class="btn btn--secondary btn--med spc--bottom--sml" play-all="album.playlist">Play album</button>
             <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--med spc--bottom--sml">edit album</a>
             <a ng-if="profile.id == $root.user.id" href="javascript:void();" ng-click="album.id ? deleteAlbum($index) : cancelEdit()" class="btn btn--tertiary btn--med spc--bottom--sml">delete album</a>
-
         </div>
     </div>
-
 </div>

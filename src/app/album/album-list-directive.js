@@ -12,6 +12,7 @@
         function($scope, $state, $stateParams, $q, albumsService, filesService, baasicApp) {
             var app = baasicApp.get();
             $scope.apiUrl = app.getApiUrl();
+            $scope.modifiedAlbums = [];
 
             function loadAlbumCovers (){
                 return filesService.streams.get($scope.album.coverId)
@@ -37,6 +38,16 @@
                 })
                 .success(function(data) {
                     $scope.albums = data.item;
+                    $scope.modifiedAlbums = angular.copy($scope.albums);
+                    if($scope.ModifiedAlbums) {
+                        for(var i = 0; i < $scope.modifiedAlbums.length; i++) {
+                            if($scope.modifiedAlbums[i].playlist) {
+                                for(var j = 0; j < $scope.modifiedAlbums[i].playlist.length; j++){
+                                    $scope.modifiedAlbums[i].playlist[j].url = $scope.modifiedAlbums[i].playlist[j].url + '?rnd=' + $scope.modifiedAlbums[i].rnd;
+                                }
+                            }
+                        }
+                    }
                     
                     $scope.pagerData = {
                         currentPage: data.page,
@@ -59,7 +70,7 @@
             };
 
             /*
-            $scope.populatePlaylist = function populatePlaylist(album) {
+            populatePlaylist = function populatePlaylist(album) {
                 $scope.songs = [];
                 for(var i = 0; i< album.playlist.length; i++){
                     var song = {
