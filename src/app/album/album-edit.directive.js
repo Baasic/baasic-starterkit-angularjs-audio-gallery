@@ -24,13 +24,14 @@ angular.module('media-gallery')
                     function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader, $timeout) {
                         var app = baasicApp.get();
                         $scope.apiUrl = app.getApiUrl();
-                        
+
                         $scope.albumId = $state.params.albumId;
                         $scope.file = {filename: '', blob: {}};
                         $scope.hasImageSelected = false;
                         $scope.invalidImageFileType = true;
                         $scope.imageInputChanged = false;
                         $scope.model = {};
+                        $scope.songUrlList = [];
                         var file;
                         var path = $scope.albumId + '/albumCover.jpg';
 
@@ -44,11 +45,26 @@ angular.module('media-gallery')
                             $state.go('master.main.profile', {artistId : $scope.$root.user.id});
                         };
 
+                        $scope.$on('albumUpdated', function() {
+                            getAlbum(); 
+                        });
+
+                        
+
                         //get me album
                         function getAlbum() {
                             albumsService.get($scope.albumId)
                                 .success(function (album) {
                                     $scope.album = album;
+                                    if($scope.album.playlist) {
+                                        if($scope.album.playlist.length) {
+                                            $scope.songUrlList = [];
+                                            for(var i = 0; i< $scope.album.playlist.length; i++){
+                                                var url = $scope.album.playlist[i].url + '?rnd=' + $scope.album.rnd;
+                                                $scope.songUrlList.push(url);
+                                            }
+                                        }
+                                    }
                                 })
                                 .error(function (error) {
                                     console.log(error); //jshint ignore: line
