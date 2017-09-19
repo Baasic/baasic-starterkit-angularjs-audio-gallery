@@ -27,7 +27,7 @@ angular.module('media-gallery')
 							vm.user.challengeIdentifier = '';
 							vm.user.challengeResponse = '';
 
-							vm.register = function() {
+							vm.register = function() {								
 								if($scope.registrationForm.$valid) {
 									vm.user.challengeIdentifier = recaptchaService.challenge();
 									vm.user.challengeResponse = recaptchaService.response();

@@ -104,7 +104,7 @@ angular.module('media-gallery', [
                 });
         }
     ])
-    .constant('recaptchaKey', '6Lf9xRYUAAAAAGM2pIRSQpipXoRyLJweTfKB1CXN')
+    .constant('recaptchaKey', '6LfcryYTAAAAAO0KBx1Cj6yNnSSjbB2MHTchdWac')
     .controller('MainCtrl', ['$scope', '$state', '$rootScope', '$browser',
         function MainCtrl($scope, $state, $rootScope, $browser) {
 
