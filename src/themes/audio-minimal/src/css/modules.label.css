@@ -13,7 +13,7 @@
         position: absolute;
         width: 100%;
         left: 0;
-        bottom: 0;
+
         padding: 6px;
         background-color: $gray1;
         @mixin type-scale $type-base, 1.25;
@@ -29,6 +29,17 @@
         }
         &--med {
             max-width: 250px;
+        }
+        &--primary {
+            bottom: 0;
+        }
+        &--secondary {
+            top: 0;
+            @mixin type-scale $type-base, 1.35;
+            opacity: 1;
+            &:hover {
+                background-color: black;
+            }
         }
     }
     &--primary {

@@ -45,9 +45,15 @@ dl dd {}
 /**
  * Anchors
  */
-a {}
+a {
+    text-decoration: none;
+    color: $color-secondary;
+    transition: all 250ms ease-in-out;
+}
 a:link {}
-a:hover {}
+a:hover {
+    color: color($color-secondary lightness(+20%));
+}
 a:focus {}
 a:visited {}
 

@@ -4,27 +4,31 @@
         <h4 class="hero__text">Please Sign in here</h4>
     </div>
 </section>
-﻿<div class="container container--membership">
+<div class="container container--lrg">
     <form class="form form--sml form--centered" name="login" novalidate ng-submit="submitLogin()">
-        <div class="form__field">
-            <input class="input input--text" type="text" name="username" ng-model="username" name="username" required placeholder="Enter your email or username" />
-            <div ng-show="login.$submitted || login.username.$touched">
-                <span class="validation validation--alert" ng-show="login.username.$error.required">Username is required.</span>
-            </div>
+        <label for="password" class="label label--primary">
+            Username
+        </label>
+        <input class="input input--text" type="text" name="username" ng-model="username" name="username" required placeholder="Enter your email or username" />
+        <div ng-show="login.$submitted || login.username.$touched">
+            <span class="validation validation--alert" ng-show="login.username.$error.required">Username is required.</span>
         </div>
-        <div class="form__field">
-            <input class="input input--text" type="password" name="password" ng-model="password" name="password" required placeholder="Password" autocomplete="off" />
-            <div ng-show="login.$submitted || login.password.$touched">
-                <span class="validation validation--alert" ng-show="login.password.$error.required">Password is required.</span>
-            </div>
+
+        <label for="password" class="label label--primary">
+            Password
+        </label>
+        <input class="input input--text" type="password" name="password" ng-model="password" name="password" required placeholder="Password" autocomplete="off" />
+        <div ng-show="login.$submitted || login.password.$touched">
+            <span class="validation validation--alert" ng-show="login.password.$error.required">Password is required.</span>
         </div>
+
 
         <button class="btn btn--secondary btn--lrg btn--wide" type="submit" ng-disabled="logging">Login</button>
         <div ng-show="loginError" class="spc--top--med">
             <span class="validation validation--error">{{loginError}}</span>
         </div>
-        <div class="spc--top--med">
-            <a ui-sref="master.main.password-recovery" class="login__retreive">Forgot Your Password? Recover Your Password Here!</a>
+        <div class="spc--top--med type--center">
+            <a ui-sref="master.main.password-recovery">Forgot Your Password? Recover Your Password Here!</a>
         </div>
     </form>
 </div>

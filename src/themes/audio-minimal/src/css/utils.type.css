@@ -44,15 +44,7 @@
             line-height: calc($unit * 20);
         }
     }
-/*  &--thin {
-        font-weight: $type-weight-thin;
-    }
-    &--light {
-        font-weight: $type-weight-light;
-    }
-    &--regular {
-        font-weight: $type-weight-regular;
-    }*/
+
     &--italic {
         font-style: italic;
     }

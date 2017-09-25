@@ -1,6 +1,7 @@
 /*------------------------------------*\
     # vars.responsive
 \*------------------------------------*/
+@custom-media --screen-to-logo     (max-width: 26em); /* 416px */
 
 @custom-media --screen-from-sml    (min-width: 34em); /* 544px */
 @custom-media --screen-to-sml      (max-width: 33.9375em); /* 543px */

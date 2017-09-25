@@ -24,8 +24,8 @@ angular.module('media-gallery')
                 controller: ['$scope', '$state', '$q', 'albumsService', 'baasicFilesService', 'baasicApp', 'FileReader', '$timeout',
                     function ($scope, $state, $q, albumsService, filesService, baasicApp, FileReader, $timeout) {
                         var app = baasicApp.get();
-                        $scope.apiUrl = app.getApiUrl();  
-                        $scope.hasImageSelected = false;                        
+                        $scope.apiUrl = app.getApiUrl();
+                        $scope.hasImageSelected = false;
                         $scope.artistId = $state.params.artistId;
                         $scope.file = {filename: ''};
                         $scope.model = {};
@@ -44,7 +44,7 @@ angular.module('media-gallery')
                         };
 
                         $scope.goToEdit = function goToEdit() {
-                            $state.go('master.main.album-edit', {albumId : $scope.album.id});                                                                    
+                            $state.go('master.main.album-edit', {albumId : $scope.album.id});
                         };
 
                         //save album data and cover
@@ -80,7 +80,7 @@ angular.module('media-gallery')
                                         .finally(function(){
                                             addCoverStream();
                                         });
-                                } 
+                                }
                                 else { //if not existant, make me empty object
                                     $scope.album = {};
                                 }
@@ -145,9 +145,9 @@ angular.module('media-gallery')
 
                         $scope.previewSelectedImage = function previewSelectedImage() {
                             $timeout(function() {
-                                if($scope.file.blob.type === 'image/png' || $scope.file.blob.type === 'image/jpeg' || $scope.file.blob.type === 'image/jpg' ) {                       
-                                    $scope.invalidImageFileType = false;   
-                                    $scope.hasImageSelected = true;        
+                                if($scope.file.blob.type === 'image/png' || $scope.file.blob.type === 'image/jpeg' || $scope.file.blob.type === 'image/jpg' ) {
+                                    $scope.invalidImageFileType = false;
+                                    $scope.hasImageSelected = true;
                                     FileReader.readAsDataURL($scope.file.blob, $scope)
                                     .then(function(response){
                                         $scope.selectedImage = response;
@@ -159,9 +159,9 @@ angular.module('media-gallery')
                                     $scope.invalidImageFileType = true;
                                 }
                             });
-                        };                      
+                        };
                 }],
-                templateUrl: 'templates/album/template-album-add-form.html'
+                templateUrl: 'templates/album/template-album-edit-form.html'
             };
         }
     ]);

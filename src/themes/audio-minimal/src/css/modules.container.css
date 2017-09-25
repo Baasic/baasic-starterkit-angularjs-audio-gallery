@@ -7,10 +7,11 @@
     &--membership {
         padding: 0 calc($unit*3);
     }
-    &--big {
-        max-width: 1600px;
-    }
     &--light {
         background: white;
     }
+    &--lrg {
+        max-width: 1600px;
+    }
+
  }

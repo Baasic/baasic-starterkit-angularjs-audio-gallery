@@ -4,7 +4,7 @@
 
 .album {
     &__wrapper {
-        padding: $unit;
+        padding: calc($unit * 4);
     }
     &__name {
         letter-spacing: 0.5px;
@@ -36,7 +36,6 @@
             color: $color-secondary;
             opacity: 0.75;
         }
-
     }
     &__about {
         margin-top: calc($unit*2);
@@ -50,12 +49,14 @@
     }
     &__playlist {
         list-style: none;
-        display: inline-block;
         padding: 0;
+        &__wrapper {
+            padding: calc($unit * 4);
+        }
         &__item {
             display: block;
             &:nth-child(odd) {
-                background: white;
+                background: $gray5;
             }
             &:nth-child(even) {
                 background: none;

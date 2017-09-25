@@ -46,10 +46,10 @@ angular.module('media-gallery')
                         };
 
                         $scope.$on('albumUpdated', function() {
-                            getAlbum(); 
+                            getAlbum();
                         });
 
-                        
+
 
                         //get me album
                         function getAlbum() {
@@ -211,9 +211,9 @@ angular.module('media-gallery')
                         $scope.previewSelectedImage = function previewSelectedImage() {
                             $timeout(function() {
                                 $scope.imageInputChanged = true;
-                                if($scope.file.blob.type === 'image/png' || $scope.file.blob.type === 'image/jpeg' || $scope.file.blob.type === 'image/jpg' ) {                       
-                                    $scope.invalidImageFileType = false;   
-                                    $scope.hasImageSelected = true;        
+                                if($scope.file.blob.type === 'image/png' || $scope.file.blob.type === 'image/jpeg' || $scope.file.blob.type === 'image/jpg' ) {
+                                    $scope.invalidImageFileType = false;
+                                    $scope.hasImageSelected = true;
                                     FileReader.readAsDataURL($scope.file.blob, $scope)
                                     .then(function(response){
                                         $scope.selectedImage = response;

@@ -3,8 +3,7 @@
 \*------------------------------------*/
 
 .validation {
-    display: inline-block;
-    margin: $unit 0 calc($unit*2) 0;
+    margin: 0 0 calc($unit*2) 0;
     padding: $unit calc($unit*2);
 
     border-width: 1px;

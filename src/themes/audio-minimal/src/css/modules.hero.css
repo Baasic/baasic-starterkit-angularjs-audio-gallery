@@ -19,6 +19,12 @@
         color: white;
         z-index: 1;
     }
+    &__title {
+        margin-bottom: 12px;
+    }
+    &__text {
+        margin-bottom: 24px;
+    }
     &--cta {
         background: url(./assets/img/hero.jpg) no-repeat center;
     }
@@ -37,5 +43,4 @@
     &--password {
         background: url(./assets/img/hero.jpg) no-repeat center;
     }
-
 }

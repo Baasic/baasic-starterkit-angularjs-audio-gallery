@@ -99,7 +99,7 @@
     &--shuffle {
         background-image: svg-load(../../assets/icons/shuffle.svg, fill: $color-text);
     }
-
+    
     /*social icons*/
     &--bandcamp {
         background-image: svg-load(../../assets/icons/bandcamp.svg, fill: $color-text);

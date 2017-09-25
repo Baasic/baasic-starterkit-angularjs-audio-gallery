@@ -67,6 +67,7 @@
 /* @import components.footer.css; */
 @import components.profile.css;
 @import components.album.css;
+@import components.songs.css;
 @import components.scrollbar.css;
 @import components.menu.css;
 @import components.search.css;

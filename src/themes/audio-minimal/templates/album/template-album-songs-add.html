@@ -1,48 +1,70 @@
-<form name="newSong" novalidate ng-submit="addSong(song)">
-    <div class="row">
-        <h4>Add song</h4>
-    </div>
-    <div class="row">
-        <div class="col-sml-12 col-med-4 col-lrg-4">
-            <label for="song-title-{{$index}}">Song Title</label>
-            <input type="text" id="newSongTitle" name="title" ng-model="song.title" required />
-        </div>
-        <div class="col-sml-12 col-med-4 col-lrg-4">
-            <input type="file" id="newSongFile" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3" file-types=".mp3, .m4a" ng-change="checkAudioFileType()">
-        </div>
-        <input type="hidden" ng-model="song.url">
-        <input type="hidden" ng-model="song.pic">
-        <div class="form__field col-sml-12 col-med-4 col-lrg-4">
-            <button type="submit" class="btn btn--quinary btn--sml push" ng-disabled="newSong.$invalid || invalidAudioFileType">Save</button>
-            <button type="button" class="btn btn--primary btn--sml push" ng-click="cancel()">Cancel</button>
-        </div>
-    </div>
-    <div class="row">
-        <p class="validation validation--alert" ng-show="((newSong.$submitted || newSong.$touched) && newSong.$error.fileType) || invalidAudioFileType">Allowed extensions are: .mp3 and .m4a </p>
-        <p class="validation validation--alert" ng-show="!newSong.$submitted && (newSong.title.$dirty && newSong.title.$error.required)">Title is required.</p>
-    </div>
-</form>
+<div class="container container--lrg container--light">
+    <div class="songs__wrapper">
 
+        <!--  Add Song -->
+        <form class="songs__form spc--bottom--sml" name="newSong" novalidate ng-submit="addSong(song)">
+            <div class="row">
+                <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 spc--bottom--sml">
+                    <h3 class="spc--top--lrg">Add new song</h3>
+                </div>
+                <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
+                    <label for="newSongTitle" class="label label--primary">Song Title</label>
+                    <div class="col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
+                        <input class="input input--text" type="text" id="newSongTitle" name="title" ng-model="song.title" required />
+                    </div>
+                    <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 songs__label-wrapper">
+                        <label for="newSongFile" class="type--wide type--center type--color--negative label label--files label--files--secondary">
+                            <i class="fa fa-music"></i>
+                            <span>Add File</span>
+                        </label>
+                        <input class="input input--file" name="songFile" type="file" id="newSongFile" file-model="file.blob" ng-model="file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3" file-types=".mp3, .m4a" ng-change="checkAudioFileType()" required>
+                    </div>
+                    <input type="hidden" ng-model="song.url">
+                    <input type="hidden" ng-model="song.pic">
+                    <div class="col-sml-12">
+                        <p class="validation validation--alert" ng-show="((newSong.$submitted || newSong.$touched) && newSong.$error.fileType) || invalidAudioFileType">Allowed extensions are: .mp3 and .m4a </p>
+                        <p class="validation validation--alert" ng-show="!newSong.$submitted && (newSong.title.$dirty && newSong.title.$error.required)">Title is required.</p>
+                        <p class="validation validation--alert" ng-show="newSong.$submitted && (newSong.songFile.$dirty && newSong.songFile.$error.required)">Song file is required.</p>
+                    </div>
+                    <div class="push">
+                        <button type="submit" class="btn btn--primary btn--med" ng-disabled="newSong.$invalid || invalidAudioFileType">Save</button>
+                        <button type="button" class="btn btn--tertiary btn--med" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
 
-<div class="row">
-    <h4>Edit songs</h4>
-</div>
-<div ng-repeat="song in songArray">
-    <form name="editSong" novalidate ng-submit="saveEditedSong(song)">
-        <div class="col-sml-12 col-med-4 col-lrg-4">
-            <label for="song-title-{{$index}}">Song Title</label>
-            <input type="text" id="title" name="title" ng-model="songArray[$index].title" required />
+        <!--  Edit Songs -->
+        <div ng-repeat="song in songArray" ng-show="songArray.length" class="spc--top--lrg">
+            <form name="editSong" novalidate ng-submit="saveEditedSong(song)" class="row">
+                <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 spc--bottom--sml">
+                    <h3 class="spc--top--lrg">Edit song</h3>
+                </div>
+                <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
+                    <label class="label label--primary" for="song-title-{{$index}}">Song Title</label>
+                    <div class="col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
+                        <input class="input input--text" type="text" id="title" name="title" ng-model="songArray[$index].title" required />
+                    </div>
+                    <div class="col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 songs__label-wrapper">
+                        <label for="newSongFile" class="type--wide type--center type--color--negative label label--files label--files--secondary">
+                            <i class="fa fa-music"></i>
+                            <span>Change File</span>
+                        </label>
+                        <input class="input input--file" name="songFile" type="file" file-model="songFileArray[$index].file.blob" ng-model="songFileArray[$index].file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3" file-types=".mp3, .m4a" ng-change="checkUpdateFileType($index)">
+                    </div>
+                    <input type="hidden" ng-model="song.url">
+                    <input type="hidden" ng-model="song.pic">
+
+                    <p class="validation validation--alert" ng-show="(editSong.$submitted || editSong.title.$touched) && editSong.title.$error.required">Title is required.</p>
+                    <p class="validation validation--alert" ng-show="((editSong.$submitted || editSong.$touched) && editSong.$error.fileType) || songFileArray[$index].invalid">Allowed extensions are: mp3 and m4a </p>
+
+                    <div class="push">
+                        <button class="btn btn--med btn--primary" type="submit" ng-disabled="editSong.title.$error.required || songFileArray[$index].invalid || !editSong.$dirty">Save</button>
+                        <button class="btn btn--med btn--tertiary" type="button" ng-click="deleteSong($index);">Delete</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col-sml-12 col-med-4 col-lrg-4">
-            <input type="file" file-model="songFileArray[$index].file.blob" ng-model="songFileArray[$index].file.fileName" accept="audio/mpeg, audio/x-mpeg, audio/mpeg3, audio/x-mpeg3" file-types=".mp3, .m4a" ng-change="checkUpdateFileType($index)">
-        </div >
-        <input type="hidden" ng-model="song.url">
-        <input type="hidden" ng-model="song.pic">
-        <div class="form__field col-sml-12 col-med-4 col-lrg-4">
-            <button type="submit" ng-disabled="editSong.title.$error.required || songFileArray[$index].invalid || !editSong.$dirty" >Save</button>
-            <button type="button" ng-click="cancel()">Cancel</button>
-        </div>
-        <p class="validation validation--alert" ng-show="(editSong.$submitted || editSong.title.$touched) && editSong.title.$error.required">Title is required.</p>
-        <p class="validation validation--alert" ng-show="((editSong.$submitted || editSong.$touched) && editSong.$error.fileType) || songFileArray[$index].invalid">Allowed extensions are: mp3 and m4a </p>
-    </form>
+    </div>
 </div>

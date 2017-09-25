@@ -1,65 +1,75 @@
-<div class="container">
-    <div class="album__wrapper row col-sml-12">
-        <form novalidate name="editAlbum" ng-submit="saveAlbum(album)">
-            <div class="position--rel display--ib col-sml-12 col-med-6 col-lrg-4 col-xlrg-3">
-                <div>
-                    <label for="albumCover" class="type--wide type--center type--color--negative label label--files">
-                        <i class="fa fa-camera"></i>
-                        <span>Change Cover</span>
-                    </label>
-
-                    <img ng-if="!album.coverId && !hasImageSelected" src="./assets/img/img.png"/>
-                    <img ng-if="album.coverId && !hasImageSelected" ng-src="{{apiUrl}}file-streams/{{album.coverId}}?rnd={{album.rnd}}" width="250"/>
-                    <img ng-if="hasImageSelected" ng-src="{{selectedImage}}" width="250" alt="Selected avatar" title="Selected avatar"/>
-                    <input class="display--n" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()">
+<div class="main container container--lrg container--light">
+    <div class="album__wrapper">
+        <form novalidate name="editAlbum" ng-submit="saveAlbum(album)" class="album__edit__form">
+            <div class="row">
+                <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 spc--bottom--sml">
+                    <div class="position--rel">
+                        <img ng-if="!album.coverId && !hasImageSelected" src="./assets/img/img.png"/>
+                        <img ng-if="album.coverId && !hasImageSelected" ng-src="{{apiUrl}}file-streams/{{album.coverId}}?rnd={{album.rnd}}"/>
+                        <img ng-if="hasImageSelected" ng-src="{{selectedImage}}" alt="Selected avatar" title="Selected avatar"/>
+                        <label for="albumCover" class="type--wide type--center type--color--negative label label--files label--files--primary">
+                            <i class="fa fa-camera"></i>
+                            <span ng-if="album.coverId">Change Cover</span>
+                            <span ng-if="!album.coverId">Add Cover</span>
+                        </label>
+                    </div>
+                    <input ng-if="album.coverId" class="input input--file" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()">
+                    <input ng-if="!album.coverId" class="input input--file" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()" required>
 
                     <p class="validation validation--alert" ng-show="(editAlbum.$submitted && editAlbum.$error.fileType) || (invalidImageFileType && imageInputChanged)">Allowed extensions are: png, jpeg, jpg</p>
                 </div>
-            </div>
 
-            <div class="album__about col-sml-12 col-med-6 col-lrg-8 col-xlrg-9">
-                <label for="albumName" class="label label--primary">Album Name</label>
-                <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
-                <div ng-show="editAlbum.$submitted || editAlbum.albumName.$dirty || editAlbum.albumName.$invalid">
-                    <p class="validation validation--alert" ng-show="editAlbum.albumName.$error.required || editAlbum.albumName.$invalid"> Album name is required. </p>
-                </div>
+                <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
+                    <label for="albumName" class="label label--primary">Album Name</label>
+                    <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
+                    <div ng-show="editAlbum.$submitted || editAlbum.albumName.$dirty || editAlbum.albumName.$invalid">
+                        <p class="validation validation--alert" ng-show="editAlbum.albumName.$error.required || editAlbum.albumName.$invalid"> Album name is required. </p>
+                    </div>
 
-                <input name="artistId" ng-model="album.artistId" type="hidden" />
+                    <input name="artistId" ng-model="album.artistId" type="hidden" />
 
-                <label for="albumReleaseYear" class="label label--primary">Release Year</label>
-                <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input input--text" required />
-                <div ng-show="editAlbum.$submitted || editAlbum.releaseYear.$dirty || editAlbum.albumReleaseYear.$invalid">
-                    <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required || editAlbum.albumReleaseYear.$invalid"> Year of album release is required. </p>
-                    <p class="validation validation--error" ng-show="editAlbum.input.$error"> Please Enter Four Digit Number Only</p>
-                </div>
+                    <label for="albumReleaseYear" class="label label--primary">Release Year</label>
+                    <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input input--text" required />
+                    <div ng-show="editAlbum.$submitted || editAlbum.releaseYear.$dirty || editAlbum.albumReleaseYear.$invalid">
+                        <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required || editAlbum.albumReleaseYear.$invalid"> Year of album release is required. </p>
+                        <p class="validation validation--error" ng-show="editAlbum.input.$error"> Please Enter Four Digit Number Only</p>
+                    </div>
 
-                <label for="aboutAlbum" class="label label--primary">About Album</label>
-                <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input input--text"></textarea>
-                <div>
-                    <button type="submit" class="btn btn--quinary btn--med push">Save</button>
-                    <button type="button" class="btn btn--primary btn--med push" ng-click="cancelEdit(album);">Cancel</button>
+                    <label for="aboutAlbum" class="label label--primary">About Album</label>
+                    <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input input--text"></textarea>
+                    <div ng-if="$root.user.isAuthenticated" class="push">
+                        <button ng-if="album.coverId" type="submit" class="btn btn--primary btn--med">Save</button>
+                        <button ng-if="!album.coverId" type="submit" class="btn btn--primary btn--med" ng-disabled="editAlbum.$invalid || invalidImageFileType || !hasImageSelected">Save & Continue</button>
+                        <button type="button" class="btn btn--tertiary btn--med" ng-click="cancelEdit(album);">Cancel</button>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="row col-sml-12">
-        <div ng-repeat="song in album.playlist as playlist">
-            <div class="col-sml-12">
-                <p class="label label--primary col-sml-12 col-med-6 col-lrg-9">
-                    <span title="Delete this song from album" ng-click="deleteSong($index);" class="fa fa-times"></span>
-                        {{song.artist}} - {{song.title}}
-                </p>
-                <audio controls class="col-sml-12 col-med-6 col-lrg-3">
-                    <source ng-src="{{songUrlList[$index] | trusted}}" type="audio/mpeg"/>
-                </audio>
+    <div ng-if="album.coverId" class="album__playlist__wrapper">
+        <div class="row">
+            <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2">
+                <h3>Playlist:</h3>
+            </div>
+            <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
+                <ul class="album__playlist">
+                    <li ng-repeat="song in album.playlist as playlist" class="col col-sml-12 album__playlist__item">
+                        <div class="col-sml-12">
+                            <div class="col-sml-12 col-med-8">
+                                {{$index+1}}. {{song.title}}
+                            </div>
+                            <audio controls class="col-sml-12 col-med-4">
+                                <source ng-src="{{songUrlList[$index] | trusted}}" type="audio/mpeg"/>
+                            </audio>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div ng-if="!album.playlist.length">
+                No songs uploaded for this album
             </div>
         </div>
-        <div ng-if="!album.playlist.length">
-            No songs uploaded for this album
-            <new-song></new-song>
-        </div>
     </div>
-
-    <album-songs></album-songs>
+    <album-songs ng-if="album.coverId"/>
 </div>

@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main container container--lrg container--light">
     <div class="profile__header">
         <form novalidate name="editProfile" ng-submit="saveProfile(profile)" class="profile__edit__form">
             <div class="row">
@@ -8,7 +8,7 @@
                         <img ng-if="imageSrc && !hasImageSelected" class="" ng-src="no-image.png" alt="{{profile.displayName}}" title="{{profile.displayName}}">
                         <img ng-if="hasImageSelected" class="" ng-src="{{selectedImage}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
 
-                        <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files">
+                        <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files label--files--primary">
                             <i class="icon icon--sml icon--photo"></i>
                             <span ng-if="!profile.avatar">Add Avatar</span>
                             <span ng-if="profile.avatar">Change Avatar</span>

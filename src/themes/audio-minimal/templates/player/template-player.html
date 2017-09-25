@@ -1,99 +1,6 @@
-
-
-        <!-- <div class="col-md-12">
-            <h5>Songs</h5>
-            <ul>
-                <li ng-repeat="song in songs">
-                    <button music-player="play" add-song="song">{{ song.title }}</button>
-                    <button music-player add-song="song">+</button>
-                    ------------
-                    {{song}}
-                </li>
-            </ul>
-
-            <button play-all="songs">Play all</button>
-            <button play-all="songs" data-play="false">Add all</button>
-        </div>
-
-    <hr />
-
-
-
-    <div class="row">
-        <div class="col col-sml-12">
-            <!-- init soundManager2 player -->
-            <!-- <sound-manager></sound-manager>
-            <div class="player">
-                <img class="player__songart" ng-if="currentPlaying.cover.length" ng-src="{{currentPlaying.cover}}" alt="Album cover"/>
-                <img class="player__songart" ng-if="!currentPlaying.cover.length" src="../assets/img/no-cover.png" alt="Album cover" />
-                <span class="player__song--current">
-                    Currently Playing: {{ currentPlaying.title }} by {{ currentPlaying.artist }} ({{ currentPostion }} / {{ currentDuration }})
-                <div class="seekBase" seek-track>
-                    <div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
-                </span>
-
-                <div class="">
-                    <a class="player__btn player__btn--prev" prev-track>Prev Track</a>
-                    <a class="player__btn" ng-class="{'player__btn--play':!isPlaying, 'player__btn--pause':isPlaying }" play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</a>
-                    <a class="player__btn player__btn--next" next-track>Next Track</a>
-                    <a class="player__btn" ng-class="{'player__btn--repeat--on':repeat, 'player__btn--repeat--off':!repeat}" repeat-music >Repeat ({{ repeat }})</a>
-                    <a class="player__btn player__btn--volume__plus" music-volume data-type="increase">+</a>
-                    <a class="player__btn player__btn--volume__minus" music-volume data-type="decrease">-</a>
-                    <a class="player__btn player__btn--playlist" ng-click="playlistOpen=!playlistOpen">playlist</a>
-                </div>
-
-                <div class="player__seeker" seek-track>
-                    <div class="player__seeker__progress" ng-style="{width : ( progress + '%' ) }"></div>
-                </div>
-            </div>
-
-            <br />
-
-            <button class="player__btn player__btn--play" play-music>Play</button>
-            <button class="player__btn player__btn--pause" pause-music>Pause</button>
-            <button class="player__btn player__btn--stop" stop-music>Stop</button>
-            <button class="player__btn" ng-class="{'player__btn--repeat--on':repeat, 'player__btn--repeat--off':!repeat}" repeat-music >Repeat ({{ repeat }})</button>
-            <button class="player__btn" ng-class="{'player__btn--play':isPlaying === false, 'player__btn--pause':isPlaying===true }" play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
-
-            Is Playing: {{ isPlaying }}
-            <br/>
-            <br/>Volume: {{ volume }} -
-            <button class="player__btn player__btn--volume__plus" music-volume data-type="increase">+</button>
-            <button class="player__btn player__btn--volume__minus" music-volume data-type="decrease">-</button>
-            <button class="player__btn player__btn--volume__mute" mute-music>Mute ({{ mute }})</button>
-            <br/>
-            <br/>
-            <button class="player__btn player__btn--prev" prev-track>Prev Track</button>
-            <button class="player__btn player__btn--next" next-track>Next Track</button>
-            <button clear-playlist>Clear Playlist</button>
-            <br/>
-            <h5>Playlist</h5>
-            <ul class="player__playlist" ng-class="{'player__playlist--open':playlistOpen}">
-                <li class="player__playlist__item" ng-class="{ 'active' : currentPlaying.id == song.id }" ng-repeat="song in playlist">
-                    <a class="player__playlist__item__title" play-from-playlist="song">{{ song.title }}</a>
-
-
-                    -
-                    <a class="" remove-from-playlist="song" data-index="{{$index}}">
-                        <small>(remove)</small>
-                    </a>
-
-
-                    <span ng-if="currentPlaying.id == song.id"></span>
-                </li>
-            </ul>
-        </div>
-    </div> -->
-
-<!----------------------->
-
 <div class="sm2-bar-ui full-width fixed paused" ng-class="{'playlist-open': playlistActive}">
     <sound-manager></sound-manager>
     <div class="bd sm2-main-controls">
-
-        <div class="sm2-inline-texture"></div>
-        <div class="sm2-inline-gradient"></div>
-
         <div class="sm2-inline-element sm2-button-element">
             <div class="sm2-button-bd">
                 <img ng-if="!currentPlaying.cover" class="sm2-inline-button" src="../assets/img/no-cover.png" />
@@ -102,16 +9,23 @@
         </div>
         <div class="sm2-inline-element sm2-button-element">
             <div class="sm2-button-bd">
-                <a href="#play" class="player__btn" ng-class="{'player__btn--play':isPlaying === false, 'player__btn--pause':isPlaying===true }" play-pause-toggle>Play / Pause</a>
+                <a href="#prev" title="Previous" prev-track class="sm2-inline-button sm2-icon-previous">&lt; previous</a>
             </div>
         </div>
-
+        <div class="sm2-inline-element sm2-button-element">
+            <div class="sm2-button-bd">
+                <a href="#play" class="sm2-inline-button" ng-class="{'sm2-icon-play':isPlaying === false, 'sm2-icon-pause sm2-control-on':isPlaying===true }" play-pause-toggle></a>
+            </div>
+        </div>
+        <div class="sm2-inline-element sm2-button-element">
+            <div class="sm2-button-bd">
+                <a href="#next" title="Next" next-track class="sm2-inline-button sm2-icon-next">&gt; next</a>
+            </div>
+        </div>
         <div class="sm2-inline-element sm2-inline-status">
-
             <div class="sm2-playlist">
                 <div class="sm2-playlist-target"><ul class="sm2-playlist-bd"><li><b>{{ currentPlaying.artist }}</b> - {{ currentPlaying.title }}</li></ul></div>
             </div>
-
             <div class="sm2-progress">
                 <div class="sm2-row">
                     <div class="sm2-inline-time">{{ currentPostion }}</div>
@@ -120,80 +34,37 @@
                             <div class="sm2-progress-bar" ng-style="{width : ( progress + '%' ) }"></div>
                             <div class="sm2-progress-ball" ng-style="{left : ( progress + '%' ) }"><div class="icon-overlay"></div></div>
                         </div>
-
                     </div>
                     <div class="sm2-inline-duration">{{ currentDuration }}</div>
                 </div>
             </div>
-
         </div>
-
-        <div class="sm2-inline-element sm2-button-element sm2-volume">
-            <div class="sm2-button-bd">
-                <span class="sm2-inline-button sm2-volume-control volume-shade"></span>
-                <a href="#volume+" music-volume data-type="decrease" class="sm2-inline-button sm2-volume-control">volume down</a>
-            </div>
-        </div>
-
-        <div class="sm2-inline-element sm2-button-element sm2-volume">
-            <div class="sm2-button-bd">
-                <span class="sm2-inline-button sm2-volume-control volume-shade"></span>
-                <a href="#volume-" music-volume data-type="increase" class="sm2-inline-button sm2-volume-control">volume up</a>
-            </div>
-        </div>
-
         <div class="sm2-inline-element sm2-button-element">
             <div class="sm2-button-bd">
-                <a href="#prev" title="Previous" prev-track class="sm2-inline-button sm2-icon-previous">&lt; previous</a>
+                <a href="#repeat" title="Repeat playlist" repeat-music class="sm2-inline-button sm2-icon-repeat" ng-class="{'sm2-control-on':repeat}"></a>
             </div>
         </div>
-
-        <div class="sm2-inline-element sm2-button-element">
-            <div class="sm2-button-bd">
-                <a href="#next" title="Next" next-track class="sm2-inline-button sm2-icon-next">&gt; next</a>
-            </div>
-        </div>
-
-        <div class="sm2-inline-element sm2-button-element">
-            <div class="sm2-button-bd">
-                <a href="#repeat" title="Repeat playlist" repeat-music class="sm2-inline-button sm2-icon-repeat" ng-class="{'player__btn--repeat--on':repeat, 'player__btn--repeat--off':!repeat}">∞ repeat</a>
-            </div>
-        </div>
-
-
         <div class="sm2-inline-element sm2-button-element sm2-menu">
             <div class="sm2-button-bd">
-                <a href="#playlist" ng-click="playlistToggle();" class="sm2-inline-button sm2-icon-menu">playlist</a>
+                <a href="#playlist" ng-click="playlistToggle();" class="sm2-inline-button sm2-icon-menu" ng-class="{'sm2-control-on':playlistActive}">playlist</a>
             </div>
         </div>
-
     </div>
-
     <div class="bd sm2-playlist-drawer sm2-element" >
-
         <div class="sm2-inline-texture">
             <div class="sm2-box-shadow"></div>
         </div>
-
         <!-- playlist content is mirrored here -->
-
         <div class="sm2-playlist-wrapper">
-
             <ul class="sm2-playlist-bd">
-
                 <!-- standard one-line items -->
                 <li ng-repeat="song in playlist" ng-class="{ 'active' : currentPlaying.id == song.id }">
                     <a play-from-playlist="song">
-                        <b>{{ song.title }}</b> - {{ song.artist }} <button remove-from-playlist="song" data-index="{{$index}}" style="display:block;float:right;">remove</button>
+                        <b>{{ song.title }}</b> - {{ song.artist }}
+                        <!-- <a href="javascript:void(0)" remove-from-playlist="song" data-index="{{$index}}" class="push">×</a> -->
                     </a>
-
-
                 </li>
-
             </ul>
-
         </div>
-
     </div>
-
 </div>

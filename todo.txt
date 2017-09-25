@@ -1,5 +1,5 @@
-styling
-------------
-cijela album sekcija 
-cijela sekcija uploada pjesama
-cijeli player
+TO DO:
+------
+- dodati spinner gdje je potrebno
+- istestirati validatione
+- istestirati i srediti sveukupno

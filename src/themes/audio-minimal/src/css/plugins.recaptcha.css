@@ -3,7 +3,5 @@
 \*------------------------------------*/
 
 .recaptcha {
-    display: block;
-    width: calc(100% - 130px);
-    margin: 1rem auto;
+    margin: 0 0 calc($unit * 2) 0;
 }
