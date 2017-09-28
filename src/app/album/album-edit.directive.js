@@ -192,7 +192,7 @@ angular.module('media-gallery')
                             $scope.album = saveAlbum;
                             $scope.album.rnd = Math.random(10).toString().substring(7);
 
-                            if($scope.file.blob) {
+                            if($scope.hasImageSelected && !$scope.invalidImageFileType) {
                                 updateCoverStream();
                             } else {
                                 updateAlbum();

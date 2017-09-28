@@ -21,8 +21,10 @@ angular.module('media-gallery')
 
                         $scope.$watch('album.playlist', function(){
                             if($scope.album){
-                                if($scope.album.playlist.length) {
-                                    $scope.songArray = angular.copy($scope.album.playlist);
+                                if($scope.album.playlist) {
+                                    if($scope.album.playlist.length) {
+                                        $scope.songArray = angular.copy($scope.album.playlist);
+                                    }
                                 }
                             }
                         });
