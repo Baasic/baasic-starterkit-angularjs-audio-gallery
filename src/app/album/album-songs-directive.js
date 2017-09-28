@@ -25,6 +25,9 @@ angular.module('media-gallery')
                                     if($scope.album.playlist.length) {
                                         $scope.songArray = angular.copy($scope.album.playlist);
                                     }
+                                    if($scope.album.playlist.length===0){
+                                        $scope.songArray=[];
+                                    }
                                 }
                             }
                         });
