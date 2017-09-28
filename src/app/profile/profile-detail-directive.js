@@ -10,11 +10,12 @@ angular.module('media-gallery')
                 scope: '=',
                 controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService', 'baasicUserProfileAvatarService', 'baasicFilesService', 'albumsService',
                     function baasicProfileDetail($scope, $state, $stateParams, $q, profileService, avatarService ,filesService, albumsService) {
-                        
+
                         function loadProfile() {
                             $scope.albums = [];
                             $scope.artistId = $state.params.artistId;
                             var profileExists;
+
                             profileService.get($state.params.artistId, {
                                 embed: 'avatar'
                             })
@@ -33,6 +34,7 @@ angular.module('media-gallery')
                                     } else {
                                         profileExists = false;
                                     }
+                                    $scope.$root.loader.resume();
                                 });
                         }
 
@@ -42,12 +44,14 @@ angular.module('media-gallery')
                             var avatarId = $scope.profile.id;
                             var avatarToDelete = null;
                             var albumIdList = [];
-                            var albumList = $scope.albums;                                
+                            var albumList = $scope.albums;
                             var albumCoverIdList = [];
                             var albumCoverList = [];
                             var albumListLength = $scope.albums.length;
                             var songIdList = [];
                             var albumsToDelete = [];
+
+
 
                             if(albumListLength > 0) {
                                 createAlbumIdList(albumList);
@@ -56,6 +60,7 @@ angular.module('media-gallery')
                             }
 
                             function deleteAllData() {
+                                $scope.$root.loader.suspend();
                                 getAvatar();
                             }
 
@@ -118,7 +123,7 @@ angular.module('media-gallery')
                                             deleteProfileData();
                                         }
                                     }
-                                    
+
                                 });
                             }
 
@@ -208,7 +213,7 @@ angular.module('media-gallery')
                                     });
                                 }
                                 if(albumCoverList.length > 0){
-                                    chainedPromise();                                    
+                                    chainedPromise();
                                 }
                                 else {
                                     deleteAlbumData();
@@ -262,6 +267,9 @@ angular.module('media-gallery')
                                 })
                                 .error(function (error) {
                                     $scope.error = error;
+                                })
+                                .finally(function () {
+                                    $scope.$root.loader.resume();
                                 });
                             }
 

@@ -9,9 +9,6 @@ angular.module('media-gallery')
                 scope: '=',
                 controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService',
                     function ($scope, $state, $stateParams, $q, baasicUserProfileService) {
-
-                        $scope.$root.loader.suspend();
-
                         function loadProfiles() {
                             baasicUserProfileService.find({
                                 page: $state.params.page || 1,
@@ -34,10 +31,9 @@ angular.module('media-gallery')
                                 $scope.error = error;
                             })
                             .finally(function () {
-                                $scope.$root.loader.resume();
+
                             });
                         }
-
                         loadProfiles();
                     }
                 ],

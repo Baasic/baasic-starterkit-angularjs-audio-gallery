@@ -31,13 +31,14 @@
                 var avatarChange;
                 var avatarEdit;
                 $scope.hasImageSelected = false;
-                $scope.invalidFileType = false;                                            
+                $scope.invalidFileType = false;
 
                 if (!$scope.$root.user.isAuthenticated) {
                     $state.go('master.main.profile', {artistId: $state.params.artistId});
                 }
 
                 function loadProfile() {
+                    $scope.$root.loader.suspend();
                     profileService.get($scope.artistId, {
                         embed: 'avatar'
                     })
@@ -53,7 +54,11 @@
                         } else {
                             profileExists = false;
                         }
+                        resume();
                     });
+                    function resume() {
+                        $scope.$root.loader.resume();
+                    }
                 }
 
                 loadProfile();
@@ -61,6 +66,8 @@
                 $scope.saveProfile = function(profile) {
                     $scope.profile = profile;
                     $scope.profile.id = $scope.artistId;
+
+                    $scope.$root.loader.suspend();
 
                     //set promises for add or update profile
                     if(profileExists) {
@@ -98,7 +105,7 @@
                         })
                         .finally(function (){
                             loadProfile();
-                            backToProfile();
+                            $scope.$root.loader.resume();
                         });
                     }
 
@@ -115,6 +122,7 @@
                                 saveAvatar();
                             } else {
                                 loadProfile();
+                                $scope.$root.loader.resume();
                                 backToProfile();
                             }
                         });
@@ -127,8 +135,8 @@
                 $scope.previewSelectedImage = function previewSelectedImage() {
                     $timeout(function() {
                         ///check file type before uploading
-                        if($scope.profile.avatar.blob.type === 'image/png' || $scope.profile.avatar.blob.type === 'image/jpeg' || $scope.profile.avatar.blob.type === 'image/jpg' ) {                       
-                            $scope.invalidFileType = false;                            
+                        if($scope.profile.avatar.blob.type === 'image/png' || $scope.profile.avatar.blob.type === 'image/jpeg' || $scope.profile.avatar.blob.type === 'image/jpg' ) {
+                            $scope.invalidFileType = false;
                             $scope.hasImageSelected = true;
                             FileReader.readAsDataURL($scope.profile.avatar.blob, $scope)
                             .then(function(response){
@@ -136,11 +144,11 @@
                             }, function(error) {
                                 $scope.error = error;
                             });
-                        } 
+                        }
                         else {
                             $scope.invalidFileType = true;
                         }
-                        $scope.file = $scope.profile.avatar; 
+                        $scope.file = $scope.profile.avatar;
                     });
                 };
 

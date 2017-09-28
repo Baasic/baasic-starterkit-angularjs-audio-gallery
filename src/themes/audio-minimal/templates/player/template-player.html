@@ -1,9 +1,9 @@
 <div class="sm2-bar-ui full-width fixed paused" ng-class="{'playlist-open': playlistActive}">
     <sound-manager></sound-manager>
     <div class="bd sm2-main-controls">
-        <div class="sm2-inline-element sm2-button-element">
+        <div class="sm2-inline-element sm2-button-element visible__from--xsml">
             <div class="sm2-button-bd">
-                <img ng-if="!currentPlaying.cover" class="sm2-inline-button" src="../assets/img/no-cover.png" />
+                <img ng-if="!currentPlaying.cover" class="sm2-inline-button" src="../assets/img/no-cover.svg" title="Play some funky music!"/>
                 <img ng-if="currentPlaying.cover" class="sm2-inline-button" ng-src="{{currentPlaying.cover}}" />
             </div>
         </div>

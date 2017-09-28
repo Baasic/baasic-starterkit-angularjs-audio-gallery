@@ -1,9 +1,14 @@
 <div class="container container--lrg container--light">
     <section class="hero hero--cta">
-        <div class="hero__content">
+        <div class="hero__content" ng-if="!user.isAuthenticated">
             <h2 class="hero__title">Welcome to SOUNDBOX</h2>
             <h3 class="hero__text">Register and share your music with the world completely free.</h3>
             <a ui-sref="master.main.register" class="btn btn--lrg btn--ghost">Register</a>
+        </div>
+        <div class="hero__content" ng-if="user.isAuthenticated">
+            <h2 class="hero__title">Welcome to SOUNDBOX</h2>
+            <h3 class="hero__text">Update your profile, albums and songs, keep your fans up to date.</h3>
+            <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--lrg btn--ghost">My Profile</a>
         </div>
     </section>
     <section class="profile__list row">

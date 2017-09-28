@@ -691,7 +691,7 @@
 }
 
 .sm2-control-on {
-    background-color: rgba(0,0,0,0.3); 
+    background-color: rgba(0,0,0,0.3);
 }
 
 .sm2-extra-controls .sm2-icon-repeat {
@@ -801,7 +801,7 @@
  height: 100%;
  top: 0px;
  left: 0px;
- background: none, url(../image/icomoon/free-25px-000000/SVG/spinner.svg);
+ //background: none, url(../image/icomoon/free-25px-000000/SVG/spinner.svg);
  background-size: 72%;
  background-position: 50%;
  background-repeat: no-repeat;

@@ -90,7 +90,7 @@
 @import utils.icon.css;
 @import utils.floats.css;
 @import utils.img.css;
-/* @import utils.visibility.css; */
+@import utils.responsive.css; 
 
 /**
 * Import: plugins

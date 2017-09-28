@@ -1,0 +1,26 @@
+/*------------------------------------*\
+    # utils.responsive
+\*------------------------------------*/
+
+.visible__from {
+    &--xsml {
+        @media(--screen-to-xsml) {
+            display: none!important;
+        }
+    }
+    &--sml {
+        @media(--screen-to-sml) {
+            display: none!important;
+        }
+    }
+    &--med {
+        @media(--screen-to-med) {
+            display: none!important;
+        }
+    }
+    &--lrg {
+        @media(--screen-to-lrg) {
+            display: none!important;
+        }
+    }
+}

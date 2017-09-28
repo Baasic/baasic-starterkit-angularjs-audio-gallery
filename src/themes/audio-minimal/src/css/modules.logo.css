@@ -22,7 +22,7 @@
         max-width: 195px;
         width: 100%;
 
-        @media(--screen-to-logo) {
+        @media(--screen-to-xsml) {
             width: 75px;
             background-image: svg-load(../../assets/img/logo-sm.svg, fill: $color-text);
         }
