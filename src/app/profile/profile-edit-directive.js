@@ -27,9 +27,7 @@
                 $scope.model = {};
                 $scope.artistId = $state.params.artistId;
                 var profileExists;
-                var profileEdit;
-                var avatarChange;
-                var avatarEdit;
+                var avatarExists;
                 $scope.hasImageSelected = false;
                 $scope.invalidFileType = false;
 
@@ -50,10 +48,17 @@
                     })
                     .finally(function (){
                         if($scope.profile) {
+                            if($scope.profile.avatar) {
+                                avatarExists = true;
+                            } else {
+                                avatarExists = false;
+                            }
+
                             profileExists = true;
                         } else {
                             profileExists = false;
                         }
+
                         resume();
                     });
                     function resume() {
@@ -64,38 +69,51 @@
                 loadProfile();
 
                 $scope.saveProfile = function(profile) {
-                    $scope.profile = profile;
-                    $scope.profile.id = $scope.artistId;
+                    profile.id = $scope.artistId;
 
                     $scope.$root.loader.suspend();
-
-                    //set promises for add or update profile
-                    if(profileExists) {
-                        profileEdit = profileService.update($scope.profile);
-                    } else {
-                        profileEdit = profileService.create($scope.profile);
-                    }
-
-                    //set promises for add or update avatar
-                    if($scope.profile.avatar) {
-                        if($scope.profile.avatar.change){
-                            $scope.profile.avatar.rnd =  Math.random(10).toString().substring(7);
-                            avatarChange = true;
-                            if ($scope.profile.avatar.id) {
-                                avatarEdit = avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob);
-                            } else {
-                                avatarEdit = avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob);
-                            }
-                        }
-                    }
 
                     // functions that can be performed
                     function backToProfile() {
                         $state.go('master.main.profile', {artistId: $scope.profile.id}, {reload:true});
                     }
 
-                    function saveAvatar() {
-                        return avatarEdit
+                    function updateProfile() {
+                        return profileService.update(profile)
+                        .success (function(data){
+                        })
+                        .error (function(error){
+                            $scope.error = error;
+                        })
+                        .finally (function(){
+                            if($scope.hasImageSelected) {
+                                checkAvatar();
+                            } else {
+                                $scope.$root.loader.resume();
+                                backToProfile();
+                            }
+                        });
+                    }
+
+                    function createProfile() {
+                        return profileService.create(profile)
+                        .success (function(data){
+                        })
+                        .error (function(error){
+                            $scope.error = error;
+                        })
+                        .finally (function(){
+                            if($scope.hasImageSelected) {
+                                checkAvatar();
+                            } else {
+                                $scope.$root.loader.resume();
+                                backToProfile();
+                            }
+                        });
+                    }
+
+                    function updateAvatar() {
+                        return avatarService.streams.update($scope.profile.id, $scope.profile.avatar.blob)
                         .success(function(data, stream) {
                             $scope.avatarData = data;
                             $scope.avatarStream = stream;
@@ -104,32 +122,40 @@
                             $scope.error = error;
                         })
                         .finally(function (){
-                            loadProfile();
                             $scope.$root.loader.resume();
+                            backToProfile();
                         });
                     }
 
-                    function updateProfile() {
-                        return profileEdit
-                        .success (function(data){
-                            $scope.profile = data;
+                    function createAvatar() {
+                        return avatarService.streams.create($scope.profile.id, 'avatar', $scope.profile.avatar.blob)
+                        .success(function(data, stream) {
+                            $scope.avatarData = data;
+                            $scope.avatarStream = stream;
                         })
-                        .error (function(error){
+                        .error(function(error) {
                             $scope.error = error;
                         })
-                        .finally (function(){
-                            if (avatarChange) {
-                                saveAvatar();
-                            } else {
-                                loadProfile();
-                                $scope.$root.loader.resume();
-                                backToProfile();
-                            }
+                        .finally(function (){
+                            $scope.$root.loader.resume();
+                            backToProfile();
                         });
                     }
 
-                    updateProfile();
+                    function checkAvatar() {
+                        if(avatarExists) {
+                            updateAvatar();
+                        }
+                        else {
+                            createAvatar();
+                        }
+                    }
 
+                    if(profileExists) {
+                        updateProfile();
+                    } else {
+                        createProfile();
+                    }
                 };
 
                 $scope.previewSelectedImage = function previewSelectedImage() {

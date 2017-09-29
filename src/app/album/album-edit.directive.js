@@ -145,10 +145,8 @@ angular.module('media-gallery')
 
                         //find selected song in array
                         var findSong = function($index){
-                            console.log($scope);
                             var songId = $scope.album.playlist[$index].id;
                             $scope.album.playlist.splice($index, 1);
-                            console.log($scope);
                             return filesService.get(songId)
                                 .success(function(songData) {
                                     $scope.songData = songData;
