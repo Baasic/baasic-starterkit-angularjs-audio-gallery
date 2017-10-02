@@ -26,7 +26,7 @@ var htmlminOpts = {
 };
 
 var baseUrl = g.util.env.baseUrl || '/';
-var theme = g.util.env.theme || 'audio-minimal';
+var theme = g.util.env.theme || 'soundbox';
 
 //Plugins
 var atImport = require('postcss-import');
