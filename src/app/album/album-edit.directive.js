@@ -145,7 +145,7 @@ angular.module('media-gallery')
 
                         //find selected song in array
                         var findSong = function($index){
-                            var songId = $scope.playlist[$index].id;
+                            var songId = $scope.album.playlist[$index].id;
                             $scope.album.playlist.splice($index, 1);
                             return filesService.get(songId)
                                 .success(function(songData) {
@@ -192,7 +192,7 @@ angular.module('media-gallery')
                             $scope.album = saveAlbum;
                             $scope.album.rnd = Math.random(10).toString().substring(7);
 
-                            if($scope.file.blob) {
+                            if($scope.hasImageSelected && !$scope.invalidImageFileType) {
                                 updateCoverStream();
                             } else {
                                 updateAlbum();

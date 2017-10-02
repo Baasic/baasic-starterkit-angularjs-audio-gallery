@@ -16,6 +16,7 @@
                     <input ng-if="album.coverId" class="input input--file" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()">
                     <input ng-if="!album.coverId" class="input input--file" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()" required>
 
+                    <p class="validation validation--alert" ng-show="(editAlbum.$submitted && editAlbum.$error.fileType && hasImageSelected) || (invalidImageFileType && imageInputChanged)">Allowed extensions are: png, jpeg, jpg</p>
                     <div ng-show="editAlbum.$submitted && editAlbum.albumName.$invalid" class="spc--top--sml">
                         <p class="validation validation--alert" ng-show="invalidImageFileType && imageInputChanged">Allowed extensions are: png, jpeg, jpg</p>
                         <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.$error.required">Album cover image is required</p>
