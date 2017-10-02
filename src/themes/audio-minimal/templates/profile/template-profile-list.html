@@ -28,7 +28,7 @@
         </p>
     </section>
     <pager pager-data="profiles.pagerData" ng-show="profiles.pagerData.hasPrevious || profiles.pagerData.hasNext" class="pager">
-        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage - 1})" class="btn btn--med btn--primary pull" ng-show="profiles.pagerData.hasPrevious">< Prev</a>
-        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage + 1})" class="btn btn--med btn--primary push" ng-show="profiles.pagerData.hasNext">Next ></a>
+        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage - 1})" class="btn btn--med btn--primary pull" ng-show="profiles.pagerData.hasPrevious">Prev</a>
+        <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage + 1})" class="btn btn--med btn--primary push" ng-show="profiles.pagerData.hasNext">Next</a>
     </pager>
 </div>

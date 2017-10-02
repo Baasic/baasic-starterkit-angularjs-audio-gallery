@@ -59,5 +59,8 @@
         &__form {
             overflow: hidden;
         }
+        &__picture {
+            min-height: calc($unit*8);
+        }
     }
 }
