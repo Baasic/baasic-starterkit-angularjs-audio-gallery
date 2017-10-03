@@ -37,8 +37,8 @@ angular.module('media-gallery')
                         };
 
                         $scope.submitLogin = function submitLogin() {
-                            $scope.$root.loader.suspend();
                             if ($scope.login.$valid) {
+                                $scope.$root.loader.suspend();
                                 $scope.logging = true;
                                 loginService.login({
                                     username: $scope.username,
@@ -61,6 +61,7 @@ angular.module('media-gallery')
                                         })
                                         .finally(function () {
                                             $scope.logging = false;
+                                            $scope.$root.loader.resume();
                                             $state.go('master.main.index');
                                         });
 
@@ -85,8 +86,7 @@ angular.module('media-gallery')
                                 .finally(function() {
                                     $scope.$root.loader.resume();
                                 });
-                                }
-
+                            }
                         };
                     }
                 ],

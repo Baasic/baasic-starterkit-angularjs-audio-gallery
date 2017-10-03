@@ -20,6 +20,7 @@ angular.module('media-gallery')
 							$scope.vm = vm;
 
 							vm.message = '';
+                            vm.messageType = '';
 
 							vm.user = {};
 							vm.user.activationUrl = $state.href('master.main.account-activation', {}, {absolute: true}) + '?activationToken={activationToken}';
@@ -27,23 +28,33 @@ angular.module('media-gallery')
 							vm.user.challengeIdentifier = '';
 							vm.user.challengeResponse = '';
 
-							vm.register = function() {								
+							vm.register = function() {
 								if($scope.registrationForm.$valid) {
 									vm.user.challengeIdentifier = recaptchaService.challenge();
 									vm.user.challengeResponse = recaptchaService.response();
 
 									if(vm.user.challengeResponse === '') {
-										vm.message = 'Captcha code is required!';
+										vm.message = 'Captcha is required! Confirm that you are not robot!';
+                                        vm.messageType = 'alert';
 										return;
 									}
 
 									registerService.create(vm.user)
 										.success(function() {
 											vm.message = 'You have successfully registered, please check you email in order to finish registration process';
-                                            /*To do: create profile and make it active:false; */
+                                            vm.messageType = 'success';
 										})
 										.error(function(data, status) {
-											vm.message = status + ': ' + data.message;
+										    var statusNumbers = {
+                                                '400' : 'Bad Request - Please check Captcha challenge request',
+                                                '401' : 'Requested action requires authenthication',
+                                                '403' : 'System refuses to fullfil requested action, registration may be disabled',
+                                                '409' : 'Email or username is already registered in system',
+                                                '500' : 'Internal server error, this is on server side, please contact support'
+                                            };
+
+                                            vm.message = statusNumbers[status];
+                                            vm.messageType = 'error';
 											recaptchaService.reload();
 										})
 										.finally(function () {

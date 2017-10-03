@@ -10,6 +10,9 @@
     &--light {
         background: white;
     }
+    &--sml {
+        max-width: 600px;
+    }
     &--lrg {
         max-width: 1600px;
     }
