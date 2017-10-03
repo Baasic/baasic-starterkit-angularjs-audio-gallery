@@ -24,13 +24,11 @@ angular.module('media-gallery')
 
                     scope.$root[name] = {
                         suspend: function suspend() {
-                            console.log('suspend');
                             scope.timerId = setTimeout(function () {
                                 elem.removeClass(hideClass);
                             }, delay);
                         },
                         resume: function resume() {
-                            console.log('resume');
                             if (scope.timerId) {
                                 clearTimeout(scope.timerId);
                                 scope.timerId = null;
