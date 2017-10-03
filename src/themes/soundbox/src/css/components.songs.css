@@ -11,19 +11,9 @@
         height: calc($unit * 8);
         margin-bottom: calc($unit * 2);
     }
-
     &__playlist {
         list-style: none;
         display: inline-block;
         padding: 0;
-        &__item {
-            display: block;
-            &:nth-child(odd) {
-                background: white;
-            }
-            &:nth-child(even) {
-                background: none;
-            }
-        }
     }
 }

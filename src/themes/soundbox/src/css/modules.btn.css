@@ -76,11 +76,12 @@
     /**
      * Button sizes
      */
+    /* not in use
     &--sml {
         height: calc($unit * 4);
         line-height: calc($unit * 4);
         padding: 0 calc($unit * 2);
-    }
+    }*/
     &--med {
         height: calc($unit * 6);
         line-height: calc($unit * 6);

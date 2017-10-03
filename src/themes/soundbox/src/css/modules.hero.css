@@ -5,6 +5,7 @@
 .hero {
     position: relative;
     width: 100%;
+    background: url(./assets/img/hero.jpg) no-repeat center;
     &:before {
         content: '';
         position: absolute;
@@ -24,23 +25,5 @@
     }
     &__text {
         margin-bottom: 24px;
-    }
-    &--cta {
-        background: url(./assets/img/hero.jpg) no-repeat center;
-    }
-    &--register {
-        background: url(./assets/img/hero.jpg) no-repeat center;
-    }
-    &--activation {
-        background: url(./assets/img/hero.jpg) no-repeat center;
-    }
-    &--login {
-        background: url(./assets/img/hero.jpg) no-repeat center;
-    }
-    &--search {
-        background: url(./assets/img/hero.jpg) no-repeat center;
-    }
-    &--password {
-        background: url(./assets/img/hero.jpg) no-repeat center;
     }
 }

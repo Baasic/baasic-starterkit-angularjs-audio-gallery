@@ -69,7 +69,6 @@
 @import components.album.css;
 @import components.songs.css;
 @import components.scrollbar.css;
-@import components.menu.css;
 @import components.search.css;
 @import components.pager.css;
 /**
@@ -90,7 +89,7 @@
 @import utils.icon.css;
 @import utils.floats.css;
 @import utils.img.css;
-@import utils.responsive.css; 
+@import utils.responsive.css;
 
 /**
 * Import: plugins

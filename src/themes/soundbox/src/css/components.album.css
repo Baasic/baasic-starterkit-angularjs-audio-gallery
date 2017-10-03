@@ -13,39 +13,6 @@
         &--primary {
             font-weight: 700;
         }
-        &--secondary {
-            max-width: 250px;
-            width: 100%;
-            margin-top: $unit;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            @mixin type-scale $type-medium, 1.5;
-        }
-    }
-    &__link {
-        display: block;
-        position: relative;
-        color: $color-primary;
-        font-family: $ff-sans;
-        @mixin type-scale $type-medium, 1.25;
-        text-decoration: none;
-        transition: all .3s ease-in-out;
-
-        &:hover {
-            color: $color-secondary;
-            opacity: 0.75;
-        }
-    }
-    &__about {
-        margin-top: calc($unit*2);
-        @media (--screen-from-sml) {
-            padding: 0 calc($unit*2);
-            margin-top: 0;
-        }
-    }
-    &__cover {
-        max-width: calc($unit*24);
     }
     &__playlist {
         list-style: none;

@@ -27,35 +27,7 @@
         padding: calc($unit*4);
         overflow: hidden;
     }
-    &__title {
-        text-transform: uppercase;
-    }
-    &__subtitle, &__description {
-        margin-bottom: calc($unit*2);
-    }
-    &__content {
-        padding: calc($unit*4);
-        &:after {
-            content: '';
-            clear: both;
-            display:table;
-        }
-    }
-    &__avatar {
-        max-width: 200px;
-        width: 100%;
-        float: right;
-    }
-    &__info {
-        display: inline-block;
-        vertical-align: top;
-        max-width: calc(100% - 220px);
-    }
-
-    &__edit{
-        &__buttons {
-            margin: calc($unit*4) 0 calc($unit*2) 0;
-        }
+    &__edit {
         &__form {
             overflow: hidden;
         }
