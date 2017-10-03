@@ -58,8 +58,11 @@
                     <li ng-repeat="song in album.playlist as playlist" class="col col-sml-12 album__playlist__item">
                         <div class="col-sml-12">
                             <div class="col-sml-12 col-med-8">
-                                {{$index+1}}. {{song.title}}
-                                <a href="javascript:void(0)" ng-click="deleteSong($index);" class="type--bold alert album__playlist__item__delete">×</a>
+                                <p class="spc--top--sml">
+                                    {{$index+1}}. {{song.title}}
+                                    <a href="javascript:void(0)" ng-click="deleteSong($index);" class="type--bold alert album__playlist__item__delete">×</a>
+                                </p>
+
                             </div>
                             <audio controls class="col-sml-12 col-med-4">
                                 <source ng-src="{{songUrlList[$index] | trusted}}" type="audio/mpeg"/>
