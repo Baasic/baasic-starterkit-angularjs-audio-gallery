@@ -49,8 +49,6 @@ angular.module('media-gallery')
                             getAlbum();
                         });
 
-
-
                         //get me album
                         function getAlbum() {
                             albumsService.get($scope.albumId)
@@ -139,6 +137,7 @@ angular.module('media-gallery')
                                     console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
+                                    $scope.$root.loader.resume();                                    
                                     $scope.backToDetails();
                                 });
                         };
@@ -171,6 +170,7 @@ angular.module('media-gallery')
                                     console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
+                                    $scope.$root.loader.suspend();                                    
                                     getAlbum();
                                 });
                         };
@@ -189,6 +189,7 @@ angular.module('media-gallery')
 
                         //save album on button click
                         $scope.saveAlbum = function(saveAlbum) {
+                            $scope.$root.loader.suspend();                            
                             $scope.album = saveAlbum;
                             $scope.album.rnd = Math.random(10).toString().substring(7);
 
@@ -201,6 +202,7 @@ angular.module('media-gallery')
 
                         //delete song on button click
                         $scope.deleteSong = function ($index) {
+                            $scope.$root.loader.suspend();                            
                             findSong($index);
                         };
 

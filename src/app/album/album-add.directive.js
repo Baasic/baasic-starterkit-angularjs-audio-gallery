@@ -53,6 +53,7 @@ angular.module('media-gallery')
                             $scope.album.rnd = Math.random(10).toString().substring(7);
 
                             function createAlbum() {
+                                $scope.$root.loader.suspend();
                                 $scope.album.artistId = $scope.artistId;
                                 return albumsService.create($scope.album)
                                     .success(function(album){
@@ -129,8 +130,7 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function() {
-                                        console.log('scope album');
-                                        console.log($scope.album);
+                                        $scope.$root.loader.resume();                                      
 
                                         $scope.goToEdit();
                                     });
