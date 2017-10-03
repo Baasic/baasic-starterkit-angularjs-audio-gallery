@@ -78,7 +78,7 @@
             <div ng-if="$root.user.isAuthenticated" class="push">
                 <button class="btn btn--primary btn--med spc--bottom--sml" type="submit">Save</button>
                 <a class="btn btn--primary btn--med spc--bottom--sml" ui-sref="master.main.album-add({artistId : $root.user.id})" ng-if="profile.id.length">Add album</a>
-                <a class="btn btn--tertiary btn--med spc--bottom--sml" ui-sref="master.main.profile({artistId : $root.user.id})">Cancel</a>
+                <a class="btn btn--tertiary btn--med spc--bottom--sml" href="javascript:void(0);" ng-click="cancelEdit();">Cancel</a>
             </div>
         </form>
     </div>

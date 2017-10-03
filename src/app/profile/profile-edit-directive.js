@@ -179,7 +179,12 @@
                 };
 
                 $scope.cancelEdit = function cancelEdit() {
-                    $state.go('master.main.profile', {artistId: $scope.profile.id});
+                    if($scope.profile) {
+                        $state.go('master.main.profile', {artistId: $scope.profile.id});
+                    } else {
+                        $state.go('master.main.index');
+                    }
+
                 };
             }
         ],

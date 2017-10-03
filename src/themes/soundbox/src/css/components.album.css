@@ -61,6 +61,12 @@
             &:nth-child(even) {
                 background: none;
             }
+            &__delete {
+                color: $color-tertiary;
+                &:hover {
+                    color: color($color-tertiary blackness(+20%));
+                }
+            }
         }
     }
 }
