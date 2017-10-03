@@ -40,6 +40,7 @@ angular.module('media-gallery')
                             }
 
                             function getAlbum() {
+                                $scope.$root.loader.suspend();                                
                                 albumsService.get($scope.albumId, {})
                                 .success(function(album){
                                     $scope.album = album;
@@ -125,6 +126,8 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
+                                        $scope.$root.loader.resume();
+                                        
                                         $scope.$emit('albumUpdated', {});
 
                                         //TODO: set the new song form input to pristine state.
@@ -132,7 +135,8 @@ angular.module('media-gallery')
                                         document.getElementById('newSongTitle').value = null;
                                         document.getElementById('newSongFile').value = null;
                                         $scope.newSong.$setPristine();
-                                        $scope.invalidAudioFileType = false;                                        
+                                        $scope.invalidAudioFileType = false;
+                                        $scope.$root.loader.resume();                                        
                                     });
                             };
 
@@ -172,6 +176,8 @@ angular.module('media-gallery')
                             }
 
                             var getAlbum = function() {
+                                $scope.$root.loader.suspend();
+                                
                                 return albumsService.get($scope.albumId, {})
                                     .success(function(album){
                                         albumToUpdate = album;
@@ -272,6 +278,9 @@ angular.module('media-gallery')
                                     })
                                     .finally(function(){
                                         //refresh song list here
+                                        $scope.$root.loader.resume();
+                                        
+
                                         $scope.$emit('albumUpdated', {});
                                         
                                         //TODO: set the new song form input to pristine state.

@@ -15,7 +15,7 @@ angular.module('media-gallery')
                             $scope.albums = [];
                             $scope.artistId = $state.params.artistId;
                             var profileExists;
-
+                            
                             profileService.get($state.params.artistId, {
                                 embed: 'avatar'
                             })
@@ -25,16 +25,18 @@ angular.module('media-gallery')
                                 .error(function (error) {
                                     $scope.error = error;
                                     if (error === '"Resource not found."') {
+                                        $scope.$root.loader.resume();                                                                            
                                         $state.go('master.main.profile-edit', {artistId: $state.params.artistId});
                                     }
                                 })
                                 .finally(function (){
+                                    $scope.$root.loader.resume();                                    
+                                    
                                     if($scope.profile) {
                                         profileExists = true;
                                     } else {
                                         profileExists = false;
                                     }
-                                    $scope.$root.loader.resume();
                                 });
                         }
 

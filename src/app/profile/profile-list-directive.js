@@ -10,6 +10,8 @@ angular.module('media-gallery')
                 controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService',
                     function ($scope, $state, $stateParams, $q, baasicUserProfileService) {
                         function loadProfiles() {
+                            $scope.$root.loader.suspend();
+                            
                             baasicUserProfileService.find({
                                 page: $state.params.page || 1,
                                 rpp: 10,
@@ -31,7 +33,7 @@ angular.module('media-gallery')
                                 $scope.error = error;
                             })
                             .finally(function () {
-
+                                $scope.$root.loader.resume();                                
                             });
                         }
                         loadProfiles();

@@ -23,10 +23,12 @@
                     $scope.error = error;
                 })
                 .finally(function(){
+                    $scope.$root.loader.resume();                    
                 });
             }
 
             function loadAlbums() {
+
                 $scope.albums = [];
 
                 albumsService.find({
@@ -91,10 +93,9 @@
                 }
 
                 function deleteAllData() {
+                    $scope.$root.loader.suspend();                    
                     getAlbumCover();
                 }
-            
-
 
                 function getAlbumCover() {
                     var coverId = $scope.albums[album].coverId;
@@ -170,6 +171,8 @@
                         $scope.error = error;
                     })
                     .finally(function () {
+                        $scope.$root.loader.resume();
+                        
                         $scope.backToDetails();
                     });
                 }
