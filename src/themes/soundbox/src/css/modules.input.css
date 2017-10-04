@@ -30,7 +30,7 @@
 
     &--search {
         padding: calc($unit*2);
-        margin: $unit 0;
+        margin-top: calc($unit*2);
         &__reset{
             position: absolute;
             top: calc($unit*3);

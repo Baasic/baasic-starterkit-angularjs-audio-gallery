@@ -202,8 +202,10 @@ angular.module('media-gallery')
 
                         //delete song on button click
                         $scope.deleteSong = function ($index) {
-                            $scope.$root.loader.suspend();                            
-                            findSong($index);
+                            if (window.confirm('This will delete selected song from system, are you sure you want to delete this song?')) {
+                                $scope.$root.loader.suspend();
+                                findSong($index);
+                            }
                         };
 
                         $scope.cancelEdit = function () {

@@ -66,6 +66,9 @@
     &--remove {
         background-image: svg-load(../../assets/icons/remove.svg, fill: $color-text);
     }
+    &--delete {
+        background-image: svg-load(../../assets/icons/delete.svg, fill: $color-tertiary);
+    }
     &--upload {
         background-image: svg-load(../../assets/icons/upload.svg, fill: $color-text);
     }
@@ -90,6 +93,9 @@
     &--play {
         background-image: svg-load(../../assets/icons/play.svg, fill: $color-text);
     }
+    &--play__btn {
+        background-image: svg-load(../../assets/icons/play-button.svg, fill: $color-text);
+    }
     &--prev {
         background-image: svg-load(../../assets/icons/prev.svg, fill: $color-text);
     }
@@ -99,7 +105,7 @@
     &--shuffle {
         background-image: svg-load(../../assets/icons/shuffle.svg, fill: $color-text);
     }
-    
+
     /*social icons*/
     &--bandcamp {
         background-image: svg-load(../../assets/icons/bandcamp.svg, fill: $color-text);

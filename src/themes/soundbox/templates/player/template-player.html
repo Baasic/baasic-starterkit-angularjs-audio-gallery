@@ -60,7 +60,7 @@
                 <!-- standard one-line items -->
                 <li ng-repeat="song in playlist" ng-class="{ 'active' : currentPlaying.id == song.id }">
                     <a play-from-playlist="song">
-                        <b>{{ song.title }}</b> - {{ song.artist }}
+                        <b>{{ song.artist }}</b> - {{ song.title }}
                         <!-- <a href="javascript:void(0)" remove-from-playlist="song" data-index="{{$index}}" class="push">×</a> -->
                     </a>
                 </li>
