@@ -163,7 +163,7 @@ angular.module('media-gallery', [
 
         $scope.resetSearch = function resetSearch() {
             $scope.searchFor = '';
-            $state.go('master.main.search', { search: $scope.searchFor });
+            $state.go('master.main.index');
         };
     }])
     .run(['$rootScope', '$window', 'baasicAuthorizationService',

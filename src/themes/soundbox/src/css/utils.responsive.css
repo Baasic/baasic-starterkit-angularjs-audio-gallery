@@ -8,6 +8,7 @@
             display: none!important;
         }
     }
+    /* not in use
     &--sml {
         @media(--screen-to-sml) {
             display: none!important;
@@ -23,4 +24,5 @@
             display: none!important;
         }
     }
+    */
 }

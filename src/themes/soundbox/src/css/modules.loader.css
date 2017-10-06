@@ -24,7 +24,6 @@
         position: absolute;
         width: 8px;
         animation: sound 0ms -800ms linear infinite alternate;
-
         &:nth-child(1)  { left: 3px; animation-duration: 474ms; }
         &:nth-child(2)  { left: 15px; animation-duration: 433ms; }
         &:nth-child(3)  { left: 27px; animation-duration: 407ms; }
@@ -41,7 +40,6 @@
         color: white;
     }
 }
-
 @keyframes sound {
     0% {
        opacity: .35;

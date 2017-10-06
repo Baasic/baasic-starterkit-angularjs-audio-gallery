@@ -7,7 +7,7 @@
     &__list {
         padding: calc($unit*4);
         &__link {
-            color: $gray4;
+            color: $gray-light;
             text-decoration: none;
             opacity: 0.7;
             transition: all 250ms ease-in-out;

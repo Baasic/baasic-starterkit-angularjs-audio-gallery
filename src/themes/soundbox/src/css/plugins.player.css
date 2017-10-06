@@ -2,90 +2,6 @@
     # plugins.player
 \*------------------------------------*/
 
-.player {
-    background-color: $shamrock;
-    &__song {
-        &--current {
-            color: $color-primary;
-        }
-    }
-    &__songart {
-        width: 80px
-    }
-    &__seeker {
-        &__progress {
-
-        }
-    }
-    &__btn {
-        display: inline-block;
-        vertical-align: middle;
-
-        touch-action: manipulation;
-        user-select: none;
-
-        cursor: pointer;
-        white-space: nowrap;
-        font-family: $ff-sans;
-        text-decoration: none;
-        text-align: center;
-        border-left: 1px solid rgba(0,0,0,0.1);
-        height: 45px;
-        width: 45px;
-        background: no-repeat center center;
-
-        &:focus {
-            outline: 0;
-        }
-
-        &--play {
-            background-image: url(../assets/img/player/play.svg);
-        }
-        &--pause {
-            background-image: url(../assets/img/player/pause.svg);
-        }
-        &--stop {
-            background-image: url(../assets/img/player/stop.svg);
-        }
-        &--repeat {
-            &--on {
-
-            }
-            &--off {
-
-            }
-        }
-        &--prev {
-            background-image: url(../assets/img/player/prev.svg);
-        }
-        &--next {
-            background-image: url(../assets/img/player/next.svg);
-        }
-        &--mute {
-            background-image: url(../assets/img/player/mute.svg);
-        }
-        &--volume {
-            &--plus {
-
-            }
-            &--minus {
-
-            }
-        }
-    }
-    &__playlist {
-        &__item {
-            &__title {
-
-            }
-            & .active {
-
-            }
-        }
-    }
-}
-
-
 /**
  * SoundManager 2: "Bar UI" player - CSS
  * Copyright (c) 2014, Scott Schiller. All rights reserved.
@@ -95,270 +11,48 @@
  */
 
 .sm2-bar-ui {
- position: relative;
- display: inline-block;
- width: 100%;
- font-family: helvetica, arial, verdana, sans-serif;
- font-weight: normal;
- /* prevent background border bleed */
- -webkit-background-clip: padding-box;
- background-clip: padding-box;
- /* because indeed, fonts do look pretty "fat" otherwise in this case. */
- -moz-osx-font-smoothing: grayscale;
- -webkit-font-smoothing: antialiased;
- /* general font niceness? */
- font-smoothing: antialiased;
- text-rendering: optimizeLegibility;
- min-width: 20em;
- max-width: 30em;
- /* take out overflow if you want an absolutely-positioned playlist dropdown. */
- border-radius: 2px;
- overflow: hidden;
- /* just for fun (animate normal / full-width) */
- transition: max-width 0.2s ease-in-out;
+    width: 100%;
+    transition: max-width 0.2s ease-in-out;
 }
-
-.sm2-bar-ui .sm2-playlist li {
- text-align: center;
- margin-top: -2px;
- font-size: 95%;
- line-height: 1em;
-}
-
-.sm2-bar-ui.compact {
- min-width: 1em;
- max-width: 15em;
-}
-
 .sm2-bar-ui ul {
- line-height: 1em;
+    line-height: 1em;
 }
-
-/* want things left-aligned? */
-.sm2-bar-ui.left .sm2-playlist li {
- text-align: left;
-}
-
 .sm2-bar-ui .sm2-playlist li .load-error {
-  cursor: help;
+    cursor: help;
 }
-
-.sm2-bar-ui.full-width {
- max-width: 100%;
- z-index: 5;
-}
-
 .sm2-bar-ui.fixed {
- position: fixed;
- top: auto;
- bottom: 0px;
- left: 0px;
- border-radius: 0px;
- /* so the absolutely-positioned playlist can show... */
- overflow: visible;
- /* and this should probably have a high z-index. tweak as needed. */
- z-index: 999;
+    position: fixed;
+    top: auto;
+    bottom: 0px;
+    left: 0px;
+    z-index: 999;
 }
-
-.sm2-bar-ui.fixed .bd,
-.sm2-bar-ui.bottom .bd {
- /* display: table; */
- border-radius: 0px;
- border-bottom: none;
-}
-
-.sm2-bar-ui.bottom {
- /* absolute bottom-aligned UI */
- top: auto;
- bottom: 0px;
- left: 0px;
- border-radius: 0px;
- /* so the absolutely-positioned playlist can show... */
- overflow: visible;
-}
-
-.sm2-bar-ui.playlist-open .bd {
- border-bottom-left-radius: 0px;
- border-bottom-right-radius: 0px;
- border-bottom-color: transparent;
-}
-
-.sm2-bar-ui .bd,
-.sm2-bar-ui .sm2-extra-controls {
- position: relative;
- background-color: #2288cc;
- /*
- transition: background 0.2s ease-in-out;
- */
-}
-
-.sm2-bar-ui .sm2-inline-gradient {
- /* gradient */
- position: absolute;
- left: 0px;
- top: 0px;
- width: 100%;
- height: 100%;
- background-image: linear-gradient(to bottom, rgba(255,255,255,0.125) 5%, rgba(255,255,255,0.125) 45%, rgba(255,255,255,0.15) 50%, rgba(0,0,0,0.1) 51%, rgba(0,0,0,0.1) 95%); /* W3C */
-}
-
-.sm2-bar-ui.flat .sm2-inline-gradient {
- background-image: none;
-}
-
-.sm2-bar-ui.flat .sm2-box-shadow {
- display: none;
- box-shadow: none;
-}
-
-.sm2-bar-ui.no-volume .sm2-volume {
- /* mobile devices (android + iOS) ignore attempts to set volume. */
- display: none;
-}
-
-.sm2-bar-ui.textured .sm2-inline-texture {
- position: absolute;
- top: 0px;
- left: 0px;
- width: 100%;
- height: 100%;
- /* for example */
- /* background-image: url(../image/wood_pattern_dark.png); */
- /* additional opacity effects can be applied here. */
- opacity: 0.75;
-
-}
-
-.sm2-bar-ui.textured.dark-text .sm2-inline-texture {
- /* dark text + textured case: use light wood background (for example.) */
- /* background-image: url(../image/patterns/wood_pattern.png); */
-}
-
-.sm2-bar-ui.textured.dark-text .sm2-playlist-wrapper {
- /* dark text + textured case: ditch 10% dark on playlist body. */
- background-color: transparent;
-}
-
-.sm2-bar-ui.textured.dark-text .sm2-playlist-wrapper ul li:hover a,
-.sm2-bar-ui.textured.dark-text .sm2-playlist-wrapper ul li.selected a {
- /* dark + textured case: dark highlights */
- background-color: rgba(0,0,0,0.1);
- background-image: url(../image/black-10.png);
- /* modern browsers don't neeed the image */
- background-image: none, none;
-}
-
 .sm2-bar-ui .bd {
- display: table;
- border-bottom: none;
+    display: table;
+    border-bottom: none;
 }
-
-.sm2-bar-ui .sm2-playlist-wrapper {
- background-color: rgba(0,0,0,0.1);
-}
-
-.sm2-bar-ui .sm2-extra-controls .bd {
- background-color: rgba(0,0,0,0.2);
-}
-
-
-.sm2-bar-ui.textured .sm2-extra-controls .bd {
- /* lighten extra color overlays */
- background-color: rgba(0,0,0,0.05);
-}
-
-.sm2-bar-ui .sm2-extra-controls {
- background-color: transparent;
- border: none;
-}
-
-.sm2-bar-ui .sm2-extra-controls .bd {
- /* override full-width table behaviour */
- display: block;
- border: none;
-}
-
-.sm2-bar-ui .sm2-extra-controls .sm2-inline-element {
- display: inline-block;
-}
-
 .sm2-bar-ui,
 .sm2-bar-ui .bd a {
- color: #fff;
+    color: #fff;
+    text-decoration: none;
 }
-
-.sm2-bar-ui.dark-text,
-.sm2-bar-ui.dark-text .bd a {
- color: #000;
-}
-
-.sm2-bar-ui.dark-text .sm2-inline-button {
- /* Warning/disclaimer: SVG might be fuzzy when inverted on Chrome, losing resolution on hi-DPI displays. */
- -webkit-filter: invert(1);
- /* SVG-based invert filter for Firefox */
- filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'invert\'><feColorMatrix in='SourceGraphic' type='matrix' values='-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0'/></filter></svg>#invert");
- /* IE 8 inverse filter, may only match pure black/white */
- /* filter: xray; */
- /* pending W3 standard */
- filter: invert(1);
- /* not you, IE < 10. */
- filter: none\9;
-}
-
-.sm2-bar-ui .bd a {
- text-decoration: none;
-}
-
 .sm2-bar-ui .bd .sm2-button-element:hover {
- background-color: rgba(0,0,0,0.1);
- background-image: url(../image/black-10.png);
- background-image: none, none;
+    background-color: rgba(0,0,0,0.25);
 }
-
 .sm2-bar-ui .bd .sm2-button-element:active {
- background-color: rgba(0,0,0,0.25);
- background-image: url(../image/black-25.png);
- background-image: none, none;
+    background-color: rgba(0,0,0,0.25);
 }
-
-.sm2-bar-ui .bd .sm2-extra-controls .sm2-button-element:active .sm2-inline-button,
-.sm2-bar-ui .bd .active .sm2-inline-button/*,
-.sm2-bar-ui.playlist-open .sm2-menu a */{
- -ms-transform: scale(0.9);
- -webkit-transform: scale(0.9);
- -webkit-transform-origin: 50% 50%;
- /* firefox doesn't scale quite right. */
- transform: scale(0.9);
- transform-origin: 50% 50%;
- /* firefox doesn't scale quite right. */
- -moz-transform: none;
-}
-
 .sm2-bar-ui .bd .sm2-extra-controls .sm2-button-element:hover,
 .sm2-bar-ui .bd .sm2-extra-controls .sm2-button-element:active,
 .sm2-bar-ui .bd .active {
- background-color: rgba(0,0,0,0.1);
- background-image: url(../image/black-10.png);
- background-image: none, none;
+    background-color: rgba(0,0,0,0.1);
 }
-
 .sm2-bar-ui .bd .sm2-extra-controls .sm2-button-element:active {
  /* box shadow is excessive on smaller elements. */
  box-shadow: none;
 }
-
-.sm2-bar-ui {
- /* base font size */
- font-size: 15px;
- text-shadow: none;
-}
-
 .sm2-bar-ui .sm2-inline-element {
- position: relative;
- display: inline-block;
- vertical-align: middle;
- padding: 0px;
- overflow: hidden;
+    vertical-align: middle;
 }
 
 .sm2-bar-ui .sm2-inline-element,
@@ -395,12 +89,6 @@
  background-color: rgba(0,0,0,0.15);
 }
 
-.sm2-bar-ui .sm2-extra-controls .sm2-inline-element {
- width: 25px; /* bare minimum */
- min-height: 1.75em;
- min-width: 2.5em;
-}
-
 .sm2-bar-ui .sm2-inline-status {
  line-height: 100%;
  /* how much to allow before truncating song artist / title with ellipsis */
@@ -416,32 +104,6 @@
  /* extra-small em scales up nicely, vs. 1px which gets fat */
  border-right: 0.075em dotted #666; /* legacy */
  border-right: 0.075em solid rgba(0,0,0,0.1);
-}
-
-.sm2-bar-ui .sm2-inline-element.noborder {
- border-right: none;
-}
-
-.sm2-bar-ui .sm2-inline-element.compact {
- min-width: 2em;
- padding: 0px 0.25em;
-}
-
-.sm2-bar-ui .sm2-inline-element:first-of-type {
- border-top-left-radius: 3px;
- border-bottom-left-radius: 3px;
- overflow: hidden;
-}
-
-.sm2-bar-ui .sm2-inline-element:last-of-type {
- border-right: none;
- border-top-right-radius: 3px;
- border-bottom-right-radius: 3px;
-}
-
-.sm2-bar-ui .sm2-inline-status a:hover {
- background-color: transparent;
- text-decoration: underline;
 }
 
 .sm2-inline-time,
@@ -463,17 +125,6 @@
  /* initial render / empty case */
  position: relative;
  min-height: 1em;
-}
-
-.sm2-bar-ui .sm2-playlist ul {
- position: absolute;
- left: 0px;
- top: 0px;
- width: 100%;
- list-style-type: none;
- overflow: hidden;
- white-space: nowrap;
- text-overflow: ellipsis;
 }
 
 .sm2-bar-ui p,
@@ -527,12 +178,6 @@
  background-color: rgba(0,0,0,0.33);
  background-image: url(../image/black-33.png);
  background-image: none, none;
-}
-
-.volume-shade,
-.playing .sm2-progress .sm2-progress-track,
-.paused .sm2-progress .sm2-progress-track {
- cursor: pointer;
 }
 
 .playing .sm2-progress .sm2-progress-ball {
@@ -615,12 +260,6 @@
  background-position: 40% 53%;
 }
 
-.playing .sm2-icon-play-pause {
- background-image: none, url(../assets/img/player/pause.svg);
- background-size: 57.6%;
- background-position: 50% 53%;
-}
-
 .sm2-icon-play {
  background-image: none, url(../assets/img/player/play.svg);
  background-size: 57.6%;
@@ -631,23 +270,6 @@
  background-image: none, url(../assets/img/player/pause.svg);
  background-size: 57.6%;
  background-position: 50% 53%;
-}
-
-.sm2-volume-control {
- background-image: none, url(../assets/img/player/volume.svg);
-}
-
-.sm2-volume-control,
-.sm2-volume-shade {
- background-position: 42% 50%;
- background-size: 56%;
-}
-
-.volume-shade {
- filter: alpha(opacity=33); /* <= IE 8 */
- opacity: 0.33;
-/* -webkit-filter: invert(1);*/
- background-image: none, url(../assets/img/player/volume.svg);
 }
 
 .sm2-icon-menu {
@@ -670,19 +292,11 @@
  background-position: 50% 50%;
 }
 
-
 .sm2-extra-controls .sm2-icon-previous,
 .sm2-extra-controls .sm2-icon-next {
  background-size: 53%;
 }
-/* not implemented
-.sm2-icon-shuffle {
- background-image: url(../image/icomoon/entypo-25px-ffffff/PNG/shuffle.png);
- background-image: none, url(../image/icomoon/entypo-25px-ffffff/SVG/shuffle.svg);
- background-size: 45%;
- background-position: 50% 50%;
-}
-*/
+
 .sm2-icon-repeat {
  background-image: url(../image/icomoon/entypo-25px-ffffff/PNG/loop.png);
  background-image: none, url(../assets/img/player/repeat.svg);
@@ -1104,7 +718,7 @@
 }
 .sm2-bar-ui .sm2-main-controls,
 .sm2-bar-ui .sm2-playlist-drawer {
- background-color: $gray2;
+ background-color: $gray-dark;
 }
 .sm2-bar-ui .sm2-inline-texture {
  background: transparent;

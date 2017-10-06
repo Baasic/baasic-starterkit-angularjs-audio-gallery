@@ -6,10 +6,4 @@
     &--ib {
         display: inline-block;
     }
-    &--b {
-        display: block;
-    }
-    &--n {
-        display: none;
-    }
 }

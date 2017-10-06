@@ -1,6 +1,5 @@
 <div class="container container--lrg container--light">
     <div class="songs__wrapper">
-        <!--  Add Song -->
         <form class="songs__form spc--bottom--sml" name="newSong" novalidate ng-submit="addSong(song)">
             <div class="row">
                 <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 spc--bottom--sml">
@@ -21,11 +20,9 @@
                     <input type="hidden" ng-model="song.url">
                     <input type="hidden" ng-model="song.pic">
                     <div class="col-sml-12">
-                        <div  ng-if="newSong.$submitted">
-                            <p class="validation validation--alert" ng-if="newSong.$submitted && newSong.title.$error.required">Song Title is required</p>
-                            <p class="validation validation--alert" ng-show="newSong.$submitted && invalidAudioFileType">Allowed extensions are: .mp3 and .m4a </p>
-                            <p class="validation validation--alert" ng-show="newSong.$submitted && newSong.songFile.$error.required">Song file is required.</p>
-                        </div>
+                        <p class="validation validation--alert" ng-if="newSong.$submitted && newSong.title.$error.required">Song Title is required</p>
+                        <p class="validation validation--alert" ng-if="newSong.$submitted && invalidAudioFileType">Allowed extensions are: .mp3 and .m4a </p>
+                        <p class="validation validation--alert" ng-if="newSong.$submitted && newSong.songFile.$error.required">Song file is required.</p>
                     </div>
                     <div class="push">
                         <button type="submit" class="btn btn--primary btn--med">Upload</button>

@@ -15,27 +15,21 @@
                     </div>
                     <input ng-if="album.coverId" class="input input--file" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()">
                     <input ng-if="!album.coverId" class="input input--file" id="albumCover" name="albumCover" type="file" file-model="file.blob" ng-model="file.filename" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" ng-change="previewSelectedImage()" required>
-                    <div ng-show="(editAlbum.$submitted && editAlbum.albumCover.$error.fileType) || (editAlbum.$submitted && editAlbum.albumCover.$error.required)" class="spc--top--sml">
-                        <p class="validation validation--alert" ng-show="invalidImageFileType && imageInputChanged">Allowed extensions are: png, jpeg, jpg</p>
-                        <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.albumCover.$error.required">Album cover image is required</p>
-                    </div>
+                    <p class="validation validation--alert" ng-if="editAlbum.$submitted && (invalidImageFileType && imageInputChanged)">Allowed extensions are: png, jpeg, jpg</p>
+                    <p class="validation validation--alert" ng-if="editAlbum.$submitted && editAlbum.albumCover.$error.required">Album cover image is required</p>
                 </div>
 
                 <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
                     <label for="albumName" class="label label--primary">Album Name</label>
                     <input id="albumName" name="albumName" ng-model="album.name" type="text" class="input input--text" required />
-                    <div ng-show="editAlbum.$submitted && editAlbum.albumName.$invalid">
-                        <p class="validation validation--alert" ng-show="editAlbum.albumName.$error.required || editAlbum.albumName.$invalid"> Album name is required. </p>
-                    </div>
+                    <p class="validation validation--alert" ng-show="editAlbum.$submitted && (editAlbum.albumName.$error.required || editAlbum.albumName.$invalid)"> Album name is required. </p>
 
                     <input name="artistId" ng-model="album.artistId" type="hidden" />
 
                     <label for="albumReleaseYear" class="label label--primary">Release Year</label>
                     <input id="albumReleaseYear" name="albumReleaseYear" ng-model="album.releaseYear" type="number" ng-min="1000" ng-max="9999" class="input input--text" required />
-                    <div ng-show="editAlbum.$submitted && editAlbum.albumReleaseYear.$invalid">
-                        <p class="validation validation--alert" ng-show="editAlbum.releaseYear.$error.required || editAlbum.albumReleaseYear.$invalid"> Year of album release is required. </p>
-                        <p class="validation validation--error" ng-show="editAlbum.input.$error"> Please Enter Four Digit Number Only</p>
-                    </div>
+                    <p class="validation validation--alert" ng-show="editAlbum.$submitted && editAlbum.releaseYear.$error.required"> Year of album release is required. </p>
+                    <p class="validation validation--error" ng-show="editAlbum.$submitted && editAlbum.input.$error"> Please Enter Four Digit Number Only</p>
 
                     <label for="aboutAlbum" class="label label--primary">About Album</label>
                     <textarea id="aboutAlbum" name="aboutAlbum" rows="5" ng-model="album.aboutAlbum" class="input input--text"></textarea>
@@ -56,8 +50,7 @@
             <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
                 <ul class="album__playlist">
                     <li ng-repeat="song in album.playlist as playlist" class="col col-sml-12 album__playlist__item">
-
-                        <a href="javascript:void(0)" music-player="play" add-song="song" class="icon icon--lrg icon--play__btn"></a>
+                        <a href="javascript:void(0)" music-player="play" add-song="song" class="icon icon--lrg icon--play"></a>
                         {{$index+1}}. {{song.title}}
                         <a href="javascript:void(0)" ng-click="deleteSong($index);" title="Delete song" class="push icon icon--lrg icon--delete"></a>
                     </li>

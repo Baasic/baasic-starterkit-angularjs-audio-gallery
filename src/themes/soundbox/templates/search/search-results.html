@@ -1,7 +1,7 @@
 <div class="container container--lrg container--light">
     <section class="hero">
         <div class="hero__content">
-            <h2 class="hero__title">You searched for</h2>
+            <h2 class="hero__title">You searched for:</h2>
             <h3 ng-controller="SearchCtrl">"{{ searchFor }}"</h3>
         </div>
     </section>
@@ -14,11 +14,9 @@
             </a>
         </div>
     </section>
-
-    <section class="" ng-if="!profiles.item.length">
+    <section class="padd--all--med" ng-if="!profiles.item.length">
         <p>No artists found!</p>
     </section>
-
     <pager pager-data="profiles.pagerData" ng-show="profiles.pagerData.hasPrevious || profiles.pagerData.hasNext" class="pager">
         <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage - 1})" class="btn btn--med btn--primary pull" ng-show="profiles.pagerData.hasPrevious">Prev</a>
         <a ui-sref="master.main.index({ page: profiles.pagerData.currentPage + 1})" class="btn btn--med btn--primary push" ng-show="profiles.pagerData.hasNext">Next</a>

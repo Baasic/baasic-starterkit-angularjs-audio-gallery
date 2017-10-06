@@ -7,10 +7,9 @@
             <div class="row">
                 <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 spc--bottom--sml">
                     <div class="position--rel profile__edit__picture">
-                        <img ng-if="!imageSrc && !hasImageSelected" class="" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-                        <img ng-if="imageSrc && !hasImageSelected || !profile" class="" ng-src="/assets/img/img.png" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-                        <img ng-if="hasImageSelected" class="" ng-src="{{selectedImage}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-
+                        <img ng-if="!imageSrc && !hasImageSelected" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                        <img ng-if="imageSrc && !hasImageSelected || !profile" ng-src="/assets/img/img.png" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                        <img ng-if="hasImageSelected" ng-src="{{selectedImage}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
                         <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files label--files--primary">
                             <i class="icon icon--sml icon--photo"></i>
                             <span ng-if="!profile.avatar">Add Avatar</span>

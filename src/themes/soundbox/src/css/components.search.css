@@ -8,4 +8,8 @@
     &.active {
         margin-top: 0px;
     }
+    &--404 {
+        max-width: 600px;
+        margin: 0 auto; 
+    }
 }

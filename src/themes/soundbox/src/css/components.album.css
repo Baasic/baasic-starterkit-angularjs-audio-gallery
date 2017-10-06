@@ -23,7 +23,7 @@
         &__item {
             display: block;
             &:nth-child(odd) {
-                background: $gray5;
+                background: $gray-lighter;
             }
             &:nth-child(even) {
                 background: none;

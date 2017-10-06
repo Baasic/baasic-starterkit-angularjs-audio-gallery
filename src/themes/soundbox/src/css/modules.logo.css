@@ -5,26 +5,28 @@
 .logo {
     display: inline-block;
     opacity: 0.5;
-
     background-repeat: no-repeat;
     background-position: center;
-
     vertical-align: middle;
     transition: all 250ms ease-in-out;
-
     &:hover {
         opacity: 1;
     }
-
     &--header {
         background-image: svg-load(../../assets/img/logo.svg, fill: $color-text);
         height: calc($unit*10);
         max-width: 190px;
         width: 100%;
-
         @media(--screen-to-xsml) {
             width: 75px;
             background-image: svg-load(../../assets/img/logo-sm.svg, fill: $color-text);
         }
+    }
+    &__404 {
+        background-image: svg-load(../../assets/img/logo.svg, fill: $gray-lighter);
+        height: calc($unit*10);
+        max-width: 190px;
+        width: 100%;
+        margin: 0 auto;
     }
 }

@@ -3,13 +3,7 @@
 \*------------------------------------*/
 
 .position {
-    &--abs {
-        position: absolute;
-    }
     &--rel {
         position: relative;
-    }
-    &--fix {
-        position: fixed;
     }
 }

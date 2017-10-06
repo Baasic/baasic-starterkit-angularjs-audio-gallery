@@ -13,7 +13,7 @@ html {
 
 body {
     font-family: $ff-serif;
-    background: $gray5;
+    background: $gray-lighter;
     overflow-x: hidden;
     color: $color-text;
     padding-bottom: 50px;

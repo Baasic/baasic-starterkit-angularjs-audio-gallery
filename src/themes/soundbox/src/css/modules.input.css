@@ -9,29 +9,24 @@
     border-style: solid;
     border-color: color($color-text a(50%));
     transition: all 250ms ease-in-out;
-
     &--file {
         display: none;
     }
-
     &--text, &--search {
         @mixin type-scale $type-medium, 1.25;
-
         &:focus, &:hover {
             outline: 0;
             border-color: $color-text;
             color:  black;
         }
     }
-
     &--text {
         margin-bottom: calc($unit*2);
     }
-
     &--search {
         padding: calc($unit*2);
         margin-top: calc($unit*2);
-        &__reset{
+        &__reset {
             position: absolute;
             top: calc($unit*3);
             right: calc($unit*2);
@@ -42,7 +37,9 @@
             text-decoration: none;
             opacity: 0.5;
             transition: all 250ms ease-in-out;
+
             &:hover {
+                color: $color-tertiary;
                 opacity: 1;
             }
         }

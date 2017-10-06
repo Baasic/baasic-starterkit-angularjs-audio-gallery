@@ -1,3 +1,20 @@
-﻿<div>
-	<h2>404 - Page not found</h2>
-</div>
+<section class="hero__404">
+    <div class="hero__content">
+        <a ui-sref="master.main.index" class="logo logo__404"></a>
+        <div class="type--center">
+            <h1 class="type--404 type--center">
+                404
+            </h1>
+            <h2 class="type--center spc--bottom--med">
+                This isn't the page you're looking for!
+            </h2>
+            <p>You can go to <a class="btn btn--sml btn--ghost" ui-sref="master.main.index">Homepage</a> or you can try to search for your favorite artist:</p>
+            <section class="search--404 spc--top--med">
+                <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="position--rel">
+                    <input type="text" name="searchEntry" placeholder="Type and hit enter or &crarr;" class="input input--search" ng-model="searchFor"/>
+                    <a href="javascript:void(0);" ng-if="searchFor" ng-click="resetSearch()" class="input--search__reset">×</a>
+                </form>
+            </section>
+        </div>
+    </div>
+</section>
