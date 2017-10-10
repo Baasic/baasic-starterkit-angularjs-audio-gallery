@@ -563,6 +563,7 @@
 
 .sm2-playlist-wrapper ul li {
  border-bottom: 1px solid rgba(0,0,0,0.05);
+ cursor: pointer;
 }
 
 .sm2-playlist-wrapper ul li:nth-child(odd) {
