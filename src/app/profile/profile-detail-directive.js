@@ -8,14 +8,13 @@ angular.module('media-gallery')
             return {
                 restrict: 'AE',
                 scope: '=',
-                controller: ['$scope', '$state', '$stateParams', '$q', 'baasicUserProfileService', 'baasicUserProfileAvatarService', 'baasicFilesService', 'albumsService',
-                    function baasicProfileDetail($scope, $state, $stateParams, $q, profileService, avatarService ,filesService, albumsService) {
+                controller: ['$scope', '$rootScope', '$state', '$stateParams', '$q', 'baasicUserProfileService', 'baasicUserProfileAvatarService', 'baasicFilesService', 'albumsService',
+                    function baasicProfileDetail($scope, $rootScope, $state, $stateParams, $q, profileService, avatarService ,filesService, albumsService) {
 
                         function loadProfile() {
                             $scope.albums = [];
                             $scope.artistId = $state.params.artistId;
                             var profileExists;
-                            
                             profileService.get($state.params.artistId, {
                                 embed: 'avatar'
                             })
@@ -25,13 +24,12 @@ angular.module('media-gallery')
                                 .error(function (error) {
                                     $scope.error = error;
                                     if (error === '"Resource not found."') {
-                                        $scope.$root.loader.resume();                                                                            
+                                        $scope.$root.loader.resume();
                                         $state.go('master.main.profile-edit', {artistId: $state.params.artistId});
                                     }
                                 })
-                                .finally(function (){
-                                    $scope.$root.loader.resume();                                    
-                                    
+                                .finally(function (){ 
+                                    $scope.$root.loader.resume();
                                     if($scope.profile) {
                                         profileExists = true;
                                     } else {
@@ -265,6 +263,7 @@ angular.module('media-gallery')
                             function deleteProfileData () {
                                 return profileService.remove($scope.profile)
                                 .success(function () {
+                                    $scope.$root.loader.resume();
                                     $state.go('master.main.index');
                                 })
                                 .error(function (error) {

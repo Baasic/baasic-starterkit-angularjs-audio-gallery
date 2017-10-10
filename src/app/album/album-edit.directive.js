@@ -51,6 +51,7 @@ angular.module('media-gallery')
 
                         //get me album
                         function getAlbum() {
+                            $scope.$root.loader.suspend();
                             albumsService.get($scope.albumId)
                                 .success(function (album) {
                                     $scope.album = album;
@@ -68,6 +69,7 @@ angular.module('media-gallery')
                                     console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
+                                    $scope.$root.loader.resume();
                                 });
                         }
                         getAlbum();
@@ -97,6 +99,7 @@ angular.module('media-gallery')
 
                         //get me cover data
                         var getCoverData = function() {
+                            $scope.$root.loader.suspend();
                             filesService.find(path)
                                 .success(function(coverData){
                                     $scope.coverData = coverData.item[0];
@@ -136,7 +139,7 @@ angular.module('media-gallery')
                                 .error(function(error){
                                     console.log(error); //jshint ignore: line
                                 })
-                                .finally(function(){
+                                .finally(function(){                                    
                                     $scope.$root.loader.resume();                                    
                                     $scope.backToDetails();
                                 });
@@ -170,7 +173,6 @@ angular.module('media-gallery')
                                     console.log(error); //jshint ignore: line
                                 })
                                 .finally(function(){
-                                    $scope.$root.loader.suspend();                                    
                                     getAlbum();
                                 });
                         };
@@ -183,7 +185,8 @@ angular.module('media-gallery')
                                 .error(function(error) {
                                     console.log(error); //jshint ignore: line
                                 })
-                                .finally(function(){
+                                .finally(function(){                                    
+                                    $scope.$root.loader.resume();
                                 });
                         };
 

@@ -21,8 +21,8 @@
                     }
                 };
             },
-            controller: ['$scope', '$state', '$q', '$window', 'FileReader','baasicUserProfileService', 'baasicUserProfileAvatarService', '$timeout',
-            function ($scope, $state, $q, $window, FileReader, profileService, avatarService, $timeout) {
+            controller: ['$rootScope', '$scope', '$state', '$q', '$window', 'FileReader','baasicUserProfileService', 'baasicUserProfileAvatarService', '$timeout',
+            function ($rootScope, $scope, $state, $q, $window, FileReader, profileService, avatarService, $timeout) {
                 $scope.file = { filename: ''};
                 $scope.model = {};
                 $scope.artistId = $state.params.artistId;
@@ -47,6 +47,8 @@
                         $scope.error = error;
                     })
                     .finally(function (){
+                        var scope = $rootScope.$new();
+                        scope.loader.resume();
                         if($scope.profile) {
                             if($scope.profile.avatar) {
                                 avatarExists = true;
@@ -58,12 +60,7 @@
                         } else {
                             profileExists = false;
                         }
-
-                        resume();
                     });
-                    function resume() {
-                        $scope.$root.loader.resume();
-                    }
                 }
 
                 loadProfile();

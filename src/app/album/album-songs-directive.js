@@ -126,7 +126,6 @@ angular.module('media-gallery')
                                         $scope.error = error;
                                     })
                                     .finally(function(){
-                                        $scope.$root.loader.resume();
                                         
                                         $scope.$emit('albumUpdated', {});
 
@@ -136,7 +135,7 @@ angular.module('media-gallery')
                                         document.getElementById('newSongFile').value = null;
                                         $scope.newSong.$setPristine();
                                         $scope.invalidAudioFileType = false;
-                                        $scope.$root.loader.resume();                                        
+                                        $rootScope.loader.resume();                                        
                                     });
                             };
 
@@ -278,9 +277,6 @@ angular.module('media-gallery')
                                     })
                                     .finally(function(){
                                         //refresh song list here
-                                        $scope.$root.loader.resume();
-                                        
-
                                         $scope.$emit('albumUpdated', {});
                                         
                                         //TODO: set the new song form input to pristine state.
@@ -291,7 +287,8 @@ angular.module('media-gallery')
                                         document.getElementById('newSongTitle').value = null;
                                         document.getElementById('newSongFile').value = null;
                                         $scope.newSong.$setPristine();
-                                        $scope.invalidAudioFileType = false;                                        
+                                        $scope.invalidAudioFileType = false;      
+                                        $rootScope.loader.resume();                                        
                                     });
                             };
 

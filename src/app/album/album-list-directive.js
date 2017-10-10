@@ -8,14 +8,14 @@
         restrict: 'AE',
         templateUrl:'templates/album/template-album-list.html',
         scope: '=',
-        controller: ['$scope', '$state', '$stateParams', '$q', 'albumsService', 'baasicFilesService', 'baasicApp',
-        function($scope, $state, $stateParams, $q, albumsService, filesService, baasicApp) {
+        controller: ['$scope', '$rootScope', '$state', '$stateParams', '$q', 'albumsService', 'baasicFilesService', 'baasicApp',
+        function($scope, $rootScope, $state, $stateParams, $q, albumsService, filesService, baasicApp) {
             var app = baasicApp.get();
             $scope.apiUrl = app.getApiUrl();
             $scope.modifiedAlbums = [];
 
-            function loadAlbumCovers (){
-                return filesService.streams.get($scope.album.coverId)
+            function loadAlbumCovers (){                
+                filesService.streams.get($scope.album.coverId)
                 .success(function(cover){
                     $scope.cover = cover;
                 })
@@ -23,14 +23,13 @@
                     $scope.error = error;
                 })
                 .finally(function(){
-                    $scope.$root.loader.resume();                    
+                    console.log($scope.$root);
+                    $scope.$root.loader.resume();
                 });
             }
 
             function loadAlbums() {
-
                 $scope.albums = [];
-
                 albumsService.find({
                     page: 1,
                     rpp: 10,
@@ -38,7 +37,7 @@
                     orderBy: 'releaseYear',
                     orderDirection : 'desc'
                 })
-                .success(function(data) {
+                .success(function(data) {                    
                     $scope.albums = data.item;
                     $scope.modifiedAlbums = angular.copy($scope.albums);
                     if($scope.ModifiedAlbums) {
@@ -60,7 +59,7 @@
                 .error(function(error) {
                     $scope.error = error;
                 })
-                .finally(function() {
+                .finally(function() {                    
                     $scope.$parent.albums = $scope.albums;
                     loadAlbumCovers();
                 });
@@ -170,7 +169,7 @@
                     .error(function (error) {
                         $scope.error = error;
                     })
-                    .finally(function () {
+                    .finally(function () {                        
                         $scope.$root.loader.resume();
                         
                         $scope.backToDetails();
