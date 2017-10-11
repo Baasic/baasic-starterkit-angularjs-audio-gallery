@@ -20,6 +20,7 @@ angular.module('media-gallery')
                             if (fn) {
                                 fn($scope);
                             }
+                            $scope.$root.loader.resume();
                             $state.go('master.main.index');
                         }
                         var storageKey = 'socialData';
@@ -34,10 +35,11 @@ angular.module('media-gallery')
                         $scope.logout = function logout() {
                             var token = authService.getAccessToken();
                             if (token) {
+                                $scope.$root.loader.suspend();
                                 loginService.logout(token.access_token, token.token_type) // jshint ignore:line
                                     .success(function socialLogin() {
                                          // clear social login provider data
-
+                                        $scope.$root.loader.resume();
                                         socialLogin.notification = '';
                                         socialLogin.showCredentials = false;
                                         socialLogin.inProgress = false;

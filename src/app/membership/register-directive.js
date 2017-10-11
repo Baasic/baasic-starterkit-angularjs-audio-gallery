@@ -38,7 +38,7 @@ angular.module('media-gallery')
                                         vm.messageType = 'alert';
 										return;
 									}
-
+									$scope.$root.loader.suspend();
 									registerService.create(vm.user)
 										.success(function() {
 											vm.message = 'You have successfully registered, please check you email in order to finish registration process';

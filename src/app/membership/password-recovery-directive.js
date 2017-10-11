@@ -31,6 +31,7 @@ angular.module('media-gallery')
 							return;
 						}
 
+						$scope.$root.loader.suspend();
 						passwordRecoveryService.requestReset(vm.recoveryData)
 							.success(function() {
 								vm.message = 'An email with a password change link has been sucessfully sent.';

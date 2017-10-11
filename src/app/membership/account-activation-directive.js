@@ -17,9 +17,10 @@ angular.module('media-gallery')
                         vm.messageType = '';
                         (function(){
                             if($stateParams.activationToken) {
-
+                                $scope.$root.loader.suspend();
                                 baasicRegisterService.activate({activationToken: $stateParams.activationToken})
                                 .success(function(){
+                                    $scope.$root.loader.resume();
                                     vm.message = 'You have successfully activated your account! You will be redirected to login form in 5 seconds.';
                                     vm.messageType = 'success';
                                     setTimeout(function(){
@@ -27,6 +28,7 @@ angular.module('media-gallery')
                                     }, 5000);
                                 })
                                 .error(function (data, status) {
+                                    $scope.$root.loader.resume();
                                     var statusNumbers = {
                                         '400' : 'Bad Request - System does not understand your request',
                                         '401' : 'Requested action requires authenthication',
