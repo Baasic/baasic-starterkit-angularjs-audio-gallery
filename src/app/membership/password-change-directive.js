@@ -13,7 +13,7 @@ angular.module('media-gallery')
 
 					var vm= {};
 					$scope.vm = vm;
-                    $scope.passwordRegex = '^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
+                    $scope.passwordRegex = '^(?=.*?[A-Za-z0-9])(?=.*?[^A-Za-z0-9]).{8,}$';
 					vm.resetData = {};
 					vm.resetData.passwordRecoveryToken = $stateParams.passwordRecoveryToken;
 					vm.resetData.newPassword = '';

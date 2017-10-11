@@ -16,6 +16,8 @@ angular.module('media-gallery')
 					controller: ['$scope','$state', 'baasicRegisterService', 'baasicRecaptchaService',
 						function RegisterCtrl($scope, $state, registerService, recaptchaService) {
 
+                            $scope.passwordRegex = '^(?=.*?[A-Za-z0-9])(?=.*?[^A-Za-z0-9]).{8,}$';
+
 							var vm = {};
 							$scope.vm = vm;
 
@@ -23,6 +25,7 @@ angular.module('media-gallery')
                             vm.messageType = '';
 
 							vm.user = {};
+
 							vm.user.activationUrl = $state.href('master.main.account-activation', {}, {absolute: true}) + '?activationToken={activationToken}';
 							vm.user.creationDate = new Date();
 							vm.user.challengeIdentifier = '';

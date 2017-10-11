@@ -16,8 +16,9 @@
     <p class="validation validation--alert" ng-show="(registrationForm.$submitted || registrationForm.userName.$touched) && registrationForm.userName.$error.required">Username is required.</p>
 
     <label for="password" class="label label--primary">Password</label>
-    <input class="input input--text" type="password" id="password" name="password" ng-model="vm.user.password" required placeholder="Password" autocomplete="off" />
+    <input class="input input--text" type="password" id="password" name="password" ng-pattern="passwordRegex" ng-model="vm.user.password" required placeholder="Password" autocomplete="off" />
     <p class="validation validation--alert" ng-show="(registrationForm.$submitted || registrationForm.password.$touched) && registrationForm.password.$error.required">Password is required.</p>
+    <p class="validation validation--alert" ng-show="(registrationForm.$submitted || registrationForm.password.$touched) && !registrationForm.password.$valid">Password must contain at least 8 characters and at least 1 non alpha-numeric character.</p>
 
     <label for="confirmPassword" class="label label--primary">Confirm Password</label>
     <input class="input input--text" type="password" id="confirmPassword" name="confirmPassword" ng-model="vm.user.confirmPassword" required placeholder="Confirm Password" autocomplete="off" />
