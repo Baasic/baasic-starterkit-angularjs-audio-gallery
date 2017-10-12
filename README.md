@@ -75,10 +75,5 @@ Get in touch using one of the community channels
 * [Pineapple Supply Co](https://pineapplesupply.co)
 * [flickr](https://flickr.com)
 * [tookapic](https://stock.tookapic.com/)
-
-Lorem Ipsums:
-- [Veggie Ipsum](http://veggieipsum.com/)
-- [Cheese Ipsum](http://www.cheeseipsum.co.uk/)
-- [Bacon Ipsum](http://baconipsum.com/)
-- [Cupcake Ipsum](http://www.cupcakeipsum.com/)
-- [Lorem Ipsum](http://www.lipsum.com/)
+* [Smashicons](https://smashicons.com) from
+* [Flaticons](https://flaticons.com)
