@@ -3,10 +3,11 @@ Baasic AngularJS Media Gallery Starter Kit
 
 ## Starter Kit Functionality
 
-This Starter Kit provides a bare-bones media gallery functionality. There are various themes available which demonstrate the capability of media gallery module, to keep things simple we implemented a theme which demonstrates photo capabilities, a theme for video capabilities and a theme for all types of documents. We deliberately removed advanced features so the baasic functionality is not obscured by them: however, future samples will include a complete media gallery management functionality.
+This Starter Kit provides a bare-bones media gallery functionality. There are various themes available which demonstrate the capability of media gallery module, to keep things simple we implemented a theme which demonstrates photo capabilities, a theme for video capabilities, a theme for audio capabilities and a theme for all types of documents. We deliberately removed advanced features so the baasic functionality is not obscured by them: however, future samples will include a complete media gallery management functionality.
 
 More information about the Starter Kit can be found in the series of blog posts [here](http://www.baasic.com/posts/AngularJS-Blog-Starter-Kit-part-1/).
 
+Audio starter kit provides membership module which enables registration, authorization, password change and account activation. After Account activation member can create profile that allows upload of artist avatar and entering info about artist along with his social network links. Every artist can add albums. Albums have image cover, description and playlist which is created by uploading songs to album. Starter kit also have audio player that can play uploaded songs on artist page.
 
 ## Working with the Starter kit
 
@@ -62,3 +63,22 @@ Get in touch using one of the community channels
 * GitHub: [Baasic](https://github.com/Baasic)
 * Google Groups: [Baasic Support](https://groups.google.com/forum/#!forum/baasic-baas)
 * Twitter: [@baasical](https://twitter.com/baasical)
+
+
+## Credits
+* [PostCSS](https://github.com/postcss)
+* [Audionautix](http://audionautix.com)
+* [Pexels](https://pexels.com/)
+* [Pixabay](https://pixabay.com)
+* [SplitShire](https://splitshire.com)
+* [Jay Mantri](http://jaymantri.com)
+* [Pineapple Supply Co](https://pineapplesupply.co)
+* [flickr](https://flickr.com)
+* [tookapic](https://stock.tookapic.com/)
+
+Lorem Ipsums:
+- [Veggie Ipsum](http://veggieipsum.com/)
+- [Cheese Ipsum](http://www.cheeseipsum.co.uk/)
+- [Bacon Ipsum](http://baconipsum.com/)
+- [Cupcake Ipsum](http://www.cupcakeipsum.com/)
+- [Lorem Ipsum](http://www.lipsum.com/)
