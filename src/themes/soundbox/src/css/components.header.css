@@ -8,4 +8,11 @@
     margin: 0 auto;
     padding: calc($unit*2) 0;
 
+    &__details {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: calc($unit*4);
+        overflow: hidden;
+    }
 }

@@ -20,13 +20,6 @@
         }
     }
     /*profile detail styling*/
-    &__header {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        padding: calc($unit*4);
-        overflow: hidden;
-    }
     &__edit {
         &__form {
             overflow: hidden;

@@ -8,7 +8,8 @@
             <p class="spc--bottom--sml">{{album.aboutAlbum}}</p>
             <p class="spc--bottom--sml" ng-if="!album.playlist || !album.playlist.length">No songs uploaded for this album!</p>
             <p class="spc--bottom--sml" ng-if="album.playlist && album.playlist.length">{{album.playlist.length}} <span ng-if="album.playlist.length == 1">song</span> <span ng-if="album.playlist.length > 1">songs</span> uploaded for this album!</p>
-            <button ng-if="album.playlist && album.playlist.length" class="btn btn--secondary btn--med spc--bottom--sml" play-all="album.playlist">Play album</button>
+            <a ng-if="album.playlist && album.playlist.length" class="btn btn--secondary btn--med spc--bottom--sml" play-all="album.playlist">Play album</a>
+            <a class="btn btn--primary btn--med spc--bottom--sml" ui-sref="master.main.album-info({albumId : album.id})">More info</a>
             <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--med spc--bottom--sml">edit album</a>
             <a ng-if="profile.id == $root.user.id" href="javascript:void();" ng-click="album.id ? deleteAlbum($index) : cancelEdit()" class="btn btn--tertiary btn--med spc--bottom--sml">delete album</a>
         </div>
