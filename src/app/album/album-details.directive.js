@@ -15,20 +15,10 @@ angular.module('media-gallery')
                         $scope.albumId = $state.params.albumId;
                         $scope.songUrlList = [];
 
-
-                        //please login if not logged in
-                        if (!$scope.$root.user.isAuthenticated) {
-                            $state.go('master.main.login');
-                        }
-
                         //back to profile page
                         $scope.backToDetails = function backToDetails() {
                             $state.go('master.main.profile', {artistId : $scope.$root.user.id});
                         };
-
-                        $scope.$on('albumUpdated', function() {
-                            getAlbum();
-                        });
 
                         //get me album
                         function getAlbum() {
