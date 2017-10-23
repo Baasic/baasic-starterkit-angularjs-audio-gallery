@@ -4,21 +4,23 @@
 
 .logo {
     display: inline-block;
-    opacity: 0.5;
+    opacity: 1;
     background-repeat: no-repeat;
     background-position: center;
     vertical-align: middle;
     transition: all 250ms ease-in-out;
+    sa
     &:hover {
-        opacity: 1;
+        opacity: 0.5;
     }
     &--header {
-        background-image: svg-load(../../assets/img/logo.svg, fill: $color-text);
+        background-image: svg-load(../../assets/img/logo.svg, fill: $color-primary);
         height: calc($unit * 6);
         width: 120px;
+        
         @media(--screen-to-xsml) {
             width: 75px;
-            background-image: svg-load(../../assets/img/logo-sm.svg, fill: $color-text);
+            background-image: svg-load(../../assets/img/logo-sm.svg, fill: $color-primary);
         }
     }
     &__404 {

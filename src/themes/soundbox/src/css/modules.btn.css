@@ -19,6 +19,7 @@
     text-decoration: none;
     text-align: center;
     border: 0;
+    border-radius: $global-radial;
 
     &:focus {
         outline: 0;
@@ -78,18 +79,19 @@
      */
 
     &--sml {
+        @mixin type-scale $type-small, 1;
         height: calc($unit * 4);
         line-height: calc($unit * 4);
         padding: 0 calc($unit * 2);
     }
     &--med {
+        @mixin type-scale $type-small, 1.5;
         height: calc($unit * 6);
-        line-height: calc($unit * 6);
         padding: 0 calc($unit * 3);
     }
     &--lrg {
+        @mixin type-scale $type-small, 2;
         height: calc($unit * 8);
-        line-height: calc($unit * 8);
         padding: 0 calc($unit * 4);
     }
 

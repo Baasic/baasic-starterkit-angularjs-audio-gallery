@@ -9,6 +9,7 @@
     border-style: solid;
     border-color: color($color-text a(50%));
     transition: all 250ms ease-in-out;
+
     &--file {
         display: none;
     }
@@ -26,6 +27,8 @@
     &--search {
         padding: calc($unit*2);
         margin-top: calc($unit*2);
+        border-radius: $global-radial;
+
         &__reset {
             position: absolute;
             top: calc($unit*3);

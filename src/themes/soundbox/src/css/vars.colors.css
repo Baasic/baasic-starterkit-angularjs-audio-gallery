@@ -7,7 +7,7 @@
  * Color naming taken from: http://www.color-blindness.com/color-name-hue/
  */
 
-$tangelo: #e37222;
+$orange-red: #f13913;
 $shamrock: #2ecc71;
 $cinnabar: #de443a;
 $allports: #1b5c95;
@@ -25,7 +25,7 @@ $color-text:        #333;
 /**
  * Theme colors
  */
-$color-primary:     $gray-darker;
+$color-primary:     $orange-red;
 $color-secondary: 	$allports;
 $color-tertiary:    $cinnabar;
 
@@ -34,4 +34,4 @@ $color-tertiary:    $cinnabar;
  */
 $color-warning:     $cinnabar;
 $color-success:     $shamrock;
-$color-alert:       $tangelo;
+$color-alert:       $cinnabar;

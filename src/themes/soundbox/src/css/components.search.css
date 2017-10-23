@@ -3,9 +3,9 @@
 \*------------------------------------*/
 
 .search {
-    padding: $spacer;
     margin-top: -68px;
     transition: all 250ms ease-in-out;
+    padding: 0 $spacer;
 
     &.active {
         margin-top: 0px;

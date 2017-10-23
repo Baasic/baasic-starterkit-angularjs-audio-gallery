@@ -23,6 +23,10 @@
     &--last {
         margin-right: 0;
     }
+    &--tiny {
+        width: calc($unit * 4);
+        height: calc($unit * 4);
+    }
     &--sml {
 	    width: calc($unit * 5);
 	    height: calc($unit * 5);
@@ -38,15 +42,30 @@
 
     &--login {
         background-image: svg-load(../../assets/icons/login.svg, fill: $color-text);
+        &:hover {
+            background-image: svg-load(../../assets/icons/login.svg, fill: $color-primary);
+        }
     }
     &--logout {
         background-image: svg-load(../../assets/icons/logout.svg, fill: $color-text);
+
+        &:hover {
+            background-image: svg-load(../../assets/icons/logout.svg, fill: $color-primary);
+        }
     }
     &--register {
         background-image: svg-load(../../assets/icons/register.svg, fill: $color-text);
+
+        &:hover {
+            background-image: svg-load(../../assets/icons/register.svg, fill: $color-primary);
+        }
     }
     &--profile {
         background-image: svg-load(../../assets/icons/profile.svg, fill: $color-text);
+
+        &:hover {
+            background-image: svg-load(../../assets/icons/profile.svg, fill: $color-primary);
+        }
     }
     &--photo {
         background-image: svg-load(../../assets/icons/photo.svg, fill: white);
@@ -57,9 +76,17 @@
     }
     &--search {
         background-image: svg-load(../../assets/icons/search.svg, fill: $color-text);
+        
+        &:hover {
+            background-image: svg-load(../../assets/icons/search.svg, fill: $color-primary);
+        }
     }
     &--play {
         background-image: svg-load(../../assets/icons/play-button.svg, fill: $color-text);
+
+        &:hover {
+            background-image: svg-load(../../assets/icons/play-button.svg, fill: $color-primary);
+        }
     }
 
     /*social icons*/

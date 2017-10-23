@@ -4,20 +4,20 @@
         <a href="javascript:void(0);" ng-if="searchFor" ng-click="resetSearch()" class="input--search__reset">×</a>
     </form>
 </section>
-<header class="header row">
-    <div class="col col-sml-12 group">
+<header class="header clear">
+    <div class="group">
         <a ui-sref="master.main.index" class="logo logo--header pull"></a>
         <nav class="push">
-            <a href="javascript:void(0);" class="icon icon--first icon--sml icon--search display--ib" title="Search" ng-click="toggleSearch()"></a>
+            <a href="javascript:void(0);" class="icon icon--first icon--tiny icon--search display--ib" title="Search" ng-click="toggleSearch()"></a>
             <div ng-if="$root.user.isAuthenticated" class="display--ib">
-                <a ui-sref="master.main.profile({artistId: $root.user.id})" title="My Profile" class="icon icon--sml icon--profile"></a>
+                <a ui-sref="master.main.profile({artistId: $root.user.id})" title="My Profile" class="icon icon--tiny icon--profile"></a>
                 <baasic-logout on-logout="setEmptyUser()">
-                    <a href="javascript:void(0)" ng-click="logout()" title="Logout" class="icon icon--last icon--sml icon--logout"></a>
+                    <a href="javascript:void(0)" ng-click="logout()" title="Logout" class="icon icon--last icon--tiny icon--logout"></a>
                 </baasic-logout>
             </div>
             <div ng-if="!$root.user.isAuthenticated" class="display--ib">
-                <a ui-sref="master.main.login" class="icon icon--sml icon--login" title="Log In"></a>
-                <a ui-sref="master.main.register" class="icon icon--last icon--sml icon--register" title="Register"></a>
+                <a ui-sref="master.main.login" class="icon icon--tiny icon--login" title="Log In"></a>
+                <a ui-sref="master.main.register" class="icon icon--last icon--tiny icon--register" title="Register"></a>
             </div>
         </nav>
     </div>
