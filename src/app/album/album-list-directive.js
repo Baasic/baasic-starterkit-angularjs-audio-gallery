@@ -14,7 +14,7 @@
             $scope.apiUrl = app.getApiUrl();
             $scope.modifiedAlbums = [];
 
-            function loadAlbumCovers (){                
+            function loadAlbumCovers (){
                 filesService.streams.get($scope.album.coverId)
                 .success(function(cover){
                     $scope.cover = cover;
@@ -23,7 +23,7 @@
                     $scope.error = error;
                 })
                 .finally(function(){
-                    console.log($scope.$root);
+                    console.log($scope.$root); //jshint ignore: line
                     $scope.$root.loader.resume();
                 });
             }
@@ -37,7 +37,7 @@
                     orderBy: 'releaseYear',
                     orderDirection : 'desc'
                 })
-                .success(function(data) {                    
+                .success(function(data) {
                     $scope.albums = data.item;
                     $scope.modifiedAlbums = angular.copy($scope.albums);
                     if($scope.ModifiedAlbums) {
@@ -49,7 +49,7 @@
                             }
                         }
                     }
-                    
+
                     $scope.pagerData = {
                         currentPage: data.page,
                         pageSize: data.recordsPerPage,
@@ -59,7 +59,7 @@
                 .error(function(error) {
                     $scope.error = error;
                 })
-                .finally(function() {                    
+                .finally(function() {
                     $scope.$parent.albums = $scope.albums;
                     loadAlbumCovers();
                 });
@@ -92,7 +92,7 @@
                 }
 
                 function deleteAllData() {
-                    $scope.$root.loader.suspend();                    
+                    $scope.$root.loader.suspend();
                     getAlbumCover();
                 }
 
@@ -169,9 +169,9 @@
                     .error(function (error) {
                         $scope.error = error;
                     })
-                    .finally(function () {                        
+                    .finally(function () {
                         $scope.$root.loader.resume();
-                        
+
                         $scope.backToDetails();
                     });
                 }

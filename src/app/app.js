@@ -94,6 +94,10 @@ angular.module('media-gallery', [
                     url: 'edit-album/{albumId}',
                     templateUrl: 'templates/album/album-edit.html'
                 })
+                .state('master.main.album-info', {
+                    url: 'album-info/{albumId}',
+                    templateUrl: 'templates/album/album-details.html'
+                })
                 .state('master.main.search', {
                     url: 'search?{search,type}',
                     templateUrl: 'templates/search/search-results.html',

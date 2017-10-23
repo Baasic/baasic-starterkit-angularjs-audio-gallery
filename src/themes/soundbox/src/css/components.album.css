@@ -14,6 +14,11 @@
             font-weight: 700;
         }
     }
+    &__song-duration {
+        display: inline-block;
+        padding: calc($unit*3) calc($unit*2);
+
+    }
     &__playlist {
         list-style: none;
         padding: 0;
