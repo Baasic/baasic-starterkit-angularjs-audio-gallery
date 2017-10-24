@@ -27,13 +27,12 @@
     }
 
     &__title {
-        margin-bottom: calc($unit * 4);
-        @mixin type-scale $type-xxlarge, 1.75;
+        margin-bottom: calc($unit * 2);
+        @mixin type-scale $type-xxxlarge, 2;
         font-weight: $type-weight-extra-light;
-
     }
     &__text {
-        margin-bottom: 24px;
+        margin-bottom: calc($unit * 4);
         @mixin type-scale $type-base, 1;
     }
     &__404 {

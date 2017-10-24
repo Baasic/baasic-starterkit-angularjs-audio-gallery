@@ -106,6 +106,12 @@
         background-image: svg-load(../../assets/icons/soundcloud.svg, fill: $color-text);
     }
     &--web {
-        background-image: svg-load(../../assets/icons/web.svg, fill: $color-text);
+        background-image: svg-load(../../assets/icons/link.svg, fill: $color-text);
+        transform: rotate(-45deg);
+        transform-origin: center;
+
+        &:hover {
+            background-image: svg-load(../../assets/icons/link.svg, fill: $color-primary);
+        }
     }
 }

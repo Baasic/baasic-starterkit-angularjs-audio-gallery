@@ -6,15 +6,15 @@
                 <img ng-if="!profile.avatar" src="./assets/img/avatar-1.png" />
             </div>
             <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
-                <h1 class="type--uppercase">{{profile.displayName}}</h1>
-                <h3 class="spc--bottom--sml">{{profile.genre}} <span ng-if="profile.genre.length && profile.country.length"> | </span> {{profile.country}}</h3>
-                <p class="spc--bottom--med">{{profile.aboutArtist}}</p>
+                <h1 class="profile__title">{{profile.displayName}}</h1>
+                <h3 class="profile__subtitle">{{profile.genre}} <span ng-if="profile.genre.length && profile.country.length"> | </span> {{profile.country}}</h3>
+                <p class="profile__description">{{profile.aboutArtist}}</p>
                 <div class="icon__social">
                     <a class="icon icon--med icon--bandcamp" ng-if="profile.bandcamp.length" ng-href="{{profile.bandcamp}}" title="Visit {{profile.displayName}} on Bandcamp"></a>
                     <a class="icon icon--med icon--myspace" ng-if="profile.myspace.length" ng-href="{{profile.myspace}}" title="Visit {{profile.displayName}} on MySpace"></a>
                     <a class="icon icon--med icon--lastfm" ng-if="profile.lastfm.length" ng-href="{{profile.lastfm}}" title="Visit {{profile.displayName}} on Last.fm"></a>
                     <a class="icon icon--med icon--soundcloud" ng-if="profile.soundcloud.length" ng-href="{{profile.soundcloud}}" title="Visit {{profile.displayName}} on Soundcloud"></a>
-                    <a class="icon icon--med icon--web" ng-if="profile.web.length" ng-href="{{profile.web}}" title="Visit {{profile.displayName}} Official Web Page"></a>
+                    <a class="icon icon--sml icon--web" ng-if="profile.web.length" ng-href="{{profile.web}}" title="Visit {{profile.displayName}} Official Web Page"></a>
                 </div>
             </div>
         </div>

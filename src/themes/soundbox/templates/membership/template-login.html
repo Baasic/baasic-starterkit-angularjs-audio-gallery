@@ -1,23 +1,26 @@
 <section class="hero">
     <div class="hero__content">
         <h2 class="hero__title">Sign in</h2>
-        <h4 class="hero__text">Please Sign in here</h4>
+        <h4 class="hero__text">Create albums, upload songs and share with the world.</h4>
     </div>
 </section>
 
 <form class="form form--sml form--centered" name="login" novalidate ng-submit="submitLogin()">
-    <label for="password" class="label label--primary">Username</label>
-    <input class="input input--text" type="text" name="username" ng-model="username" name="username" required placeholder="Enter your email or username" />
-    <div class="validation validation--alert" ng-show="(login.$submitted || login.username.$touched) && login.username.$error.required">Username is required.</div>
+    <div class="spc--bottom--med">
+        <label for="password" class="label label--primary">Username</label>
+        <input class="input input--text" type="text" name="username" ng-model="username" name="username" required placeholder="Enter your email or username" />
+        <div class="validation validation--alert" ng-show="(login.$submitted || login.username.$touched) && login.username.$error.required">Username is required.</div>
+        
+        <label for="password" class="label label--primary">Password</label>
+        <input class="input input--text" type="password" name="password" ng-model="password" name="password" required placeholder="Password" autocomplete="off" />
+        <div class="validation validation--alert" ng-show="(login.$submitted || login.password.$touched) && login.password.$error.required">Password is required.</div>
+        
+        <div ng-show="loginError" class="validation validation--error">{{loginError}}</div>
+    </div>
 
-    <label for="password" class="label label--primary">Password</label>
-    <input class="input input--text" type="password" name="password" ng-model="password" name="password" required placeholder="Password" autocomplete="off" />
-    <div class="validation validation--alert" ng-show="(login.$submitted || login.password.$touched) && login.password.$error.required">Password is required.</div>
-
-    <div ng-show="loginError" class="validation validation--error">{{loginError}}</div>
-
-    <button class="btn btn--secondary btn--lrg btn--wide" type="submit" ng-disabled="logging">Login</button>
-
-    <p class="spc--top--med type--center">Forgot password? <a ui-sref="master.main.password-recovery">Recover password here!</a></p>
-    <p class="spc--top--med type--center">Don't have SoundBox account? <a ui-sref="master.main.register">Register here!</a></p>
+    <div class="clear spc--bottom--lrg">
+        <button class="btn btn--primary btn--med pull" type="submit" ng-disabled="logging">Login</button>
+        <p class="spc--top--sml push">Forgot password? <a ui-sref="master.main.password-recovery">Recover password here!</a></p>
+    </div>
+    <p class="type--center">Don't have SoundBox account? <a ui-sref="master.main.register">Register here!</a></p>
 </form>

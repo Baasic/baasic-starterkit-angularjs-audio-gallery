@@ -38,20 +38,20 @@
      * Button styles
      */
     &--primary {
-        background: transparent;
-        color: $color-primary;
-        border: 2px solid $color-primary;
+        background: $color-primary;
+        color: white;
+
         &:hover {
-            background: $color-primary;
+            background: color($color-primary lightness(+10%));
             color: white;
         }
     }
     &--secondary {
-        background: transparent;
-        color: $color-secondary;
-        border: 2px solid $color-secondary;
+        background: $color-secondary;
+        color: white;
+
         &:hover {
-            background: $color-secondary;
+            background: color($color-secondary lightness(+10%));
             color: white;
         }
     }
@@ -64,10 +64,12 @@
             color: white;
         }
     }
+
     &--ghost {
         background: transparent;
         color: white;
-        border: 2px solid white;
+        border: 1px solid white;
+        
         &:hover {
             background-color: white;
             color: $color-text;

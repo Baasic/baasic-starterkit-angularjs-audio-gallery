@@ -47,12 +47,12 @@ dl dd {}
  */
 a {
     text-decoration: none;
-    color: $color-secondary;
+    color: $color-primary;
     transition: all 250ms ease-in-out;
 }
 a:link {}
 a:hover {
-    color: color($color-secondary lightness(+20%));
+    color: color($color-primary lightness(+20%));
 }
 a:focus {}
 a:visited {}

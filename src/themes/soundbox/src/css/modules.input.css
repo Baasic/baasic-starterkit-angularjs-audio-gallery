@@ -4,17 +4,18 @@
 
 .input {
     width: 100%;
-    padding: $unit;
+    padding: $unit calc($unit * 2);
     border-width: 1px;
     border-style: solid;
     border-color: color($color-text a(50%));
+    border-radius: $global-radial;
     transition: all 250ms ease-in-out;
 
     &--file {
         display: none;
     }
     &--text, &--search {
-        @mixin type-scale $type-medium, 1.25;
+        @mixin type-scale $type-base, 1.5;
         &:focus, &:hover {
             outline: 0;
             border-color: $color-text;
@@ -27,7 +28,6 @@
     &--search {
         padding: calc($unit*2);
         margin-top: calc($unit*2);
-        border-radius: $global-radial;
 
         &__reset {
             position: absolute;

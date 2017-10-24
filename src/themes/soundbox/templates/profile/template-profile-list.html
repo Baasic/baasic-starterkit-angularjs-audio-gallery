@@ -1,13 +1,13 @@
 <div class="container container--lrg container--light">
     <section class="hero">
         <div class="hero__content" ng-if="!user.isAuthenticated">
-            <h2 class="hero__title">Welcome to SOUNDBOX</h2>
-            <h3 class="hero__text">Register and share your music with the world completely free.</h3>
+            <h2 class="hero__title">Welcome to SoundBox</h2>
+            <h3 class="hero__text">Share your music with the world&mdash;today!</h3>
             <a ui-sref="master.main.register" class="btn btn--med btn--ghost">Register</a>
         </div>
         <div class="hero__content" ng-if="user.isAuthenticated">
             <h2 class="hero__title">Welcome to SoundBox</h2>
-            <h3 class="hero__text">Share your music with the world&emdash;today!</h3>
+            <h3 class="hero__text">Share your music with the world&mdash;today!</h3>
             <a ui-sref="master.main.profile({artistId: $root.user.id})" class="btn btn--lrg btn--ghost">My Profile</a>
         </div>
     </section>
@@ -16,8 +16,8 @@
             <a ui-sref="master.main.profile({artistId: profile.id})" class="profile__list__link">
                 <img ng-if="!profile.avatar" src="./assets/img/img.png">
                 <img ng-if="profile.avatar" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-                <p class="type--medium type--bold type--capitalize">{{profile.displayName}}</p>
             </a>
+            <p class="type--medium type--bold type--capitalize">{{profile.displayName}}</p>
         </div>
     </section>
     <section class="padd--all--med" ng-if="!profiles.item.length">
