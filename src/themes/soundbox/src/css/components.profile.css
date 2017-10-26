@@ -12,7 +12,6 @@
             display: inline-block;
             color: $gray-light;
             text-decoration: none;
-            opacity: 0.7;
             transition: all 250ms ease-in-out;
 
             & img {
@@ -86,5 +85,13 @@
         margin-bottom: calc($unit * 2);
         @mixin type-scale $type-base, 1;
         color: color($color-text lightness(+10%));
+    }
+
+    &__avatar {
+        display: inline-block;
+
+        width: calc($unit * 20);
+        height: calc($unit * 20);
+        border-radius: $global-rounded;
     }
 }

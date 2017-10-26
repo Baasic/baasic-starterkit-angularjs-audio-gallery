@@ -1,15 +1,15 @@
 <div class="row">
     <div class="col col-sml-12 col-xlrg-6 profile__list" ng-if="albums.length" ng-repeat="album in modifiedAlbums">
-        <div class="col col-sml-12 col-med-4 col-xxlrg-3">
+        <div play-all="album.playlist" class="col col-sml-12 col-med-4 col-xxlrg-3 position--rel album__image__wrapper">
             <img src="./assets/img/img.png" ng-src="{{apiUrl}}/file-streams/{{album.coverId}}?rnd={{album.rnd}}" />
+            <a ng-if="album.playlist && album.playlist.length" class="album__play" play-all="album.playlist"></a>
         </div>
         <div class="col col-sml-12 col-med-8 col-xxlrg-9">
-            <h3 class="album__name album__name--primary">{{album.name}} ({{album.releaseYear}})</h3>
+            <h3 class="album__name album__name--primary">{{album.name}} <span class="album__year">({{album.releaseYear}})</span></h3>
             <p class="spc--bottom--sml">{{album.aboutAlbum}}</p>
             <p class="spc--bottom--sml" ng-if="!album.playlist || !album.playlist.length">No songs uploaded for this album!</p>
-            <p class="spc--bottom--sml" ng-if="album.playlist && album.playlist.length">{{album.playlist.length}} <span ng-if="album.playlist.length == 1">song</span> <span ng-if="album.playlist.length > 1">songs</span> uploaded for this album!</p>
-            <a ng-if="album.playlist && album.playlist.length" class="btn btn--secondary btn--med spc--bottom--sml" play-all="album.playlist">Play album</a>
-            <a class="btn btn--primary btn--med spc--bottom--sml" ui-sref="master.main.album-info({albumId : album.id})">More info</a>
+            <p class="spc--bottom--sml album__songs" ng-if="album.playlist && album.playlist.length">{{album.playlist.length}} <span ng-if="album.playlist.length == 1">song</span> <span ng-if="album.playlist.length > 1">songs</span></p>
+            <a class="spc--bottom--sml type--small" ui-sref="master.main.album-info({albumId : album.id})">More info</a>
             <a ng-if="profile.id == $root.user.id" ui-sref="master.main.album-edit({albumId : album.id})" class="btn btn--primary btn--med spc--bottom--sml">edit album</a>
             <a ng-if="profile.id == $root.user.id" href="javascript:void();" ng-click="album.id ? deleteAlbum($index) : cancelEdit()" class="btn btn--tertiary btn--med spc--bottom--sml">delete album</a>
         </div>

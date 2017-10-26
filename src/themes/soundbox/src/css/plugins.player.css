@@ -33,7 +33,7 @@
 }
 .sm2-bar-ui,
 .sm2-bar-ui .bd a {
-    color: #fff;
+    color: $color-text;
     text-decoration: none;
 }
 .sm2-bar-ui .bd .sm2-button-element:hover {
@@ -262,19 +262,19 @@
 
 .sm2-icon-play {
  background-image: none, url(../assets/img/player/play.svg);
- background-size: 57.6%;
+ background-size: 40%;
  background-position: 50% 53%;
 }
 
 .sm2-icon-pause {
  background-image: none, url(../assets/img/player/pause.svg);
- background-size: 57.6%;
+ background-size: 40%;
  background-position: 50% 53%;
 }
 
 .sm2-icon-menu {
  background-image: none, url(../assets/img/player/list.svg);
- background-size: 58%;
+ background-size: 40%;
  background-position: 54% 51%;
 }
 
@@ -288,7 +288,7 @@
 
 .sm2-icon-previous,
 .sm2-icon-next {
- background-size: 49.5%;
+ background-size: 40%;
  background-position: 50% 50%;
 }
 
@@ -301,7 +301,7 @@
  background-image: url(../image/icomoon/entypo-25px-ffffff/PNG/loop.png);
  background-image: none, url(../assets/img/player/repeat.svg);
  background-position: 50% 43%;
- background-size: 54%;
+ background-size: 40%;
 }
 
 .sm2-control-on {
@@ -719,7 +719,9 @@
 }
 .sm2-bar-ui .sm2-main-controls,
 .sm2-bar-ui .sm2-playlist-drawer {
- background-color: $gray-dark;
+  background-color: color($color-text lightness(+65%));
+  border-top: 1px solid color($color-text lightness(+40%));
+
 }
 .sm2-bar-ui .sm2-inline-texture {
  background: transparent;

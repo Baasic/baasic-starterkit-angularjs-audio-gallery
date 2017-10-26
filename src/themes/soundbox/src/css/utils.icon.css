@@ -82,10 +82,10 @@
         }
     }
     &--play {
-        background-image: svg-load(../../assets/icons/play-button.svg, fill: $color-text);
+        background-image: svg-load(../../assets/icons/play-album.svg, fill: $color-text);
 
         &:hover {
-            background-image: svg-load(../../assets/icons/play-button.svg, fill: $color-primary);
+            background-image: svg-load(../../assets/icons/play-album.svg, fill: $color-primary);
         }
     }
 

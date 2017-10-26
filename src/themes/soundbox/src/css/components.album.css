@@ -6,27 +6,91 @@
     &__wrapper {
         padding: calc($unit * 4);
     }
+    
     &__name {
         letter-spacing: 0.5px;
         font-family: $ff-sans;
         @mixin type-scale $type-large, 1.5;
         &--primary {
+            @mixin type-scale $type-medium, 1.5;
             font-weight: 700;
         }
     }
-    &__song-duration {
-        display: inline-block;
-        padding: calc($unit*3) calc($unit*2);
-
+    
+    &__year {
+        @mixin type-scale $type-small, 1.5;
+        color: color($color-text lightness(+20%));
     }
+
+    &__songs {
+        @mixin type-scale $type-small, 0.5;
+        color: color($color-text lightness(+20%));
+    }
+
+    &__single-song {
+        
+    }
+    
+    &__song-duration {
+        @mixin type-scale $type-small, 1.5;
+        color: color($color-text lightness(+20%));
+    }
+    
+    &__play {
+        opacity: 0;
+        visibility: hidden;
+
+        position: absolute;
+        top: calc(50% - 24px);
+        left: calc(50% - 24px);
+
+        width: calc($unit * 8);
+        height: calc($unit * 8);
+
+        background-image: svg-load(../../assets/icons/play-album.svg, fill: white);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        transform: scale(1);
+        filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.7));
+
+        transition: all 250ms ease-in-out;    
+        cursor: pointer;
+    }
+
+    &__image {
+        &__wrapper {
+            cursor: pointer;
+            transition: all 250ms ease-in-out;    
+
+            &:hover,
+            &:active,
+            &:focus {
+                & .album__play {
+                    opacity: 1;
+                    visibility: visible;
+            
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+
     &__playlist {
         list-style: none;
         padding: 0;
+
         &__wrapper {
             padding: calc($unit * 4);
         }
+        
         &__item {
             display: block;
+            
+            @mixin type-scale $type-small, 1.5;
+            align-content: middle;
+            
             &:nth-child(odd) {
                 background: $gray-lighter;
             }

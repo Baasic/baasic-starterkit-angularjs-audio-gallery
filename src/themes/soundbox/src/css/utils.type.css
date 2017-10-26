@@ -3,6 +3,9 @@
 \*------------------------------------*/
 
 .type {
+    &--small {
+        @mixin type-scale $type-small, 0.75;
+    }
     &--base {
         @mixin type-scale $type-base, 1;
     }

@@ -24,7 +24,7 @@
                 <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
                     <ul class="album__playlist">
                         <li ng-repeat="song in album.playlist as playlist" class="col col-sml-12 album__playlist__item">
-                            <a href="javascript:void(0)" music-player="play" add-song="song" class="icon icon--lrg icon--play"></a>
+                            <a href="javascript:void(0)" music-player="play" add-song="song" class="album__single-song icon icon--sml icon--play"></a>
                             {{$index+1}}. {{song.title}}
                             <div class="album__song-duration push">{{song.fileSize}}</div>
                         </li>
