@@ -29,7 +29,7 @@ In its default state, this Kit points to the [main demo site](http://demo.baasic
 
     {
         "apiRootUrl": "api.baasic.com",
-        "apiVersion": "beta",
+        "apiVersion": "v1",
         "apiKey": "your-unique-identifier"
     }
 
