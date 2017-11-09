@@ -11,7 +11,7 @@ Audio starter kit provides membership module which enables registration, authori
 
 ## Working with the Starter kit
 
-As a client-side prerequisite, you should install the basic tools for your operating system: Node.js (4.x and above), Bower and Gulp. Start by cloning the [AngularJS Media Gallery Starter Kit repository](https://github.com/Baasic/baasic-starterkit-angularjs-media-gallery/). After that, go into the root folder of the started Kit you just cloned and type
+As a client-side prerequisite, you should install the basic tools for your operating system: Node.js (4.x and above), Bower and Gulp. Start by cloning the [AngularJS Audio Gallery Starter Kit repository](https://github.com/Baasic/baasic-starterkit-angularjs-audio-gallery/). After that, go into the root folder of the started Kit you just cloned and type
 
     npm install
 
@@ -25,7 +25,7 @@ this will serve you the default theme, to serve a different theme please use the
 
 and you are *almost* ready to go.
 
-In its default state, this Kit points to the [main demo site](http://demo.baasic.com/angularjs/starterkit-media-gallery/) and pulls its content from it. As it would not be a nice thing to have thousands of users editing it, you will need to point your Kit to your own application. It is easy - just go to the root folder and find *app.conf.json* and enter your Baasic application unique identifier (API Key) here:
+In its default state, this Kit points to the [main demo site](http://demo.baasic.com/angularjs/starterkit-audio-gallery/) and pulls its content from it. As it would not be a nice thing to have thousands of users editing it, you will need to point your Kit to your own application. It is easy - just go to the root folder and find *app.conf.json* and enter your Baasic application unique identifier (API Key) here:
 
     {
         "apiRootUrl": "api.baasic.com",
