@@ -7,8 +7,9 @@
             <div class="row">
                 <div class="col col-sml-12 col-med-4 col-lrg-3 col-xlrg-2 spc--bottom--sml">
                     <div class="position--rel profile__edit__picture">
-                        <img ng-if="!imageSrc && !hasImageSelected" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
-                        <img ng-if="imageSrc && !hasImageSelected || !profile" ng-src="/assets/img/img.png" alt="{{profile.displayName}}" title="{{profile.displayName}}">
+                        <img ng-if="!imageSrc && !hasImageSelected" ng-src="{{profile.avatar.links('stream-token').href}}" alt="{{profile.displayName}}"
+                            title="{{profile.displayName}}">
+                        <img ng-if="imageSrc && !hasImageSelected || !profile" ng-src="./assets/img/img.png" alt="{{profile.displayName}}" title="{{profile.displayName}}">
                         <img ng-if="hasImageSelected" ng-src="{{selectedImage}}" alt="{{profile.displayName}}" title="{{profile.displayName}}">
                         <label for="profileAvatar" class="type--wide type--center type--color--negative label label--files label--files--primary">
                             <i class="icon icon--sml icon--photo"></i>
@@ -16,23 +17,27 @@
                             <span ng-if="profile.avatar">Change Avatar</span>
                         </label>
                     </div>
-                    <input type="file" name="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change" accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input input--file" ng-change="previewSelectedImage()">
+                    <input type="file" name="profileAvatar" id="profileAvatar" file-model="profile.avatar.blob" ng-model="profile.avatar.change"
+                        accept="image/png, image/jpeg, image/jpg" file-types=".png,.jpeg,.jpg" class="input input--file" ng-change="previewSelectedImage()">
                     <p class="spc--top--sml validation validation--alert" ng-show="editProfile.profileAvatar.$dirty && ((editProfile.profileAvatar.$invalid && !profile)||invalidFileType)">Allowed extensions are: png, jpeg, jpg</p>
                     <p class="spc--top--sml validation validation--alert" ng-show="editProfile.$submitted && editProfile.profileAvatar.$error.required">Profile avatar is required</p>
                 </div>
                 <div class="col col-sml-12 col-med-8 col-lrg-9 col-xlrg-10">
                     <label for="displayName" class="label label--primary">Artist / Band Name</label>
-                    <input name="displayName" id="displayName" ng-model="profile.displayName" type="text" placeholder="Artist/Band Name" class="input input--text" required>
+                    <input name="displayName" id="displayName" ng-model="profile.displayName" type="text" placeholder="Artist/Band Name" class="input input--text"
+                        required>
                     <p class="validation validation--alert" ng-show="editProfile.$submitted && editProfile.displayName.$error.required">Name is Required</p>
                     <div class="row">
                         <div class="col col-lrg-6">
                             <label for="genre" class="label label--primary">Genre</label>
-                            <input name="genre" id="genre" ng-model="profile.genre" type="text" placeholder="Enter Music Genre" class="input input--text display--ib" required>
+                            <input name="genre" id="genre" ng-model="profile.genre" type="text" placeholder="Enter Music Genre" class="input input--text display--ib"
+                                required>
                             <p class="validation validation--alert" ng-show="editProfile.$submitted && editProfile.genre.$error.required">Genre is Required</p>
                         </div>
                         <div class="col col-lrg-6">
                             <label for="country" class="label label--primary">Country</label>
-                            <input name="country" id="country" ng-model="profile.country" type="text" placeholder="Enter Country" class="input input--text display--ib" required>
+                            <input name="country" id="country" ng-model="profile.country" type="text" placeholder="Enter Country" class="input input--text display--ib"
+                                required>
                             <p class="validation validation--alert" ng-show="editProfile.$submitted && editProfile.country.$error.required">Country is Required</p>
                         </div>
                     </div>

@@ -3,7 +3,8 @@
     <div class="bd sm2-main-controls">
         <div class="sm2-inline-element sm2-button-element visible__from--xsml">
             <div class="sm2-button-bd">
-                <img ng-if="!currentPlaying.cover" class="sm2-inline-button" src="../assets/img/no-cover.svg" title="Play some funky music!"/>
+                <img ng-if="!currentPlaying.cover" class="sm2-inline-button" src="./assets/img/no-cover.svg" title="Play some funky music!"
+                />
                 <img ng-if="currentPlaying.cover" class="sm2-inline-button" ng-src="{{currentPlaying.cover}}" />
             </div>
         </div>
@@ -14,7 +15,8 @@
         </div>
         <div class="sm2-inline-element sm2-button-element">
             <div class="sm2-button-bd">
-                <a href="#play" class="sm2-inline-button" ng-class="{'sm2-icon-play':isPlaying === false, 'sm2-icon-pause sm2-control-on':isPlaying===true }" play-pause-toggle></a>
+                <a href="#play" class="sm2-inline-button" ng-class="{'sm2-icon-play':isPlaying === false, 'sm2-icon-pause sm2-control-on':isPlaying===true }"
+                    play-pause-toggle></a>
             </div>
         </div>
         <div class="sm2-inline-element sm2-button-element">
@@ -24,7 +26,11 @@
         </div>
         <div class="sm2-inline-element sm2-inline-status">
             <div class="sm2-playlist">
-                <div class="sm2-playlist-target"><ul class="sm2-playlist-bd"><li><b>{{ currentPlaying.artist }}</b> - {{ currentPlaying.title }}</li></ul></div>
+                <div class="sm2-playlist-target">
+                    <ul class="sm2-playlist-bd">
+                        <li><b>{{ currentPlaying.artist }}</b> - {{ currentPlaying.title }}</li>
+                    </ul>
+                </div>
             </div>
             <div class="sm2-progress">
                 <div class="sm2-row">
@@ -32,7 +38,9 @@
                     <div class="sm2-progress-bd">
                         <div class="sm2-progress-track" seek-track>
                             <div class="sm2-progress-bar" ng-style="{width : ( progress + '%' ) }"></div>
-                            <div class="sm2-progress-ball" ng-style="{left : ( progress + '%' ) }"><div class="icon-overlay"></div></div>
+                            <div class="sm2-progress-ball" ng-style="{left : ( progress + '%' ) }">
+                                <div class="icon-overlay"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="sm2-inline-duration">{{ currentDuration }}</div>
@@ -50,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="bd sm2-playlist-drawer sm2-element" >
+    <div class="bd sm2-playlist-drawer sm2-element">
         <div class="sm2-inline-texture">
             <div class="sm2-box-shadow"></div>
         </div>

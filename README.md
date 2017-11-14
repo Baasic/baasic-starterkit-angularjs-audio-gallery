@@ -52,7 +52,7 @@ gulp dist --theme default
 You can also add a `--baseUrl` command if your blog destination is not in root of your website
 
 For example:
-`--baseUrl "/angularjs/starterkit-media-gallery-showcase/"`
+`--baseUrl "/angularjs/starterkit-audio-gallery/"`
 
 Now there's a `./dist` folder with all scripts and stylesheets concatenated and minified, also third party libraries installed with bower will be concatenated and minified into `vendors.min.js` and `vendors.min.css` respectively.
 

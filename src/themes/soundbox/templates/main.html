@@ -1,6 +1,7 @@
 <section class="search" ng-class="{'active': searchActive }">
     <form ng-controller="SearchCtrl" name="searchForm" ng-submit="searchSite();" class="position--rel">
-        <input type="text" name="searchEntry" placeholder="Type and hit enter or &crarr;" class="input input--search" ng-model="searchFor"/>
+        <input type="text" name="searchEntry" placeholder="Type and hit enter or &crarr;" class="input input--search" ng-model="searchFor"
+        />
         <a href="javascript:void(0);" ng-if="searchFor" ng-click="resetSearch()" class="input--search__reset">×</a>
     </form>
 </section>
@@ -17,7 +18,8 @@
             </div>
             <div ng-if="!$root.user.isAuthenticated" class="display--ib">
                 <a ui-sref="master.main.login" class="icon icon--tiny icon--login" title="Log In"></a>
-                <a ui-sref="master.main.register" class="icon icon--last icon--tiny icon--register" title="Register"></a>
+                <!--Uncomment this to allow registration-->
+                <!--<a ui-sref="master.main.register" class="icon icon--last icon--tiny icon--register" title="Register"></a>-->
             </div>
         </nav>
     </div>
